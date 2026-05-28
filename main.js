@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const agentsMarkdownPath = '/agents/AGENTS.md';
   const rawCodeElements = [
     document.getElementById('raw-agents-code'),
     document.getElementById('dialog-raw-agents-code'),
@@ -48,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
     'create-cli': 'skills/create-cli.md',
   };
   const skillContentCache = new Map();
+  const floatingTooltip = document.createElement('div');
+  floatingTooltip.className = 'floating-tooltip font-karla';
+  floatingTooltip.setAttribute('role', 'tooltip');
+  document.body.appendChild(floatingTooltip);
   
   let agentsMarkdownContent = '';
   let activeAgentsView = 'raw';
@@ -56,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let isAgentsDialogOpen = false;
   let isSkillDialogOpen = false;
   let lastSkillTrigger = null;
+  let activeTooltipTarget = null;
 
   const faviconLink = document.getElementById('dynamic-favicon');
   if (faviconLink) {
@@ -71,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 1. FETCH & PROCESS AGENTS.MD FOR THE CODE BOX
-  fetch('AGENTS.md')
+  fetch(agentsMarkdownPath)
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to fetch AGENTS.md');
@@ -109,10 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(error => {
       console.error(error);
       rawCodeElements.forEach(element => {
-        element.textContent = 'Failed to load AGENTS.md. Ensure the file is present in the workspace root.';
+        element.textContent = `Failed to load AGENTS.md from ${agentsMarkdownPath}.`;
       });
       renderedAgentsViews.forEach(element => {
-        element.innerHTML = '<p>Failed to load AGENTS.md. Ensure the file is present in the workspace root.</p>';
+        element.innerHTML = `<p>Failed to load AGENTS.md from <code>${agentsMarkdownPath}</code>.</p>`;
       });
     });
 
@@ -345,14 +351,78 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  function setCopiedState(button, copiedLabel = 'Copied AGENTS.md', defaultLabel = 'Copy AGENTS.md') {
-    button.setAttribute('aria-label', copiedLabel);
-    button.classList.add('is-copied');
+  const copiedStateTimers = new WeakMap();
 
-    window.setTimeout(() => {
+  function positionFloatingTooltip(target) {
+    const label = target.getAttribute('data-tooltip');
+    if (!label) return;
+
+    floatingTooltip.textContent = label;
+    floatingTooltip.classList.add('is-visible');
+
+    const targetRect = target.getBoundingClientRect();
+    const tooltipRect = floatingTooltip.getBoundingClientRect();
+    const viewportPadding = 12;
+    const centeredLeft = targetRect.left + targetRect.width / 2;
+    const left = Math.min(
+      Math.max(centeredLeft, tooltipRect.width / 2 + viewportPadding),
+      window.innerWidth - tooltipRect.width / 2 - viewportPadding,
+    );
+    const top = targetRect.bottom + tooltipRect.height + 12 > window.innerHeight
+      ? targetRect.top - tooltipRect.height - 8
+      : targetRect.bottom + 8;
+
+    floatingTooltip.style.left = `${left}px`;
+    floatingTooltip.style.top = `${Math.max(viewportPadding, top)}px`;
+  }
+
+  function showFloatingTooltip(target) {
+    activeTooltipTarget = target;
+    positionFloatingTooltip(target);
+  }
+
+  function hideFloatingTooltip(target) {
+    if (target && activeTooltipTarget !== target) return;
+    activeTooltipTarget = null;
+    floatingTooltip.classList.remove('is-visible');
+  }
+
+  document.querySelectorAll('.editor-actions [data-tooltip]').forEach(target => {
+    target.addEventListener('pointerenter', () => showFloatingTooltip(target));
+    target.addEventListener('pointerleave', () => hideFloatingTooltip(target));
+    target.addEventListener('focus', () => showFloatingTooltip(target));
+    target.addEventListener('blur', () => hideFloatingTooltip(target));
+  });
+
+  window.addEventListener('scroll', () => {
+    if (activeTooltipTarget) positionFloatingTooltip(activeTooltipTarget);
+  }, true);
+
+  window.addEventListener('resize', () => {
+    if (activeTooltipTarget) positionFloatingTooltip(activeTooltipTarget);
+  });
+
+  function setCopiedState(button, copiedLabel = 'Copied AGENTS.md', defaultLabel = 'Copy AGENTS.md') {
+    const existingTimer = copiedStateTimers.get(button);
+    if (existingTimer) {
+      window.clearTimeout(existingTimer);
+    }
+
+    button.setAttribute('aria-label', copiedLabel);
+    button.setAttribute('data-tooltip', copiedLabel);
+    button.classList.add('is-copied');
+    button.blur();
+    showFloatingTooltip(button);
+
+    const timer = window.setTimeout(() => {
       button.setAttribute('aria-label', defaultLabel);
+      button.setAttribute('data-tooltip', defaultLabel);
       button.classList.remove('is-copied');
-    }, 1600);
+      copiedStateTimers.delete(button);
+      hideFloatingTooltip(button);
+    }, 650);
+
+    copiedStateTimers.set(button, timer);
   }
 
   async function handleCopyAgents(button) {
