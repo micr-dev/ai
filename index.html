@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>AI Stack — ai.micr.dev</title>
+  <meta name="description" content="The current snapshot of Microck's AI working setup, model hierarchies, hooks, MCPs, local tools, and the architectural changelog.">
+  <meta name="theme-color" content="#000000">
+  
+  <!-- Fonts: Karla, Ysabeau, and Fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body class="antialiased">
+
+  <!-- Ambient Grid Overlay -->
+  <div class="ambient-glows" aria-hidden="true">
+    <div class="glow-grid"></div>
+  </div>
+
+  <div class="page-container">
+    
+    <!-- LEFT COLUMN: Changelog (40% Width, Scrolls Independently, Left Scrollbar) -->
+    <aside class="changelog-column" id="changelog-section">
+      <div class="changelog-scroll-wrapper">
+        <div class="changelog-content-container">
+          
+          <!-- Sticky Header for Changelog -->
+          <div class="column-header">
+            <h2 class="column-title font-serif italic">Changelog</h2>
+          </div>
+          
+          <div class="changelog-timeline">
+            
+            <!-- Change Group 1 -->
+            <div class="change-group" data-group="28/05/2026">
+              <div class="change-date font-karla">28/05/2026</div>
+                            <div class="change-entry" data-targets="claude-3-5-sonnet,gemini-1-5-pro,cursor,aider,agents-md">
+                  <h3 class="change-title">Deployed Interactive Skill Constellation Map and Casing standardizations</h3>
+                  <p class="change-description">Replaced the traditional static Models and Harnesses columns with a fully interactive SVG skill constellation map linking Claude, Gemini, Cursor, Aider, and AGENTS.md. Standardized all stack entries to lowercase Helvetica Neue weights matching nikota.dev experience roles and descriptions.</p>
+                </div>
+                
+                <div class="change-entry" data-targets="flux-1-dev,midjourney-v6">
+                  <h3 class="change-title">Ingested Flux.1 Dev as Primary Image Generation Engine</h3>
+                  <p class="change-description">Flux.1 shows far superior typography fidelity for UI mocking compared to Midjourney v6.</p>
+                </div>
+                
+                <div class="change-entry" data-targets="mac-studio-m2-ultra">
+                  <h3 class="change-title">Upgraded Local Compute Memory to 192GB</h3>
+                  <p class="change-description">Fitted higher density RAM blocks on local Mac Studio anchor. Parallel agent testing requires large RAM buffers to hold concurrent Llama-3 instances without swapping.</p>
+                </div>
+                
+              </div>
+            </div>
+            
+            <!-- Change Group 2 -->
+            <div class="change-group" data-group="14/05/2026">
+              <div class="change-date font-karla">14/05/2026</div>
+              <div class="change-entries">
+                
+                <div class="change-entry" data-targets="claude-3-5-sonnet">
+                  <h3 class="change-title">Re-aligned Primary Coding Engine to Claude 3.5 Sonnet (V2)</h3>
+                  <p class="change-description">Version 2 release demonstrates a 12% increase in AST logic validation. Structural refactoring tasks now complete with zero manual interventions.</p>
+                </div>
+                
+                <div class="change-entry" data-targets="mcp-memory-server">
+                  <h3 class="change-title">Activated Memory MCP Bridge</h3>
+                  <p class="change-description">Memory MCP resolves state drift between disconnected agent runs. It records project milestones and key coding preferences automatically.</p>
+                </div>
+                
+              </div>
+            </div>
+            
+            <!-- Change Group 3 -->
+            <div class="change-group" data-group="22/04/2026">
+              <div class="change-date font-karla">22/04/2026</div>
+              <div class="change-entries">
+                
+                <div class="change-entry" data-targets="mcp-brave-search">
+                  <h3 class="change-title">Integrated Brave Search MCP Server</h3>
+                  <p class="change-description">Permits coding agents to run live web lookups directly, bypassing outdated internal training cutoffs for modern documentation.</p>
+                </div>
+                
+                <div class="change-entry" data-targets="cursor">
+                  <h3 class="change-title">Adopted Cursor as Primary Editor Harness</h3>
+                  <p class="change-description">Migrated from basic VS Code setup. Cursor's composer agent provides native multi-file editing support, cutting feature development loops in half.</p>
+                </div>
+                
+              </div>
+            </div>
+            
+            <!-- Change Group 4 -->
+            <div class="change-group" data-group="08/03/2026">
+              <div class="change-date font-karla">08/03/2026</div>
+              <div class="change-entries">
+                
+                <div class="change-entry" data-targets="agents-md">
+                  <h3 class="change-title">Established AGENTS.md Protocol v4.0</h3>
+                  <p class="change-description">Formulated strict agent sandbox controls and redaction boundaries to secure public repository publishing.</p>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- RIGHT COLUMN: Stack (60% Width, Fixed in Viewport with Internal Scroll Regions) -->
+    <main class="stack-column" id="stack-section">
+      
+      <!-- Scrollable Region for Dense Stack Content -->
+      <div class="stack-scroll-region">
+        
+        <!-- SECTION: SKILL CONSTELLATION -->
+        <section class="stack-section" id="constellation-section">
+          <h2 class="section-heading font-serif italic">skill constellation</h2>
+          
+          <div class="constellation-container">
+            <!-- SVG connecting lines -->
+            <svg class="constellation-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <!-- Lines between nodes -->
+              <line x1="18" y1="22" x2="50" y2="48" class="constellation-line line-claude-3-5-sonnet line-cursor" />
+              <line x1="82" y1="18" x2="50" y2="48" class="constellation-line line-gemini-1-5-pro line-cursor" />
+              <line x1="18" y1="22" x2="22" y2="78" class="constellation-line line-claude-3-5-sonnet line-aider" />
+              <line x1="50" y1="48" x2="22" y2="78" class="constellation-line line-cursor line-aider" />
+              <line x1="50" y1="48" x2="78" y2="82" class="constellation-line line-cursor line-agents-md" />
+              <line x1="82" y1="18" x2="78" y2="82" class="constellation-line line-gemini-1-5-pro line-agents-md" />
+              <line x1="22" y1="78" x2="78" y2="82" class="constellation-line line-aider line-agents-md" />
+            </svg>
+            
+            <!-- Nodes absolute-positioned over SVG -->
+            <!-- Node: Claude 3.5 Sonnet -->
+            <div class="constellation-node" id="claude-3-5-sonnet" style="left: 18%; top: 22%;" data-id="claude-3-5-sonnet">
+              <span class="node-dot"></span>
+              <span class="node-label font-sans">claude 3.5 sonnet (v2)</span>
+            </div>
+            
+            <!-- Node: Gemini 1.5 Pro -->
+            <div class="constellation-node label-left" id="gemini-1-5-pro" style="left: 82%; top: 18%;" data-id="gemini-1-5-pro">
+              <span class="node-dot"></span>
+              <span class="node-label font-sans">gemini 1.5 pro</span>
+            </div>
+            
+            <!-- Node: Cursor -->
+            <div class="constellation-node" id="cursor" style="left: 50%; top: 48%;" data-id="cursor">
+              <span class="node-dot"></span>
+              <span class="node-label font-sans">cursor</span>
+            </div>
+            
+            <!-- Node: Aider -->
+            <div class="constellation-node" id="aider" style="left: 22%; top: 78%;" data-id="aider">
+              <span class="node-dot"></span>
+              <span class="node-label font-sans">aider</span>
+            </div>
+            
+            <!-- Node: AGENTS.md -->
+            <div class="constellation-node label-left" id="agents-md" style="left: 78%; top: 82%;" data-id="agents-md">
+              <span class="node-dot"></span>
+              <span class="node-label font-sans">agents.md</span>
+            </div>
+          </div>
+          
+          <!-- Details Panel (Replaces standard entry detail layouts) -->
+          <div id="constellation-details-panel" class="constellation-details">
+            <div class="constellation-default-state font-sans">
+              <p>hover over any node in the skill constellation above to inspect the specific models, harnesses, and operating manuals governing this system.</p>
+            </div>
+          </div>
+        </section>
+        
+        <!-- SECTION: AGENTS.MD (Raw code boxed style container) -->
+        <section class="stack-section" id="agents-section">
+          <h2 class="section-heading font-serif italic">AGENTS.md</h2>
+          
+          <div class="agents-box-container" id="agents-md">
+            <!-- IDE Editor Style Window (Only visible boxed element permitted) -->
+            <div class="editor-pane">
+              <div class="editor-header">
+                <div class="editor-dots">
+                  <span class="dot dot-close"></span>
+                  <span class="dot dot-minimize"></span>
+                  <span class="dot dot-expand"></span>
+                </div>
+                <div class="editor-tab font-karla">
+                  <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                  <span>AGENTS.md</span>
+                </div>
+                <button class="render-trigger font-karla" id="open-rendered-btn">View Rendered Manual</button>
+              </div>
+              
+              <div class="editor-body">
+                <!-- Line Numbers Column -->
+                <div class="line-numbers font-mono" id="editor-line-numbers">
+                  <!-- Generated by JS -->
+                </div>
+                <!-- Preformatted Code Block -->
+                <pre class="editor-code font-mono"><code id="raw-agents-code">Loading raw operating manual...</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- SECTION: HOOKS -->
+        <section class="stack-section" id="hooks">
+          <h2 class="section-heading font-serif italic">Hooks</h2>
+          
+          <div class="simple-list">
+            
+            <div class="stack-entry" id="pre-commit-ai">
+              <div class="entry-header">
+                <span class="entry-name">pre-commit-ai</span>
+              </div>
+              <p class="entry-description">Automated Git pre-commit hook that queries local models to review changes before staging.</p>
+              <p class="entry-reason">Catches syntactical drift and architectural policy violations prior to remote pushes.</p>
+            </div>
+            
+            <div class="stack-entry" id="pr-agent-hook">
+              <div class="entry-header">
+                <span class="entry-name">pr-agent-hook</span>
+              </div>
+              <p class="entry-description">GitHub Action triggered hook running security audits and visual diff changes on pull requests.</p>
+              <p class="entry-reason">Ensures compliance with performance budgets and CSS layout rules without manual intervention.</p>
+            </div>
+            
+          </div>
+        </section>
+        
+        <!-- SECTION: MCPS -->
+        <section class="stack-section" id="mcps">
+          <h2 class="section-heading font-serif italic">MCPs</h2>
+          
+          <div class="simple-list">
+            
+            <div class="stack-entry" id="mcp-memory-server">
+              <div class="entry-header">
+                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/memory" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">mcp-memory-server</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
+              </div>
+              <p class="entry-description">Graph-based semantic memory engine that persists project-specific configurations.</p>
+              <p class="entry-reason">Enables agents to maintain context across terminal sessions without polluting prompts.</p>
+            </div>
+            
+            <div class="stack-entry" id="mcp-filesystem-server">
+              <div class="entry-header">
+                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">mcp-filesystem-server</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
+              </div>
+              <p class="entry-description">Secure directory bridge granting read-write privileges to designated paths.</p>
+              <p class="entry-reason">Enforces strict path containment, preventing agents from escaping the sandbox.</p>
+            </div>
+            
+            <div class="stack-entry" id="mcp-brave-search">
+              <div class="entry-header">
+                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">mcp-brave-search</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
+              </div>
+              <p class="entry-description">Real-time web research bridge powered by Brave Search API.</p>
+              <p class="entry-reason">Provides agents with current documentation and software package release cycles.</p>
+            </div>
+            
+          </div>
+        </section>
+        
+        <!-- SECTION: CLI / LOCAL TOOLS -->
+        <section class="stack-section" id="cli-tools">
+          <h2 class="section-heading font-serif italic">CLI / Local Tools</h2>
+          
+          <div class="simple-list">
+            
+            <div class="stack-entry" id="ripgrep">
+              <div class="entry-header">
+                <a href="https://github.com/BurntSushi/ripgrep" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">ripgrep (rg)</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
+              </div>
+              <p class="entry-description">Line-oriented search tool that respects gitignore rules.</p>
+              <p class="entry-reason">Provides ultra-fast regex scanning of massive source directories for target context search.</p>
+            </div>
+            
+            <div class="stack-entry" id="fd">
+              <div class="entry-header">
+                <a href="https://github.com/sharkdp/fd" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">fd</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
+              </div>
+              <p class="entry-description">Simple, fast and user-friendly alternative to find.</p>
+              <p class="entry-reason">Allows agents to locate specific file assets instantly through intuitive glob patterns.</p>
+            </div>
+            
+            <div class="stack-entry" id="fzf">
+              <div class="entry-header">
+                <a href="https://github.com/junegunn/fzf" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">fzf</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
+              </div>
+              <p class="entry-description">Command-line fuzzy finder.</p>
+              <p class="entry-reason">Enables interactive filtering of local directories, processes, and command history.</p>
+            </div>
+            
+          </div>
+        </section>
+        
+        <!-- SECTION: SKILLS -->
+        <section class="stack-section" id="skills">
+          <h2 class="section-heading font-serif italic">Skills</h2>
+          
+          <div class="skills-inline-list">
+            
+            <div class="skill-item">
+              <span class="skill-name font-karla">context pruning</span>
+              <span class="skill-label font-karla badge-favorite">favorite</span>
+              <span class="skill-detail font-sans">— art of stripping redundant files to optimize token space.</span>
+            </div>
+            
+            <div class="skill-item">
+              <span class="skill-name font-karla">prompt surgical injection</span>
+              <span class="skill-label font-karla badge-handmade">handmade</span>
+              <span class="skill-detail font-sans">— crafting micro-instructions targeting specific AST nodes.</span>
+            </div>
+            
+            <div class="skill-item">
+              <span class="skill-name font-karla">rag pipeline alignment</span>
+              <span class="skill-label font-karla badge-favorite">favorite</span>
+              <span class="skill-detail font-sans">— building local embeddings vector caches to feed context windows.</span>
+            </div>
+            
+            <div class="skill-item">
+              <span class="skill-name font-karla">agent sandbox containment</span>
+              <span class="skill-label font-karla badge-handmade">handmade</span>
+              <span class="skill-detail font-sans">— defining isolated shell systems for running agent compilers securely.</span>
+            </div>
+            
+          </div>
+        </section>
+        
+        <!-- SECTION: IMAGE GENERATION -->
+        <section class="stack-section" id="image-gen">
+          <h2 class="section-heading font-serif italic">image generation</h2>
+          
+          <div class="role-grid">
+            <!-- Primary Left Column (60% Width) -->
+            <div class="role-column">
+              <span class="role-label font-karla">primary</span>
+              
+              <div class="stack-entry" id="flux-1-dev">
+                <div class="entry-header">
+                  <a href="https://blackforestlabs.ai/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                    <span class="entry-name">flux.1 dev</span>
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                  </a>
+                </div>
+                <p class="entry-description">preferred model for interface prototyping and structural graphics.</p>
+                <p class="entry-reason">renders exceptional text clarity inside graphics and matches modern UI layouts.</p>
+              </div>
+            </div>
+            
+            <!-- Secondary Right Column (40% Width) -->
+            <div class="role-column">
+              <span class="role-label font-karla">secondary</span>
+              
+              <div class="stack-entry" id="midjourney-v6">
+                <div class="entry-header">
+                  <a href="https://www.midjourney.com/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                    <span class="entry-name">midjourney v6</span>
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                  </a>
+                </div>
+                <p class="entry-description">artistic image generation for conceptual backgrounds and visual themes.</p>
+                <p class="entry-reason">generates rich texture gradients and hyper-realistic lighting aesthetics.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- SECTION: WORKSPACE -->
+        <section class="stack-section" id="workspace">
+          <h2 class="section-heading font-serif italic">workspace</h2>
+          
+          <div class="simple-list">
+            
+            <div class="stack-entry" id="wezterm">
+              <div class="entry-header">
+                <a href="https://wezfurlong.org/wezterm/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">wezterm</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
+              </div>
+              <p class="entry-description">gpu-accelerated terminal emulator designed for high-performance command-line workflows.</p>
+            </div>
+            
+            <div class="stack-entry" id="tmux">
+              <div class="entry-header">
+                <a href="https://github.com/tmux/tmux" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">tmux</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
+              </div>
+              <p class="entry-description">workspace manager enabling persistent background sessions and multi-pane splits.</p>
+            </div>
+            
+            <div class="stack-entry" id="tailscale">
+              <div class="entry-header">
+                <a href="https://tailscale.com/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">tailscale</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
+              </div>
+              <p class="entry-description">zero-config mesh vpn based on wireguard for secure remote workspace access.</p>
+            </div>
+            
+            <div class="stack-entry tooltip-target" id="mac-studio-m2-ultra">
+              <div class="entry-header">
+                <span class="entry-name">mac studio m2 ultra</span>
+                <span class="info-badge font-karla">local specs</span>
+              </div>
+              <p class="entry-description">local compute anchor hosting local databases and isolated agent shells.</p>
+              <p class="entry-reason">allows heavy parallel builds and local vector indexers to run off-grid.</p>
+              
+              <!-- Tooltip containing specific machine details (No provider/location info!) -->
+              <div class="custom-tooltip font-mono">
+                <div class="tooltip-title">Compute Specifications</div>
+                <div class="tooltip-divider"></div>
+                <div class="tooltip-row"><span>Processor:</span> <span>Apple M2 Ultra</span></div>
+                <div class="tooltip-row"><span>Core Count:</span> <span>24 CPU (16 Perf / 8 Eff)</span></div>
+                <div class="tooltip-row"><span>Graphics:</span> <span>60-Core GPU</span></div>
+                <div class="tooltip-row"><span>Memory:</span> <span>192GB LPDDR5 Unified (800GB/s)</span></div>
+                <div class="tooltip-row"><span>Storage:</span> <span>4TB NVMe SSD RAID-0</span></div>
+                <div class="tooltip-row"><span>Engine:</span> <span>32-Core Neural Engine (31.6 TOPS)</span></div>
+              </div>
+            </div>
+            
+        </section>
+        
+        <!-- SECTION: EXPERIENCE (nikota.dev inspired) -->
+        <section class="experience-section" id="experience">
+          <h3 class="experience-title">experience</h3>
+          
+          <div class="experience-list">
+            
+            <a href="#" class="experience-item-link">
+              <div class="experience-item">
+                <div class="experience-item-header">
+                  <span class="experience-item-title">lead ai tooling engineer</span>
+                  <span class="experience-item-date">(2024 - present)</span>
+                </div>
+                <p class="experience-item-description">design and integration of autonomous developer harnesses, custom git hook pipelines, and low-latency local model compilers.</p>
+              </div>
+            </a>
+            
+            <a href="#" class="experience-item-link">
+              <div class="experience-item">
+                <div class="experience-item-header">
+                  <span class="experience-item-title">freelance systems & ai architect</span>
+                  <span class="experience-item-date">(2022 - 2024)</span>
+                </div>
+                <p class="experience-item-description">configuring high-density local compute anchors, secure overlay mesh networks, and agent memory graphs.</p>
+              </div>
+            </a>
+            
+          </div>
+        </section>
+        
+      </div>
+      
+      <!-- Footer & Links (nikota.dev inspired) -->
+      <footer class="stack-footer">
+        <div class="footer-links">
+          <a href="https://github.com/microck" target="_blank" rel="noopener noreferrer" class="footer-link">github</a>
+          <a href="https://x.com/microck" target="_blank" rel="noopener noreferrer" class="footer-link">twitter (x)</a>
+          <a href="https://blog.micr.dev" target="_blank" rel="noopener noreferrer" class="footer-link">blog</a>
+        </div>
+      </footer>
+      
+    </main>
+  </div>
+
+  <!-- READ-ONLY MODAL OVERLAY FOR AGENTS.MD (Opens instantly, no fades) -->
+  <div class="modal-overlay" id="agents-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-window">
+      <header class="modal-header">
+        <h2 class="modal-title font-serif italic" id="modal-title">AGENTS.md — Rendered Operating Manual</h2>
+        <button class="modal-close-btn font-karla" id="close-modal-btn" aria-label="Close modal">Close [Esc]</button>
+      </header>
+      <div class="modal-body font-sans" id="rendered-agents-container">
+        <!-- Rendered markdown is inserted here by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Injection -->
+  <script src="main.js"></script>
+</body>
+</html>
