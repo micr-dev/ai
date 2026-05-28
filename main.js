@@ -775,6 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!text || element.dataset.textEffectReady === 'true') return;
 
     element.dataset.textEffectReady = 'true';
+    element.dataset.textEffectText = text;
     preserveAccessibleLabel(element);
     element.setAttribute('aria-label', text);
     element.classList.add('text-effect-root', `text-effect-${mode}`);
@@ -803,6 +804,24 @@ document.addEventListener('DOMContentLoaded', () => {
       effectIndex += 1;
       element.appendChild(span);
     });
+  }
+
+  function settleTextEffect(element) {
+    if (!element || element.dataset.textEffectSettled === 'true') return;
+
+    const originalText = element.dataset.textEffectText;
+    if (!originalText) return;
+
+    element.textContent = originalText;
+    element.classList.remove(
+      'text-effect-root',
+      'text-effect-char',
+      'text-effect-word-mode',
+      'text-effect-preset',
+      'text-effect-custom',
+      'text-effect-body',
+    );
+    element.dataset.textEffectSettled = 'true';
   }
 
   function setupTextEffects() {
@@ -870,6 +889,10 @@ document.addEventListener('DOMContentLoaded', () => {
       splitTextEffect(element, 'body', bodyBaseDelay);
     });
     applyPageWideBodySweep(bodyElements, bodyBaseDelay);
+
+    window.setTimeout(() => {
+      document.querySelectorAll('.text-effect-root').forEach(settleTextEffect);
+    }, 1200);
   }
 
   function startFontDependentUi() {
@@ -908,6 +931,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (target.classList.contains('text-effect-unit') || target.classList.contains('component-reveal')) {
       target.classList.add('is-revealed');
+    }
+
+    if (target.classList.contains('text-effect-unit')) {
+      const root = target.closest('.text-effect-root');
+      if (!root) return;
+
+      const pendingUnits = root.querySelectorAll('.text-effect-unit:not(.is-revealed)');
+      if (pendingUnits.length === 0) {
+        window.requestAnimationFrame(() => settleTextEffect(root));
+      }
     }
   });
 
