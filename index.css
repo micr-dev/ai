@@ -6,6 +6,7 @@
   --font-helvetica-neue: "helveticaNeue", "Helvetica Neue", "Inter", sans-serif;
   --font-ysabeau: "Ysabeau", "Ysabeau Fallback", "Georgia", serif;
   --font-karla: "Karla", "Karla Fallback", sans-serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 
   /* Colors - EXCLUSIVELY BLACK & WHITE */
@@ -32,6 +33,11 @@
   scroll-behavior: auto; /* Disable smooth scrolling to prevent soft fades */
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  font-style: normal;
+}
+
 html, body {
   width: 100%;
   height: 100%;
@@ -50,6 +56,9 @@ html, body {
 }
 .font-serif {
   font-family: var(--font-ysabeau);
+}
+.font-space {
+  font-family: var(--font-space-grotesk);
 }
 
 /* Antialiasing for supreme crisp typography */
@@ -184,8 +193,10 @@ html, body {
 }
 
 .column-title {
+  font-family: var(--font-space-grotesk) !important;
   font-size: 2.5rem;
-  font-weight: 500; /* clean medium weight matching nikota.dev */
+  font-weight: 400 !important; /* Space Grotesk / 400 */
+  font-style: normal !important;
   color: var(--color-primary);
   margin-bottom: 0px;
 }
@@ -195,8 +206,10 @@ html, body {
 }
 
 .section-heading {
+  font-family: var(--font-space-grotesk) !important;
   font-size: 1.6rem;
-  font-weight: 500; /* clean medium weight matching nikota.dev */
+  font-weight: 400 !important; /* Space Grotesk / 400 */
+  font-style: normal !important;
   color: var(--color-primary);
   border-bottom: none; /* Removed border line under section headings */
   padding-bottom: 0.75rem;
@@ -216,10 +229,8 @@ html, body {
 }
 
 .entry-name {
-  font-family: var(--font-helvetica-neue);
-  font-size: 0.875rem; /* text-sm size to match experience role titles exactly */
+  font-size: 1.05rem;
   font-weight: 500; /* clean medium weight matching nikota.dev */
-  text-transform: lowercase; /* lowercase equivalent to roles */
   color: var(--color-primary);
   transition: color 0s; /* Hover shift immediately - NO FADES */
 }
@@ -257,21 +268,17 @@ html, body {
 
 /* Quiet Secondary Text without Loud Field Labels */
 .entry-description {
-  font-family: var(--font-helvetica-neue);
   font-size: 0.875rem;
-  color: var(--color-secondary); /* gray tone #8b8b8b */
-  line-height: 1.4;
+  color: var(--color-secondary);
+  line-height: 1.5;
   margin-bottom: 0.25rem;
-  font-weight: 400;
 }
 
 .entry-reason {
-  font-family: var(--font-helvetica-neue);
-  font-size: 0.875rem;
-  color: var(--color-secondary); /* gray tone #8b8b8b */
+  font-size: 0.8rem;
+  color: var(--color-tertiary);
   line-height: 1.4;
   margin-bottom: 0.35rem;
-  font-weight: 400;
 }
 
 .entry-metadata {
@@ -689,8 +696,10 @@ html, body {
 }
 
 .modal-title {
+  font-family: var(--font-space-grotesk) !important;
   font-size: 1.3rem;
-  font-weight: 400;
+  font-weight: 400 !important; /* Space Grotesk / 400 */
+  font-style: normal !important;
   color: var(--color-primary);
 }
 
@@ -840,9 +849,10 @@ html, body {
 }
 
 .experience-title {
-  font-family: var(--font-helvetica-neue);
+  font-family: var(--font-space-grotesk) !important;
   font-size: 0.95rem; /* matching nikota h3 experience size */
-  font-weight: 700; /* font-bold (700) */
+  font-weight: 400 !important; /* Space Grotesk / 400 */
+  font-style: normal !important;
   text-transform: lowercase;
   color: var(--color-primary);
   margin-bottom: 1.25rem;
@@ -929,170 +939,6 @@ html, body {
   color: var(--color-primary);
 }
 
-/* --- 14. SKILL CONSTELLATION MAP STYLE --- */
-.constellation-container {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  background-color: transparent;
-  user-select: none;
-}
-
-.constellation-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.constellation-line {
-  stroke: #1a1a1a; /* deep muted border line */
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-  transition: stroke 0s, opacity 0s, stroke-width 0s; /* instant transitions - zero fades */
-}
-
-.constellation-line.active {
-  stroke: var(--color-accent); /* pure white */
-  stroke-width: 1.5;
-  opacity: 1;
-}
-
-.constellation-line.inactive {
-  stroke: #111111;
-  opacity: 0.15;
-}
-
-.constellation-node {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  padding: 0.5rem;
-  margin: -0.5rem; /* increases clickable area for mobile / user comfort */
-  transition: none;
-}
-
-.node-dot {
-  width: 6px;
-  height: 6px;
-  background-color: var(--color-tertiary);
-  border-radius: 50%;
-  border: 1px solid var(--color-bg);
-  display: inline-block;
-  transition: none;
-}
-
-.constellation-node:hover .node-dot,
-.constellation-node.active .node-dot {
-  background-color: var(--color-primary); /* pure white */
-}
-
-.node-label {
-  font-family: var(--font-helvetica-neue);
-  font-size: 0.875rem; /* text-sm to match experience role titles */
-  font-weight: 500;
-  text-transform: lowercase;
-  color: var(--color-secondary); /* gray tone #8b8b8b */
-  margin-left: 0.5rem;
-  white-space: nowrap;
-  transition: none;
-}
-
-.constellation-node:hover .node-label,
-.constellation-node.active .node-label {
-  color: var(--color-primary); /* pure white */
-}
-
-/* Position label to the left of the dot for right-hand nodes */
-.constellation-node.label-left {
-  flex-direction: row-reverse;
-}
-
-.constellation-node.label-left .node-label {
-  margin-left: 0;
-  margin-right: 0.5rem;
-}
-
-/* Detail Panel for interactive updates */
-.constellation-details {
-  margin-top: 1rem;
-  min-height: 120px;
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.constellation-detail-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.constellation-detail-type {
-  font-family: var(--font-karla);
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: lowercase;
-  color: var(--color-secondary);
-}
-
-.constellation-detail-title-row {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.constellation-detail-title {
-  font-family: var(--font-helvetica-neue);
-  font-size: 0.875rem; /* matches experience role title exactly */
-  font-weight: 500;
-  text-transform: lowercase;
-  color: var(--color-primary);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  text-decoration: none;
-}
-
-.constellation-detail-title:hover {
-  text-decoration: underline;
-}
-
-.constellation-detail-desc {
-  font-family: var(--font-helvetica-neue);
-  font-weight: 400;
-  font-size: 0.875rem; /* text-sm matches experience description */
-  color: var(--color-secondary); /* gray tone #8b8b8b */
-  line-height: 1.4;
-  margin-top: 0.1rem;
-}
-
-.constellation-detail-why {
-  font-family: var(--font-helvetica-neue);
-  font-weight: 400;
-  font-size: 0.875rem; /* text-sm matches experience description */
-  color: var(--color-secondary); /* gray tone #8b8b8b */
-  line-height: 1.4;
-  margin-top: 0.25rem;
-}
-
-.constellation-default-state {
-  font-family: var(--font-helvetica-neue);
-  font-weight: 400;
-  font-size: 0.875rem;
-  color: var(--color-secondary); /* gray tone #8b8b8b */
-  line-height: 1.4;
-}
-
 /* --- 15. RESPONSIVE MEDIA QUERIES (MOBILE RE-ORDERING) --- */
 @media (max-width: 768px) {
   html, body {
@@ -1139,19 +985,6 @@ html, body {
     padding: 1.5rem 1.5rem 3rem 1.5rem;
     overflow: visible;
     height: auto;
-  }
-
-  .constellation-container {
-    height: 240px;
-    margin-bottom: 1.5rem;
-  }
-
-  .node-label {
-    font-size: 0.75rem; /* slightly smaller on mobile to prevent clipping */
-  }
-
-  .constellation-details {
-    min-height: 140px;
   }
 
   .stack-footer {
