@@ -5,10 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- SEO Meta Tags -->
-  <title>AI Stack — ai.micr.dev</title>
-  <meta name="description" content="The current snapshot of Microck's AI working setup, model hierarchies, hooks, MCPs, local tools, and the architectural changelog.">
-  <meta name="theme-color" content="#000000">
+  <title>AI Stack</title>
+  <meta name="description" content="Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, CLI tools, skills, image generation, workspace, and setup history.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Microck">
+  <meta name="application-name" content="AI Stack">
+  <meta name="theme-color" content="#121212">
+  <link rel="canonical" href="https://ai.micr.dev/">
+  <link id="dynamic-favicon" rel="icon" href="/favicon-a.png" type="image/png">
+  <link rel="alternate icon" href="/favicon.gif" type="image/gif">
+  <link rel="alternate icon" href="/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AI Stack">
+  <meta property="og:title" content="AI Stack">
+  <meta property="og:description" content="Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, CLI tools, skills, image generation, workspace, and setup history.">
+  <meta property="og:url" content="https://ai.micr.dev/">
+  <meta property="og:image" content="https://ai.micr.dev/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="AI Stack">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Stack">
+  <meta name="twitter:description" content="Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, CLI tools, skills, image generation, workspace, and setup history.">
+  <meta name="twitter:image" content="https://ai.micr.dev/og-image.png">
   
+  <!-- Critical local fonts load before rendering/animation setup -->
+  <link rel="preload" href="public/fonts/helvetica-neue/HelveticaNeue-Roman.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="public/fonts/helvetica-neue/HelveticaNeue-Medium.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="public/fonts/helvetica-neue/HelveticaNeueBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="public/fonts/commit-mono/CommitMono-400-Regular.otf" as="font" type="font/otf" crossorigin>
+  <style>
+    body.fonts-loading .page-container {
+      visibility: hidden;
+    }
+  </style>
+
   <!-- Fonts: Space Grotesk, Karla, Ysabeau, and Fallbacks -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,9 +50,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="index.css?v=20260528-tool-spacing-fixed">
 </head>
-<body class="antialiased">
+<body class="antialiased fonts-loading">
 
   <!-- Ambient Grid Overlay -->
   <div class="ambient-glows" aria-hidden="true">
@@ -39,69 +72,541 @@
           </div>
           
           <div class="changelog-timeline">
-            
-            <!-- Change Group 1 -->
-            <div class="change-group" data-group="28/05/2026">
-              <div class="change-date font-karla">28/05/2026</div>
+            <div class="change-group" data-group="27/05/2026">
+              <div class="change-date font-karla">27/05/2026</div>
               <div class="change-entries">
-                
-                <div class="change-entry" data-targets="flux-1-dev,midjourney-v6">
-                  <h3 class="change-title">Ingested Flux.1 Dev as Primary Image Generation Engine</h3>
-                  <p class="change-description">Flux.1 shows far superior typography fidelity for UI mocking compared to Midjourney v6.</p>
+
+                <div class="change-entry" data-targets="kagi-cli">
+                  <h3 class="change-title">Added kagi-cli CLI</h3>
                 </div>
-                
-                <div class="change-entry" data-targets="mac-studio-m2-ultra">
-                  <h3 class="change-title">Upgraded Local Compute Memory to 192GB</h3>
-                  <p class="change-description">Fitted higher density RAM blocks on local Mac Studio anchor. Parallel agent testing requires large RAM buffers to hold concurrent Llama-3 instances without swapping.</p>
+
+                <div class="change-entry" data-targets="hermes-agent">
+                  <h3 class="change-title">Modified Hermes Agent Harness</h3>
                 </div>
-                
+
+                <div class="change-entry" data-targets="hook-pretooluse-safety">
+                  <h3 class="change-title">Modified PreToolUse Bash Safety Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-pretooluse-rtk">
+                  <h3 class="change-title">Modified PreToolUse RTK Rewrite Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-sessionstart-lintcn">
+                  <h3 class="change-title">Modified SessionStart lintcn Setup Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-sessionstart-residue">
+                  <h3 class="change-title">Modified SessionStart Residue Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-sessionstart-dora">
+                  <h3 class="change-title">Modified SessionStart dora Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-stop-residue">
+                  <h3 class="change-title">Modified Stop Residue Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-stop-lintcn">
+                  <h3 class="change-title">Modified Stop lintcn Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-stop-dora">
+                  <h3 class="change-title">Modified Stop dora Hook</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="26/05/2026">
+              <div class="change-date font-karla">26/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="gpt-5-5">
+                  <h3 class="change-title">Modified GPT 5.5 Model</h3>
+                </div>
+
+                <div class="change-entry" data-targets="parkour-mcp">
+                  <h3 class="change-title">Added parkour-mcp MCP</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="25/05/2026">
+              <div class="change-date font-karla">25/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="grill-with-docs">
+                  <h3 class="change-title">Added grill-with-docs Skill</h3>
+                </div>
+
+                <div class="change-entry" data-targets="semble-cli">
+                  <h3 class="change-title">Added semble CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="semble-mcp">
+                  <h3 class="change-title">Added semble MCP</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="24/05/2026">
+              <div class="change-date font-karla">24/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="language-selection">
+                  <h3 class="change-title">Added language-selection Skill</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="22/05/2026">
+              <div class="change-date font-karla">22/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="jj">
+                  <h3 class="change-title">Modified jj CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-sessionstart-lintcn">
+                  <h3 class="change-title">Modified SessionStart lintcn Setup Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-sessionstart-residue">
+                  <h3 class="change-title">Modified SessionStart Residue Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-sessionstart-dora">
+                  <h3 class="change-title">Modified SessionStart dora Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-stop-residue">
+                  <h3 class="change-title">Modified Stop Residue Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-stop-lintcn">
+                  <h3 class="change-title">Modified Stop lintcn Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-stop-dora">
+                  <h3 class="change-title">Modified Stop dora Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="mcp-vnc">
+                  <h3 class="change-title">Modified mcp-vnc MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="thermo-nuclear-code-quality-review">
+                  <h3 class="change-title">Modified thermo-nuclear-code-quality-review Skill</h3>
+                </div>
+
+                <div class="change-entry" data-targets="thermo-nuclear-code-quality-review">
+                  <h3 class="change-title">Added thermo-nuclear-code-quality-review Skill</h3>
+                </div>
+
               </div>
             </div>
             
-            <!-- Change Group 2 -->
-            <div class="change-group" data-group="14/05/2026">
-              <div class="change-date font-karla">14/05/2026</div>
+            <div class="change-group" data-group="21/05/2026">
+              <div class="change-date font-karla">21/05/2026</div>
               <div class="change-entries">
                 
-                <div class="change-entry" data-targets="claude-3-5-sonnet">
-                  <h3 class="change-title">Re-aligned Primary Coding Engine to Claude 3.5 Sonnet (V2)</h3>
-                  <p class="change-description">Version 2 release demonstrates a 12% increase in AST logic validation. Structural refactoring tasks now complete with zero manual interventions.</p>
+                <div class="change-entry" data-targets="agent-deck">
+                  <h3 class="change-title">Added agent-deck Workspace</h3>
                 </div>
                 
-                <div class="change-entry" data-targets="mcp-memory-server">
-                  <h3 class="change-title">Activated Memory MCP Bridge</h3>
-                  <p class="change-description">Memory MCP resolves state drift between disconnected agent runs. It records project milestones and key coding preferences automatically.</p>
+                <div class="change-entry" data-targets="dora-cli">
+                  <h3 class="change-title">Modified dora CLI</h3>
                 </div>
-                
+
+                <div class="change-entry" data-targets="dora-mcp">
+                  <h3 class="change-title">Modified dora MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="semble-cli">
+                  <h3 class="change-title">Modified semble CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="semble-mcp">
+                  <h3 class="change-title">Modified semble MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="fff-cli">
+                  <h3 class="change-title">Modified fff CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="fff-mcp">
+                  <h3 class="change-title">Modified fff MCP</h3>
+                </div>
+
               </div>
             </div>
-            
-            <!-- Change Group 3 -->
-            <div class="change-group" data-group="22/04/2026">
-              <div class="change-date font-karla">22/04/2026</div>
+
+            <div class="change-group" data-group="19/05/2026">
+              <div class="change-date font-karla">19/05/2026</div>
               <div class="change-entries">
-                
-                <div class="change-entry" data-targets="mcp-brave-search">
-                  <h3 class="change-title">Integrated Brave Search MCP Server</h3>
-                  <p class="change-description">Permits coding agents to run live web lookups directly, bypassing outdated internal training cutoffs for modern documentation.</p>
-                </div>
-                
-                <div class="change-entry" data-targets="cursor">
-                  <h3 class="change-title">Adopted Cursor as Primary Editor Harness</h3>
-                  <p class="change-description">Migrated from basic VS Code setup. Cursor's composer agent provides native multi-file editing support, cutting feature development loops in half.</p>
-                </div>
-                
-              </div>
-            </div>
-            
-            <!-- Change Group 4 -->
-            <div class="change-group" data-group="08/03/2026">
-              <div class="change-date font-karla">08/03/2026</div>
-              <div class="change-entries">
-                
+
                 <div class="change-entry" data-targets="agents-md">
-                  <h3 class="change-title">Established AGENTS.md Protocol v4.0</h3>
-                  <p class="change-description">Formulated strict agent sandbox controls and redaction boundaries to secure public repository publishing.</p>
+                  <h3 class="change-title">Modified AGENTS.md</h3>
+                </div>
+
+                <div class="change-entry" data-targets="vps">
+                  <h3 class="change-title">Added VPS Workspace</h3>
+                </div>
+
+                <div class="change-entry" data-targets="tailscale">
+                  <h3 class="change-title">Added Tailscale Workspace</h3>
+                </div>
+                
+              </div>
+            </div>
+            
+            <div class="change-group" data-group="17/05/2026">
+              <div class="change-date font-karla">17/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="discord-py-self">
+                  <h3 class="change-title">Added discord-py-self MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="dora-mcp">
+                  <h3 class="change-title">Added dora MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="fff-mcp">
+                  <h3 class="change-title">Added fff MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-sessionstart-residue">
+                  <h3 class="change-title">Added Residue SessionStart Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-stop-residue">
+                  <h3 class="change-title">Added Residue Stop Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="naming">
+                  <h3 class="change-title">Added naming Skill</h3>
+                </div>
+
+                <div class="change-entry" data-targets="create-cli">
+                  <h3 class="change-title">Added create-cli Skill</h3>
+                </div>
+
+                <div class="change-entry" data-targets="glm-5-1">
+                  <h3 class="change-title">Added GLM-5.1 Model</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="10/05/2026">
+              <div class="change-date font-karla">10/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="tailscale">
+                  <h3 class="change-title">Added Tailscale Workspace</h3>
+                </div>
+
+                <div class="change-entry" data-targets="repository-test-design">
+                  <h3 class="change-title">Added repository-test-design Skill</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="08/05/2026">
+              <div class="change-date font-karla">08/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="hook-precompact-handoff">
+                  <h3 class="change-title">Added PreCompact Handoff Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-postcompact-handoff">
+                  <h3 class="change-title">Added PostCompact Handoff Hook</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="07/05/2026">
+              <div class="change-date font-karla">07/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="mermaid-diagrams">
+                  <h3 class="change-title">Added mermaid-diagrams Skill</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="05/05/2026">
+              <div class="change-date font-karla">05/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="opensrc-mcp">
+                  <h3 class="change-title">Added opensrc-mcp MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="github-mcp">
+                  <h3 class="change-title">Added github MCP</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="24/04/2026">
+              <div class="change-date font-karla">24/04/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="gpt-5-5">
+                  <h3 class="change-title">Modified GPT 5.5 Model</h3>
+                </div>
+
+                <div class="change-entry" data-targets="mcp-vnc">
+                  <h3 class="change-title">Added mcp-vnc MCP</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="23/04/2026">
+              <div class="change-date font-karla">23/04/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="gpt-image-2">
+                  <h3 class="change-title">Added gpt-image-2 Image Generation Model</h3>
+                </div>
+
+                <div class="change-entry" data-targets="gitquarry-cli">
+                  <h3 class="change-title">Added gitquarry CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="gitquarry-mcp">
+                  <h3 class="change-title">Added gitquarry-mcp MCP</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="15/04/2026">
+              <div class="change-date font-karla">15/04/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="agent-deck">
+                  <h3 class="change-title">Added agent-deck Workspace</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="13/04/2026">
+              <div class="change-date font-karla">13/04/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="optimo">
+                  <h3 class="change-title">Added optimo Skill</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="12/04/2026">
+              <div class="change-date font-karla">12/04/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="markitdown-mcp">
+                  <h3 class="change-title">Added markitdown-mcp MCP</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="04/04/2026">
+              <div class="change-date font-karla">04/04/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="hook-sessionstart-lintcn">
+                  <h3 class="change-title">Added SessionStart lintcn Setup Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-stop-lintcn">
+                  <h3 class="change-title">Added Stop lintcn Check Hook</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="03/04/2026">
+              <div class="change-date font-karla">03/04/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="grill-me">
+                  <h3 class="change-title">Added grill-me Skill</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="29/03/2026">
+              <div class="change-date font-karla">29/03/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="hermes-agent">
+                  <h3 class="change-title">Added Hermes Agent Harness</h3>
+                </div>
+
+                <div class="change-entry" data-targets="dora-cli">
+                  <h3 class="change-title">Added dora CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="discord-py-self">
+                  <h3 class="change-title">Added discord-py-self MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="egaki-cli">
+                  <h3 class="change-title">Added egaki CLI</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="27/03/2026">
+              <div class="change-date font-karla">27/03/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="markit-cli">
+                  <h3 class="change-title">Added markit CLI</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="24/03/2026">
+              <div class="change-date font-karla">24/03/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="fff-cli">
+                  <h3 class="change-title">Added fff CLI</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="21/03/2026">
+              <div class="change-date font-karla">21/03/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="lit-cli">
+                  <h3 class="change-title">Added lit CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="dora-cli">
+                  <h3 class="change-title">Added dora CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="lintcn-cli">
+                  <h3 class="change-title">Added lintcn CLI</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="20/03/2026">
+              <div class="change-date font-karla">20/03/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="discord-py-self">
+                  <h3 class="change-title">Added discord-py-self MCP</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="17/03/2026">
+              <div class="change-date font-karla">17/03/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="kagi-mcp">
+                  <h3 class="change-title">Added kagi-mcp MCP</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="16/03/2026">
+              <div class="change-date font-karla">16/03/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="naming">
+                  <h3 class="change-title">Added naming Skill</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="14/03/2026">
+              <div class="change-date font-karla">14/03/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="codex-cli">
+                  <h3 class="change-title">Added codex-cli Harness</h3>
+                </div>
+
+                <div class="change-entry" data-targets="agent-browser-cli">
+                  <h3 class="change-title">Added agent-browser CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="dora-mcp">
+                  <h3 class="change-title">Added dora MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="grep-app">
+                  <h3 class="change-title">Added grep-app MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="perplexity-webui">
+                  <h3 class="change-title">Added perplexity-webui MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="reddit-mcp-buddy">
+                  <h3 class="change-title">Added reddit-mcp-buddy MCP</h3>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="change-group" data-group="13/03/2026">
+              <div class="change-date font-karla">13/03/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="glm-5-turbo">
+                  <h3 class="change-title">Added GLM-5-Turbo Model</h3>
+                </div>
+
+                <div class="change-entry" data-targets="reddit-mcp-buddy">
+                  <h3 class="change-title">Added reddit-mcp-buddy MCP</h3>
+                </div>
+
+                <div class="change-entry" data-targets="tmux">
+                  <h3 class="change-title">Added tmux Workspace</h3>
+                </div>
+
+                <div class="change-entry" data-targets="rtk">
+                  <h3 class="change-title">Added rtk CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="rg">
+                  <h3 class="change-title">Added rg CLI</h3>
+                </div>
+
+                <div class="change-entry" data-targets="opensrc-cli">
+                  <h3 class="change-title">Added opensrc CLI</h3>
                 </div>
                 
               </div>
@@ -123,41 +628,32 @@
           <h2 class="section-heading">Models</h2>
           
           <div class="role-grid">
-            <!-- Primary Left Column (60% Width) -->
             <div class="role-column">
               <span class="role-label font-karla">Primary</span>
               
-              <div class="stack-entry" id="claude-3-5-sonnet">
+              <div class="stack-entry" id="gpt-5-5">
                 <div class="entry-header">
-                  <a href="https://www.anthropic.com/claude/sonnet" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                    <span class="entry-name">Claude 3.5 Sonnet (V2)</span>
-                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                    </svg>
-                  </a>
+                  <span class="entry-name">GPT 5.5</span>
                 </div>
-                <p class="entry-description">Default language model for system design, deep logic, and structural refactoring.</p>
-                <p class="entry-reason">Exhibits superior comprehension of complex codebase context and high adherence to strict system instructions.</p>
+                <p class="entry-description">Primary Codex model for implementation, debugging, review, and repository-level reasoning.</p>
               </div>
             </div>
             
-            <!-- Secondary Right Column (40% Width) -->
             <div class="role-column">
               <span class="role-label font-karla">Secondary</span>
               
-              <div class="stack-entry" id="gemini-1-5-pro">
+              <div class="stack-entry" id="glm-5-turbo">
                 <div class="entry-header">
-                  <a href="https://deepmind.google/technologies/gemini/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                    <span class="entry-name">Gemini 1.5 Pro</span>
-                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                    </svg>
-                  </a>
+                  <span class="entry-name">GLM-5-Turbo</span>
                 </div>
-                <p class="entry-description">Secondary model utilized for codebase-wide repository indexing and multimodality verification.</p>
-                <p class="entry-reason">Leverages an expansive 2-million token window to ingest full codebase directories without context fragmentation.</p>
+                <p class="entry-description">Secondary model for fast Hermes Agent loops and alternate model judgment.</p>
+              </div>
+
+              <div class="stack-entry" id="glm-5-1">
+                <div class="entry-header">
+                  <span class="entry-name">GLM-5.1</span>
+                </div>
+                <p class="entry-description">Secondary GLM model kept alongside the turbo profile for broader Z.AI coverage.</p>
               </div>
             </div>
           </div>
@@ -172,18 +668,17 @@
             <div class="role-column">
               <span class="role-label font-karla">Primary</span>
               
-              <div class="stack-entry" id="cursor">
+              <div class="stack-entry" id="codex-cli">
                 <div class="entry-header">
-                  <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                    <span class="entry-name">Cursor</span>
+                  <a href="https://developers.openai.com/codex/cli/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                    <span class="entry-name">Codex CLI</span>
                     <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
                       <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
                     </svg>
                   </a>
                 </div>
-                <p class="entry-description">AI-native editor acting as the primary system developer interface.</p>
-                <p class="entry-reason">Provides deep integration of inline AI prompting, composer agents, and local codebase indexing.</p>
+                <p class="entry-description">Primary terminal harness for code edits, tool execution, browser checks, and sub-agent orchestration.</p>
               </div>
             </div>
             
@@ -191,18 +686,11 @@
             <div class="role-column">
               <span class="role-label font-karla">Secondary</span>
               
-              <div class="stack-entry" id="aider">
+              <div class="stack-entry" id="hermes-agent">
                 <div class="entry-header">
-                  <a href="https://aider.chat/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                    <span class="entry-name">Aider</span>
-                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                    </svg>
-                  </a>
+                  <span class="entry-name">Hermes Agent</span>
                 </div>
-                <p class="entry-description">CLI-driven autonomous git-pairing assistant for rapid feature iterations.</p>
-                <p class="entry-reason">Excels at executing multi-file surgical modifications directly from terminal shell environments.</p>
+                <p class="entry-description">Secondary agent harness with a persistent shell, GLM defaults, and a separate tool runtime.</p>
               </div>
             </div>
           </div>
@@ -213,34 +701,41 @@
           <h2 class="section-heading">AGENTS.md</h2>
           
           <div class="agents-box-container" id="agents-md">
-            <!-- IDE Editor Style Window (Only visible boxed element permitted) -->
             <div class="editor-pane">
-              <div class="editor-header">
-                <div class="editor-dots">
-                  <span class="dot dot-close"></span>
-                  <span class="dot dot-minimize"></span>
-                  <span class="dot dot-expand"></span>
+              <div class="editor-actions" aria-label="AGENTS.md quick actions">
+                <div class="editor-view-toggle" role="tablist" aria-label="AGENTS.md view">
+                  <button class="render-trigger icon-control font-karla" id="open-rendered-btn" type="button" role="tab" aria-selected="false" aria-controls="rendered-agents-view" aria-label="View rendered AGENTS.md" data-view="rendered" data-tooltip="View rendered AGENTS.md">
+                    <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                  <button class="render-trigger icon-control font-karla is-active" id="open-raw-btn" type="button" role="tab" aria-selected="true" aria-controls="raw-agents-view" aria-label="View raw AGENTS.md" data-view="raw" data-tooltip="View raw AGENTS.md">
+                    <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M10 12.5 8 15l2 2.5"></path>
+                      <path d="m14 12.5 2 2.5-2 2.5"></path>
+                      <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path>
+                    </svg>
+                  </button>
                 </div>
-                <div class="editor-tab font-karla">
-                  <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
+                <button class="render-trigger icon-control font-karla" id="copy-agents-inline-btn" type="button" aria-label="Copy AGENTS.md" data-tooltip="Copy AGENTS.md">
+                  <svg class="control-icon copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
                   </svg>
-                  <span>AGENTS.md</span>
-                </div>
-                <button class="render-trigger font-karla" id="open-rendered-btn">View Rendered Manual</button>
+                </button>
               </div>
-              
-              <div class="editor-body">
+              <div class="editor-body" id="agents-inline-open-target" role="button" tabindex="0" aria-label="Open AGENTS.md dialog">
                 <!-- Line Numbers Column -->
                 <div class="line-numbers font-mono" id="editor-line-numbers">
                   <!-- Generated by JS -->
                 </div>
                 <!-- Preformatted Code Block -->
-                <pre class="editor-code font-mono"><code id="raw-agents-code">Loading raw operating manual...</code></pre>
+                <pre class="editor-code font-mono" id="raw-agents-view" role="tabpanel" aria-labelledby="open-raw-btn"><code id="raw-agents-code">Loading raw operating manual...</code></pre>
+                <div class="agents-rendered-view font-sans" id="rendered-agents-view" role="tabpanel" aria-labelledby="open-rendered-btn" hidden>
+                  <p>Loading rendered operating manual...</p>
+                </div>
               </div>
             </div>
           </div>
@@ -252,20 +747,74 @@
           
           <div class="simple-list">
             
-            <div class="stack-entry" id="pre-commit-ai">
+            <div class="stack-entry" id="hook-pretooluse-safety">
               <div class="entry-header">
-                <span class="entry-name">pre-commit-ai</span>
+                <span class="entry-name">PreToolUse | Bash Safety</span>
               </div>
-              <p class="entry-description">Automated Git pre-commit hook that queries local models to review changes before staging.</p>
-              <p class="entry-reason">Catches syntactical drift and architectural policy violations prior to remote pushes.</p>
+              <p class="entry-description">Checks shell tool calls before execution.</p>
             </div>
-            
-            <div class="stack-entry" id="pr-agent-hook">
+
+            <div class="stack-entry" id="hook-pretooluse-rtk">
               <div class="entry-header">
-                <span class="entry-name">pr-agent-hook</span>
+                <span class="entry-name">PreToolUse | RTK Rewrite</span>
               </div>
-              <p class="entry-description">GitHub Action triggered hook running security audits and visual diff changes on pull requests.</p>
-              <p class="entry-reason">Ensures compliance with performance budgets and CSS layout rules without manual intervention.</p>
+              <p class="entry-description">Routes Bash through the local RTK rewrite guard when supported.</p>
+            </div>
+
+            <div class="stack-entry" id="hook-sessionstart-lintcn">
+              <div class="entry-header">
+                <span class="entry-name">SessionStart | lintcn Setup</span>
+              </div>
+              <p class="entry-description">Runs the lintcn setup command at session start.</p>
+            </div>
+
+            <div class="stack-entry" id="hook-sessionstart-residue">
+              <div class="entry-header">
+                <span class="entry-name">SessionStart | Residue Start</span>
+              </div>
+              <p class="entry-description">Starts Residue session capture.</p>
+            </div>
+
+            <div class="stack-entry" id="hook-sessionstart-dora">
+              <div class="entry-header">
+                <span class="entry-name">SessionStart | Dora Index Check</span>
+              </div>
+              <p class="entry-description">Checks Dora status and starts indexing when the repository supports it.</p>
+            </div>
+
+            <div class="stack-entry" id="hook-precompact-handoff">
+              <div class="entry-header">
+                <span class="entry-name">PreCompact | Compact Handoff</span>
+              </div>
+              <p class="entry-description">Writes a compact handoff before manual or automatic compaction.</p>
+            </div>
+
+            <div class="stack-entry" id="hook-postcompact-handoff">
+              <div class="entry-header">
+                <span class="entry-name">PostCompact | Handoff Reload</span>
+              </div>
+              <p class="entry-description">Loads the compact handoff reminder after compaction.</p>
+            </div>
+
+            <div class="stack-entry" id="hook-stop-residue">
+              <div class="entry-header">
+                <span class="entry-name">Stop | Residue Finish</span>
+              </div>
+              <p class="entry-description">Ends Residue session capture.</p>
+            </div>
+
+            <div class="stack-entry" id="hook-stop-lintcn">
+              <div class="entry-header">
+                <span class="entry-name">Stop | lintcn Check</span>
+              </div>
+              <p class="entry-description">Runs the lintcn stop check.</p>
+            </div>
+
+            <div class="stack-entry" id="hook-stop-dora">
+              <div class="entry-header">
+                <span class="entry-name">Stop | Dora Reindex</span>
+              </div>
+              <p class="entry-description">Starts a Dora reindex after session shutdown.</p>
             </div>
             
           </div>
@@ -275,100 +824,160 @@
         <section class="stack-section" id="mcps">
           <h2 class="section-heading">MCPs</h2>
           
-          <div class="simple-list">
+          <div class="simple-list two-column-list">
             
-            <div class="stack-entry" id="mcp-memory-server">
+            <div class="stack-entry" id="discord-py-self">
               <div class="entry-header">
-                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/memory" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                  <span class="entry-name">mcp-memory-server</span>
-                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                  </svg>
-                </a>
+                <a href="https://github.com/Microck/discord.py-self-mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">discord-py-self</span></a>
               </div>
-              <p class="entry-description">Graph-based semantic memory engine that persists project-specific configurations.</p>
-              <p class="entry-reason">Enables agents to maintain context across terminal sessions without polluting prompts.</p>
+              <p class="entry-description">Active Discord automation server.</p>
             </div>
             
-            <div class="stack-entry" id="mcp-filesystem-server">
+            <div class="stack-entry" id="dora-mcp">
               <div class="entry-header">
-                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                  <span class="entry-name">mcp-filesystem-server</span>
-                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                  </svg>
-                </a>
+                <a href="https://github.com/butttons/dora" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">dora</span></a>
               </div>
-              <p class="entry-description">Secure directory bridge granting read-write privileges to designated paths.</p>
-              <p class="entry-reason">Enforces strict path containment, preventing agents from escaping the sandbox.</p>
+              <p class="entry-description">Structural code intelligence for symbols, dependencies, docs, and architecture queries.</p>
             </div>
             
-            <div class="stack-entry" id="mcp-brave-search">
+            <div class="stack-entry" id="fff-mcp">
               <div class="entry-header">
-                <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                  <span class="entry-name">mcp-brave-search</span>
-                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                  </svg>
-                </a>
+                <a href="https://github.com/magnusmalm/fff-cli" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">fff</span></a>
               </div>
-              <p class="entry-description">Real-time web research bridge powered by Brave Search API.</p>
-              <p class="entry-reason">Provides agents with current documentation and software package release cycles.</p>
+              <p class="entry-description">Fast file finder with frecency-backed grep and filename discovery.</p>
+            </div>
+
+            <div class="stack-entry" id="semble-mcp">
+              <div class="entry-header">
+                <a href="https://github.com/mochunab/semble-mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">semble</span></a>
+              </div>
+              <p class="entry-description">Semantic code search server.</p>
+            </div>
+
+            <div class="stack-entry" id="grep-app">
+              <div class="entry-header">
+                <a href="https://github.com/ai-tools-all/grep_app_mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">grep-app</span></a>
+              </div>
+              <p class="entry-description">Browser-backed grep.app research bridge.</p>
+            </div>
+
+            <div class="stack-entry" id="markitdown-mcp">
+              <div class="entry-header">
+                <a href="https://github.com/KorigamiK/markitdown_mcp_server" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">markitdown-mcp</span></a>
+              </div>
+              <p class="entry-description">Document-to-markdown conversion server.</p>
+            </div>
+
+            <div class="stack-entry" id="mcp-vnc">
+              <div class="entry-header">
+                <a href="https://github.com/hrrrsn/mcp-vnc" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">mcp-vnc</span></a>
+              </div>
+              <p class="entry-description">Remote visual-control server.</p>
+            </div>
+
+            <div class="stack-entry" id="perplexity-webui">
+              <div class="entry-header">
+                <a href="https://github.com/Microck/perplexity-webui-mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">perplexity-webui</span></a>
+              </div>
+              <p class="entry-description">Rendered Perplexity research bridge.</p>
+            </div>
+
+            <div class="stack-entry" id="reddit-mcp-buddy">
+              <div class="entry-header">
+                <a href="https://github.com/karanb192/reddit-mcp-buddy" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">reddit-mcp-buddy</span></a>
+              </div>
+              <p class="entry-description">Reddit research server.</p>
+            </div>
+
+            <div class="stack-entry" id="gitquarry-mcp">
+              <div class="entry-header">
+                <a href="https://github.com/Microck/gitquarry" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">gitquarry-mcp</span></a>
+              </div>
+              <p class="entry-description">GitHub repository search and inspection server.</p>
+            </div>
+
+            <div class="stack-entry" id="opensrc-mcp">
+              <div class="entry-header">
+                <a href="https://github.com/dmmulroy/opensrc-mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">opensrc-mcp</span></a>
+              </div>
+              <p class="entry-description">Source package fetch and cache server.</p>
+            </div>
+
+            <div class="stack-entry" id="github-mcp">
+              <div class="entry-header">
+                <a href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">github</span></a>
+              </div>
+              <p class="entry-description">GitHub API server.</p>
+            </div>
+
+            <div class="stack-entry" id="kagi-mcp">
+              <div class="entry-header">
+                <a href="https://github.com/kagisearch/kagimcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">kagi-mcp</span></a>
+              </div>
+              <p class="entry-description">Kagi search, extract, summarize, and assistant server.</p>
+            </div>
+
+            <div class="stack-entry" id="parkour-mcp">
+              <div class="entry-header">
+                <a href="https://github.com/blightbow/parkour-mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">parkour-mcp</span></a>
+              </div>
+              <p class="entry-description">Code-profile research and repository navigation server.</p>
             </div>
             
           </div>
         </section>
         
-        <!-- SECTION: CLI / LOCAL TOOLS -->
+        <!-- SECTION: CLI -->
         <section class="stack-section" id="cli-tools">
-          <h2 class="section-heading">CLI / Local Tools</h2>
+          <h2 class="section-heading">CLI</h2>
           
-          <div class="simple-list">
+          <div class="simple-list two-column-list">
             
-            <div class="stack-entry" id="ripgrep">
+            <div class="stack-entry" id="rtk">
+              <div class="entry-header">
+                <a href="https://github.com/cliffano/rtk" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">rtk</span></a>
+              </div>
+              <p class="entry-description">Verified wrapper used only for supported subcommands.</p>
+            </div>
+
+            <div class="stack-entry" id="rg">
               <div class="entry-header">
                 <a href="https://github.com/BurntSushi/ripgrep" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                  <span class="entry-name">ripgrep (rg)</span>
+                  <span class="entry-name">rg</span>
                   <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
                     <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
                   </svg>
                 </a>
               </div>
-              <p class="entry-description">Line-oriented search tool that respects gitignore rules.</p>
-              <p class="entry-reason">Provides ultra-fast regex scanning of massive source directories for target context search.</p>
+              <p class="entry-description">Default raw text and filename search command.</p>
             </div>
             
-            <div class="stack-entry" id="fd">
+            <div class="stack-entry" id="jj">
               <div class="entry-header">
-                <a href="https://github.com/sharkdp/fd" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                  <span class="entry-name">fd</span>
+                <a href="https://github.com/jj-vcs/jj" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">jj</span>
                   <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
                     <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
                   </svg>
                 </a>
               </div>
-              <p class="entry-description">Simple, fast and user-friendly alternative to find.</p>
-              <p class="entry-reason">Allows agents to locate specific file assets instantly through intuitive glob patterns.</p>
+              <p class="entry-description">Canonical version-control interface for colocated Git repositories.</p>
             </div>
             
-            <div class="stack-entry" id="fzf">
-              <div class="entry-header">
-                <a href="https://github.com/junegunn/fzf" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                  <span class="entry-name">fzf</span>
-                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                  </svg>
-                </a>
-              </div>
-              <p class="entry-description">Command-line fuzzy finder.</p>
-              <p class="entry-reason">Enables interactive filtering of local directories, processes, and command history.</p>
-            </div>
+            <div class="stack-entry" id="dora-cli"><div class="entry-header"><a href="https://github.com/butttons/dora" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">dora</span></a></div><p class="entry-description">Structural code intelligence for symbols, dependencies, docs, and architecture.</p></div>
+            <div class="stack-entry" id="semble-cli"><div class="entry-header"><a href="https://github.com/johunsang/semble_rs" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">semble</span></a></div><p class="entry-description">Semantic code search when natural-language intent beats exact grep.</p></div>
+            <div class="stack-entry" id="fff-cli"><div class="entry-header"><a href="https://github.com/magnusmalm/fff-cli" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">fff</span></a></div><p class="entry-description">Fast local file finder and grep surface.</p></div>
+            <div class="stack-entry" id="gitquarry-cli"><div class="entry-header"><a href="https://github.com/Microck/gitquarry" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">gitquarry</span></a></div><p class="entry-description">GitHub repository search and inspection.</p></div>
+            <div class="stack-entry" id="opensrc-cli"><div class="entry-header"><a href="https://github.com/vercel-labs/opensrc" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">opensrc</span></a></div><p class="entry-description">Dependency source fetching and local cache access.</p></div>
+            <div class="stack-entry" id="markit-cli"><div class="entry-header"><a href="https://github.com/Michaelliv/markit" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">markit</span></a></div><p class="entry-description">Markdown conversion for files, URLs, and streams.</p></div>
+            <div class="stack-entry" id="lit-cli"><div class="entry-header"><a href="https://github.com/run-llama/liteparse" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">lit</span></a></div><p class="entry-description">LiteParse document parsing for PDFs, Office files, and images.</p></div>
+            <div class="stack-entry" id="agent-browser-cli"><div class="entry-header"><a href="https://github.com/vercel-labs/agent-browser" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">agent-browser</span></a></div><p class="entry-description">Browser automation for rendered checks, screenshots, clicks, and forms.</p></div>
+            <div class="stack-entry" id="residue-cli"><div class="entry-header"><a href="https://github.com/butttons/residue" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">residue</span></a></div><p class="entry-description">Session provenance capture, verification, and upload.</p></div>
+            <div class="stack-entry" id="egaki-cli"><div class="entry-header"><a href="https://github.com/remorses/egaki" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">egaki</span></a></div><p class="entry-description">Terminal-driven image generation and editing.</p></div>
+            <div class="stack-entry" id="kagi-cli"><div class="entry-header"><a href="https://github.com/Microck/kagi-cli" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">kagi-cli</span></a></div><p class="entry-description">Local Kagi command surface kept alongside kagi-mcp.</p></div>
+            <div class="stack-entry" id="lintcn-cli"><div class="entry-header"><a href="https://github.com/remorses/lintcn" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">lintcn</span></a></div><p class="entry-description">Type-aware semantic linting for project-specific invariants.</p></div>
             
           </div>
         </section>
@@ -379,29 +988,16 @@
           
           <div class="skills-inline-list">
             
-            <div class="skill-item">
-              <span class="skill-name font-karla">Context Pruning</span>
-              <span class="skill-label font-karla badge-favorite">Favorite</span>
-              <span class="skill-detail font-sans">— Art of stripping redundant files to optimize token space.</span>
-            </div>
-            
-            <div class="skill-item">
-              <span class="skill-name font-karla">Prompt Surgical Injection</span>
-              <span class="skill-label font-karla badge-handmade">Handmade</span>
-              <span class="skill-detail font-sans">— Crafting micro-instructions targeting specific AST nodes.</span>
-            </div>
-            
-            <div class="skill-item">
-              <span class="skill-name font-karla">RAG Pipeline Alignment</span>
-              <span class="skill-label font-karla badge-favorite">Favorite</span>
-              <span class="skill-detail font-sans">— Building local embeddings vector caches to feed context windows.</span>
-            </div>
-            
-            <div class="skill-item">
-              <span class="skill-name font-karla">Agent Sandbox Containment</span>
-              <span class="skill-label font-karla badge-handmade">Handmade</span>
-              <span class="skill-detail font-sans">— Defining isolated shell systems for running agent compilers securely.</span>
-            </div>
+            <div class="skill-item" id="grill-with-docs" data-tooltip="Stress-tests decisions against the project glossary and captures resolved language."><span class="skill-name font-karla">grill-with-docs</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Stress-tests decisions against the project glossary and captures resolved language.</span></div>
+            <div class="skill-item" id="grill-me" data-tooltip="Runs focused design interviews until assumptions and tradeoffs are explicit."><span class="skill-name font-karla">grill-me</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Runs focused design interviews until assumptions and tradeoffs are explicit.</span></div>
+            <div class="skill-item" id="compact-handoff" data-tooltip="Preserves task state across context compaction and resume boundaries."><span class="skill-name font-karla">compact-handoff</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Preserves task state across context compaction and resume boundaries.</span></div>
+            <div class="skill-item" id="repository-test-design" data-tooltip="Designs tests that catch real defects instead of shallow snapshot churn."><span class="skill-name font-karla">repository-test-design</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Designs tests that catch real defects instead of shallow snapshot churn.</span></div>
+            <div class="skill-item" id="optimo" data-tooltip="Optimizes images and videos through local media pipelines."><span class="skill-name font-karla">optimo</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Optimizes images and videos through local media pipelines.</span></div>
+            <div class="skill-item" id="naming" data-tooltip="Structured naming system for private operator use."><span class="skill-name font-karla">naming</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Structured naming system for private operator use.</span></div>
+            <div class="skill-item" id="thermo-nuclear-code-quality-review" data-tooltip="Runs strict maintainability reviews."><span class="skill-name font-karla">thermo-nuclear-code-quality-review</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Runs strict maintainability reviews.</span></div>
+            <div class="skill-item" id="mermaid-diagrams" data-tooltip="Produces useful GitHub-compatible diagrams for systems, flows, and architecture."><span class="skill-name font-karla">mermaid-diagrams</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Produces useful GitHub-compatible diagrams for systems, flows, and architecture.</span></div>
+            <div class="skill-item" id="language-selection" data-tooltip="Chooses implementation languages from constraints instead of taste alone."><span class="skill-name font-karla">language-selection</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Chooses implementation languages from constraints instead of taste alone.</span></div>
+            <div class="skill-item" id="create-cli" data-tooltip="Shapes command-line interfaces, flags, help text, errors, and output contracts."><span class="skill-name font-karla">create-cli</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Shapes command-line interfaces, flags, help text, errors, and output contracts.</span></div>
             
           </div>
         </section>
@@ -415,37 +1011,11 @@
             <div class="role-column">
               <span class="role-label font-karla">Primary</span>
               
-              <div class="stack-entry" id="flux-1-dev">
+              <div class="stack-entry" id="gpt-image-2">
                 <div class="entry-header">
-                  <a href="https://blackforestlabs.ai/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                    <span class="entry-name">Flux.1 Dev</span>
-                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                    </svg>
-                  </a>
+                  <span class="entry-name">gpt-image-2</span>
                 </div>
-                <p class="entry-description">Preferred model for interface prototyping and structural graphics.</p>
-                <p class="entry-reason">Renders exceptional text clarity inside graphics and matches modern UI layouts.</p>
-              </div>
-            </div>
-            
-            <!-- Secondary Right Column (40% Width) -->
-            <div class="role-column">
-              <span class="role-label font-karla">Secondary</span>
-              
-              <div class="stack-entry" id="midjourney-v6">
-                <div class="entry-header">
-                  <a href="https://www.midjourney.com/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                    <span class="entry-name">Midjourney v6</span>
-                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-                    </svg>
-                  </a>
-                </div>
-                <p class="entry-description">Artistic image generation for conceptual backgrounds and visual themes.</p>
-                <p class="entry-reason">Generates rich texture gradients and hyper-realistic lighting aesthetics.</p>
+                <p class="entry-description">Primary image generation and editing model exposed through the local image pipeline.</p>
               </div>
             </div>
           </div>
@@ -457,17 +1027,31 @@
           
           <div class="simple-list">
             
-            <div class="stack-entry" id="wezterm">
+            <div class="stack-entry tooltip-target" id="vps">
               <div class="entry-header">
-                <a href="https://wezfurlong.org/wezterm/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                  <span class="entry-name">WezTerm</span>
+                <span class="entry-name">VPS</span>
+              </div>
+              <p class="entry-description">Active remote compute anchor for this operator environment.</p>
+              <div class="custom-tooltip font-mono" role="tooltip">
+                <span class="tooltip-title">Public Compute Specs</span>
+                <span class="tooltip-row"><span>CPU:</span> <span>4 vCPU ARM Neoverse-N1</span></span>
+                <span class="tooltip-row"><span>Memory:</span> <span>24GB RAM</span></span>
+                <span class="tooltip-row"><span>Storage:</span> <span>180GB root disk</span></span>
+                <span class="tooltip-row"><span>OS:</span> <span>Ubuntu 22.04 LTS</span></span>
+              </div>
+            </div>
+
+            <div class="stack-entry" id="agent-deck">
+              <div class="entry-header">
+                <a href="https://github.com/asheshgoplani/agent-deck" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">agent-deck</span>
                   <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
                     <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
                   </svg>
                 </a>
               </div>
-              <p class="entry-description">GPU-accelerated terminal emulator designed for high-performance command-line workflows.</p>
+              <p class="entry-description">Agent workspace dashboard for supervising local operator surfaces.</p>
             </div>
             
             <div class="stack-entry" id="tmux">
@@ -495,57 +1079,46 @@
               </div>
               <p class="entry-description">Zero-config mesh VPN based on WireGuard for secure remote workspace access.</p>
             </div>
-            
-            <div class="stack-entry tooltip-target" id="mac-studio-m2-ultra">
+
+            <div class="stack-entry" id="tabby">
               <div class="entry-header">
-                <span class="entry-name">Mac Studio M2 Ultra</span>
-                <span class="info-badge font-karla">Local Specs</span>
+                <a href="https://tabby.sh/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">Tabby</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
               </div>
-              <p class="entry-description">Local compute anchor hosting local databases and isolated agent shells.</p>
-              <p class="entry-reason">Allows heavy parallel builds and local vector indexers to run off-grid.</p>
-              
-              <!-- Tooltip containing specific machine details (No provider/location info!) -->
-              <div class="custom-tooltip font-mono">
-                <div class="tooltip-title">Compute Specifications</div>
-                <div class="tooltip-divider"></div>
-                <div class="tooltip-row"><span>Processor:</span> <span>Apple M2 Ultra</span></div>
-                <div class="tooltip-row"><span>Core Count:</span> <span>24 CPU (16 Perf / 8 Eff)</span></div>
-                <div class="tooltip-row"><span>Graphics:</span> <span>60-Core GPU</span></div>
-                <div class="tooltip-row"><span>Memory:</span> <span>192GB LPDDR5 Unified (800GB/s)</span></div>
-                <div class="tooltip-row"><span>Storage:</span> <span>4TB NVMe SSD RAID-0</span></div>
-                <div class="tooltip-row"><span>Engine:</span> <span>32-Core Neural Engine (31.6 TOPS)</span></div>
-              </div>
+              <p class="entry-description">Terminal client used as one of the active remote-work surfaces.</p>
             </div>
             
-        </section>
-        
-        <!-- SECTION: EXPERIENCE (nikota.dev inspired) -->
-        <section class="experience-section" id="experience">
-          <h3 class="experience-title">experience</h3>
-          
-          <div class="experience-list">
-            
-            <a href="#" class="experience-item-link">
-              <div class="experience-item">
-                <div class="experience-item-header">
-                  <span class="experience-item-title">lead ai tooling engineer</span>
-                  <span class="experience-item-date">(2024 - present)</span>
-                </div>
-                <p class="experience-item-description">design and integration of autonomous developer harnesses, custom git hook pipelines, and low-latency local model compilers.</p>
+            <div class="stack-entry" id="termius">
+              <div class="entry-header">
+                <a href="https://termius.com/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">Termius</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
               </div>
-            </a>
-            
-            <a href="#" class="experience-item-link">
-              <div class="experience-item">
-                <div class="experience-item-header">
-                  <span class="experience-item-title">freelance systems & ai architect</span>
-                  <span class="experience-item-date">(2022 - 2024)</span>
-                </div>
-                <p class="experience-item-description">configuring high-density local compute anchors, secure overlay mesh networks, and agent memory graphs.</p>
+              <p class="entry-description">SSH/session manager used for remote access and connection organization.</p>
+            </div>
+
+            <div class="stack-entry" id="socket-firewall">
+              <div class="entry-header">
+                <a href="https://socket.dev/blog/introducing-socket-firewall" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                  <span class="entry-name">Socket Firewall</span>
+                  <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                </a>
               </div>
-            </a>
+              <p class="entry-description">Package-install firewall for supply-chain risk checks.</p>
+            </div>
             
-          </div>
         </section>
         
       </div>
@@ -553,20 +1126,99 @@
     </main>
   </div>
 
-  <!-- READ-ONLY MODAL OVERLAY FOR AGENTS.MD (Opens instantly, no fades) -->
-  <div class="modal-overlay" id="agents-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-window">
-      <header class="modal-header">
-        <h2 class="modal-title" id="modal-title">AGENTS.md — Rendered Operating Manual</h2>
-        <button class="modal-close-btn font-karla" id="close-modal-btn" aria-label="Close modal">Close [Esc]</button>
-      </header>
-      <div class="modal-body font-sans" id="rendered-agents-container">
-        <!-- Rendered markdown is inserted here by JS -->
+  <div class="morph-dialog-overlay" id="agents-dialog" aria-hidden="true" hidden>
+    <button class="morph-dialog-backdrop" type="button" aria-label="Close AGENTS.md dialog" data-close-agents-dialog></button>
+    <section class="morph-dialog-panel" role="dialog" aria-modal="true" aria-labelledby="agents-dialog-title">
+      <h2 class="sr-only" id="agents-dialog-title">AGENTS.md</h2>
+      <div class="editor-pane editor-pane-dialog">
+        <div class="editor-actions" aria-label="AGENTS.md dialog actions">
+          <div class="editor-view-toggle" role="tablist" aria-label="AGENTS.md dialog view">
+            <button class="render-trigger icon-control font-karla" id="dialog-rendered-btn" type="button" role="tab" aria-selected="false" aria-controls="dialog-rendered-agents-view" aria-label="View rendered AGENTS.md" data-view="rendered" data-tooltip="View rendered AGENTS.md">
+              <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+            <button class="render-trigger icon-control font-karla is-active" id="dialog-raw-btn" type="button" role="tab" aria-selected="true" aria-controls="dialog-raw-agents-view" aria-label="View raw AGENTS.md" data-view="raw" data-tooltip="View raw AGENTS.md">
+              <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 12.5 8 15l2 2.5"></path>
+                <path d="m14 12.5 2 2.5-2 2.5"></path>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path>
+              </svg>
+            </button>
+          </div>
+          <button class="render-trigger icon-control font-karla" id="copy-agents-dialog-btn" type="button" aria-label="Copy AGENTS.md" data-tooltip="Copy AGENTS.md">
+            <svg class="control-icon copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+            </svg>
+          </button>
+          <button class="render-trigger icon-control font-karla" id="close-agents-dialog-btn" type="button" aria-label="Close AGENTS.md dialog" data-tooltip="Close">
+            <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="editor-body">
+          <div class="line-numbers font-mono" id="dialog-editor-line-numbers"></div>
+          <pre class="editor-code font-mono" id="dialog-raw-agents-view" role="tabpanel" aria-labelledby="dialog-raw-btn"><code id="dialog-raw-agents-code">Loading raw operating manual...</code></pre>
+          <div class="agents-rendered-view font-sans" id="dialog-rendered-agents-view" role="tabpanel" aria-labelledby="dialog-rendered-btn" hidden>
+            <p>Loading rendered operating manual...</p>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+  </div>
+
+  <div class="morph-dialog-overlay" id="skill-dialog" aria-hidden="true" hidden>
+    <button class="morph-dialog-backdrop" type="button" aria-label="Close skill detail" data-close-skill-dialog></button>
+    <section class="skill-dialog-panel" role="dialog" aria-modal="true" aria-labelledby="skill-dialog-title">
+      <button class="render-trigger icon-control font-karla skill-dialog-close" id="close-skill-dialog-btn" type="button" aria-label="Close skill detail" data-tooltip="Close">
+        <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+      <div class="skill-dialog-content">
+        <span class="skill-dialog-kicker font-karla" id="skill-dialog-label"></span>
+        <h2 class="skill-dialog-title" id="skill-dialog-title"></h2>
+        <div class="editor-pane skill-editor-pane">
+          <div class="editor-actions" aria-label="Skill markdown actions">
+            <div class="editor-view-toggle" role="tablist" aria-label="Skill markdown view">
+              <button class="render-trigger icon-control font-karla" id="skill-rendered-btn" type="button" role="tab" aria-selected="false" aria-controls="skill-rendered-view" aria-label="View rendered skill markdown" data-skill-view="rendered" data-tooltip="View rendered SKILL.md">
+                <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+              <button class="render-trigger icon-control font-karla is-active" id="skill-raw-btn" type="button" role="tab" aria-selected="true" aria-controls="skill-raw-view" aria-label="View raw skill markdown" data-skill-view="raw" data-tooltip="View raw SKILL.md">
+                <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M10 12.5 8 15l2 2.5"></path>
+                  <path d="m14 12.5 2 2.5-2 2.5"></path>
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path>
+                </svg>
+              </button>
+            </div>
+            <button class="render-trigger icon-control font-karla" id="copy-skill-btn" type="button" aria-label="Copy SKILL.md" data-tooltip="Copy SKILL.md">
+              <svg class="control-icon copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="skill-editor-body">
+            <pre class="editor-code skill-raw-view font-mono" id="skill-raw-view" role="tabpanel" aria-labelledby="skill-raw-btn"><code id="skill-raw-code">Select a skill...</code></pre>
+            <div class="agents-rendered-view skill-rendered-view font-sans" id="skill-rendered-view" role="tabpanel" aria-labelledby="skill-rendered-btn" hidden></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- Script Injection -->
-  <script src="main.js"></script>
+<script src="main.js?v=20260528-animated-favicon-js-2"></script>
 </body>
 </html>

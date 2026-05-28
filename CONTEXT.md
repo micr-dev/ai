@@ -5,7 +5,7 @@ This context describes the public page for presenting Microck's current AI worki
 ## Language
 
 **Stack Showcase Page**:
-The fully public page titled `AI Stack` and hosted at `ai.micr.dev` that presents the current AI stack as the primary experience and its recent evolution as supporting context. On desktop, the changelog is slightly narrower on the left and the stack is slightly wider on the right. The changelog area scrolls independently with its scrollbar on the left edge, while the stack area remains fixed in the viewport with dense content handled by internal scroll regions. On mobile, the current stack appears before the changelog. The page and its OG image use text directly on a dark background, avoid visible boxes, cards, or panel containers except for AGENTS.md, and use no fades anywhere.
+The fully public page titled `AI Stack` and hosted at `ai.micr.dev` that presents the current AI stack as the primary experience and its recent evolution as supporting context. On desktop, the changelog is slightly narrower on the left and the stack is slightly wider on the right. The changelog area scrolls independently with its scrollbar on the left edge, while the stack area remains fixed in the viewport with dense content handled by internal scroll regions. On mobile, the current stack appears before the changelog. The page and its OG image use text directly on a dark background and avoid visible boxes, cards, or panel containers except for AGENTS.md. Motion should stay subtle and purposeful; quick fades are allowed for tooltips, overlays, and state changes.
 _Avoid_: Dashboard, landing page, card layout, boxed layout
 
 **Stack Entry**:
@@ -16,6 +16,10 @@ _Avoid_: Card, tile, resource
 A tool integration exposed to a harness through the Model Context Protocol.
 _Avoid_: CLI tool
 
+**Active MCP**:
+An **MCP** configured for the current operator environment and not explicitly disabled. Active MCPs may be listed publicly by name, but credentials, tokens, host secrets, and environment values must never appear on the Stack Showcase Page.
+_Avoid_: Installed MCP, available MCP
+
 **CLI / Local Tool**:
 A direct operator tool used from the local environment.
 _Avoid_: MCP
@@ -23,6 +27,10 @@ _Avoid_: MCP
 **Skill Label**:
 A subtle low-emphasis label used inside the Skills section, such as `Handmade` or `Favorite`.
 _Avoid_: Skill section, category
+
+**Gatekept Skill**:
+A **Stack Entry** in the Skills section whose name and purpose may be shown publicly, while the underlying prompt, private rubric, or implementation details remain unpublished.
+_Avoid_: Hidden skill, secret skill
 
 **Image Generation**:
 The stack section for the preferred image generation model or workflow. It is separate from the Models section, which focuses on coding and chat models.
@@ -43,6 +51,10 @@ _Avoid_: Backup, fallback
 **Change Entry**:
 A dated structured public note describing a stack or workflow change that already happened, including small operational tweaks. Every **Change Entry** has a date, may include an optional why, may include an optional description, and may optionally refer to related **Stack Entries**. On the page, optional why and description text appears as quiet secondary text rather than as visibly labeled fields.
 _Avoid_: Release note, highlights post
+
+**Chronological Setup History**:
+The evidence-backed changelog for the current operator stack. Dates should come from `Microck/cli-backup` commit history or other checked local artifacts; when exact adoption timing is uncertain, the page should describe the first observed backup snapshot rather than inventing a precise adoption event.
+_Avoid_: Placeholder timeline, fictional history
 
 **Change Group**:
 A date-grouped set of **Change Entries** shown under one `DD/MM/YYYY` date header in the changelog.
@@ -104,15 +116,8 @@ Domain expert: "No. The page should read as text on a dark background, without v
 
 Dev: "Can interactions fade elements in or out?"
 
-Domain expert: "No. The page uses no fades anywhere."
+Domain expert: "Yes, when the fade is quick, restrained, and makes state changes easier to follow."
 
 Dev: "Should the AGENTS.md section be rewritten as marketing copy?"
 
 Domain expert: "No. It should read like the raw operating manual, with redactions where public exposure would be unnecessary or risky."
-
-## Changelog Database
-
-### 28/05/2026
-- **Deployed Interactive Skill Constellation Map and Casing standardizations**
-  Replaced the traditional static Models and Harnesses columns with a fully interactive SVG skill constellation map linking Claude, Gemini, Cursor, Aider, and AGENTS.md. Standardized all stack entries to lowercase Helvetica Neue weights matching nikota.dev experience roles and descriptions.
-  - Affected stack entries: `claude-3-5-sonnet`, `gemini-1-5-pro`, `cursor`, `aider`, `agents-md`
