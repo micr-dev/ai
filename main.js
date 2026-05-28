@@ -66,14 +66,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const faviconLink = document.getElementById('dynamic-favicon');
   if (faviconLink) {
     const faviconFrames = ['/favicon-a.png', '/favicon-i.png'];
+    let faviconFrameIndex = -1;
+    let faviconRevision = 0;
+
     const setFaviconFrame = () => {
-      const faviconFrameIndex = Math.floor(Date.now() / 700) % faviconFrames.length;
-      faviconLink.setAttribute('href', `${faviconFrames[faviconFrameIndex]}?v=${faviconFrameIndex}`);
-      faviconLink.setAttribute('type', 'image/png');
+      const previousIcon = document.getElementById('dynamic-favicon');
+      const nextIcon = document.createElement('link');
+
+      faviconRevision += 1;
+      faviconFrameIndex = (faviconFrameIndex + 1) % faviconFrames.length;
+      nextIcon.id = 'dynamic-favicon';
+      nextIcon.rel = 'icon';
+      nextIcon.type = 'image/png';
+      nextIcon.href = `${faviconFrames[faviconFrameIndex]}?frame=${faviconFrameIndex}&rev=${faviconRevision}`;
+
+      previousIcon?.remove();
+      document.head.append(nextIcon);
     };
 
     setFaviconFrame();
-    window.setInterval(setFaviconFrame, 250);
+    window.setInterval(setFaviconFrame, 700);
   }
 
   // 1. FETCH & PROCESS AGENTS.MD FOR THE CODE BOX
