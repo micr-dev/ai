@@ -12,7 +12,7 @@
   <!-- Fonts: Karla, Ysabeau, and Fallbacks -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400&family=Karla:ital,wght@0,200..800;1,200..800&family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="index.css">
@@ -33,7 +33,7 @@
           
           <!-- Sticky Header for Changelog -->
           <div class="column-header">
-            <h2 class="column-title font-serif italic">Changelog</h2>
+            <h2 class="column-title">Changelog</h2>
           </div>
           
           <div class="changelog-timeline">
@@ -41,10 +41,7 @@
             <!-- Change Group 1 -->
             <div class="change-group" data-group="28/05/2026">
               <div class="change-date font-karla">28/05/2026</div>
-                            <div class="change-entry" data-targets="claude-3-5-sonnet,gemini-1-5-pro,cursor,aider,agents-md">
-                  <h3 class="change-title">Deployed Interactive Skill Constellation Map and Casing standardizations</h3>
-                  <p class="change-description">Replaced the traditional static Models and Harnesses columns with a fully interactive SVG skill constellation map linking Claude, Gemini, Cursor, Aider, and AGENTS.md. Standardized all stack entries to lowercase Helvetica Neue weights matching nikota.dev experience roles and descriptions.</p>
-                </div>
+              <div class="change-entries">
                 
                 <div class="change-entry" data-targets="flux-1-dev,midjourney-v6">
                   <h3 class="change-title">Ingested Flux.1 Dev as Primary Image Generation Engine</h3>
@@ -119,66 +116,99 @@
       <!-- Scrollable Region for Dense Stack Content -->
       <div class="stack-scroll-region">
         
-        <!-- SECTION: SKILL CONSTELLATION -->
-        <section class="stack-section" id="constellation-section">
-          <h2 class="section-heading font-serif italic">skill constellation</h2>
+        <!-- SECTION: MODELS -->
+        <section class="stack-section" id="models">
+          <h2 class="section-heading">Models</h2>
           
-          <div class="constellation-container">
-            <!-- SVG connecting lines -->
-            <svg class="constellation-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <!-- Lines between nodes -->
-              <line x1="18" y1="22" x2="50" y2="48" class="constellation-line line-claude-3-5-sonnet line-cursor" />
-              <line x1="82" y1="18" x2="50" y2="48" class="constellation-line line-gemini-1-5-pro line-cursor" />
-              <line x1="18" y1="22" x2="22" y2="78" class="constellation-line line-claude-3-5-sonnet line-aider" />
-              <line x1="50" y1="48" x2="22" y2="78" class="constellation-line line-cursor line-aider" />
-              <line x1="50" y1="48" x2="78" y2="82" class="constellation-line line-cursor line-agents-md" />
-              <line x1="82" y1="18" x2="78" y2="82" class="constellation-line line-gemini-1-5-pro line-agents-md" />
-              <line x1="22" y1="78" x2="78" y2="82" class="constellation-line line-aider line-agents-md" />
-            </svg>
-            
-            <!-- Nodes absolute-positioned over SVG -->
-            <!-- Node: Claude 3.5 Sonnet -->
-            <div class="constellation-node" id="claude-3-5-sonnet" style="left: 18%; top: 22%;" data-id="claude-3-5-sonnet">
-              <span class="node-dot"></span>
-              <span class="node-label font-sans">claude 3.5 sonnet (v2)</span>
+          <div class="role-grid">
+            <!-- Primary Left Column (60% Width) -->
+            <div class="role-column">
+              <span class="role-label font-karla">Primary</span>
+              
+              <div class="stack-entry" id="claude-3-5-sonnet">
+                <div class="entry-header">
+                  <a href="https://www.anthropic.com/claude/sonnet" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                    <span class="entry-name">Claude 3.5 Sonnet (V2)</span>
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                  </a>
+                </div>
+                <p class="entry-description">Default language model for system design, deep logic, and structural refactoring.</p>
+                <p class="entry-reason">Exhibits superior comprehension of complex codebase context and high adherence to strict system instructions.</p>
+              </div>
             </div>
             
-            <!-- Node: Gemini 1.5 Pro -->
-            <div class="constellation-node label-left" id="gemini-1-5-pro" style="left: 82%; top: 18%;" data-id="gemini-1-5-pro">
-              <span class="node-dot"></span>
-              <span class="node-label font-sans">gemini 1.5 pro</span>
-            </div>
-            
-            <!-- Node: Cursor -->
-            <div class="constellation-node" id="cursor" style="left: 50%; top: 48%;" data-id="cursor">
-              <span class="node-dot"></span>
-              <span class="node-label font-sans">cursor</span>
-            </div>
-            
-            <!-- Node: Aider -->
-            <div class="constellation-node" id="aider" style="left: 22%; top: 78%;" data-id="aider">
-              <span class="node-dot"></span>
-              <span class="node-label font-sans">aider</span>
-            </div>
-            
-            <!-- Node: AGENTS.md -->
-            <div class="constellation-node label-left" id="agents-md" style="left: 78%; top: 82%;" data-id="agents-md">
-              <span class="node-dot"></span>
-              <span class="node-label font-sans">agents.md</span>
+            <!-- Secondary Right Column (40% Width) -->
+            <div class="role-column">
+              <span class="role-label font-karla">Secondary</span>
+              
+              <div class="stack-entry" id="gemini-1-5-pro">
+                <div class="entry-header">
+                  <a href="https://deepmind.google/technologies/gemini/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                    <span class="entry-name">Gemini 1.5 Pro</span>
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                  </a>
+                </div>
+                <p class="entry-description">Secondary model utilized for codebase-wide repository indexing and multimodality verification.</p>
+                <p class="entry-reason">Leverages an expansive 2-million token window to ingest full codebase directories without context fragmentation.</p>
+              </div>
             </div>
           </div>
+        </section>
+        
+        <!-- SECTION: HARNESSES -->
+        <section class="stack-section" id="harnesses">
+          <h2 class="section-heading">Harnesses</h2>
           
-          <!-- Details Panel (Replaces standard entry detail layouts) -->
-          <div id="constellation-details-panel" class="constellation-details">
-            <div class="constellation-default-state font-sans">
-              <p>hover over any node in the skill constellation above to inspect the specific models, harnesses, and operating manuals governing this system.</p>
+          <div class="role-grid">
+            <!-- Primary Left Column (60% Width) -->
+            <div class="role-column">
+              <span class="role-label font-karla">Primary</span>
+              
+              <div class="stack-entry" id="cursor">
+                <div class="entry-header">
+                  <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                    <span class="entry-name">Cursor</span>
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                  </a>
+                </div>
+                <p class="entry-description">AI-native editor acting as the primary system developer interface.</p>
+                <p class="entry-reason">Provides deep integration of inline AI prompting, composer agents, and local codebase indexing.</p>
+              </div>
+            </div>
+            
+            <!-- Secondary Right Column (40% Width) -->
+            <div class="role-column">
+              <span class="role-label font-karla">Secondary</span>
+              
+              <div class="stack-entry" id="aider">
+                <div class="entry-header">
+                  <a href="https://aider.chat/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
+                    <span class="entry-name">Aider</span>
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                  </a>
+                </div>
+                <p class="entry-description">CLI-driven autonomous git-pairing assistant for rapid feature iterations.</p>
+                <p class="entry-reason">Excels at executing multi-file surgical modifications directly from terminal shell environments.</p>
+              </div>
             </div>
           </div>
         </section>
         
         <!-- SECTION: AGENTS.MD (Raw code boxed style container) -->
         <section class="stack-section" id="agents-section">
-          <h2 class="section-heading font-serif italic">AGENTS.md</h2>
+          <h2 class="section-heading">AGENTS.md</h2>
           
           <div class="agents-box-container" id="agents-md">
             <!-- IDE Editor Style Window (Only visible boxed element permitted) -->
@@ -216,7 +246,7 @@
         
         <!-- SECTION: HOOKS -->
         <section class="stack-section" id="hooks">
-          <h2 class="section-heading font-serif italic">Hooks</h2>
+          <h2 class="section-heading">Hooks</h2>
           
           <div class="simple-list">
             
@@ -241,7 +271,7 @@
         
         <!-- SECTION: MCPS -->
         <section class="stack-section" id="mcps">
-          <h2 class="section-heading font-serif italic">MCPs</h2>
+          <h2 class="section-heading">MCPs</h2>
           
           <div class="simple-list">
             
@@ -292,7 +322,7 @@
         
         <!-- SECTION: CLI / LOCAL TOOLS -->
         <section class="stack-section" id="cli-tools">
-          <h2 class="section-heading font-serif italic">CLI / Local Tools</h2>
+          <h2 class="section-heading">CLI / Local Tools</h2>
           
           <div class="simple-list">
             
@@ -343,32 +373,32 @@
         
         <!-- SECTION: SKILLS -->
         <section class="stack-section" id="skills">
-          <h2 class="section-heading font-serif italic">Skills</h2>
+          <h2 class="section-heading">Skills</h2>
           
           <div class="skills-inline-list">
             
             <div class="skill-item">
-              <span class="skill-name font-karla">context pruning</span>
-              <span class="skill-label font-karla badge-favorite">favorite</span>
-              <span class="skill-detail font-sans">— art of stripping redundant files to optimize token space.</span>
+              <span class="skill-name font-karla">Context Pruning</span>
+              <span class="skill-label font-karla badge-favorite">Favorite</span>
+              <span class="skill-detail font-sans">— Art of stripping redundant files to optimize token space.</span>
             </div>
             
             <div class="skill-item">
-              <span class="skill-name font-karla">prompt surgical injection</span>
-              <span class="skill-label font-karla badge-handmade">handmade</span>
-              <span class="skill-detail font-sans">— crafting micro-instructions targeting specific AST nodes.</span>
+              <span class="skill-name font-karla">Prompt Surgical Injection</span>
+              <span class="skill-label font-karla badge-handmade">Handmade</span>
+              <span class="skill-detail font-sans">— Crafting micro-instructions targeting specific AST nodes.</span>
             </div>
             
             <div class="skill-item">
-              <span class="skill-name font-karla">rag pipeline alignment</span>
-              <span class="skill-label font-karla badge-favorite">favorite</span>
-              <span class="skill-detail font-sans">— building local embeddings vector caches to feed context windows.</span>
+              <span class="skill-name font-karla">RAG Pipeline Alignment</span>
+              <span class="skill-label font-karla badge-favorite">Favorite</span>
+              <span class="skill-detail font-sans">— Building local embeddings vector caches to feed context windows.</span>
             </div>
             
             <div class="skill-item">
-              <span class="skill-name font-karla">agent sandbox containment</span>
-              <span class="skill-label font-karla badge-handmade">handmade</span>
-              <span class="skill-detail font-sans">— defining isolated shell systems for running agent compilers securely.</span>
+              <span class="skill-name font-karla">Agent Sandbox Containment</span>
+              <span class="skill-label font-karla badge-handmade">Handmade</span>
+              <span class="skill-detail font-sans">— Defining isolated shell systems for running agent compilers securely.</span>
             </div>
             
           </div>
@@ -376,44 +406,44 @@
         
         <!-- SECTION: IMAGE GENERATION -->
         <section class="stack-section" id="image-gen">
-          <h2 class="section-heading font-serif italic">image generation</h2>
+          <h2 class="section-heading">Image Generation</h2>
           
           <div class="role-grid">
             <!-- Primary Left Column (60% Width) -->
             <div class="role-column">
-              <span class="role-label font-karla">primary</span>
+              <span class="role-label font-karla">Primary</span>
               
               <div class="stack-entry" id="flux-1-dev">
                 <div class="entry-header">
                   <a href="https://blackforestlabs.ai/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                    <span class="entry-name">flux.1 dev</span>
+                    <span class="entry-name">Flux.1 Dev</span>
                     <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
                       <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
                     </svg>
                   </a>
                 </div>
-                <p class="entry-description">preferred model for interface prototyping and structural graphics.</p>
-                <p class="entry-reason">renders exceptional text clarity inside graphics and matches modern UI layouts.</p>
+                <p class="entry-description">Preferred model for interface prototyping and structural graphics.</p>
+                <p class="entry-reason">Renders exceptional text clarity inside graphics and matches modern UI layouts.</p>
               </div>
             </div>
             
             <!-- Secondary Right Column (40% Width) -->
             <div class="role-column">
-              <span class="role-label font-karla">secondary</span>
+              <span class="role-label font-karla">Secondary</span>
               
               <div class="stack-entry" id="midjourney-v6">
                 <div class="entry-header">
                   <a href="https://www.midjourney.com/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                    <span class="entry-name">midjourney v6</span>
+                    <span class="entry-name">Midjourney v6</span>
                     <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
                       <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
                     </svg>
                   </a>
                 </div>
-                <p class="entry-description">artistic image generation for conceptual backgrounds and visual themes.</p>
-                <p class="entry-reason">generates rich texture gradients and hyper-realistic lighting aesthetics.</p>
+                <p class="entry-description">Artistic image generation for conceptual backgrounds and visual themes.</p>
+                <p class="entry-reason">Generates rich texture gradients and hyper-realistic lighting aesthetics.</p>
               </div>
             </div>
           </div>
@@ -421,21 +451,21 @@
         
         <!-- SECTION: WORKSPACE -->
         <section class="stack-section" id="workspace">
-          <h2 class="section-heading font-serif italic">workspace</h2>
+          <h2 class="section-heading">Workspace</h2>
           
           <div class="simple-list">
             
             <div class="stack-entry" id="wezterm">
               <div class="entry-header">
                 <a href="https://wezfurlong.org/wezterm/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                  <span class="entry-name">wezterm</span>
+                  <span class="entry-name">WezTerm</span>
                   <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
                     <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
                   </svg>
                 </a>
               </div>
-              <p class="entry-description">gpu-accelerated terminal emulator designed for high-performance command-line workflows.</p>
+              <p class="entry-description">GPU-accelerated terminal emulator designed for high-performance command-line workflows.</p>
             </div>
             
             <div class="stack-entry" id="tmux">
@@ -448,29 +478,29 @@
                   </svg>
                 </a>
               </div>
-              <p class="entry-description">workspace manager enabling persistent background sessions and multi-pane splits.</p>
+              <p class="entry-description">Workspace manager enabling persistent background sessions and multi-pane splits.</p>
             </div>
             
             <div class="stack-entry" id="tailscale">
               <div class="entry-header">
                 <a href="https://tailscale.com/" target="_blank" rel="noopener noreferrer" class="entry-title-link">
-                  <span class="entry-name">tailscale</span>
+                  <span class="entry-name">Tailscale</span>
                   <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
                     <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
                   </svg>
                 </a>
               </div>
-              <p class="entry-description">zero-config mesh vpn based on wireguard for secure remote workspace access.</p>
+              <p class="entry-description">Zero-config mesh VPN based on WireGuard for secure remote workspace access.</p>
             </div>
             
             <div class="stack-entry tooltip-target" id="mac-studio-m2-ultra">
               <div class="entry-header">
-                <span class="entry-name">mac studio m2 ultra</span>
-                <span class="info-badge font-karla">local specs</span>
+                <span class="entry-name">Mac Studio M2 Ultra</span>
+                <span class="info-badge font-karla">Local Specs</span>
               </div>
-              <p class="entry-description">local compute anchor hosting local databases and isolated agent shells.</p>
-              <p class="entry-reason">allows heavy parallel builds and local vector indexers to run off-grid.</p>
+              <p class="entry-description">Local compute anchor hosting local databases and isolated agent shells.</p>
+              <p class="entry-reason">Allows heavy parallel builds and local vector indexers to run off-grid.</p>
               
               <!-- Tooltip containing specific machine details (No provider/location info!) -->
               <div class="custom-tooltip font-mono">
@@ -534,7 +564,7 @@
   <div class="modal-overlay" id="agents-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-window">
       <header class="modal-header">
-        <h2 class="modal-title font-serif italic" id="modal-title">AGENTS.md — Rendered Operating Manual</h2>
+        <h2 class="modal-title" id="modal-title">AGENTS.md — Rendered Operating Manual</h2>
         <button class="modal-close-btn font-karla" id="close-modal-btn" aria-label="Close modal">Close [Esc]</button>
       </header>
       <div class="modal-body font-sans" id="rendered-agents-container">
