@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mermaid Diagrams"
+  short_description: "Complex GitHub-ready Mermaid diagrams"
+  default_prompt: "Use $mermaid-diagrams to create a GitHub README-compatible architecture diagram."

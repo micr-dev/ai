@@ -70,6 +70,17 @@
           </div>
           
           <div class="changelog-timeline">
+            <div class="change-group" data-group="30/05/2026">
+              <div class="change-date font-karla">30/05/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="dft-writing">
+                  <h3 class="change-title">Added dft-writing Skill</h3>
+                </div>
+
+              </div>
+            </div>
+
             <div class="change-group" data-group="29/05/2026">
               <div class="change-date font-karla">29/05/2026</div>
               <div class="change-entries">
@@ -1002,6 +1013,7 @@
           
           <div class="skills-inline-list">
             
+            <div class="skill-item" id="dft-writing"><span class="skill-name font-karla">dft-writing</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Generates long-form prose through the Rosmine DFT Writing Demo's direct Gradio API.</span></div>
             <div class="skill-item" id="grill-with-docs"><span class="skill-name font-karla">grill-with-docs</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Stress-tests decisions against the project glossary and captures resolved language.</span></div>
             <div class="skill-item" id="grill-me"><span class="skill-name font-karla">grill-me</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Runs focused design interviews until assumptions and tradeoffs are explicit.</span></div>
             <div class="skill-item" id="compact-handoff"><span class="skill-name font-karla">compact-handoff</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Preserves task state across context compaction and resume boundaries.</span></div>
@@ -1216,12 +1228,11 @@
                 </svg>
               </button>
             </div>
-            <button class="render-trigger icon-control font-karla" id="copy-skill-btn" type="button" aria-label="Copy SKILL.md" data-tooltip="Copy SKILL.md">
-              <svg class="control-icon copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+            <a class="render-trigger icon-control font-karla" id="skill-github-link" href="https://github.com/micr-dev/ai/tree/main/skills" target="_blank" rel="noopener noreferrer" aria-label="Open skill on GitHub" data-tooltip="Open on GitHub">
+              <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.59 2 12.253c0 4.53 2.865 8.371 6.839 9.727.5.095.682-.223.682-.494 0-.244-.009-.89-.014-1.747-2.782.619-3.369-1.375-3.369-1.375-.455-1.184-1.11-1.499-1.11-1.499-.908-.636.069-.623.069-.623 1.004.072 1.532 1.057 1.532 1.057.892 1.567 2.341 1.114 2.91.852.091-.662.349-1.114.635-1.37-2.221-.259-4.555-1.139-4.555-5.066 0-1.119.39-2.034 1.029-2.75-.103-.258-.446-1.301.098-2.713 0 0 .84-.276 2.75 1.05A9.373 9.373 0 0 1 12 6.954a9.36 9.36 0 0 1 2.504.345c1.909-1.326 2.747-1.05 2.747-1.05.546 1.412.203 2.455.1 2.713.64.716 1.028 1.631 1.028 2.75 0 3.937-2.338 4.804-4.566 5.057.359.317.679.943.679 1.9 0 1.37-.013 2.476-.013 2.813 0 .274.18.594.688.493C19.138 20.62 22 16.78 22 12.253 22 6.59 17.523 2 12 2Z"></path>
               </svg>
-            </button>
+            </a>
           </div>
           <div class="skill-editor-body">
             <pre class="editor-code skill-raw-view font-mono" id="skill-raw-view" role="tabpanel" aria-labelledby="skill-raw-btn"><code id="skill-raw-code">Select a skill...</code></pre>
@@ -1233,6 +1244,6 @@
   </div>
 
   <!-- Script Injection -->
-<script src="main.js?v=20260529-scroll-paint-fix"></script>
+<script src="main.js?v=20260530-dft-writing-skill"></script>
 </body>
 </html>

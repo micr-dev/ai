@@ -1,0 +1,4 @@
+interface:
+  display_name: "prompts:grill-me"
+  short_description: "Relentless design interview skill"
+  default_prompt: "Use prompts:grill-me to interrogate a plan or design until the key assumptions, decisions, and risks are explicit."

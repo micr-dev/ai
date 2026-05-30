@@ -37,7 +37,7 @@ When designing a CLI, produce a compact spec the user can implement:
 - Safety rules: `--dry-run`, confirmations, `--force`, `--no-input`.
 - Config/env rules + precedence (flags > env > project config > user config > system).
 - Shell completion story (if relevant): install/discoverability; generation command or bundled scripts.
-- 5–10 example invocations (common flows; include piped/stdin examples).
+- 5-10 example invocations (common flows; include piped/stdin examples).
 
 ## Default Conventions (unless user says otherwise)
 
@@ -85,4 +85,4 @@ Fill these sections, drop anything irrelevant:
 ## Notes
 
 - Prefer recommending a parsing library (language-specific) only when asked; otherwise keep this skill language-agnostic.
-- If the request is “design parameters”, do not drift into implementation.
+- If the request is "design parameters", do not drift into implementation.

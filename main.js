@@ -34,19 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const skillRawView = document.getElementById('skill-raw-view');
   const skillRawCode = document.getElementById('skill-raw-code');
   const skillRenderedView = document.getElementById('skill-rendered-view');
-  const copySkillBtn = document.getElementById('copy-skill-btn');
+  const skillGithubLink = document.getElementById('skill-github-link');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const skillContentPaths = {
-    'grill-with-docs': 'skills/grill-with-docs.md',
-    'grill-me': 'skills/grill-me.md',
-    'compact-handoff': 'skills/compact-handoff.md',
-    'repository-test-design': 'skills/repository-test-design.md',
-    'optimo': 'skills/optimo.md',
+    'dft-writing': 'skills/dft-writing/SKILL.md',
+    'grill-with-docs': 'skills/grill-with-docs/SKILL.md',
+    'grill-me': 'skills/grill-me/SKILL.md',
+    'compact-handoff': 'skills/compact-handoff/SKILL.md',
+    'repository-test-design': 'skills/repository-test-design/SKILL.md',
+    'optimo': 'skills/optimo/SKILL.md',
     'naming': 'skills/naming.md',
-    'thermo-nuclear-code-quality-review': 'skills/thermo-nuclear-code-quality-review.md',
-    'mermaid-diagrams': 'skills/mermaid-diagrams.md',
-    'language-selection': 'skills/language-selection.md',
-    'create-cli': 'skills/create-cli.md',
+    'thermo-nuclear-code-quality-review': 'skills/thermo-nuclear-code-quality-review/SKILL.md',
+    'mermaid-diagrams': 'skills/mermaid-diagrams/SKILL.md',
+    'language-selection': 'skills/language-selection/SKILL.md',
+    'create-cli': 'skills/create-cli/SKILL.md',
   };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
@@ -57,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let agentsMarkdownContent = '';
   let activeAgentsView = 'raw';
   let activeSkillView = 'raw';
-  let activeSkillContent = '';
   let isAgentsDialogOpen = false;
   let isSkillDialogOpen = false;
   let lastSkillTrigger = null;
@@ -455,15 +455,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  copySkillBtn?.addEventListener('click', async () => {
-    try {
-      await copyText(activeSkillContent);
-    } catch (error) {
-      console.warn('Clipboard copy failed', error);
-    }
-    setCopiedState(copySkillBtn, 'Copied SKILL.md', 'Copy SKILL.md');
-  });
-
   function getDialogTargetRect() {
     const margin = window.innerWidth <= 768 ? 12 : 32;
     const width = Math.min(920, window.innerWidth - margin * 2);
@@ -657,7 +648,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         skillDialogLabel.textContent = label;
         skillDialogTitle.textContent = title;
-        activeSkillContent = '';
+        if (skillGithubLink) {
+          skillGithubLink.href = getSkillGithubUrl(item.id);
+        }
         skillRawCode.textContent = 'Loading SKILL.md...';
         skillRenderedView.innerHTML = '<p>Loading SKILL.md...</p>';
         setSkillView('raw');
@@ -671,7 +664,6 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
           const detail = await loadSkillContent(item.id);
           if (lastSkillTrigger === item && isSkillDialogOpen) {
-            activeSkillContent = detail;
             skillRawCode.textContent = detail;
             skillRenderedView.innerHTML = renderMarkdown(getRenderableSkillMarkdown(detail));
             skillRawView.scrollTop = 0;
@@ -680,9 +672,9 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         } catch (error) {
           console.warn('Failed to load skill content', error);
-          activeSkillContent = fallback || 'Failed to load SKILL.md.';
-          skillRawCode.textContent = activeSkillContent;
-          skillRenderedView.innerHTML = renderMarkdown(activeSkillContent);
+          const fallbackContent = fallback || 'Failed to load SKILL.md.';
+          skillRawCode.textContent = fallbackContent;
+          skillRenderedView.innerHTML = renderMarkdown(fallbackContent);
         }
       };
 
@@ -732,6 +724,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const text = await response.text();
     skillContentCache.set(skillId, text);
     return text;
+  }
+
+  function getSkillGithubUrl(skillId) {
+    const path = skillContentPaths[skillId];
+    if (!path) {
+      return 'https://github.com/micr-dev/ai/tree/main/skills';
+    }
+
+    const repoBaseUrl = 'https://github.com/micr-dev/ai';
+    const sourcePath = path.endsWith('/SKILL.md') ? path.slice(0, -'/SKILL.md'.length) : path;
+    const view = path.endsWith('/SKILL.md') ? 'tree' : 'blob';
+    return `${repoBaseUrl}/${view}/main/${sourcePath}`;
   }
 
   function getRenderableSkillMarkdown(markdown) {
