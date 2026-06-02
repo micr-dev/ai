@@ -730,6 +730,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function getSkillGithubUrl(skillId) {
     const externalSkillUrls = {
       'dynamic-workflows': 'https://github.com/DannyMac180/skills/blob/main/codex-dynamic-workflows',
+      'grill-with-docs': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs',
+      'grill-me': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me',
+      'compact-handoff': 'https://tessl.io/registry/coding-agent-helpers/compact-handoff/0.1.1',
+      'thermo-nuclear-code-quality-review': 'https://github.com/cursor/plugins/blob/main/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md',
+      'create-cli': 'https://github.com/steipete/create-cli',
     };
 
     if (externalSkillUrls[skillId]) {
