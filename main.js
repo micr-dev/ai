@@ -727,6 +727,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getSkillGithubUrl(skillId) {
+    const externalSkillUrls = {
+      'dynamic-workflows': 'https://github.com/DannyMac180/skills/blob/main/codex-dynamic-workflows',
+    };
+
+    if (externalSkillUrls[skillId]) {
+      return externalSkillUrls[skillId];
+    }
+
     const path = skillContentPaths[skillId];
     if (!path) {
       return 'https://github.com/micr-dev/ai/tree/main/skills';
