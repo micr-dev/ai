@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'mermaid-diagrams': 'skills/mermaid-diagrams/SKILL.md',
     'language-selection': 'skills/language-selection/SKILL.md',
     'create-cli': 'skills/create-cli/SKILL.md',
+    'grill-with-facts': 'skills/grill-with-facts/SKILL.md',
   };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
