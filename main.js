@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'language-selection': 'skills/language-selection/SKILL.md',
     'create-cli': 'skills/create-cli/SKILL.md',
     'grill-with-facts': 'skills/grill-with-facts/SKILL.md',
+    'make-interfaces-feel-better': 'skills/make-interfaces-feel-better/SKILL.md',
+    'oklch-skill': 'skills/oklch-skill/SKILL.md',
   };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
