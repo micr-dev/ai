@@ -737,6 +737,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'compact-handoff': 'https://tessl.io/registry/coding-agent-helpers/compact-handoff/0.1.1',
       'thermo-nuclear-code-quality-review': 'https://github.com/cursor/plugins/blob/main/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md',
       'create-cli': 'https://github.com/steipete/create-cli',
+      'make-interfaces-feel-better': 'https://github.com/jakubkrehel/make-interfaces-feel-better',
+      'oklch-skill': 'https://github.com/jakubkrehel/oklch-skill',
     };
 
     if (externalSkillUrls[skillId]) {
