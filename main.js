@@ -735,7 +735,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'dynamic-workflows': 'https://github.com/DannyMac180/skills/blob/main/codex-dynamic-workflows',
       'grill-with-docs': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs',
       'grill-me': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me',
-      'compact-handoff': 'https://tessl.io/registry/coding-agent-helpers/compact-handoff/0.1.1',
+      'compact-handoff': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff',
       'thermo-nuclear-code-quality-review': 'https://github.com/cursor/plugins/blob/main/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md',
       'create-cli': 'https://github.com/steipete/create-cli',
       'make-interfaces-feel-better': 'https://github.com/jakubkrehel/make-interfaces-feel-better',
