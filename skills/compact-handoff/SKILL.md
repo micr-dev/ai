@@ -1,67 +1,19 @@
 ---
 name: compact-handoff
-description: Use before manual or automatic context compaction, when the user asks for precompact/pre-compact handling, or immediately after compaction/resume to preserve and reload durable session context. Creates and reads compact handoff markdown files under ~/.codex/compact-handoffs so a post-compact agent can continue without relying only on the model-generated compact summary.
+description: Compact the current conversation into a handoff document for another agent to pick up. Inspired by Matt Pocock's handoff skill (mattpocock/skills).
+argument-hint: "What will the next session be used for?"
 ---
 
 # Compact Handoff
 
-Use this skill for context compaction handoffs.
+Based on [Matt Pocock's handoff skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md).
 
-## Create Before Compacting
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS — not the current workspace.
 
-1. Create a durable handoff file under `~/.codex/compact-handoffs/` with a kebab-case timestamped name:
+Include a "suggested skills" section in the document, which suggests skills that the agent should invoke.
 
-   ```bash
-   mkdir -p ~/.codex/compact-handoffs
-   handoff="$(mktemp ~/.codex/compact-handoffs/$(date -u +%Y-%m-%dT%H-%M-%SZ)-handoff-XXXXXX.md)"
-   sed -n '1,20p' "$handoff"
-   ```
+Do not duplicate content already captured in other artifacts (PRDs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 
-2. Fill the file with concise resume context. Do not duplicate large artifacts that already exist elsewhere. Reference paths, issue URLs, PR URLs, commits, and docs instead.
+Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
 
-3. Include these sections:
-   - `# Compact Handoff: <task>`
-   - `## Current State`
-   - `## Decisions and Assumptions`
-   - `## Files and Artifacts`
-   - `## Verification`
-   - `## Immediate Resume Instructions`
-   - `## Open Risks`
-
-4. Run a quick readback:
-
-   ```bash
-   sed -n '1,220p' "$handoff"
-   ls -t ~/.codex/compact-handoffs/*.md | head -1
-   ```
-
-5. Tell the user the handoff path. After that, compaction can proceed. The `PreCompact` hook expects a recent markdown file in `~/.codex/compact-handoffs/`.
-
-## Read After Compacting
-
-1. Find the latest handoff:
-
-   ```bash
-   latest="$(ls -t ~/.codex/compact-handoffs/*.md 2>/dev/null | head -1)"
-   printf '%s\n' "$latest"
-   ```
-
-2. Read it completely before any implementation or destructive command:
-
-   ```bash
-   sed -n '1,260p' "$latest"
-   ```
-
-3. Verify the live workspace state against the handoff:
-   - `pwd`
-   - `git status -s -u` when inside a git repo
-   - any running dev server or workflow named in the handoff
-
-4. Start from `Immediate Resume Instructions`. If the handoff conflicts with live files, trust live files and report the mismatch before editing.
-
-## Content Rules
-
-- Keep secrets out of handoffs. Mention env var names only, never values.
-- Prefer exact file paths and command outcomes over broad prose.
-- Keep the handoff short enough to read after compaction, usually 80-180 lines.
-- If the task has an existing PRD, ADR, issue, PR, or docs artifact, link to it instead of copying it.
+If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
