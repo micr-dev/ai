@@ -5,39 +5,43 @@ description: Stress-tests a plan through one-question-at-a-time design grilling 
 
 # Grill With Facts
 
-Interview the user relentlessly about every aspect of a plan until there is shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one by one, and use `.facts` as the durable ledger so decisions do not vanish into chat history.
+Stress-test a plan until the important decisions are explicit, then write the durable outcomes into `.facts`. The goal is not to produce a chat transcript. The goal is to leave the project with crisp `@spec` facts, honest `@draft` risks, and domain vocabulary a future agent can use.
+
+## Start
 
 1. Identify the plan, proposal, or design being grilled.
-2. Load the existing fact sheet:
+2. Load the facts workflow and current fact sheet:
 
 ```sh
+facts skills show facts
 facts ll
 facts check
 facts ll --tags "draft or spec"
 ```
 
 3. Ask one high-leverage question at a time.
-4. After each answer, immediately record durable outcomes in facts.
+4. After each settled answer, immediately record the outcome with `facts add` or `facts edit`.
 
 If no fact sheet exists, ask before running `facts init`. Do not create a separate notes document as a substitute for facts.
 
-### 1. Orient
+## Orient
 
-- Read the current `.facts` files before asking questions.
+- Read current `.facts` files before asking questions.
+- Use section filters when the sheet is large, such as `facts ll --section feature/area` and `facts check --section feature/area`.
 - Read relevant docs and code when they can answer a question directly.
-- If the proposal conflicts with existing facts or code, surface the contradiction before continuing.
+- If the proposal conflicts with existing facts, docs, or code, surface the contradiction before continuing.
 - Use the `## domain` section as the vocabulary source. Add a domain fact only when a concept will recur across multiple facts.
+- For relevant manual facts shown by `facts check`, inspect the code and report each as `PASS` or `FAIL` with a one-line reason.
 
-### 2. Grill One Branch At A Time
+## Grill One Branch At A Time
 
 - Ask one focused question at a time.
 - Walk down the highest-dependency branch first, then move to the next branch after it is resolved or explicitly deferred.
-- For each question, provide your recommended answer and the concrete tradeoff.
+- For each question, provide a recommended answer and the concrete tradeoff.
 - Prefer dependency-resolving questions over style or low-risk details.
-- Challenge vague terms, hidden assumptions, irreversible decisions, and missing edge cases.
-- If the user answers with a weak or risky default, say so directly and propose a better default.
+- Challenge vague terms, hidden assumptions, irreversible decisions, missing edge cases, and weak defaults.
 
-### 3. Log Facts Immediately
+## Log Facts Immediately
 
 Convert each settled answer into atomic, declarative facts as soon as it is resolved:
 
@@ -56,17 +60,17 @@ Use lifecycle tags deliberately:
 
 Do not use facts for chat transcript fragments. Facts must be behavioral, atomic, stable, falsifiable, and useful to a future agent implementing the project.
 
-### 4. Handle Open Risks
+## Companion Skills
 
-When a risk or unknown matters but is not resolved, log it as a draft fact instead of leaving it in chat:
+This skill captures and pressure-tests requirements. It does not replace the facts lifecycle skills:
 
-```sh
-facts add "decision needed: webhook retries must define max attempts and dead-letter behavior" --section risks/payments --tags "draft"
-```
+- Use `facts-refine` when the session is mainly about turning existing `@draft` facts into precise `@spec` facts.
+- Hand off to `facts-implement` after grilling when the resulting `@spec` facts are ready to build.
+- Use `facts-discover` only when the user explicitly asks to audit, bootstrap, discover, or sync the fact sheet against existing code.
 
-When the user later resolves it, edit or replace the draft with precise `@spec` facts.
+During a grilling session, stay focused on requirement capture. Do not start implementation unless the user redirects.
 
-### 5. Add Commands Sparingly
+## Add Commands Sparingly
 
 Add `command:` only when the command genuinely tests the claim and would fail if the claim became false. Prefer honest manual facts over keyword-grep checks that create false confidence.
 
@@ -76,7 +80,7 @@ Good commands are fast, read-only, idempotent, and specific:
 facts add "CLI exposes the check subcommand" --section cli --command "facts check --help >/dev/null"
 ```
 
-### 6. Verify And Close
+## Verify And Close
 
 After each coherent batch of captured facts:
 
@@ -87,11 +91,10 @@ facts lint
 
 Close with:
 
-- the facts added or changed
-- the decisions now captured as `@spec`
-- the unresolved risks still captured as `@draft`
-- any contradictions between the plan, facts, docs, or code
-
-## Stop Condition
+- facts added or changed
+- decisions captured as `@spec` and unresolved risks captured as `@draft`
+- relevant manual facts verified as `PASS` or `FAIL`
+- contradictions between the plan, facts, docs, or code
+- the next lifecycle step, usually `facts-refine` for remaining drafts or `facts-implement` for ready specs
 
 Stop only when the major decision branches are resolved or intentionally deferred, every durable outcome has been captured in `.facts`, and remaining unknowns are represented as `@draft` facts with clear wording.
