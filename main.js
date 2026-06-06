@@ -740,6 +740,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'create-cli': 'https://github.com/steipete/create-cli',
       'make-interfaces-feel-better': 'https://github.com/jakubkrehel/make-interfaces-feel-better',
       'oklch-skill': 'https://github.com/jakubkrehel/oklch-skill',
+      'emil-design-eng': 'https://github.com/BiniamD/emil-design-eng',
     };
 
     if (externalSkillUrls[skillId]) {
