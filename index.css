@@ -377,6 +377,23 @@ body.fonts-ready .page-container {
   margin-bottom: 0.4rem;
 }
 
+.entry-logo {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-right: 0.45rem;
+}
+
+.entry-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .entry-name {
   font-size: inherit;
   font-weight: 600;
@@ -436,6 +453,14 @@ body.fonts-ready .page-container {
   color: var(--color-secondary);
   line-height: 1.25;
   margin-bottom: 0.25rem;
+}
+
+.entry-why {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-tertiary);
+  line-height: 1.25;
+  margin-top: 0.35rem;
 }
 
 .entry-metadata {
