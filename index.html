@@ -28,6 +28,7 @@
   <meta name="twitter:title" content="AI Stack">
   <meta name="twitter:description" content="Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, CLI tools, skills, image generation, workspace, and setup history.">
   <meta name="twitter:image" content="https://ai.micr.dev/og-image.png">
+  <base href="/">
   
   <!-- Critical local fonts load before rendering/animation setup -->
   <link rel="preload" href="assets/fonts/helvetica-neue/HelveticaNeue-Roman.otf" as="font" type="font/otf" crossorigin>
@@ -48,7 +49,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="index.css?v=20260529-scroll-paint-fix">
+  <link rel="stylesheet" href="index.css?v=20260609-snapshots">
 </head>
 <body class="antialiased fonts-loading">
 
@@ -743,6 +744,10 @@
       
       <!-- Scrollable Region for Dense Stack Content -->
       <div class="stack-scroll-region">
+        <div class="snapshot-status font-karla" id="snapshot-status" hidden>
+          <span id="snapshot-status-label">Snapshot</span>
+          <a href="/" id="snapshot-current-link">Current stack</a>
+        </div>
         
         <!-- SECTION: MODELS -->
         <section class="stack-section" id="models">
@@ -1381,6 +1386,6 @@
   </div>
 
   <!-- Script Injection -->
-<script src="main.js?v=20260530-dft-writing-skill"></script>
+  <script src="main.js?v=20260609-snapshots"></script>
 </body>
 </html>

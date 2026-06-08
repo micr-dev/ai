@@ -365,6 +365,99 @@ body.fonts-ready .page-container {
 }
 
 /* --- 8. STACK ENTRY ELEMENTS (Text Directly on Void - NO CARDS) --- */
+.snapshot-status {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+  color: var(--color-tertiary);
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.snapshot-status[hidden] {
+  display: none;
+}
+
+.snapshot-status a,
+.change-date-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.change-date-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  outline: none;
+  transition: color 180ms ease, transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.change-date-link::before,
+.change-date-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.22rem;
+  width: 100%;
+  height: 1px;
+  pointer-events: none;
+  background-color: currentColor;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+.change-date-link::before {
+  opacity: 0.22;
+  transform-origin: left;
+  animation: date-underline-intro 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--component-delay, 0ms) + 420ms);
+}
+
+.change-date-link::after {
+  opacity: 0.9;
+  transform-origin: right;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.snapshot-status a {
+  color: var(--color-secondary);
+}
+
+.snapshot-status a:hover,
+.snapshot-status a:focus-visible,
+.change-date-link:hover,
+.change-date-link:focus-visible {
+  color: var(--color-primary);
+}
+
+.change-date-link:hover,
+.change-date-link:focus-visible {
+  transform: translateY(-0.08rem);
+}
+
+.change-date-link:hover::after,
+.change-date-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.change-group.is-active-snapshot .change-date,
+.change-group.is-active-snapshot .change-date-link {
+  color: var(--color-primary);
+}
+
+.change-group.is-active-snapshot .change-date-link::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.snapshot-hidden {
+  display: none !important;
+}
+
 .stack-entry {
   position: relative;
   margin-bottom: var(--entry-gap);
@@ -1450,6 +1543,28 @@ body.fonts-ready .page-container {
   }
 }
 
+@keyframes date-underline-intro {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  45% {
+    opacity: 0.22;
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  46% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
+
 @keyframes text-reveal-char {
   from {
     opacity: 0;
@@ -1638,6 +1753,17 @@ body.fonts-ready .page-container {
     clip-path: none;
     filter: none;
     animation: none;
+    transition: none;
+  }
+
+  .change-date-link::before {
+    opacity: 0;
+    transform: scaleX(0);
+    animation: none;
+  }
+
+  .change-date-link::after {
+    transition: none;
   }
 
   .morph-dialog-backdrop {

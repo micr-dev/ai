@@ -66,6 +66,163 @@ document.addEventListener('DOMContentLoaded', () => {
   let isSkillDialogOpen = false;
   let lastSkillTrigger = null;
   let activeTooltipTarget = null;
+  const snapshotStatus = document.getElementById('snapshot-status');
+  const snapshotStatusLabel = document.getElementById('snapshot-status-label');
+
+  const monthNames = [
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'december',
+  ];
+
+  const stackItemSelector = '.stack-entry, .skill-item, .agents-box-container';
+
+  function parseDisplayDate(displayDate) {
+    const [day, month, year] = displayDate.split('/').map(part => Number(part));
+    return { day, month, year };
+  }
+
+  function getDateValue(displayDate) {
+    const { day, month, year } = parseDisplayDate(displayDate);
+    return year * 10000 + month * 100 + day;
+  }
+
+  function getSnapshotSlug(displayDate) {
+    const { day, month, year } = parseDisplayDate(displayDate);
+    return `${monthNames[month - 1]}-${day}-${year}`;
+  }
+
+  function getSnapshotTitle(displayDate) {
+    const { day, month, year } = parseDisplayDate(displayDate);
+    const monthLabel = monthNames[month - 1];
+    return `${monthLabel.charAt(0).toUpperCase()}${monthLabel.slice(1)} ${day}, ${year}`;
+  }
+
+  function getSnapshotDateFromPath() {
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const slug = pathParts[0] === 'ai' ? pathParts[1] : pathParts[0];
+    if (!slug) return null;
+
+    const match = slug.match(/^([a-z]+)-(\d{1,2})-(\d{4})$/i);
+    if (!match) return null;
+
+    const month = monthNames.indexOf(match[1].toLowerCase()) + 1;
+    const day = Number(match[2]);
+    const year = Number(match[3]);
+    if (!month || !day || !year) return null;
+
+    return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${year}`;
+  }
+
+  function getIntroducedDates() {
+    const introducedDates = new Map();
+
+    document.querySelectorAll('.change-group').forEach(group => {
+      const groupDate = group.getAttribute('data-group');
+      if (!groupDate) return;
+
+      group.querySelectorAll('.change-entry').forEach(entry => {
+        const title = entry.querySelector('.change-title')?.textContent?.trim() || '';
+        if (!title.startsWith('Added ')) return;
+
+        const targets = (entry.getAttribute('data-targets') || '')
+          .split(',')
+          .map(target => target.trim())
+          .filter(Boolean);
+
+        targets.forEach(target => {
+          const currentDate = introducedDates.get(target);
+          if (!currentDate || getDateValue(groupDate) < getDateValue(currentDate)) {
+            introducedDates.set(target, groupDate);
+          }
+        });
+      });
+    });
+
+    return introducedDates;
+  }
+
+  function updateEmptySnapshotContainers() {
+    document.querySelectorAll('.role-column, .two-column-list, .simple-list, .skills-inline-list').forEach(container => {
+      const visibleItems = Array.from(container.querySelectorAll(stackItemSelector))
+        .filter(item => !item.classList.contains('snapshot-hidden'));
+      container.classList.toggle('snapshot-hidden', visibleItems.length === 0);
+    });
+
+    document.querySelectorAll('.stack-section').forEach(section => {
+      const visibleItems = Array.from(section.querySelectorAll(stackItemSelector))
+        .filter(item => !item.classList.contains('snapshot-hidden'));
+      section.classList.toggle('snapshot-hidden', visibleItems.length === 0);
+    });
+  }
+
+  function applySnapshot(displayDate, { pushState = false } = {}) {
+    const introducedDates = getIntroducedDates();
+    const snapshotValue = displayDate ? getDateValue(displayDate) : null;
+
+    document.querySelectorAll(stackItemSelector).forEach(item => {
+      const introducedDate = introducedDates.get(item.id);
+      const isAfterSnapshot = Boolean(snapshotValue && introducedDate && getDateValue(introducedDate) > snapshotValue);
+      item.classList.toggle('snapshot-hidden', isAfterSnapshot);
+    });
+
+    updateEmptySnapshotContainers();
+
+    document.querySelectorAll('.change-group').forEach(group => {
+      group.classList.toggle('is-active-snapshot', Boolean(displayDate && group.getAttribute('data-group') === displayDate));
+    });
+
+    if (snapshotStatus && snapshotStatusLabel) {
+      snapshotStatus.hidden = !displayDate;
+      if (displayDate) {
+        snapshotStatusLabel.textContent = `Snapshot as of ${getSnapshotTitle(displayDate)}`;
+      }
+    }
+
+    const title = displayDate ? `AI Stack - ${getSnapshotTitle(displayDate)}` : 'AI Stack';
+    document.title = title;
+
+    if (pushState) {
+      const path = displayDate ? `/${getSnapshotSlug(displayDate)}` : '/';
+      window.history.pushState({ snapshotDate: displayDate }, '', path);
+    }
+  }
+
+  function setupSnapshotLinks() {
+    document.querySelectorAll('.change-group').forEach(group => {
+      const displayDate = group.getAttribute('data-group');
+      const dateElement = group.querySelector('.change-date');
+      if (!displayDate || !dateElement || dateElement.querySelector('a')) return;
+
+      const link = document.createElement('a');
+      link.className = 'change-date-link';
+      link.href = `/${getSnapshotSlug(displayDate)}`;
+      link.textContent = dateElement.textContent.trim();
+      link.setAttribute('aria-label', `View AI stack snapshot for ${getSnapshotTitle(displayDate)}`);
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        applySnapshot(displayDate, { pushState: true });
+      });
+
+      dateElement.textContent = '';
+      dateElement.append(link);
+    });
+
+    window.addEventListener('popstate', () => {
+      applySnapshot(getSnapshotDateFromPath(), { pushState: false });
+    });
+
+    applySnapshot(getSnapshotDateFromPath(), { pushState: false });
+  }
 
   const faviconLink = document.getElementById('dynamic-favicon');
   if (faviconLink) {
@@ -899,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const smallTitleBaseDelay = 260;
-    const smallTitleElements = getPositionedElements('.skill-label, .skill-name, .change-date, .change-title');
+    const smallTitleElements = getPositionedElements('.skill-label, .skill-name, .change-date-link, .change-title');
 
     smallTitleElements.forEach((element, index) => {
       const mode = element.matches('.skill-label') ? 'preset' : 'custom';
@@ -967,6 +1124,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  setupSnapshotLinks();
 
   // 4. CROSS-HIGHLIGHTING: CHANGELOG HOVER DYNAMIC LINKING
   const changeEntries = document.querySelectorAll('.change-entry');

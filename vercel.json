@@ -1,5 +1,15 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/ai/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/:path((?!assets|agents|skills|favicon-a.png|favicon-i.png|favicon.gif|favicon.png|og-image.png|robots.txt|sitemap.xml|index.css|main.js).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
