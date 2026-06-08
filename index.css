@@ -65,16 +65,16 @@
 }
 
 @font-face {
-  font-family: "Commit Mono";
-  src: url("assets/fonts/commit-mono/CommitMono-400-Regular.otf") format("opentype");
+  font-family: "Ioskeley Mono";
+  src: url("assets/fonts/ioskeley-mono/IoskeleyMono-Regular.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Commit Mono";
-  src: url("assets/fonts/commit-mono/CommitMono-700-Regular.otf") format("opentype");
+  font-family: "Ioskeley Mono";
+  src: url("assets/fonts/ioskeley-mono/IoskeleyMono-Bold.woff2") format("woff2");
   font-style: normal;
   font-weight: 700;
   font-display: swap;
@@ -88,7 +88,7 @@
   --font-serif: var(--font-ysabeau);
   --font-karla: "Karla", "Karla Fallback", sans-serif;
   --font-space-grotesk: "Space Grotesk", sans-serif;
-  --font-mono: "Commit Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --font-mono: "Ioskeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 
   /* Colors - EXCLUSIVELY BLACK & WHITE */
   --color-bg: #121212;

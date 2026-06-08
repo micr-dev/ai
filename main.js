@@ -936,7 +936,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '400 1rem helveticaNeue',
       '600 1rem helveticaNeue',
       '700 1rem helveticaNeue',
-      '400 1rem "Commit Mono"',
+      '400 1rem "Ioskeley Mono"',
     ];
 
     return Promise.all(criticalFontLoads.map(font => document.fonts.load(font)))
