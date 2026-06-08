@@ -6,7 +6,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/:path((?!assets|agents|skills|favicon-a.png|favicon-i.png|favicon.gif|favicon.png|og-image.png|robots.txt|sitemap.xml|index.css|main.js).*)",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ],
