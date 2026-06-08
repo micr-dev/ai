@@ -908,7 +908,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const bodyBaseDelay = 500;
 
-    const bodyElements = getPositionedElements('.entry-description, .change-description, .skill-detail, .entry-metadata');
+    const bodyElements = getPositionedElements('.entry-description, .entry-why, .change-description, .skill-detail, .entry-metadata');
     bodyElements.forEach(element => {
       splitTextEffect(element, 'body', bodyBaseDelay);
     });
