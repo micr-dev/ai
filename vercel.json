@@ -1,4 +1,5 @@
 {
+  "buildCommand": "node scripts/generate-ai-llms.mjs",
   "cleanUrls": true,
   "rewrites": [
     {
