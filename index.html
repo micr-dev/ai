@@ -751,7 +751,7 @@
     <main class="stack-column" id="stack-section">
       
       <!-- Scrollable Region for Dense Stack Content -->
-      <div class="stack-scroll-region">
+      <div class="stack-scroll-region" data-highlight-host>
         <div class="snapshot-status font-karla" id="snapshot-status" hidden>
           <span id="snapshot-status-label">Snapshot</span>
           <a href="/" id="snapshot-current-link">Current stack</a>
@@ -851,7 +851,7 @@
         
         <!-- SECTION: AGENTS.MD (Raw code boxed style container) -->
         <section class="stack-section" id="agents-section">
-          <h2 class="section-heading">AGENTS.md</h2>
+          <h2 class="section-heading" data-highlight>AGENTS.md</h2>
           
           <div class="agents-box-container" id="agents-md">
             <div class="editor-pane">
@@ -1396,5 +1396,51 @@
 
   <!-- Script Injection -->
   <script src="main.js?v=20260609-snapshots"></script>
+  <script type="module">
+    import { highlight } from "https://cdn.jsdelivr.net/npm/@highlighters/core@1.1.1/+esm";
+
+    const options = {
+      color: "#a6a6a6",
+      opacity: 0.34,
+      snap: "word",
+      blendMode: "screen",
+      ink: {
+        flow: 0.38,
+        feathering: 0.16,
+        streakiness: 0.18,
+        dryout: 0.08,
+      },
+      edge: {
+        waviness: 0.7,
+        roughness: 0.12,
+        cap: "round",
+      },
+      animation: {
+        trigger: "in-view",
+        duration: 520,
+        stagger: 70,
+      },
+    };
+
+    window.addEventListener("load", () => {
+      window.setTimeout(() => {
+        const host = document.querySelector("[data-highlight-host]");
+        if (!(host instanceof HTMLElement)) return;
+
+        [
+          { text: "repository-level reasoning", root: host },
+          { text: "tool execution", root: host },
+          { text: "-p workflows", root: host },
+        ].forEach((target) => {
+          highlight(target, options, host);
+        });
+
+        document.querySelectorAll("[data-highlight]").forEach((target) => {
+          const targetHost = target.closest("[data-highlight-host]");
+          highlight(target, options, targetHost instanceof HTMLElement ? targetHost : null);
+        });
+      }, 1300);
+    });
+  </script>
 </body>
 </html>
