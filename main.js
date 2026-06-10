@@ -898,6 +898,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'make-interfaces-feel-better': 'https://github.com/jakubkrehel/make-interfaces-feel-better',
       'oklch-skill': 'https://github.com/jakubkrehel/oklch-skill',
       'emil-design-eng': 'https://github.com/BiniamD/emil-design-eng',
+      'changelog': 'https://github.com/pavelsimo/changelog',
     };
 
     if (externalSkillUrls[skillId]) {
