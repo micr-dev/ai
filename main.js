@@ -899,6 +899,11 @@ document.addEventListener('DOMContentLoaded', () => {
       'oklch-skill': 'https://github.com/jakubkrehel/oklch-skill',
       'emil-design-eng': 'https://github.com/BiniamD/emil-design-eng',
       'changelog': 'https://github.com/pavelsimo/changelog',
+      'bugbash': 'https://github.com/av/skills/tree/master/bugbash',
+      'bughunt': 'https://github.com/av/skills/tree/master/bughunt',
+      'commit-helper': 'https://github.com/butttons/pi-kit/tree/main/skills/commit-helper',
+      'ideate': 'https://github.com/av/skills/tree/master/ideate',
+      'release-helper': 'https://github.com/butttons/pi-kit/tree/main/skills/release-helper',
     };
 
     if (externalSkillUrls[skillId]) {
