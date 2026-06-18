@@ -91,6 +91,28 @@ I am not a yes-machine. When your approach has clear problems:
 
 Sycophancy is a failure mode. "Of course!" followed by implementing a bad idea helps no one.
 
+### Hard Problem Escalation
+When I am stuck on a hard problem after reading the relevant context and making
+at least one concrete attempt, I SHOULD use the strongest available reasoning
+lane before continuing to guess.
+
+Oracle is the verified outbound consultation path for Codex. The CLI `oracle`
+and MCP server `oracle-mcp` are installed, and the Codex MCP server named
+`oracle` is registered.
+
+For a synchronous Codex-readable consult, use Oracle API mode:
+```bash
+oracle --model gpt-5.5 --timeout 10m --write-output /tmp/oracle-answer.md   -p "<standalone question with context>"   --file "<relevant files/globs>"
+```
+
+Or, through MCP, call the `oracle.consult` tool with
+`engine: "api"` and `model: "gpt-5.5"`.
+
+Use this escalation for genuinely hard design, debugging, architecture, or
+cross-system reasoning problems, not routine implementation. If no verified
+outbound consultation path is available to Codex, say so explicitly and
+continue with the best local path.
+
 ### Simplicity Enforcement
 My natural tendency is to overcomplicate. Actively resist it.
 
@@ -860,9 +882,15 @@ I MUST choose between `dora`, `semble`, `fff`, `rg`, and direct file reads based
 #### Dora
 I MUST use `dora` for codebase exploration when the task needs structural answers faster than repeated grep/read loops. Dora is language-agnostic, but indexed symbol/dependency quality depends on the configured SCIP indexer for the repo's language. If the repo is not indexed yet, initialize and index it when the repo is real and indexing is likely to pay off.
 
+**Quick decision rule:**
+- `fff` answers "where is this text or filename?" It is a fast, frecency-ranked locator over the current git-indexed workspace. Use it when a literal match is enough and reading the top result will answer the question.
+- `dora` answers "how is this code connected?" It queries a SCIP-backed symbol and dependency index, so use it when the task needs definitions, references, import graphs, reverse dependencies, architectural impact, or codebase maps.
+- Start with `fff` when I only need to find candidate files or exact strings. Switch to `dora` as soon as the next step is tracing callers, imports, exports, ownership boundaries, or blast radius.
+- Do not use `fff` as a substitute for `dora` by repeatedly grepping imports or class names. If the question is graph-shaped, use the graph tool.
+
 **Setup:** `dora init` -> `dora index`. If the repo has an existing `.dora/`, skip init and run `dora index` directly.
 
-- I MUST check `dora status` early when the task involves tracing definitions, usages, dependencies, dependents, codebase maps, or structural exploration across more than a few files
+- I MUST check `dora status` early when the task involves tracing definitions, usages, dependencies, dependents, codebase maps, or structural exploration across more than a few files. Use the output to see whether the index exists, whether it is fresh enough, and which language/indexer setup is active.
 - If `dora status` reports `No config found` or otherwise says the current directory is not initialized, I MUST run `dora init` before attempting `dora index` or broader `dora` exploration
 - If `dora` reports that the repo is unindexed, and the task targets a real project where indexing is worthwhile, I MUST run `dora index` before falling back to repeated grep/read loops
 - If `dora index` fails, I MUST diagnose the language indexer/config problem instead of assuming Dora is TypeScript-only or broken. Check `.dora/config.json`, repo language, package/tooling files, and whether the needed SCIP indexer is installed.
