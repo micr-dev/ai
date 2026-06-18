@@ -909,7 +909,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'ideate': 'https://github.com/av/skills/tree/master/ideate',
       'release-helper': 'https://github.com/butttons/pi-kit/tree/main/skills/release-helper',
       'oracle': 'https://github.com/openclaw/openclaw/blob/main/skills/oracle/SKILL.md',
-      'quality-code': 'https://github.com/duceum/Clean-Quality-Code-Skill-for-Claude-Codex-Cursor-and-AI-agents',
+      'quality-code': 'https://github.com/RhysSullivan/skills/blob/main/skills/quality-code',
       'review-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/review-animations',
       'write-better-error-messages': 'https://github.com/gillkyle/skills/blob/main/skills/write-better-error-messages',
     };
