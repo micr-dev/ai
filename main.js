@@ -908,6 +908,10 @@ document.addEventListener('DOMContentLoaded', () => {
       'commit-helper': 'https://github.com/butttons/pi-kit/tree/main/skills/commit-helper',
       'ideate': 'https://github.com/av/skills/tree/master/ideate',
       'release-helper': 'https://github.com/butttons/pi-kit/tree/main/skills/release-helper',
+      'oracle': 'https://github.com/openclaw/openclaw/blob/main/skills/oracle/SKILL.md',
+      'quality-code': 'https://github.com/duceum/Clean-Quality-Code-Skill-for-Claude-Codex-Cursor-and-AI-agents',
+      'review-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/review-animations',
+      'write-better-error-messages': 'https://github.com/gillkyle/skills/blob/main/skills/write-better-error-messages',
     };
 
     if (externalSkillUrls[skillId]) {
