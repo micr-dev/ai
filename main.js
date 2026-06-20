@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'quality-code': 'skills/quality-code/SKILL.md',
     'review-animations': 'skills/review-animations/SKILL.md',
     'write-better-error-messages': 'skills/write-better-error-messages/SKILL.md',
-    'devspace': 'skills/devspace/SKILL.md',
+
   };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
