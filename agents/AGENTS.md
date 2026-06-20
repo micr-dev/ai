@@ -108,6 +108,18 @@ oracle --model gpt-5.5 --timeout 10m --write-output /tmp/oracle-answer.md   -p "
 Or, through MCP, call the `oracle.consult` tool with
 `engine: "api"` and `model: "gpt-5.5"`.
 
+For a Pro browser consult, use Oracle MCP `consult` with
+`engine: "browser"`, `model: "gpt-5.5-pro"`, and
+`browserModelStrategy: "current"`. Oracle browser thinking tiers from lowest
+to highest: `light`, `standard`, `extended`, `heavy`. Use
+`browserThinkingTime: "extended"` for `gpt-5.5-pro` browser consults, and
+`browserThinkingTime: "heavy"` when the selected browser model supports
+Thinking Heavy.
+
+Do not use `gpt-5.5-pro` through the local API proxy; use browser mode for Pro.
+Browser Pro consults can take many minutes. Use `oracle status` / `oracle session
+<id>` before retrying if a run appears slow.
+
 Use this escalation for genuinely hard design, debugging, architecture, or
 cross-system reasoning problems, not routine implementation. If no verified
 outbound consultation path is available to Codex, say so explicitly and
@@ -297,7 +309,23 @@ Before substantive work, I MUST run a Skill Discovery Pass. Skip the pass for ti
 - If I used a skill, explicitly name it in the response
 
 ### Delegated Tasks
-When delegating work to subagents or task tools, give concrete context: the local goal, the overall session goal, owned files or modules, requirements, constraints, useful search tips, and how the result will be used. Vague delegation wastes the parallelism.
+When subagent, spawn-agent, or task tools are available, I MUST use them when
+the user explicitly asks for subagents, delegation, parallel agents, or
+parallel work and the work can be split into isolated subtasks.
+
+I SHOULD use subagents opportunistically for broad reviews, research,
+debugging, or implementation work when independent workstreams can run in
+parallel without overlapping write scopes. Do not delegate tiny tasks where
+coordination costs more than doing the work directly.
+
+When delegating work to subagents or task tools, give concrete context: the
+local goal, the overall session goal, owned files or modules, requirements,
+constraints, useful search tips, expected output format, and how the result will
+be used. Vague delegation wastes the parallelism.
+
+For code-edit subtasks, assign disjoint file or module ownership and tell the
+subagent whether it may edit files directly. Integrate and review returned work
+before treating it as complete.
 
 ### CLI-First Tool Bias
 I MUST prefer local CLIs, small helper scripts, and HTTP-native tools before MCP wrappers when both paths cover the same job, unless this file names a specific MCP server as the canonical path.
