@@ -56,6 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     'quality-code': 'skills/quality-code/SKILL.md',
     'review-animations': 'skills/review-animations/SKILL.md',
     'write-better-error-messages': 'skills/write-better-error-messages/SKILL.md',
+    'codebase-memory-mcp-skill': 'skills/codebase-memory-mcp/SKILL.md',
+    'domain-modeling': 'skills/domain-modeling/SKILL.md',
+    'grilling': 'skills/grilling/SKILL.md',
+    'idea-generator': 'skills/idea-generator/SKILL.md',
+    'teach': 'skills/teach/SKILL.md',
+    'transitions-dev': 'skills/transitions-dev/SKILL.md',
+    'writing-great-skills': 'skills/writing-great-skills/SKILL.md',
 
   };
   const skillContentCache = new Map();
@@ -913,6 +920,10 @@ document.addEventListener('DOMContentLoaded', () => {
       'quality-code': 'https://github.com/RhysSullivan/skills/blob/main/skills/quality-code',
       'review-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/review-animations',
       'write-better-error-messages': 'https://github.com/gillkyle/skills/blob/main/skills/write-better-error-messages',
+      'domain-modeling': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/domain-modeling',
+      'grilling': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling',
+      'teach': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/teach',
+      'writing-great-skills': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-great-skills',
     };
 
     if (externalSkillUrls[skillId]) {
