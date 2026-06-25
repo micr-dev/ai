@@ -71,6 +71,29 @@
           </div>
           
           <div class="changelog-timeline">
+            <div class="change-group" data-group="25/06/2026">
+              <div class="change-date font-karla">25/06/2026</div>
+              <div class="change-entries">
+
+                <div class="change-entry" data-targets="hook-sessionstart-dora">
+                  <h3 class="change-title">Removed SessionStart Dora Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-stop-dora">
+                  <h3 class="change-title">Removed Stop Dora Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-precompact-handoff">
+                  <h3 class="change-title">Removed PreCompact Handoff Hook</h3>
+                </div>
+
+                <div class="change-entry" data-targets="hook-postcompact-handoff">
+                  <h3 class="change-title">Removed PostCompact Handoff Hook</h3>
+                </div>
+
+              </div>
+            </div>
+
             <div class="change-group" data-group="23/06/2026">
               <div class="change-date font-karla">23/06/2026</div>
               <div class="change-entries">
@@ -1176,27 +1199,6 @@
               <p class="entry-description">Starts Residue session capture.</p>
             </div>
 
-            <div class="stack-entry" id="hook-sessionstart-dora">
-              <div class="entry-header">
-                <span class="entry-name">SessionStart | Dora Index Check</span>
-              </div>
-              <p class="entry-description">Checks Dora status and starts indexing when the repository supports it.</p>
-            </div>
-
-            <div class="stack-entry" id="hook-precompact-handoff">
-              <div class="entry-header">
-                <span class="entry-name">PreCompact | Compact Handoff</span>
-              </div>
-              <p class="entry-description">Writes a compact handoff before manual or automatic compaction.</p>
-            </div>
-
-            <div class="stack-entry" id="hook-postcompact-handoff">
-              <div class="entry-header">
-                <span class="entry-name">PostCompact | Handoff Reload</span>
-              </div>
-              <p class="entry-description">Loads the compact handoff reminder after compaction.</p>
-            </div>
-
             <div class="stack-entry" id="hook-stop-residue">
               <div class="entry-header">
                 <span class="entry-name">Stop | Residue Finish</span>
@@ -1211,12 +1213,7 @@
               <p class="entry-description">Runs the lintcn stop check.</p>
             </div>
 
-            <div class="stack-entry" id="hook-stop-dora">
-              <div class="entry-header">
-                <span class="entry-name">Stop | Dora Reindex</span>
-              </div>
-              <p class="entry-description">Starts a Dora reindex after session shutdown.</p>
-            </div>
+
             
           </div>
         </section>
