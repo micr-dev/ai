@@ -71,6 +71,48 @@
           </div>
           
           <div class="changelog-timeline">
+                        <div class="change-group" data-group="26/06/2026">
+              <div class="change-date font-karla">26/06/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="reverse-engineering">
+                  <h3 class="change-title">Consolidated reverse engineering skills into single reverse-engineering Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="attack-chain">
+                  <h3 class="change-title">Removed attack-chain Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="binary-diff">
+                  <h3 class="change-title">Removed binary-diff Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="edr-bypass-re">
+                  <h3 class="change-title">Removed edr-bypass-re Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="firmware-pentest">
+                  <h3 class="change-title">Removed firmware-pentest Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="ida-reverse">
+                  <h3 class="change-title">Removed ida-reverse Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="js-reverse">
+                  <h3 class="change-title">Removed js-reverse Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="malware-analysis">
+                  <h3 class="change-title">Removed malware-analysis Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="mobile-reverse">
+                  <h3 class="change-title">Removed mobile-reverse Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="patch-diff-exploit">
+                  <h3 class="change-title">Removed patch-diff-exploit Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="pwn-chain">
+                  <h3 class="change-title">Removed pwn-chain Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="radare2">
+                  <h3 class="change-title">Removed radare2 Skill</h3>
+                </div>
+
+              </div>
+            </div>
             <div class="change-group" data-group="25/06/2026">
               <div class="change-date font-karla">25/06/2026</div>
               <div class="change-entries">
@@ -1414,24 +1456,9 @@
         <section class="stack-section" id="skills">
           <h2 class="section-heading">Skills</h2>
           
-          <div class="skills-inline-list">
-            
-            <div class="skill-item" id="attack-chain"><span class="skill-name font-karla">attack-chain</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Plan and coordinate multi-stage security assessment workflows across reconnaissance, exploitation, privilege escalation, lateral movement, persistence,</span></div>
-            <div class="skill-item" id="binary-diff"><span class="skill-name font-karla">binary-diff</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- 跨版本符号迁移与二进制差分。当你有旧版本的符号/逆向结果，需要快速迁移到新版本时使用。</span></div>
-            <div class="skill-item" id="browser-automation"><span class="skill-name font-karla">browser-automation</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- 统一自动化入口。覆盖浏览器自动化（Playwright）和 Windows 桌面应用自动化（OpenReverse）。</span></div>
+          <div class="skills-inline-list">            <div class="skill-item" id="browser-automation"><span class="skill-name font-karla">browser-automation</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- 统一自动化入口。覆盖浏览器自动化（Playwright）和 Windows 桌面应用自动化（OpenReverse）。</span></div>
             <div class="skill-item" id="diagram-generator"><span class="skill-name font-karla">diagram-generator</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- generate, refine, validate, and render diagrams from natural language, notes, code snippets, schemas, tables, or</span></div>
-            <div class="skill-item" id="docs-generator"><span class="skill-name font-karla">docs-generator</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Creates task-oriented technical documentation with progressive disclosure</span></div>
-            <div class="skill-item" id="edr-bypass-re"><span class="skill-name font-karla">edr-bypass-re</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- 逆向防御方实现 → 红队针对性绕过。把 EDR / Defender / AV 的 hook 表、ETW provider、AMSI 实现先逆向出来，再写针对性的 unhook /</span></div>
-            <div class="skill-item" id="firmware-pentest"><span class="skill-name font-karla">firmware-pentest</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- 固件 / IoT 渗透链。从拿到一坨 .bin / .img 开始，闭环走完逆向 → 提取 → 模拟 → 利用。</span></div>
-            <div class="skill-item" id="ida-reverse"><span class="skill-name font-karla">ida-reverse</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- IDA Pro 逆向分析辅助技能。当用户提到逆向、反编译、分析二进制/PE/ELF/APK/DLL/SO、破解、找密码、漏洞分析、病毒分析、firmware 固件分析时使用。</span></div>
-            <div class="skill-item" id="js-reverse"><span class="skill-name font-karla">js-reverse</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- 在使用 js-reverse-mcp 做前端 JavaScript 逆向时使用，适用于签名链路定位、页面观察取证、运行时采样、本地补环境复现与证据化输出。</span></div>
-            <div class="skill-item" id="llm-security"><span class="skill-name font-karla">llm-security</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Assess security of LLM applications and AI agents</span></div>
-            <div class="skill-item" id="malware-analysis"><span class="skill-name font-karla">malware-analysis</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Analyze suspected malware samples and produce threat-intelligence artifacts</span></div>
-            <div class="skill-item" id="mobile-reverse"><span class="skill-name font-karla">mobile-reverse</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Analyze and security-test Android APKs and iOS IPAs with static and dynamic reverse engineering workflows</span></div>
-            <div class="skill-item" id="patch-diff-exploit"><span class="skill-name font-karla">patch-diff-exploit</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- N-day 补丁差分到利用。从厂商发布的补丁里反推漏洞点、写 PoC、做成可用的攻击模块。</span></div>
-            <div class="skill-item" id="pwn-chain"><span class="skill-name font-karla">pwn-chain</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- 从逆向走到可用利用 (Working Exploit) 的全链路工程化方法。</span></div>
-            <div class="skill-item" id="radare2"><span class="skill-name font-karla">radare2</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Use this skill whenever the user wants to analyze binaries with radare2/r2 from the command</span></div>
-            <div class="skill-item" id="reverse-engineering"><span class="skill-name font-karla">reverse-engineering</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Provides reverse engineering techniques</span></div>
+            <div class="skill-item" id="docs-generator"><span class="skill-name font-karla">docs-generator</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Creates task-oriented technical documentation with progressive disclosure</span></div>            <div class="skill-item" id="llm-security"><span class="skill-name font-karla">llm-security</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Assess security of LLM applications and AI agents</span></div>            <div class="skill-item" id="reverse-engineering"><span class="skill-name font-karla">reverse-engineering</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Provides reverse engineering techniques</span></div>
             <div class="skill-item" id="supply-chain-security"><span class="skill-name font-karla">supply-chain-security</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Assess software supply-chain security across dependencies, SBOMs, SCA, CI/CD pipelines, containers, build provenance, artifact signing,</span></div>
             <div class="skill-item" id="dft-writing"><span class="skill-name font-karla">dft-writing</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Generates long-form prose through the Rosmine DFT Writing Demo's direct Gradio API.</span></div>
             <div class="skill-item" id="grill-with-docs"><span class="skill-name font-karla">grill-with-docs</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Stress-tests decisions against the project glossary and captures resolved language.</span></div>
