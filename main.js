@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const skillGithubLink = document.getElementById('skill-github-link');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const skillContentPaths = {
-    'apk-reverse': 'skills/reverse-skill/apk-reverse/SKILL.md',
     'attack-chain': 'skills/reverse-skill/attack-chain/SKILL.md',
     'binary-diff': 'skills/reverse-skill/binary-diff/SKILL.md',
     'browser-automation': 'skills/reverse-skill/browser-automation/SKILL.md',
