@@ -36,10 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const skillRenderedView = document.getElementById('skill-rendered-view');
   const skillGithubLink = document.getElementById('skill-github-link');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const skillContentPaths = {    'browser-automation': 'skills/reverse-skill/browser-automation/SKILL.md',
-    'diagram-generator': 'skills/reverse-skill/diagram-generator/SKILL.md',
-    'docs-generator': 'skills/reverse-skill/docs-generator/SKILL.md',    'llm-security': 'skills/reverse-skill/llm-security/SKILL.md',    'reverse-engineering': 'skills/reverse-skill/reverse-engineering/SKILL.md',
-    'supply-chain-security': 'skills/reverse-skill/supply-chain-security/SKILL.md',
+  const skillContentPaths = {    'reverse-engineering': 'skills/reverse-skill/reverse-engineering/SKILL.md',
     'grill-with-docs': 'skills/grill-with-docs/SKILL.md',
     'grill-me': 'skills/grill-me/SKILL.md',
     'compact-handoff': 'skills/compact-handoff/SKILL.md',
