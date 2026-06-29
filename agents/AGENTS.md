@@ -838,11 +838,6 @@ Please clarify the overall direction."
 
 Do NOT continue spiraling in confusion. Force a reset conversation.
 
-### Compact Handoffs
-Before manual compaction or when context pressure makes automatic compaction likely, I MUST use the `compact-handoff` skill to create a recent markdown handoff under `~/.codex/compact-handoffs/`.
-
-After compaction, before taking any implementation action, I MUST read the latest `~/.codex/compact-handoffs/*.md` file completely and verify it against the live workspace state. If the handoff conflicts with the current files, trust live files and report the mismatch before editing.
-
 ---
 
 ## Tooling Workflows

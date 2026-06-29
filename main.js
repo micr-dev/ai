@@ -914,6 +914,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'bughunt': 'https://github.com/av/skills/tree/master/bughunt',
       'commit-helper': 'https://github.com/butttons/pi-kit/tree/main/skills/commit-helper',
       'ideate': 'https://github.com/av/skills/tree/master/ideate',
+      'timeboxed-iterating': 'https://github.com/av/skills/tree/master/timeboxed-iterating',
       'release-helper': 'https://github.com/butttons/pi-kit/tree/main/skills/release-helper',
       'oracle': 'https://github.com/openclaw/openclaw/blob/main/skills/oracle/SKILL.md',
       'quality-code': 'https://github.com/RhysSullivan/skills/blob/main/skills/quality-code',
