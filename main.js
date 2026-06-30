@@ -919,6 +919,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'oracle': 'https://github.com/openclaw/openclaw/blob/main/skills/oracle/SKILL.md',
       'quality-code': 'https://github.com/RhysSullivan/skills/blob/main/skills/quality-code',
       'review-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/review-animations',
+      'animation-vocabulary': 'https://github.com/emilkowalski/skills/blob/main/skills/animation-vocabulary',
       'write-better-error-messages': 'https://github.com/gillkyle/skills/blob/main/skills/write-better-error-messages',
       'domain-modeling': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/domain-modeling',
       'grilling': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling',
