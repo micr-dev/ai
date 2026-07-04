@@ -1,53 +1,50 @@
 #!/usr/bin/env python3
-"""Call the Rosmine DFT Writing Demo through Gradio's direct API."""
+"""Call the current Deft Writing API for DFT-generated prose."""
 
 from __future__ import annotations
 
 import argparse
 import json
-import sys
+import re
 import time
 import urllib.error
 import urllib.request
-import uuid
 
 
-BASE_URL = "https://dft.rosmine.ai"
-PREDICT_URL = f"{BASE_URL}/gradio_api/run/predict"
-FN_INDEX = {
-    "good": 6,
-    "fast": 7,
-}
-EXAMPLE_FN_INDEX = {
-    1: 14,
-    2: 15,
-    3: 16,
+BASE_URL = "https://deftwriting.com"
+GENERATE_URL = f"{BASE_URL}/api/generate"
+GENERATION_MODE = {
+    "generate": "simple",
+    "rewrite": "rewrite",
 }
 
 
-def post_predict(payload: dict, timeout: int) -> dict:
+def post_generate(payload: dict, timeout: int) -> tuple[dict, list[dict]]:
     body = json.dumps(payload).encode("utf-8")
     request = urllib.request.Request(
-        PREDICT_URL,
+        GENERATE_URL,
         data=body,
         headers={"Content-Type": "application/json"},
         method="POST",
     )
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
-            return json.loads(response.read().decode("utf-8"))
+            raw = response.read().decode("utf-8", errors="replace")
+            content_type = response.headers.get("Content-Type", "")
     except urllib.error.HTTPError as error:
         detail = error.read().decode("utf-8", errors="replace")
         raise SystemExit(f"DFT API HTTP {error.code}: {detail}") from error
     except urllib.error.URLError as error:
         raise SystemExit(f"DFT API request failed: {error}") from error
+    if "application/x-ndjson" in content_type:
+        return parse_ndjson(raw)
+    try:
+        parsed = json.loads(raw)
     except json.JSONDecodeError as error:
         raise SystemExit(f"DFT API returned invalid JSON: {error}") from error
-
-
-def normalize_tokens(value: int) -> int:
-    rounded = round(value / 100) * 100
-    return max(100, min(1000, rounded))
+    if is_error(parsed):
+        raise SystemExit(format_api_error(parsed))
+    return parsed, []
 
 
 def read_text(value: str | None, path: str | None) -> str:
@@ -59,52 +56,74 @@ def read_text(value: str | None, path: str | None) -> str:
         return handle.read()
 
 
-def collect_warnings(data: list) -> list[str]:
-    warnings = []
-    for item in data[1:5]:
-        if isinstance(item, dict):
-            if item.get("visible") is False:
-                continue
-            value = str(item.get("value") or "")
-            if value and "color:#b91c1c" in value:
-                text = (
-                    value.replace("<span style='color:#b91c1c'>", "")
-                    .replace("</span>", "")
-                    .strip()
-                )
-                if text:
-                    warnings.append(text)
-    return warnings
+def parse_ndjson(raw: str) -> tuple[dict, list[dict]]:
+    progress = []
+    complete = None
+    for line in raw.splitlines():
+        if not line.strip():
+            continue
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError as error:
+            raise SystemExit(f"DFT API returned invalid NDJSON: {error}") from error
+        event_type = event.get("type")
+        if event_type == "progress" and isinstance(event.get("progress"), dict):
+            progress.append(event["progress"])
+        elif event_type == "complete" and isinstance(event.get("data"), dict):
+            complete = event["data"]
+        elif event_type == "error":
+            raise SystemExit(format_api_error(event))
+    if complete is None:
+        raise SystemExit("DFT API response ended without a complete event.")
+    return complete, progress
+
+
+def is_error(value: object) -> bool:
+    return isinstance(value, dict) and (
+        "error" in value or isinstance(value.get("detail"), str)
+    )
+
+
+def format_api_error(value: object) -> str:
+    if not isinstance(value, dict):
+        return "DFT API returned an unknown error."
+    error = value.get("error") or "unknown"
+    detail = value.get("detail")
+    if isinstance(detail, str) and detail:
+        return f"DFT API error {error}: {detail}"
+    return f"DFT API error {error}"
 
 
 def print_json(value: dict) -> None:
     print(json.dumps(value, ensure_ascii=False, indent=2))
 
 
-def run_example(number: int, timeout: int, as_json: bool) -> None:
-    session_id = f"dft-{uuid.uuid4().hex[:12]}"
-    response = post_predict(
-        {
-            "data": [],
-            "event_data": None,
-            "fn_index": EXAMPLE_FN_INDEX[number],
-            "session_hash": session_id,
-        },
-        timeout,
-    )
-    data = response.get("data") or []
-    result = {
-        "prompt": data[0] if len(data) > 0 else "",
-        "outline": data[1] if len(data) > 1 else "",
-        "style": data[2] if len(data) > 2 else "",
-        "use_case": data[3] if len(data) > 3 else "",
-        "tokens": data[4] if len(data) > 4 else None,
-    }
-    if as_json:
-        print_json(result)
-        return
-    for key, value in result.items():
-        print(f"{key}: {value}")
+def build_prompt(
+    prompt: str,
+    outline: str,
+    style: str,
+    use_case: str,
+    words: int | None,
+    allow_emdash: bool,
+) -> str:
+    sections = [prompt]
+    if outline:
+        sections.append(f"Outline:\n{outline}")
+    if style:
+        sections.append(f"Style: {style}")
+    if use_case:
+        sections.append(f"Use case: {use_case}")
+    if words is not None:
+        sections.append(f"Target length: about {words} words.")
+    if not allow_emdash:
+        sections.append(
+            "Avoid em dashes. Use commas, colons, parentheses, or hyphens instead."
+        )
+    return "\n\n".join(sections)
+
+
+def count_words(text: str) -> int:
+    return len(re.findall(r"[A-Za-z0-9]+(?:'[A-Za-z0-9]+)?", text))
 
 
 def run_generate(args: argparse.Namespace) -> None:
@@ -112,37 +131,44 @@ def run_generate(args: argparse.Namespace) -> None:
     outline = read_text(args.outline, args.outline_file).strip()
     if not prompt:
         raise SystemExit("A prompt is required.")
+    if args.words is not None and args.words < 1:
+        raise SystemExit("--words must be a positive integer.")
+    rewrite_instructions = read_text(
+        args.rewrite_instructions, args.rewrite_instructions_file
+    ).strip()
+    if args.mode == "rewrite" and not rewrite_instructions:
+        rewrite_instructions = "Improve the draft while preserving its intent and facts."
 
-    tokens = normalize_tokens(args.tokens)
-    session_id = args.session_id or f"dft-{uuid.uuid4().hex[:12]}"
+    compiled_prompt = build_prompt(
+        prompt=prompt,
+        outline=outline,
+        style=args.style.strip(),
+        use_case=args.use_case.strip(),
+        words=args.words,
+        allow_emdash=args.allow_emdash,
+    )
     started = time.monotonic()
-    response = post_predict(
+    response, progress = post_generate(
         {
-            "data": [
-                prompt,
-                outline,
-                args.style,
-                args.use_case,
-                tokens,
-                args.allow_emdash,
-                True,
-                session_id,
-            ],
-            "event_data": None,
-            "fn_index": FN_INDEX[args.mode],
-            "session_hash": session_id,
+            "prompt": compiled_prompt,
+            "generationMode": GENERATION_MODE[args.mode],
+            "rewriteInstructions": rewrite_instructions,
+            "progress": True,
         },
         args.timeout,
     )
     elapsed = time.monotonic() - started
-    data = response.get("data") or []
-    output = data[0] if data else ""
+    output = str(response.get("text") or "")
+    metrics = response.get("metrics") if isinstance(response.get("metrics"), dict) else {}
     result = {
         "mode": args.mode,
-        "tokens": tokens,
+        "words_requested": args.words,
+        "words_returned": metrics.get("wordCount") or count_words(output),
         "elapsed_seconds": round(elapsed, 2),
+        "generation_id": response.get("generationId"),
         "output": output,
-        "warnings": collect_warnings(data),
+        "metrics": metrics,
+        "progress": progress,
         "raw": response if args.include_raw else None,
     }
     if args.json:
@@ -150,36 +176,31 @@ def run_generate(args: argparse.Namespace) -> None:
             result.pop("raw")
         print_json(result)
         return
-    if result["warnings"]:
-        print("\n".join(f"Warning: {warning}" for warning in result["warnings"]), file=sys.stderr)
     print(output)
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mode", choices=sorted(FN_INDEX), default="fast")
+    parser.add_argument("--mode", choices=sorted(GENERATION_MODE), default="generate")
     parser.add_argument("--prompt")
     parser.add_argument("--prompt-file")
     parser.add_argument("--outline", default="")
     parser.add_argument("--outline-file")
     parser.add_argument("--style", default="Clear, informative")
     parser.add_argument("--use-case", default="News Article")
-    parser.add_argument("--tokens", type=int, default=600)
+    parser.add_argument("--words", type=int)
+    parser.add_argument("--rewrite-instructions")
+    parser.add_argument("--rewrite-instructions-file")
     parser.add_argument("--allow-emdash", action="store_true")
-    parser.add_argument("--session-id")
-    parser.add_argument("--timeout", type=int, default=180)
+    parser.add_argument("--timeout", type=int, default=300)
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--include-raw", action="store_true")
-    parser.add_argument("--example", type=int, choices=sorted(EXAMPLE_FN_INDEX))
     return parser
 
 
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
-    if args.example is not None:
-        run_example(args.example, args.timeout, args.json)
-        return
     run_generate(args)
 
 

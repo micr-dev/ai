@@ -1,91 +1,85 @@
-# DFT Writing Demo API Contract
+# Deft Writing API Contract
 
-Source inspected: `https://dft.rosmine.ai/`, a Gradio 5.31.0 Blocks app with API prefix `/gradio_api`.
+Source inspected: `https://deftwriting.com/console`, a Next.js app that calls a first-party API route.
 
-## Components
+## Endpoint
 
-Relevant component ids:
+- Method: `POST`
+- URL: `https://deftwriting.com/api/generate`
+- Request content type: `application/json`
+- Streaming response content type: `application/x-ndjson; charset=utf-8`
 
-| Id | Purpose |
-| --- | --- |
-| 13 | Prompt textbox |
-| 15 | Outline textbox |
-| 19 | Style textbox |
-| 23 | Use case textbox |
-| 27 | Approximate output token length slider |
-| 37 | DFT output textbox |
-| 43 | Example 1 button |
-| 44 | Example 2 button |
-| 45 | Example 3 button |
+The retired `https://dft.rosmine.ai/gradio_api/run/predict` endpoint redirects to `https://deftwriting.com` and must not be used as the canonical path.
 
-## Function Indexes
+## Request
 
-The app sets `api_name: false` and exposes empty `/gradio_api/info` endpoint maps. Use `fn_index` through `/gradio_api/run/predict`.
-
-| fn_index | UI action | Inputs | Primary output |
-| --- | --- | --- | --- |
-| 6 | Generate good | prompt, outline, style, use_case, target_tokens, allow_emdash, warning_seen, session_id | data[0] |
-| 7 | Generate fast | prompt, outline, style, use_case, target_tokens, allow_emdash, warning_seen, session_id | data[0] |
-| 14 | Example 1 | none | prompt, outline, style, use_case, target_tokens |
-| 15 | Example 2 | none | prompt, outline, style, use_case, target_tokens |
-| 16 | Example 3 | none | prompt, outline, style, use_case, target_tokens |
-
-Generation request body:
+New draft:
 
 ```json
 {
-  "data": [
-    "Prompt text",
-    "Outline text",
-    "Clear, informative",
-    "Short blog post",
-    300,
-    false,
-    true,
-    "session-id"
-  ],
-  "event_data": null,
-  "fn_index": 7,
-  "session_hash": "session-id"
+  "prompt": "Write a concise article about clear technical writing.",
+  "generationMode": "simple",
+  "rewriteInstructions": "",
+  "progress": true
 }
 ```
 
-Example request body:
+Rewrite:
 
 ```json
 {
-  "data": [],
-  "event_data": null,
-  "fn_index": 14,
-  "session_hash": "session-id"
+  "prompt": "Existing draft text...",
+  "generationMode": "rewrite",
+  "rewriteInstructions": "Make this clearer while preserving every factual claim.",
+  "progress": true
 }
 ```
 
-## Observed Examples
+## Response Events
 
-Example 1:
+The API streams newline-delimited JSON. Known event shapes:
 
-- Prompt: `How has digital publishing transformed the accessibility and dissemination of scientific knowledge, and what does the future of scholarly communication look like in an era of open access and automated information sharing?`
-- Style: `Inquisitive, Analytical, Conversational`
-- Use case: `Academic Article`
-- Tokens: `700`
+```json
+{
+  "type": "progress",
+  "progress": {
+    "phase": "dft",
+    "label": "Writing",
+    "percent": 50,
+    "completedUnits": 2,
+    "totalUnits": 4,
+    "dftCompletedChunks": 1,
+    "dftTotalChunks": 2
+  }
+}
+```
 
-Example 2:
+```json
+{
+  "type": "complete",
+  "data": {
+    "text": "Generated prose...",
+    "metrics": {
+      "humanScore": null,
+      "lexicalDiversity": 0.8,
+      "wordCount": 72,
+      "avgSentenceLength": 14.4,
+      "readingLevel": 13
+    },
+    "generationId": "3a328dc4-1eaa-4ac9-b08b-2e214fcc1466"
+  }
+}
+```
 
-- Prompt: `Explore the global water crisis as both an ecological and social justice issue, examining how the commercialization of water threatens human rights and environmental sustainability.`
-- Style: `Advocacy, Urgent, Ethical`
-- Use case: `Advocacy Document`
-- Tokens: `900`
+Error responses may be JSON objects with `error` and optional `detail`.
 
-Example 3:
+## Length Behavior
 
-- Prompt: `Reflect on the historical significance and cultural legacy of Teotihuacan by exploring its 100 years of archaeological research, recent discoveries, and the efforts to preserve and celebrate this World Heritage Site.`
-- Style: `Informative, academic, chronological`
-- Use case: `None`
-- Tokens: `600`
+The current API does not expose a numeric token or word-count field. Length is controlled by prompt steering, for example `Target length: about 1600 words.`
 
-## Caveats
+Observed probes:
 
-- `/gradio_api/call/14` returned `FnIndexInferError: Could not infer function index for API name: 14`; `run/predict` succeeded.
-- The UI warns that the model is hosted on slower GPUs and can take about a minute.
-- The UI's copy button may alter copied text, but direct API responses are raw JSON and are not copied through that UI hook.
+- Prompt asking for exactly 80 words returned 72 words in 2 DFT chunks.
+- Prompt asking for a 1600-word article returned 1879 words in 12 DFT chunks after 161.21 seconds.
+
+Treat requested word counts as approximate. Long drafts can take several minutes.
