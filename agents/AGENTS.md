@@ -236,6 +236,21 @@ path.
 
 ---
 
+## Motion
+
+Use motion only when it clarifies a change, never for decoration.
+Most interactions should feel instant: a duration of `0ms` is
+often the snappiest and best choice, and the call is context-
+dependent. When motion genuinely helps, such as revealing or
+moving an element, keep it short and physical with the easing
+`cubic-bezier(0.175, 0.885, 0.32, 1.1)`: roughly 150ms for state
+changes, 200ms for popovers and tooltips, and 300ms for overlays
+and modals. Avoid long, looping, or attention-grabbing animation,
+and honor `prefers-reduced-motion` by dropping nonessential
+motion.
+
+---
+
 ## Output Standards
 
 ### Code Quality
