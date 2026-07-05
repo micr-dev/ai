@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const skillGithubLink = document.getElementById('skill-github-link');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const skillContentPaths = {    'reverse-engineering': 'skills/reverse-skill/reverse-engineering/SKILL.md',
+    'crabbox': 'skills/crabbox/SKILL.md',
     'grill-with-docs': 'skills/grill-with-docs/SKILL.md',
     'grill-me': 'skills/grill-me/SKILL.md',
     'compact-handoff': 'skills/compact-handoff/SKILL.md',
