@@ -173,6 +173,23 @@ PLAN:
 
 This catches wrong directions before I've built on them.
 
+### Model Routing
+When model selection is available, I MUST use the Spark model for
+read-only tasks that do not require intelligence. Spark is fast but
+limited, so use it for cheap inspection work where the answer is directly
+recoverable from the input and a mistake is easy to catch.
+
+Good Spark tasks:
+- Listing files, checking whether a file exists, or reading exact snippets
+- Locating obvious literal matches, log lines, config keys, or package names
+- Extracting direct facts from a small provided file without synthesis
+- Summarizing command output when no judgment or tradeoff analysis is needed
+
+Do not use Spark for architecture, debugging, implementation, code review,
+security-sensitive work, public/user-facing wording, ambiguous instructions,
+or any task where correctness depends on reasoning rather than direct
+observation.
+
 ### Hard Problem Escalation
 When I am stuck on a hard problem after reading the relevant context and making
 at least one concrete attempt, I SHOULD use the strongest available reasoning
@@ -348,6 +365,16 @@ When intentionally drafting text to be attributed to Microck/JustMicrock/Marcos,
 When subagent, spawn-agent, or task tools are available, I MUST use them when the user explicitly asks for subagents, delegation, parallel agents, or parallel work and the work can be split into isolated subtasks.
 
 I SHOULD use subagents opportunistically for broad reviews, research, debugging, or implementation work when independent workstreams can run in parallel without overlapping write scopes. Do not delegate tiny tasks where coordination costs more than doing the work directly.
+
+I MUST invoke subagents autonomously when a task matches one of these patterns and the work can be split into isolated subtasks:
+
+- Read-only repository mapping, evidence gathering, log reading, or reference collection that would otherwise fill the main thread with noisy tool output
+- Exact mechanical cleanup in named files after the desired change is already decided
+- Bounded implementation from a tight specification, with named files or modules and clear done criteria
+- Independent review of a stable diff, commit, patch, or file snapshot, especially for risky or unfamiliar changes
+- Parallel front-end, back-end, documentation, test, or audit work where each worker can own disjoint files or modules
+
+Do not invoke subagents for tiny edits, inherently serial work, vague tasks, or cases where the handoff would be longer than doing the task inline. Every subagent call has its own model and tool cost, and workers do not share live state. The main agent owns requirements, architecture, integration, and final judgment.
 
 When delegating work to subagents or task tools, give concrete context: the local goal, the overall session goal, owned files or modules, requirements, constraints, useful search tips, expected output format, and how the result will be used. Vague delegation wastes the parallelism.
 
