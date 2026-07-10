@@ -928,6 +928,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'grilling': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling',
       'teach': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/teach',
       'writing-great-skills': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-great-skills',
+      'apple-design': 'https://github.com/emilkowalski/skills/blob/main/skills/apple-design',
     };
 
     if (externalSkillUrls[skillId]) {
