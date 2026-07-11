@@ -386,7 +386,7 @@ I MUST prefer local CLIs, small helper scripts, and HTTP-native tools before MCP
 **Common mappings:**
 - Raw or structured web fetches: `rtk curl` only after confirming the installed `rtk` supports the needed `curl` flags; otherwise use raw `curl`
 - Kagi-backed web research: I MUST use the local `kagi-mcp` MCP server before any direct Kagi CLI usage. Default tools: `kagi_search`, `kagi_assistant`, `kagi_summarize`, `kagi_extract`, `kagi_quick`, `kagi_news`, `kagi_auth_status`, and `kagi_auth_check`
-- Human-readable web-page extraction: I MUST prefer the `kagi_extract` MCP tool before Defuddle or raw `curl` when the goal is readable main-content extraction rather than exact raw bytes and either `KAGI_API_TOKEN` or `KAGI_SESSION_TOKEN` is configured. With session-only auth, kagi-cli mints a Kagi API token through the authenticated API portal and then calls the real Extract API. Use Defuddle for supported YouTube transcript extraction, when Kagi Extract is unavailable, or when Kagi Extract cannot handle the source.
+- Human-readable web-page extraction: I MUST prefer the `kagi_extract` MCP tool before Defuddle or raw `curl` when the goal is readable main-content extraction rather than exact raw bytes and either `KAGI_API_TOKEN` or `KAGI_SESSION_TOKEN` is configured. With session-only auth, kagi-cli mints a Kagi API token through the authenticated API portal and then calls the real Extract API. Use Defuddle when Kagi Extract is unavailable or cannot handle the web page. For YouTube transcripts, use the installed `youtube-transcript` skill instead of Defuddle.
 - Local document parsing for PDFs, Office docs, and images for agent consumption: `lit parse <path>` MUST be the default when the source is a local file rather than a web page
 
 ---
@@ -510,15 +510,23 @@ curl -L -s <raw-github-url>
 This is more reliable than browser automation for fetching raw file content, and it avoids unsupported `rtk curl` flags on machines where RTK is a release-only CLI.
 
 ### Web Content Extraction
-When the user wants readable text/markdown from a web page or a supported YouTube transcript:
+When the user wants readable text or markdown from a web page:
 
-1. **Prefer `kagi_extract` through `kagi-mcp` first** when the goal is to extract readable markdown from a web page and `KAGI_API_TOKEN` or `KAGI_SESSION_TOKEN` is available.
-2. **Prefer the `defuddle` CLI second** when Kagi Extract is unavailable, unsuitable for the source, or when the goal is supported YouTube transcript extraction.
+1. **Prefer `kagi_extract` through `kagi-mcp` first** when `KAGI_API_TOKEN` or `KAGI_SESSION_TOKEN` is available.
+2. **Prefer the `defuddle` CLI second** when Kagi Extract is unavailable or unsuitable for the page.
    - Default command: `defuddle parse "<url>" -m -j`
    - Use `--property <name>` when you only need a specific field, and `-o <file>` when you want file output
-3. **Prefer raw `curl` next** for raw files, JSON APIs, predictable text endpoints, and any source where the exact bytes matter, unless `rtk help curl` confirms a compatible curl wrapper is available
+3. **Prefer raw `curl` next** for raw files, JSON APIs, predictable text endpoints, and any source where the exact bytes matter, unless `rtk help curl` confirms a compatible curl wrapper is available.
 4. Only fall back to browser automation when the page requires client-side rendering (heavy SPA). If the page must be rendered first, save the HTML and run Defuddle against that HTML.
-5. For raw GitHub files, use `curl -L -s` directly unless a compatible `rtk curl` wrapper is confirmed
+5. For raw GitHub files, use `curl -L -s` directly unless a compatible `rtk curl` wrapper is confirmed.
+
+When the user wants a YouTube transcript:
+
+1. **Use the installed `youtube-transcript` skill.** Do not use Defuddle for YouTube; live testing from this machine returned HTTP 429.
+2. Prefer creator-provided captions through local `yt-dlp`, then automatic captions. Select the requested language explicitly when it is known.
+3. If the video has no usable captions, download its audio and transcribe it with local Whisper. The user has pre-authorized this fallback; do not ask again.
+4. Use paid DeepAPI only when local YouTube access is blocked, `DEEPAPI_API_KEY` is already configured, and the user prefers the hosted fallback.
+5. Stop after a YouTube bot-detection or HTTP 429 response instead of retrying in a loop.
 
 ---
 
