@@ -929,6 +929,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'teach': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/teach',
       'writing-great-skills': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-great-skills',
       'apple-design': 'https://github.com/emilkowalski/skills/blob/main/skills/apple-design',
+      'optimo': 'https://github.com/microlinkhq/skills/tree/master/optimo',
+      'transitions-dev': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-dev',
     };
 
     if (externalSkillUrls[skillId]) {
