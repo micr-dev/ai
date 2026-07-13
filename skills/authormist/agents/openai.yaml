@@ -1,4 +1,0 @@
-interface:
-  display_name: "AuthorMist"
-  short_description: "Connect to Yoga and run AuthorMist safely"
-  default_prompt: "Use $authormist to connect to Yoga and rewrite text with AuthorMist."

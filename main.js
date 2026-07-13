@@ -36,8 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const skillRenderedView = document.getElementById('skill-rendered-view');
   const skillGithubLink = document.getElementById('skill-github-link');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const skillContentPaths = {    'authormist': 'skills/authormist/SKILL.md',
-    'crabbox': 'skills/crabbox/SKILL.md',
+  const skillContentPaths = {    'crabbox': 'skills/crabbox/SKILL.md',
     'grill-with-docs': 'skills/grill-with-docs/SKILL.md',
     'grill-me': 'skills/grill-me/SKILL.md',
     'compact-handoff': 'skills/compact-handoff/SKILL.md',
@@ -64,9 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'teach': 'skills/teach/SKILL.md',
     'transitions-dev': 'skills/transitions-dev/SKILL.md',
     'writing-great-skills': 'skills/writing-great-skills/SKILL.md',
-    'improve-animations': 'skills/improve-animations/SKILL.md',
-    'resolving-merge-conflicts': 'skills/resolving-merge-conflicts/SKILL.md',
-    'wayfinder': 'skills/wayfinder/SKILL.md',
 
   };
   const skillContentCache = new Map();
@@ -938,6 +934,9 @@ document.addEventListener('DOMContentLoaded', () => {
       'better-colors': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-colors',
       'better-typography': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-typography',
       'better-ui': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-ui',
+      'improve-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/improve-animations',
+      'resolving-merge-conflicts': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/resolving-merge-conflicts',
+      'wayfinder': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder',
     };
 
     if (externalSkillUrls[skillId]) {
