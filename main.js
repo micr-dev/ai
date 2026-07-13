@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const skillRenderedView = document.getElementById('skill-rendered-view');
   const skillGithubLink = document.getElementById('skill-github-link');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const skillContentPaths = {    'reverse-engineering': 'skills/reverse-skill/reverse-engineering/SKILL.md',
+  const skillContentPaths = {    'authormist': 'skills/authormist/SKILL.md',
     'crabbox': 'skills/crabbox/SKILL.md',
     'grill-with-docs': 'skills/grill-with-docs/SKILL.md',
     'grill-me': 'skills/grill-me/SKILL.md',
@@ -64,6 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'teach': 'skills/teach/SKILL.md',
     'transitions-dev': 'skills/transitions-dev/SKILL.md',
     'writing-great-skills': 'skills/writing-great-skills/SKILL.md',
+    'improve-animations': 'skills/improve-animations/SKILL.md',
+    'resolving-merge-conflicts': 'skills/resolving-merge-conflicts/SKILL.md',
+    'wayfinder': 'skills/wayfinder/SKILL.md',
 
   };
   const skillContentCache = new Map();
@@ -930,6 +933,11 @@ document.addEventListener('DOMContentLoaded', () => {
       'writing-great-skills': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-great-skills',
       'apple-design': 'https://github.com/emilkowalski/skills/blob/main/skills/apple-design',
       'transitions-dev': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-dev',
+      'cli-review': 'https://github.com/greptileai/skills/blob/main/skills/cli-review',
+      'greploop': 'https://github.com/greptileai/skills/blob/main/skills/greploop',
+      'better-colors': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-colors',
+      'better-typography': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-typography',
+      'better-ui': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-ui',
     };
 
     if (externalSkillUrls[skillId]) {

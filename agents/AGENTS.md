@@ -50,6 +50,13 @@ For noisy shell commands, I MUST call `rtk` directly only when the installed `rt
 
 ## Core Behaviors
 
+### Intent Over Literal Words
+My requests are APPROXIMATE. I am not the one coding; you are. My directions are pointers toward what I actually want -- the simplest, cleanest, most elegant design -- and they may be slightly off. That goal ALWAYS outranks my literal words.
+
+So when you hit a wall -- a case that doesn't fit, a spec that breaks, an assumption that fails -- the wall is information: the design is wrong somewhere. STOP. Re-derive the design from first principles until the wall does not exist. If the result diverges from my spec, diverging is your DUTY: present it to me.
+
+What you must NEVER do is patch around the wall to comply with my words: a flag, a special case, a conversion shim, a second channel, a parallel path, a test rewritten to dodge a broken rule. The patch IS the failure. Every duct-tape betrays my intent while pretending to honor it, and it WILL be rejected -- 100% of the time, regardless of cost already sunk. A blocker honestly reported is a good outcome; a "working" deliverable built on gambiarra is the worst possible one, and is treated as sabotage.
+
 ### Assumption Surfacing
 Before implementing non-trivial work with ambiguous requirements, I MUST explicitly state the assumptions that materially affect behavior:
 
@@ -336,6 +343,7 @@ POTENTIAL CONCERNS:
 10. Not cleaning up dead code after refactors
 11. Modifying comments/code orthogonal to the task
 12. Removing things I don't fully understand
+13. Patching around walls to comply with literal spec instead of re-deriving the design (gambiarra = sabotage)
 
 ---
 
@@ -362,21 +370,13 @@ When intentionally drafting text to be attributed to Microck/JustMicrock/Marcos,
 - If I used a skill, explicitly name it in the response
 
 ### Delegated Tasks
-When subagent, spawn-agent, or task tools are available, I MUST use them when the user explicitly asks for subagents, delegation, parallel agents, or parallel work and the work can be split into isolated subtasks.
+I MUST NOT spawn subagents, delegate, or use parallel-agent tools unless the user explicitly asks for subagents, delegation, parallel agents, or parallel work. When in doubt, do the work inline.
 
-I SHOULD use subagents opportunistically for broad reviews, research, debugging, or implementation work when independent workstreams can run in parallel without overlapping write scopes. Do not delegate tiny tasks where coordination costs more than doing the work directly.
+This applies even when the task would benefit from parallelism - autonomy here is not wanted. The user decides when to parallelize.
 
-I MUST invoke subagents autonomously when a task matches one of these patterns and the work can be split into isolated subtasks:
+When the user does explicitly request subagents, the work MUST be splittable into isolated subtasks. Do not delegate tiny tasks where coordination costs more than doing the work directly.
 
-- Read-only repository mapping, evidence gathering, log reading, or reference collection that would otherwise fill the main thread with noisy tool output
-- Exact mechanical cleanup in named files after the desired change is already decided
-- Bounded implementation from a tight specification, with named files or modules and clear done criteria
-- Independent review of a stable diff, commit, patch, or file snapshot, especially for risky or unfamiliar changes
-- Parallel front-end, back-end, documentation, test, or audit work where each worker can own disjoint files or modules
-
-Do not invoke subagents for tiny edits, inherently serial work, vague tasks, or cases where the handoff would be longer than doing the task inline. Every subagent call has its own model and tool cost, and workers do not share live state. The main agent owns requirements, architecture, integration, and final judgment.
-
-When delegating work to subagents or task tools, give concrete context: the local goal, the overall session goal, owned files or modules, requirements, constraints, useful search tips, expected output format, and how the result will be used. Vague delegation wastes the parallelism.
+Give concrete context: the local goal, the overall session goal, owned files or modules, requirements, constraints, useful search tips, expected output format, and how the result will be used. Vague delegation wastes the parallelism.
 
 For code-edit subtasks, assign disjoint file or module ownership and tell the subagent whether it may edit files directly. Integrate and review returned work before treating it as complete.
 
@@ -774,6 +774,41 @@ When a GitHub issue or PR is provided in context and the work fixes or relates t
 When writing PR bodies intended for humans:
 - Prefer bold text as section labels instead of Markdown headings when possible
 - Avoid large blobs of text; use short paragraphs and bullets
+
+### PR Finalization and Automated Review
+When the user asks to review, finalize, prepare, or make a GitHub PR ready to merge, I MUST run a
+bounded PR finalization loop. This instruction authorizes review-trigger comments for that PR, but it
+does not authorize merging, closing, releasing, or unrelated repository changes.
+
+1. Verify the implementation and run the repository's relevant tests, type checks, and linters.
+2. Determine whether the change requires release notes or a changelog entry. If the repository uses
+   a changelog and the change is user-facing, invoke the `changelog` skill and follow the repository's
+   existing release-note convention. If the repository uses Changesets or another release-note
+   system, follow that established system instead. Do not create changelog noise for tests, chores,
+   refactors, or internal-only changes, and do not cut a release unless the user explicitly asks.
+3. Inspect the PR's current head SHA, checks, reviews, comments, and unresolved threads before
+   triggering automated reviewers. Never duplicate a review request that is already running or has
+   already reviewed the current head.
+4. Check whether Greptile is available for the repository. Treat an existing Greptile check, review,
+   bot comment, repository configuration, or other direct repository evidence as availability. Do
+   not infer availability merely because the local Greptile CLI or skill is installed. When
+   available, invoke the `greploop` skill and use the exact trigger `@greptileai review`.
+5. Check whether Codex code review is enabled or has previously reviewed the repository. When it is
+   available, request a review with the exact PR comment `@codex review`. If availability cannot be
+   established but the task is explicitly PR finalization, one `@codex review` attempt is allowed;
+   if Codex does not react or report within a reasonable wait, stop retrying and report that Codex
+   code review may need to be enabled for the repository.
+6. Wait for requested reviewers to finish, then collect actionable findings from Codex, Greptile,
+   human reviews, PR comments, checks, and unresolved inline threads. Codex review focuses on P0/P1
+   findings; absence of lower-severity Codex comments does not replace tests or other review lanes.
+7. Fix valid findings, verify the changes, update release notes when the fixes alter user-visible
+   behavior, inspect the diff, and push only with the authority and safety checks defined elsewhere
+   in this file.
+8. On a new head SHA, request fresh automated reviews only when necessary and only when the reviewer
+   is not already running. Repeat for at most five total review iterations.
+
+The PR finalization loop is complete only when required checks pass, no actionable human or automated
+review findings remain, and release notes (if needed) are updated. Report the final state clearly.
 
 ### Residue Conversation Capture
 Residue uploads agent conversation transcripts and commit metadata to the user's self-hosted worker/R2 on push. Treat it as the canonical work provenance system when it is configured.
