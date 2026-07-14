@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'animated-favicons': 'skills/animated-favicons/SKILL.md',
     'grill-with-facts': 'skills/grill-with-facts/SKILL.md',
     'make-interfaces-feel-better': 'skills/make-interfaces-feel-better/SKILL.md',
-    'oklch-skill': 'skills/oklch-skill/SKILL.md',
     'oracle': 'skills/oracle/SKILL.md',
     'quality-code': 'skills/quality-code/SKILL.md',
     'review-animations': 'skills/review-animations/SKILL.md',
@@ -63,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'teach': 'skills/teach/SKILL.md',
     'transitions-dev': 'skills/transitions-dev/SKILL.md',
     'writing-great-skills': 'skills/writing-great-skills/SKILL.md',
+    'dft-writing': 'skills/dft-writing/SKILL.md',
+    'effect-program-design': 'skills/effect-program-design/SKILL.md',
+    'improve-codebase-architecture': 'skills/improve-codebase-architecture/SKILL.md',
 
   };
   const skillContentCache = new Map();
@@ -908,7 +910,6 @@ document.addEventListener('DOMContentLoaded', () => {
       'thermo-nuclear-code-quality-review': 'https://github.com/cursor/plugins/blob/main/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md',
       'create-cli': 'https://github.com/steipete/create-cli',
       'make-interfaces-feel-better': 'https://github.com/jakubkrehel/make-interfaces-feel-better',
-      'oklch-skill': 'https://github.com/jakubkrehel/oklch-skill',
       'emil-design-eng': 'https://github.com/BiniamD/emil-design-eng',
       'changelog': 'https://github.com/pavelsimo/changelog',
       'bugbash': 'https://github.com/av/skills/tree/master/bugbash',

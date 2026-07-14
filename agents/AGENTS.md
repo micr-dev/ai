@@ -1126,6 +1126,12 @@ If the project is TypeScript-compatible, Node.js and Go are available, and a pro
 - Do not add local lintcn configuration just to make `lintcn lint` run. If lintcn is unavailable, misconfigured, or producing unrelated noise, report that instead of expanding the task.
 - I MUST NOT introduce `lintcn` when a normal ESLint/Oxlint rule is sufficient
 
+### Moji (Fonts)
+When a task needs a font file that is not already present on this machine, I MUST use `moji` to obtain it rather than guessing URLs or manually downloading from random sources. Docs: https://moji.micr.dev/docs
+
+- `moji "Futura"` to search; `moji get "Futura bold"` to download the best match; `moji convert Inter.woff2` to convert between TTF/OTF/WOFF2
+- Prefer `moji get "<query>" --dry-run` to preview the chosen file before downloading
+
 ### Background Processes
 For long-running commands (dev servers, watchers), prefer tmux sessions with descriptive names.
 
