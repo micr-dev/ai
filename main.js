@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'writing-great-skills': 'skills/writing-great-skills/SKILL.md',
     'dft-writing': 'skills/dft-writing/SKILL.md',
     'effect-program-design': 'skills/effect-program-design/SKILL.md',
-    'improve-codebase-architecture': 'skills/improve-codebase-architecture/SKILL.md',
 
   };
   const skillContentCache = new Map();
@@ -933,6 +932,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'cli-review': 'https://github.com/greptileai/skills/blob/main/skills/cli-review',
       'greploop': 'https://github.com/greptileai/skills/blob/main/skills/greploop',
       'better-colors': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-colors',
+      'improve-codebase-architecture': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture',
       'better-typography': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-typography',
       'better-ui': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-ui',
       'improve-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/improve-animations',

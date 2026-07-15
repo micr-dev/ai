@@ -810,17 +810,6 @@ does not authorize merging, closing, releasing, or unrelated repository changes.
 The PR finalization loop is complete only when required checks pass, no actionable human or automated
 review findings remain, and release notes (if needed) are updated. Report the final state clearly.
 
-### Residue Conversation Capture
-Residue uploads agent conversation transcripts and commit metadata to the user's self-hosted worker/R2 on push. Treat it as the canonical work provenance system when it is configured.
-
-- NEVER bypass Residue hooks. Do not use `git push --no-verify`, disable hooks, unset hook paths, or otherwise avoid Residue capture unless the user explicitly asks to disable Residue itself for that repository.
-- Before pushing from any repo that may have Residue hooks, run `residue status` from inside the git worktree. `residue status` requires a git repository and writes diagnostic info to stdout; if it produces no output, the repo has no Residue hooks installed.
-- If Residue hooks are installed, push normally so the pre-push hook runs. After pushing, verify with `residue status` and, when useful, `residue query commits`.
-- If a normal push succeeds but Residue still reports pending sessions, run `residue push` and verify again. Do not leave captured sessions pending without calling it out.
-- When in doubt about past work, prior commits, provenance, or which agent session produced a change, use Residue before guessing. Start with `residue query commits`, then inspect the relevant session or commit metadata using available Residue commands.
-- For new repositories where Residue should be used, run `residue init`, ensure the relevant adapter is configured (`residue setup codex` for Codex; other agents as needed), commit normally, push normally, then verify with `residue status` or `residue query commits`. Do not redirect stderr to /dev/null when running `residue status` -- its errors are informative.
-- Do not paste Residue admin passwords, auth tokens, or raw transcript contents into chat, commit messages, issues, or PR bodies. If referencing Residue, mention only the session ID or app URL when the audience is authorized to view it.
-
 ### Pending Review Hygiene
 Never submit pending reviews with placeholder messages like "Reviewing suggestions". If a pending review blocks comment replies, dismiss it instead of submitting a generic text comment.
 
