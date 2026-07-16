@@ -387,6 +387,7 @@ body.is-dialog-open {
 }
 
 #hooks .section-heading,
+#cli-tools .section-heading,
 #code-review .section-heading,
 #image-gen .section-heading,
 #workspace .section-heading {
