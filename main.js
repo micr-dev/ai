@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const agentsDialog = document.getElementById('agents-dialog');
   const agentsDialogPanel = agentsDialog?.querySelector('.morph-dialog-panel');
   const agentsDialogBackdrop = agentsDialog?.querySelector('[data-close-agents-dialog]');
-  const agentsMorphSource = document.querySelector('#agents-md .editor-pane');
   const skillDialog = document.getElementById('skill-dialog');
+  const skillDialogPanel = skillDialog?.querySelector('.skill-dialog-panel');
   const skillDialogBackdrop = skillDialog?.querySelector('[data-close-skill-dialog]');
   const closeSkillDialogBtn = document.getElementById('close-skill-dialog-btn');
   const skillDialogLabel = document.getElementById('skill-dialog-label');
@@ -64,6 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'writing-great-skills': 'skills/writing-great-skills/SKILL.md',
     'dft-writing': 'skills/dft-writing/SKILL.md',
     'effect-program-design': 'skills/effect-program-design/SKILL.md',
+    'animation-vocabulary': 'skills/animation-vocabulary/SKILL.md',
+    'timeboxed-iterating': 'skills/timeboxed-iterating/SKILL.md',
 
   };
   const skillContentCache = new Map();
@@ -79,8 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let isSkillDialogOpen = false;
   let lastSkillTrigger = null;
   let activeTooltipTarget = null;
+  const suppressedTooltipFocusTargets = new WeakSet();
   const snapshotStatus = document.getElementById('snapshot-status');
   const snapshotStatusLabel = document.getElementById('snapshot-status-label');
+  const snapshotCurrentLink = document.getElementById('snapshot-current-link');
+  const stackScrollRegion = document.querySelector('.stack-scroll-region');
 
   const monthNames = [
     'january',
@@ -98,6 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const stackItemSelector = '.stack-entry, .skill-item, .agents-box-container';
+  const snapshotCategorySections = {
+    model: 'models',
+    harness: 'harnesses',
+    hook: 'hooks',
+    mcp: 'mcps',
+    cli: 'cli-tools',
+    skill: 'skills',
+    workspace: 'workspace',
+  };
+  let snapshotRecords = null;
 
   function parseDisplayDate(displayDate) {
     const [day, month, year] = displayDate.split('/').map(part => Number(part));
@@ -136,32 +151,217 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${year}`;
   }
 
-  function getIntroducedDates() {
-    const introducedDates = new Map();
+  function getSnapshotCategory(title) {
+    if (/\bModels?\b/i.test(title)) return 'model';
+    if (/\bHarness(?:es)?\b/i.test(title)) return 'harness';
+    if (/\bHooks?\b/i.test(title)) return 'hook';
+    if (/\bMCPs?\b/i.test(title)) return 'mcp';
+    if (/\bCLI\b/i.test(title)) return 'cli';
+    if (/\bSkills?\b/i.test(title)) return 'skill';
+    if (/\bWorkspace\b/i.test(title)) return 'workspace';
+    return null;
+  }
+
+  function normalizeSnapshotName(value) {
+    return value
+      .toLowerCase()
+      .replace(/\b(model|harness|hook|mcp|cli|skill|workspace)s?\b/g, '')
+      .replace(/[^a-z0-9]+/g, '');
+  }
+
+  function getSnapshotEntryName(element) {
+    return element.querySelector('.entry-name, .skill-name')?.textContent?.trim()
+      || (element.id === 'agents-md' ? 'AGENTS.md' : element.id);
+  }
+
+  function getSnapshotEvents() {
+    const events = [];
 
     document.querySelectorAll('.change-group').forEach(group => {
-      const groupDate = group.getAttribute('data-group');
-      if (!groupDate) return;
+      const date = group.getAttribute('data-group');
+      if (!date) return;
 
       group.querySelectorAll('.change-entry').forEach(entry => {
         const title = entry.querySelector('.change-title')?.textContent?.trim() || '';
-        if (!title.startsWith('Added ')) return;
-
         const targets = (entry.getAttribute('data-targets') || '')
           .split(',')
           .map(target => target.trim())
           .filter(Boolean);
 
         targets.forEach(target => {
-          const currentDate = introducedDates.get(target);
-          if (!currentDate || getDateValue(groupDate) < getDateValue(currentDate)) {
-            introducedDates.set(target, groupDate);
-          }
+          events.push({
+            action: title.split(' ')[0],
+            category: getSnapshotCategory(title),
+            date,
+            dateValue: getDateValue(date),
+            target,
+            title,
+          });
         });
       });
     });
 
-    return introducedDates;
+    return events.sort((a, b) => a.dateValue - b.dateValue);
+  }
+
+  function getHistoricalEntryName(event) {
+    const actionPattern = /^(Added|Removed|Modified|Updated)\s+/;
+    const categoryPattern = /\s+(Model|Harness|Hook|MCP|CLI|Skill|Workspace)s?(?:\s+.*)?$/i;
+    const fromTitle = event.title.replace(actionPattern, '').replace(categoryPattern, '').trim();
+
+    if (fromTitle && !fromTitle.includes(',')) return fromTitle;
+
+    return event.target
+      .replace(/-(model|harness|hook|mcp|cli|skill|workspace)$/i, '')
+      .split('-')
+      .map(part => part.toUpperCase() === 'mcp' || part.toUpperCase() === 'cli'
+        ? part.toUpperCase()
+        : `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
+      .join(' ');
+  }
+
+  function getSnapshotContainer(category, name) {
+    const sectionId = snapshotCategorySections[category];
+    const section = sectionId ? document.getElementById(sectionId) : null;
+    if (!section) return null;
+
+    if (category === 'model' || category === 'harness') {
+      const roleColumns = section.querySelectorAll('.role-column');
+      const isPrimaryModel = category === 'model' && /GPT 5\.5/i.test(name);
+      return roleColumns[isPrimaryModel ? 0 : Math.min(1, roleColumns.length - 1)] || null;
+    }
+
+    return section.querySelector('.skills-inline-list, .two-column-list, .simple-list');
+  }
+
+  function createHistoricalSnapshotRecord(event, recordsByTarget) {
+    if (!event.category) return null;
+    if (event.target === snapshotCategorySections[event.category]) return null;
+
+    const name = getHistoricalEntryName(event);
+    const container = getSnapshotContainer(event.category, name);
+    if (!container) return null;
+
+    const element = document.createElement('div');
+    element.id = `snapshot-history-${event.target}`;
+    element.className = event.category === 'skill'
+      ? 'skill-item snapshot-historical-entry snapshot-hidden'
+      : 'stack-entry snapshot-historical-entry snapshot-hidden';
+    element.dataset.snapshotGenerated = 'true';
+
+    const nameClass = event.category === 'skill' ? 'skill-name' : 'entry-name';
+    element.innerHTML = `<div class="entry-header"><span class="${nameClass}">${name}</span></div>`;
+    container.append(element);
+
+    const record = {
+      category: event.category,
+      element,
+      end: null,
+      generated: true,
+      name,
+      start: null,
+      target: event.target,
+    };
+    recordsByTarget.set(event.target, record);
+    return record;
+  }
+
+  function buildSnapshotRecords() {
+    const recordsByTarget = new Map();
+    const currentRecords = [];
+
+    document.querySelectorAll(stackItemSelector).forEach(element => {
+      if (element.dataset.snapshotGenerated === 'true') return;
+
+      const section = element.closest('.stack-section');
+      const category = Object.entries(snapshotCategorySections)
+        .find(([, sectionId]) => section?.id === sectionId)?.[0] || null;
+      const record = {
+        category,
+        element,
+        end: null,
+        generated: false,
+        name: getSnapshotEntryName(element),
+        start: null,
+        target: element.id,
+      };
+      recordsByTarget.set(element.id, record);
+      currentRecords.push(record);
+    });
+
+    const findRecord = event => {
+      const exact = recordsByTarget.get(event.target);
+      if (exact) return exact;
+
+      const normalizedTarget = normalizeSnapshotName(event.target);
+      return currentRecords.find(record => (
+        record.category === event.category
+        && normalizeSnapshotName(record.name) === normalizedTarget
+      )) || null;
+    };
+
+    const events = getSnapshotEvents();
+    const eventDates = Array.from(new Set(events.map(event => event.dateValue)));
+    events.forEach(event => {
+      if (event.action !== 'Added' && event.action !== 'Removed') return;
+
+      const existingRecord = findRecord(event) || recordsByTarget.get(event.target);
+      const record = existingRecord || createHistoricalSnapshotRecord(event, recordsByTarget);
+      if (!record) return;
+
+      if (event.action === 'Added') {
+        record.start = record.start === null ? event.dateValue : Math.min(record.start, event.dateValue);
+      } else {
+        // A removal proves the item existed immediately before this change,
+        // but not that it existed for the entire timeline. When the changelog
+        // has no earlier addition, expose it only from the preceding snapshot.
+        if (!existingRecord && record.start === null) {
+          record.start = eventDates.filter(dateValue => dateValue < event.dateValue).at(-1) ?? null;
+        }
+        record.end = record.end === null ? event.dateValue : Math.min(record.end, event.dateValue);
+      }
+    });
+
+    events.forEach(event => {
+      if (event.action === 'Replaced') {
+        const replacement = findRecord(event);
+        if (replacement && replacement.start === null) replacement.start = event.dateValue;
+
+        const predecessorName = event.title.match(/^Replaced (.+?) with /)?.[1];
+        if (!predecessorName) return;
+
+        let predecessor = Array.from(recordsByTarget.values()).find(record => (
+          record.category === event.category
+          && normalizeSnapshotName(record.name) === normalizeSnapshotName(predecessorName)
+        ));
+        if (!predecessor) {
+          predecessor = createHistoricalSnapshotRecord({ ...event, target: normalizeSnapshotName(predecessorName) }, recordsByTarget);
+          if (predecessor) {
+            predecessor.name = predecessorName;
+            predecessor.element.querySelector('.entry-name').textContent = predecessorName;
+          }
+        }
+        if (predecessor) predecessor.end = event.dateValue;
+      }
+
+      const versionUpdate = event.title.match(/^Updated (.+?) to ([\d.]+)$/i);
+      if (!versionUpdate) return;
+
+      const updatedRecord = findRecord(event);
+      if (updatedRecord && updatedRecord.start === null) updatedRecord.start = event.dateValue;
+
+      const baseName = normalizeSnapshotName(versionUpdate[1]);
+      const updatedCategory = event.category || updatedRecord?.category;
+      Array.from(recordsByTarget.values()).forEach(record => {
+        if (record === updatedRecord || record.category !== updatedCategory) return;
+        const versionSuffix = normalizeSnapshotName(record.name).slice(baseName.length);
+        if (normalizeSnapshotName(record.name).startsWith(baseName) && /^\d+$/.test(versionSuffix)) {
+          record.end = record.end === null ? event.dateValue : Math.min(record.end, event.dateValue);
+        }
+      });
+    });
+
+    return Array.from(recordsByTarget.values());
   }
 
   function updateEmptySnapshotContainers() {
@@ -178,36 +378,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function applySnapshot(displayDate, { pushState = false } = {}) {
-    const introducedDates = getIntroducedDates();
-    const snapshotValue = displayDate ? getDateValue(displayDate) : null;
+  function applySnapshot(displayDate, { pushState = false, transition = false } = {}) {
+    const commitSnapshot = () => {
+      snapshotRecords ||= buildSnapshotRecords();
+      const snapshotValue = displayDate ? getDateValue(displayDate) : null;
 
-    document.querySelectorAll(stackItemSelector).forEach(item => {
-      const introducedDate = introducedDates.get(item.id);
-      const isAfterSnapshot = Boolean(snapshotValue && introducedDate && getDateValue(introducedDate) > snapshotValue);
-      item.classList.toggle('snapshot-hidden', isAfterSnapshot);
-    });
+      snapshotRecords.forEach(record => {
+        const isCurrentView = snapshotValue === null;
+        const existedAtSnapshot = (
+          (record.start === null || record.start <= snapshotValue)
+          && (record.end === null || snapshotValue < record.end)
+        );
+        const isVisible = isCurrentView ? !record.generated : existedAtSnapshot;
+        record.element.classList.toggle('snapshot-hidden', !isVisible);
+      });
 
-    updateEmptySnapshotContainers();
+      updateEmptySnapshotContainers();
 
-    document.querySelectorAll('.change-group').forEach(group => {
-      group.classList.toggle('is-active-snapshot', Boolean(displayDate && group.getAttribute('data-group') === displayDate));
-    });
+      document.querySelectorAll('.change-group').forEach(group => {
+        group.classList.toggle('is-active-snapshot', Boolean(displayDate && group.getAttribute('data-group') === displayDate));
+      });
 
-    if (snapshotStatus && snapshotStatusLabel) {
-      snapshotStatus.hidden = !displayDate;
-      if (displayDate) {
-        snapshotStatusLabel.textContent = `Snapshot as of ${getSnapshotTitle(displayDate)}`;
+      if (snapshotStatus && snapshotStatusLabel) {
+        snapshotStatus.hidden = !displayDate;
+        if (displayDate) {
+          snapshotStatusLabel.textContent = `Snapshot as of ${getSnapshotTitle(displayDate)}`;
+        }
       }
+
+      const title = displayDate ? `AI Stack - ${getSnapshotTitle(displayDate)}` : 'AI Stack';
+      document.title = title;
+
+      if (pushState) {
+        const path = displayDate ? `/${getSnapshotSlug(displayDate)}` : '/';
+        window.history.pushState({ snapshotDate: displayDate }, '', path);
+      }
+
+      if (transition && stackScrollRegion) {
+        stackScrollRegion.scrollTop = 0;
+      }
+    };
+
+    if (transition && !prefersReducedMotion && document.startViewTransition) {
+      return document.startViewTransition(commitSnapshot).finished;
     }
 
-    const title = displayDate ? `AI Stack - ${getSnapshotTitle(displayDate)}` : 'AI Stack';
-    document.title = title;
-
-    if (pushState) {
-      const path = displayDate ? `/${getSnapshotSlug(displayDate)}` : '/';
-      window.history.pushState({ snapshotDate: displayDate }, '', path);
-    }
+    commitSnapshot();
+    return Promise.resolve();
   }
 
   function setupSnapshotLinks() {
@@ -223,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
       link.setAttribute('aria-label', `View AI stack snapshot for ${getSnapshotTitle(displayDate)}`);
       link.addEventListener('click', event => {
         event.preventDefault();
-        applySnapshot(displayDate, { pushState: true });
+        applySnapshot(displayDate, { pushState: true, transition: true });
       });
 
       dateElement.textContent = '';
@@ -231,7 +448,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.addEventListener('popstate', () => {
-      applySnapshot(getSnapshotDateFromPath(), { pushState: false });
+      applySnapshot(getSnapshotDateFromPath(), { pushState: false, transition: true });
+    });
+
+    snapshotCurrentLink?.addEventListener('click', event => {
+      event.preventDefault();
+      applySnapshot(null, { pushState: true, transition: true });
     });
 
     applySnapshot(getSnapshotDateFromPath(), { pushState: false });
@@ -431,50 +653,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setAgentsView(view) {
-    if (activeAgentsView === view && rawAgentsViews.length > 0) {
-      updateAgentsViewButtons(view);
-      return;
-    }
-
-    const previousView = activeAgentsView;
     activeAgentsView = view;
     const isRendered = view === 'rendered';
 
     updateAgentsViewButtons(view);
 
-    const previousPanels = previousView === 'rendered' ? renderedAgentsViews : rawAgentsViews;
-    const nextPanels = isRendered ? renderedAgentsViews : rawAgentsViews;
-
     lineNumbersContainers.forEach(container => {
       container.hidden = isRendered;
     });
 
-    if (prefersReducedMotion || previousView === view) {
-      renderedAgentsViews.forEach(panel => {
-        panel.hidden = !isRendered;
-      });
-      rawAgentsViews.forEach(panel => {
-        panel.hidden = isRendered;
-      });
-      return;
-    }
-
-    previousPanels.forEach(panel => {
-      panel.classList.remove('is-entering');
-      panel.classList.add('view-panel', 'is-exiting');
-      window.setTimeout(() => {
-        panel.hidden = true;
-        panel.classList.remove('is-exiting');
-      }, 170);
+    renderedAgentsViews.forEach(panel => {
+      panel.hidden = !isRendered;
     });
-
-    nextPanels.forEach(panel => {
-      panel.hidden = false;
-      panel.classList.remove('is-exiting');
-      panel.classList.add('view-panel', 'is-entering');
-      window.setTimeout(() => {
-        panel.classList.remove('is-entering');
-      }, 230);
+    rawAgentsViews.forEach(panel => {
+      panel.hidden = isRendered;
     });
 
     syncAgentsLineNumbers();
@@ -573,10 +765,19 @@ document.addEventListener('DOMContentLoaded', () => {
     floatingTooltip.classList.remove('is-visible');
   }
 
+  function focusWithoutTooltip(target) {
+    if (!target) return;
+    suppressedTooltipFocusTargets.add(target);
+    target.focus({ preventScroll: true });
+  }
+
   document.querySelectorAll('.editor-actions [data-tooltip]').forEach(target => {
     target.addEventListener('pointerenter', () => showFloatingTooltip(target));
     target.addEventListener('pointerleave', () => hideFloatingTooltip(target));
-    target.addEventListener('focus', () => showFloatingTooltip(target));
+    target.addEventListener('focus', () => {
+      if (suppressedTooltipFocusTargets.delete(target)) return;
+      showFloatingTooltip(target);
+    });
     target.addEventListener('blur', () => hideFloatingTooltip(target));
   });
 
@@ -597,6 +798,7 @@ document.addEventListener('DOMContentLoaded', () => {
     button.setAttribute('aria-label', copiedLabel);
     button.setAttribute('data-tooltip', copiedLabel);
     button.classList.add('is-copied');
+    button.querySelector('.t-icon-swap')?.setAttribute('data-state', 'b');
     button.blur();
     showFloatingTooltip(button);
 
@@ -604,6 +806,7 @@ document.addEventListener('DOMContentLoaded', () => {
       button.setAttribute('aria-label', defaultLabel);
       button.setAttribute('data-tooltip', defaultLabel);
       button.classList.remove('is-copied');
+      button.querySelector('.t-icon-swap')?.setAttribute('data-state', 'a');
       copiedStateTimers.delete(button);
       hideFloatingTooltip(button);
     }, 650);
@@ -629,101 +832,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  function getDialogTargetRect() {
-    const margin = window.innerWidth <= 768 ? 12 : 32;
-    const width = Math.min(920, window.innerWidth - margin * 2);
-    const height = Math.min(720, window.innerHeight - margin * 2);
-    return {
-      left: (window.innerWidth - width) / 2,
-      top: (window.innerHeight - height) / 2,
-      width,
-      height,
-    };
+  function getModalCloseDuration() {
+    if (prefersReducedMotion) return 0;
+
+    const value = getComputedStyle(document.documentElement).getPropertyValue('--modal-close-dur');
+    return Number.parseFloat(value) || 150;
   }
 
-  function getSourceToTargetTransform(sourceRect, targetRect) {
-    return {
-      x: sourceRect.left - targetRect.left,
-      y: sourceRect.top - targetRect.top,
-      scaleX: sourceRect.width / targetRect.width,
-      scaleY: sourceRect.height / targetRect.height,
-    };
+  function openModal(dialog, panel) {
+    dialog.hidden = false;
+    dialog.setAttribute('aria-hidden', 'false');
+    dialog.classList.remove('is-closing');
+    panel.classList.remove('is-closing');
+
+    // Commit the resting closed state before transitioning to open.
+    void panel.offsetWidth;
+    dialog.classList.add('is-open');
+    panel.classList.add('is-open');
+    document.body.classList.add('is-dialog-open');
   }
 
-  function setDialogPanelRect(rect) {
-    agentsDialogPanel.style.width = `${rect.width}px`;
-    agentsDialogPanel.style.height = `${rect.height}px`;
-    agentsDialogPanel.style.left = `${rect.left}px`;
-    agentsDialogPanel.style.top = `${rect.top}px`;
-    agentsDialogPanel.style.position = 'fixed';
+  async function closeModal(dialog, panel) {
+    dialog.classList.remove('is-open');
+    panel.classList.remove('is-open');
+    dialog.classList.add('is-closing');
+    panel.classList.add('is-closing');
+
+    await new Promise(resolve => window.setTimeout(resolve, getModalCloseDuration()));
+
+    // A reopened modal has already removed is-closing; its older close timer
+    // must not hide the new presentation state.
+    if (!panel.classList.contains('is-closing')) return false;
+
+    dialog.classList.remove('is-closing');
+    panel.classList.remove('is-closing');
+    dialog.hidden = true;
+    dialog.setAttribute('aria-hidden', 'true');
+    return true;
   }
 
-  function animateDialogMorph(sourceRect, direction) {
-    if (!agentsDialogPanel || prefersReducedMotion) return Promise.resolve();
-
-    const targetRect = getDialogTargetRect();
-    setDialogPanelRect(targetRect);
-
-    if (direction === 'close') {
-      const animation = agentsDialogPanel.animate(
-        [
-          { transform: 'translate(0, 0) scale(1)', opacity: 1, filter: 'blur(0)' },
-          { transform: 'translateY(-0.5rem) scale(0.992)', opacity: 0, filter: 'blur(4px)' },
-        ],
-        {
-          duration: 180,
-          easing: 'cubic-bezier(0.4, 0, 1, 1)',
-          fill: 'both',
-        },
-      );
-
-      return animation.finished.catch(() => {});
-    }
-
-    const transform = getSourceToTargetTransform(sourceRect, targetRect);
-    const from = `translate(${transform.x}px, ${transform.y}px) scale(${transform.scaleX}, ${transform.scaleY})`;
-    const to = 'translate(0, 0) scale(1)';
-
-    const animation = agentsDialogPanel.animate(
-      [
-        { transform: from, opacity: 0.82 },
-        { transform: to, opacity: 1 },
-      ],
-      {
-        duration: 420,
-        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-        fill: 'both',
-      },
-    );
-
-    return animation.finished.catch(() => {});
-  }
-
-  async function openAgentsDialog() {
-    if (!agentsDialog || !agentsDialogPanel || !agentsMorphSource || isAgentsDialogOpen) return;
+  function openAgentsDialog() {
+    if (!agentsDialog || !agentsDialogPanel || isAgentsDialogOpen) return;
 
     isAgentsDialogOpen = true;
-    const sourceRect = agentsMorphSource.getBoundingClientRect();
-    agentsDialog.hidden = false;
-    agentsDialog.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('is-dialog-open');
-    agentsDialog.classList.add('is-open');
     setAgentsView(activeAgentsView);
-    await animateDialogMorph(sourceRect, 'open');
-    closeAgentsDialogBtn?.focus({ preventScroll: true });
+    openModal(agentsDialog, agentsDialogPanel);
+    focusWithoutTooltip(closeAgentsDialogBtn);
   }
 
   async function closeAgentsDialog() {
-    if (!agentsDialog || !agentsDialogPanel || !agentsMorphSource || !isAgentsDialogOpen) return;
+    if (!agentsDialog || !agentsDialogPanel || !isAgentsDialogOpen) return;
 
     isAgentsDialogOpen = false;
-    const sourceRect = agentsMorphSource.getBoundingClientRect();
-    agentsDialog.classList.remove('is-open');
-    await animateDialogMorph(sourceRect, 'close');
-    agentsDialog.hidden = true;
-    agentsDialog.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('is-dialog-open');
-    agentsDialogPanel.getAnimations().forEach(animation => animation.cancel());
+    const didClose = await closeModal(agentsDialog, agentsDialogPanel);
+    if (!didClose) return;
+    if (!isSkillDialogOpen) document.body.classList.remove('is-dialog-open');
     agentsInlineOpenTarget?.focus({ preventScroll: true });
   }
 
@@ -744,11 +907,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.key === 'Escape' && isSkillDialogOpen) {
       closeSkillDialog();
     }
-  });
-
-  window.addEventListener('resize', () => {
-    if (!isAgentsDialogOpen || !agentsDialogPanel) return;
-    setDialogPanelRect(getDialogTargetRect());
   });
 
   document.querySelectorAll('.entry-title-link').forEach(link => {
@@ -809,14 +967,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setupSkillDialog() {
     document.querySelectorAll('.skill-item').forEach(item => {
+      const title = item.querySelector('.skill-name')?.textContent?.trim() || 'Skill';
+      const contentPath = skillContentPaths[item.id];
+
+      if (!contentPath) {
+        const externalUrl = getSkillGithubUrl(item.id);
+        item.setAttribute('data-skill-action', 'external');
+        item.setAttribute('role', 'link');
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('aria-label', `Open ${title} on GitHub`);
+
+        const openExternal = () => {
+          window.open(externalUrl, '_blank', 'noopener,noreferrer');
+        };
+
+        item.addEventListener('click', openExternal);
+        item.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openExternal();
+          }
+        });
+        return;
+      }
+
+      item.setAttribute('data-skill-action', 'dialog');
       item.setAttribute('role', 'button');
       item.setAttribute('tabindex', '0');
 
       const open = async () => {
-        if (!skillDialog || !skillDialogLabel || !skillDialogTitle || !skillRawView || !skillRawCode || !skillRenderedView) return;
+        if (!skillDialog || !skillDialogPanel || !skillDialogLabel || !skillDialogTitle || !skillRawView || !skillRawCode || !skillRenderedView) return;
 
         lastSkillTrigger = item;
-        const title = item.querySelector('.skill-name')?.textContent?.trim() || 'Skill';
         const label = item.querySelector('.skill-label')?.textContent?.trim() || 'Skill';
         const fallback = item.querySelector('.skill-detail')?.textContent?.replace(/^[\s-]+/, '').trim() || '';
 
@@ -829,11 +1011,8 @@ document.addEventListener('DOMContentLoaded', () => {
         skillRenderedView.innerHTML = '<p>Loading SKILL.md...</p>';
         setSkillView('raw');
         isSkillDialogOpen = true;
-        skillDialog.hidden = false;
-        skillDialog.setAttribute('aria-hidden', 'false');
-        skillDialog.classList.add('is-open');
-        document.body.classList.add('is-dialog-open');
-        closeSkillDialogBtn?.focus({ preventScroll: true });
+        openModal(skillDialog, skillDialogPanel);
+        focusWithoutTooltip(closeSkillDialogBtn);
 
         try {
           const detail = await loadSkillContent(item.id);
@@ -946,7 +1125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const path = skillContentPaths[skillId];
     if (!path) {
-      return 'https://github.com/micr-dev/ai/tree/main/skills';
+      throw new Error(`No canonical source URL for ${skillId}`);
     }
 
     const repoBaseUrl = 'https://github.com/micr-dev/ai';
@@ -959,13 +1138,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return markdown.replace(/^---\n[\s\S]*?\n---\n?/, '').trim();
   }
 
-  function closeSkillDialog() {
-    if (!skillDialog || !isSkillDialogOpen) return;
+  async function closeSkillDialog() {
+    if (!skillDialog || !skillDialogPanel || !isSkillDialogOpen) return;
 
     isSkillDialogOpen = false;
-    skillDialog.classList.remove('is-open');
-    skillDialog.hidden = true;
-    skillDialog.setAttribute('aria-hidden', 'true');
+    const didClose = await closeModal(skillDialog, skillDialogPanel);
+    if (!didClose) return;
     if (!isAgentsDialogOpen) {
       document.body.classList.remove('is-dialog-open');
     }
@@ -975,195 +1153,8 @@ document.addEventListener('DOMContentLoaded', () => {
   closeSkillDialogBtn?.addEventListener('click', closeSkillDialog);
   skillDialogBackdrop?.addEventListener('click', closeSkillDialog);
 
-  function revealElement(element, delay = 0) {
-    if (!element || element.dataset.revealReady === 'true') return;
-    element.dataset.revealReady = 'true';
-    element.classList.add('component-reveal');
-    element.style.setProperty('--component-delay', `${delay}ms`);
-  }
-
-  function preserveAccessibleLabel(element) {
-    const text = element.textContent;
-    if (!text) return;
-    const parentLink = element.closest('a');
-    if (parentLink && !parentLink.getAttribute('aria-label')) {
-      parentLink.setAttribute('aria-label', text);
-    }
-  }
-
-  function splitTextEffect(element, mode, delay = 0) {
-    const text = element.textContent;
-    if (!text || element.dataset.textEffectReady === 'true') return;
-
-    element.dataset.textEffectReady = 'true';
-    element.dataset.textEffectText = text;
-    preserveAccessibleLabel(element);
-    element.setAttribute('aria-label', text);
-    element.classList.add('text-effect-root', `text-effect-${mode}`);
-    element.style.setProperty('--effect-delay', `${delay}ms`);
-
-    const parts = mode === 'char'
-      ? Array.from(text)
-      : text.match(/\S+|\s+/g) || [];
-
-    element.textContent = '';
-    let effectIndex = 0;
-
-    parts.forEach(part => {
-      if (!part) return;
-
-      if (/^\s+$/.test(part)) {
-        element.appendChild(document.createTextNode(part));
-        return;
-      }
-
-      const span = document.createElement('span');
-      span.textContent = part;
-      span.setAttribute('aria-hidden', 'true');
-      span.className = `text-effect-unit ${mode === 'char' ? 'text-effect-letter' : 'text-effect-word'}`;
-      span.style.setProperty('--effect-index', String(effectIndex));
-      effectIndex += 1;
-      element.appendChild(span);
-    });
-  }
-
-  function settleTextEffect(element) {
-    if (!element || element.dataset.textEffectSettled === 'true') return;
-
-    const originalText = element.dataset.textEffectText;
-    if (!originalText) return;
-
-    element.textContent = originalText;
-    element.classList.remove(
-      'text-effect-root',
-      'text-effect-char',
-      'text-effect-word-mode',
-      'text-effect-preset',
-      'text-effect-custom',
-      'text-effect-body',
-    );
-    element.dataset.textEffectSettled = 'true';
-  }
-
-  function setupTextEffects() {
-    if (prefersReducedMotion) return;
-
-    const getPositionedElements = selector => {
-      return Array.from(document.querySelectorAll(selector))
-        .filter(element => element instanceof HTMLElement)
-        .map(element => {
-          const rect = element.getBoundingClientRect();
-          return {
-            element,
-            top: Math.round(rect.top / 28) * 28,
-            left: rect.left,
-          };
-        })
-        .sort((a, b) => a.top - b.top || a.left - b.left)
-        .map(item => item.element);
-    };
-
-    const getPhaseDelay = (index, total, baseDelay, maxDuration) => {
-      if (total <= 1) return baseDelay;
-
-      return Math.round(baseDelay + (index / (total - 1)) * maxDuration);
-    };
-
-    const applyPageWideBodySweep = (elements, baseDelay) => {
-      const viewportWidth = Math.max(window.innerWidth, 1);
-      const sweepDuration = 130;
-
-      elements.forEach(element => {
-        element.querySelectorAll('.text-effect-unit').forEach(unit => {
-          const rect = unit.getBoundingClientRect();
-          const pageX = Math.max(0, Math.min(1, rect.left / viewportWidth));
-          const delay = Math.round(baseDelay + pageX * sweepDuration);
-          unit.style.setProperty('--effect-delay', `${delay}ms`);
-          unit.style.setProperty('--effect-index', '0');
-        });
-      });
-    };
-
-    const componentElements = getPositionedElements('.change-group, .stack-section, .agents-box-container');
-    componentElements.forEach((element, index) => {
-      revealElement(element, Math.min(index * 4, 64));
-    });
-
-    const bigTitleElements = getPositionedElements('.column-title, .section-heading');
-    bigTitleElements.forEach((element, index) => {
-      const mode = element.classList.contains('column-title') ? 'char' : 'word-mode';
-      splitTextEffect(element, mode, getPhaseDelay(index, bigTitleElements.length, 70, 160));
-    });
-
-    const smallTitleBaseDelay = 260;
-    const smallTitleElements = getPositionedElements('.skill-label, .skill-name, .change-date-link, .change-title');
-
-    smallTitleElements.forEach((element, index) => {
-      const mode = element.matches('.skill-label') ? 'preset' : 'custom';
-      splitTextEffect(element, mode, getPhaseDelay(index, smallTitleElements.length, smallTitleBaseDelay, 210));
-    });
-
-    const bodyBaseDelay = 500;
-
-    const bodyElements = getPositionedElements('.entry-description, .entry-why, .change-description, .skill-detail, .entry-metadata');
-    bodyElements.forEach(element => {
-      splitTextEffect(element, 'body', bodyBaseDelay);
-    });
-    applyPageWideBodySweep(bodyElements, bodyBaseDelay);
-
-    window.setTimeout(() => {
-      document.querySelectorAll('.text-effect-root').forEach(settleTextEffect);
-    }, 1200);
-  }
-
-  function startFontDependentUi() {
-    document.body.classList.remove('fonts-loading');
-    document.body.classList.add('fonts-ready');
-    setupRoleFlips();
-    setupSkillDialog();
-    setupTextEffects();
-  }
-
-  function waitForCriticalFonts() {
-    if (!document.fonts?.load) {
-      return Promise.resolve();
-    }
-
-    const criticalFontLoads = [
-      '400 1rem helveticaNeue',
-      '600 1rem helveticaNeue',
-      '700 1rem helveticaNeue',
-      '400 1rem "Ioskeley Mono"',
-    ];
-
-    return Promise.all(criticalFontLoads.map(font => document.fonts.load(font)))
-      .then(() => document.fonts.ready);
-  }
-
-  if (document.fonts?.ready) {
-    waitForCriticalFonts().then(startFontDependentUi).catch(startFontDependentUi);
-  } else {
-    startFontDependentUi();
-  }
-
-  document.addEventListener('animationend', event => {
-    const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
-
-    if (target.classList.contains('text-effect-unit') || target.classList.contains('component-reveal')) {
-      target.classList.add('is-revealed');
-    }
-
-    if (target.classList.contains('text-effect-unit')) {
-      const root = target.closest('.text-effect-root');
-      if (!root) return;
-
-      const pendingUnits = root.querySelectorAll('.text-effect-unit:not(.is-revealed)');
-      if (pendingUnits.length === 0) {
-        window.requestAnimationFrame(() => settleTextEffect(root));
-      }
-    }
-  });
+  setupRoleFlips();
+  setupSkillDialog();
 
   setupSnapshotLinks();
 

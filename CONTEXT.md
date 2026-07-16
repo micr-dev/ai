@@ -5,7 +5,7 @@ This context describes the public page for presenting Microck's current AI worki
 ## Language
 
 **Stack Showcase Page**:
-The fully public page titled `AI Stack` and hosted at `ai.micr.dev` that presents the current AI stack as the primary experience and its recent evolution as supporting context. On desktop, the changelog is slightly narrower on the left and the stack is slightly wider on the right. The changelog area scrolls independently with its scrollbar on the left edge, while the stack area remains fixed in the viewport with dense content handled by internal scroll regions. On mobile, the current stack appears before the changelog. The page and its OG image use text directly on a dark background and avoid visible boxes, cards, or panel containers except for AGENTS.md. Motion should stay subtle and purposeful; quick fades are allowed for tooltips, overlays, and state changes.
+The fully public page titled `AI Stack` and hosted at `ai.micr.dev` that presents the current AI stack as the primary experience and its recent evolution as supporting context. On desktop, the changelog is slightly narrower on the left and the stack is slightly wider on the right. The changelog area scrolls independently with its scrollbar on the left edge, while the stack area remains fixed in the viewport with dense content handled by internal scroll regions. On mobile, the current stack appears before the changelog and a compact sticky text navigator provides direct access to both regions. The page and its OG image use text directly on a dark background and avoid visible boxes, cards, or panel containers except for AGENTS.md. Content renders immediately without a page-load reveal sequence. Motion stays subtle and purposeful: historical snapshots crossfade, modal surfaces share a short symmetric scale-and-fade transition, and small state changes may use quick fades.
 _Avoid_: Dashboard, landing page, card layout, boxed layout
 
 **Stack Entry**:
@@ -27,6 +27,10 @@ _Avoid_: MCP
 **Skill Label**:
 A subtle low-emphasis label used inside the Skills section, such as `Handmade` or `Favorite`.
 _Avoid_: Skill section, category
+
+**Skill Interaction**:
+A skill with a committed public source file opens that source in the read-only skill dialog. A skill without a committed public source file opens its canonical upstream GitHub location as a link instead of presenting fallback or partial dialog content.
+_Avoid_: Empty skill dialog, fallback description dialog
 
 **Gatekept Skill**:
 A **Stack Entry** in the Skills section whose name and purpose may be shown publicly, while the underlying prompt, private rubric, or implementation details remain unpublished.
@@ -59,6 +63,10 @@ _Avoid_: Placeholder timeline, fictional history
 **Change Group**:
 A date-grouped set of **Change Entries** shown under one `DD/MM/YYYY` date header in the changelog.
 _Avoid_: Timeline card, terminal log
+
+**Stack Snapshot**:
+The reconstructed public stack immediately after a selected **Change Group**. A snapshot replays additions, removals, replacements, and version transitions so its visible entries reflect that date rather than merely hiding recently added items from the current stack. When a removal has no recorded introduction, the item appears only in the immediately preceding observable snapshot instead of being projected backward without evidence.
+_Avoid_: Filtered current stack, URL-only snapshot
 
 **AGENTS.md**:
 The committed public, redacted rendering of the global `AGENTS.md` file. It keeps the original structure and tone while omitting sensitive or machine-specific details, and its user-facing section label is exactly `AGENTS.md`. It appears as a constrained raw code preview, with a read-only modal overlay that renders the content as readable markdown. AGENTS.md is the only content area allowed to use a visible boxed treatment.

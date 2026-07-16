@@ -16,26 +16,26 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 5.5, GLM-5-Turbo, GLM-5.1, Gemini 3.5 Flash.
+- Models: GPT 5.6 Sol, GLM-5.2, Gemini 3.5 Flash, GPT Codex 5.3 Spark.
 - Harnesses: Codex CLI, Hermes Agent, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
-- Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, SessionStart | lintcn Setup, SessionStart | Residue Start, SessionStart | Dora Index Check, PreCompact | Compact Handoff, PostCompact | Handoff Reload, Stop | Residue Finish, Stop | lintcn Check, Stop | Dora Reindex.
-- MCPs: discord-py-self, dora, fff, semble, grep-app, markitdown-mcp, mcp-vnc, perplexity-webui, reddit-mcp-buddy, gitquarry-mcp, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp.
-- CLI: rtk, kagi-cli, fff, dora, agent-browser, lit, semble, gitquarry, opensrc, markit, residue, egaki, rg, jj, lintcn, optimo, and 1 more.
-- Skills: dft-writing, grill-with-docs, grill-me, compact-handoff, repository-test-design, optimo, naming, thermo-nuclear-code-quality-review, mermaid-diagrams, language-selection, create-cli, dynamic-workflows, animated-favicons, grill-with-facts, make-interfaces-feel-better, oklch-skill, and 1 more.
+- Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite.
+- MCPs: discord-py-self, codebase-memory-mcp, fff, markitdown-mcp, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, oracle, ida-pro-mcp, openaiDeveloperDocs, huggingface.
+- CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, lintcn, optimo, facts, clawpatch, and 2 more.
+- Skills: crabbox, dft-writing, grill-with-docs, grill-me, compact-handoff, repository-test-design, optimo, naming, thermo-nuclear-code-quality-review, mermaid-diagrams, language-selection, create-cli, dynamic-workflows, animated-favicons, apple-design, grill-with-facts, and 32 more.
 - Image Generation: gpt-image-2.
 - Workspace: VPS, agent-deck, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
-- 09/06/2026: Added Gemini 3.5 Flash Model; Added Antigravity CLI Harness.
-- 05/06/2026: Modified PreToolUse Bash Safety Hook; Added emil-design-eng Skill; Added animated-favicons Skill.
-- 04/06/2026: Modified grill-with-facts Skill; Updated Codex CLI to 0.137.0.
-- 02/06/2026: Added make-interfaces-feel-better Skill; Added oklch-skill Skill; Updated Codex CLI to 0.136.0.
-- 01/06/2026: Modified dynamic-workflows Skill; Added facts CLI.
-- 31/05/2026: Added ghidra-headless-mcp MCP; Added dynamic-workflows Skill.
-- 30/05/2026: Added dft-writing Skill.
-- 29/05/2026: Added optimo CLI; Updated Codex CLI to 0.135.0.
+- 16/07/2026: Removed mcp-vnc MCP; Removed codebase-memory-mcp CLI; Removed residue CLI.
+- 14/07/2026: Added effect-program-design Skill; Added improve-codebase-architecture Skill; Added huggingface MCP; Updated AGENTS.md (Moji font tooling section, removed Residue section); Updated Codex CLI to 0.144.4.
+- 13/07/2026: Removed authormist Skill; Removed grep-app MCP; Removed SessionStart and Stop Hooks; Updated Codex CLI to 0.144.3.
+- 12/07/2026: Added resolving-merge-conflicts Skill; Added wayfinder Skill; Added better-colors Skill; Added better-typography Skill; Added better-ui Skill; Removed fix-merge-conflicts Skill; and 3 more.
+- 11/07/2026: Added cli-review Skill; Added greploop Skill; Added improve-animations Skill; Removed reverse-engineering Skill; Removed supply-chain-security Skill; Updated crabbox Skill (template box documentation); and 1 more.
+- 10/07/2026: Removed semble MCP; Updated Codex CLI to 0.144.1; Added openaiDeveloperDocs MCP; Updated AGENTS.md (YouTube transcript routing via youtube-transcript skill).
+- 09/07/2026: Removed GLM-5-Turbo Model; Replaced GPT 5.5 with GPT 5.6 Sol as primary model; Added apple-design Skill; Updated crabbox Skill (remote validation and lease workflows).
+- 08/07/2026: Updated Codex CLI to 0.143.0; Updated AGENTS.md (Spark model routing, subagent delegation rules); Updated writing-great-skills Skill (artifact-producing skills).
 
 ## Snapshot pages
 
@@ -84,24 +84,40 @@ The site exposes 37 dated snapshot pages. Use them only when the user asks about
 The public skills directory currently exposes:
 
 - animated-favicons
+- animation-vocabulary
+- codebase-design
+- codebase-memory-mcp
 - compact-handoff
+- crabbox
 - create-cli
 - dft-writing
+- domain-modeling
+- effect-program-design
 - grill-me
 - grill-with-docs
 - grill-with-facts
+- grilling
+- idea-generator
 - language-selection
 - make-interfaces-feel-better
 - mermaid-diagrams
 - naming
 - oklch-skill
 - optimo
+- oracle
+- quality-code
 - repository-test-design
+- review-animations
+- teach
 - thermo-nuclear-code-quality-review
+- timeboxed-iterating
+- transitions-dev
+- write-better-error-messages
+- writing-great-skills
 
 ## AGENTS.md preview
 
-The public AGENTS.md preview is redacted. It has 1062 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
+The public AGENTS.md preview is redacted. It has 1238 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
 
 ## Answering rules
 

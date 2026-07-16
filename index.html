@@ -30,17 +30,11 @@
   <meta name="twitter:image" content="https://ai.micr.dev/og-image.png">
   <base href="/">
   
-  <!-- Critical local fonts load before rendering/animation setup -->
+  <!-- Critical local fonts are preloaded; font-display handles progressive rendering. -->
   <link rel="preload" href="assets/fonts/helvetica-neue/HelveticaNeue-Roman.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="assets/fonts/helvetica-neue/HelveticaNeue-Medium.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="assets/fonts/helvetica-neue/HelveticaNeueBold.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="assets/fonts/ioskeley-mono/IoskeleyMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <style>
-    body.fonts-loading .page-container {
-      visibility: hidden;
-    }
-  </style>
-
   <!-- Fonts: Space Grotesk, Karla, Ysabeau, and Fallbacks -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +45,12 @@
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="index.css?v=20260609-snapshots">
 </head>
-<body class="antialiased fonts-loading">
+<body class="antialiased">
+
+  <nav class="mobile-section-nav font-karla" aria-label="Page sections">
+    <a href="#stack-section">Stack</a>
+    <a href="#changelog-section">Changelog</a>
+  </nav>
 
   <!-- Ambient Grid Overlay -->
   <div class="ambient-glows" aria-hidden="true">
@@ -1375,10 +1374,19 @@
                   </button>
                 </div>
                 <button class="render-trigger icon-control font-karla" id="copy-agents-inline-btn" type="button" aria-label="Copy AGENTS.md" data-tooltip="Copy AGENTS.md">
-                  <svg class="control-icon copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                  </svg>
+                  <span class="t-icon-swap" data-state="a" aria-hidden="true">
+                    <span class="t-icon" data-icon="a">
+                      <svg class="control-icon copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                      </svg>
+                    </span>
+                    <span class="t-icon" data-icon="b">
+                      <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m5 12 4 4L19 6"></path>
+                      </svg>
+                    </span>
+                  </span>
                 </button>
               </div>
               <div class="editor-body" id="agents-inline-open-target" role="button" tabindex="0" aria-label="Open AGENTS.md dialog">
@@ -1789,7 +1797,7 @@
 
   <div class="morph-dialog-overlay" id="agents-dialog" aria-hidden="true" hidden>
     <button class="morph-dialog-backdrop" type="button" aria-label="Close AGENTS.md dialog" data-close-agents-dialog></button>
-    <section class="morph-dialog-panel" role="dialog" aria-modal="true" aria-labelledby="agents-dialog-title">
+    <section class="morph-dialog-panel t-modal" role="dialog" aria-modal="true" aria-labelledby="agents-dialog-title">
       <h2 class="sr-only" id="agents-dialog-title">AGENTS.md</h2>
       <div class="editor-pane editor-pane-dialog">
         <div class="editor-actions" aria-label="AGENTS.md dialog actions">
@@ -1810,10 +1818,19 @@
             </button>
           </div>
           <button class="render-trigger icon-control font-karla" id="copy-agents-dialog-btn" type="button" aria-label="Copy AGENTS.md" data-tooltip="Copy AGENTS.md">
-            <svg class="control-icon copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-            </svg>
+            <span class="t-icon-swap" data-state="a" aria-hidden="true">
+              <span class="t-icon" data-icon="a">
+                <svg class="control-icon copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                </svg>
+              </span>
+              <span class="t-icon" data-icon="b">
+                <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m5 12 4 4L19 6"></path>
+                </svg>
+              </span>
+            </span>
           </button>
           <button class="render-trigger icon-control font-karla" id="close-agents-dialog-btn" type="button" aria-label="Close AGENTS.md dialog" data-tooltip="Close">
             <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1835,7 +1852,7 @@
 
   <div class="morph-dialog-overlay" id="skill-dialog" aria-hidden="true" hidden>
     <button class="morph-dialog-backdrop" type="button" aria-label="Close skill detail" data-close-skill-dialog></button>
-    <section class="skill-dialog-panel" role="dialog" aria-modal="true" aria-labelledby="skill-dialog-title">
+    <section class="skill-dialog-panel t-modal" role="dialog" aria-modal="true" aria-labelledby="skill-dialog-title">
       <button class="render-trigger icon-control font-karla skill-dialog-close" id="close-skill-dialog-btn" type="button" aria-label="Close skill detail" data-tooltip="Close">
         <svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M18 6 6 18"></path>
