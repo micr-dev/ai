@@ -805,7 +805,7 @@ does not authorize merging, closing, releasing, or unrelated repository changes.
    behavior, inspect the diff, and push only with the authority and safety checks defined elsewhere
    in this file.
 8. On a new head SHA, request fresh automated reviews only when necessary and only when the reviewer
-   is not already running. Repeat for at most five total review iterations.
+   is not already running. Continue the review-fix loop until all actionable findings are resolved.
 
 The PR finalization loop is complete only when required checks pass, no actionable human or automated
 review findings remain, and release notes (if needed) are updated. Report the final state clearly.

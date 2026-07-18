@@ -1,0 +1,6 @@
+interface:
+  display_name: "Find Fonts"
+  short_description: "Research and shortlist fonts for a brief"
+  default_prompt: "Use $find-fonts to research fonts for my brief, verify licensing, and recommend the best choice."
+policy:
+  allow_implicit_invocation: false

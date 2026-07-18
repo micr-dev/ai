@@ -66,7 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'effect-program-design': 'skills/effect-program-design/SKILL.md',
     'animation-vocabulary': 'skills/animation-vocabulary/SKILL.md',
     'timeboxed-iterating': 'skills/timeboxed-iterating/SKILL.md',
-
+    'find-fonts': 'skills/find-fonts/SKILL.md',
+    'tmux-codex-orchestrator': 'skills/tmux-codex-orchestrator/SKILL.md',
+    'transitions-polish': 'skills/transitions-polish/SKILL.md',
   };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
@@ -1117,6 +1119,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'improve-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/improve-animations',
       'resolving-merge-conflicts': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/resolving-merge-conflicts',
       'wayfinder': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder',
+      'tmux-codex-orchestrator': 'https://github.com/ValXp/ai_tools/tree/main/skills/tmux-codex-orchestrator',
+      'transitions-polish': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-polish',
     };
 
     if (externalSkillUrls[skillId]) {
