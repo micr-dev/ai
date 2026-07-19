@@ -313,6 +313,18 @@ Do comment:
 - Avoid using "we" or "our" phrasing; write as a single operator
 - Do not use em dashes in writing; use hyphens or restructure the sentence instead
 
+### Prose
+When writing prose (comments, commit messages, PR descriptions, docs, user-facing strings), prefer following Orwell's six rules of writing as a default, breaking any rule sooner than writing something barbarous:
+
+1. Never use a metaphor, simile, or other figure of speech which you are used to seeing in print.
+2. Never use a long word where a short one will do.
+3. If it is possible to cut a word out, always cut it out.
+4. Never use the passive where you can use the active.
+5. Never use a foreign phrase, a scientific word, or a jargon word if you can think of an everyday English equivalent.
+6. Break any of these rules sooner than say anything outright barbarous.
+
+This is a style preference, not a hard requirement; content that must match a codebase's existing voice (error messages, UI copy) follows that voice. Source: Austin Wallace, [https://x.com/austeane/status/2078367367210643865](https://x.com/austeane/status/2078367367210643865).
+
 ### Change Description
 After any modification, summarize:
 
