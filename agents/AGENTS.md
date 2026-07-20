@@ -325,6 +325,9 @@ When writing prose (comments, commit messages, PR descriptions, docs, user-facin
 
 This is a style preference, not a hard requirement; content that must match a codebase's existing voice (error messages, UI copy) follows that voice. Source: Austin Wallace, [https://x.com/austeane/status/2078367367210643865](https://x.com/austeane/status/2078367367210643865).
 
+### PR Descriptions
+When drafting a PR title or body, load and follow the `microck-voice` skill. Keep the skill's hard rules (no em dashes, no fabricated opinions/commitments, no sending without separate permission) and match Microck's casual-lowercase register for the prose sections of the PR body.
+
 ### Change Description
 After any modification, summarize:
 

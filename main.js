@@ -1121,6 +1121,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'wayfinder': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder',
       'tmux-codex-orchestrator': 'https://github.com/ValXp/ai_tools/tree/main/skills/tmux-codex-orchestrator',
       'transitions-polish': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-polish',
+      'declankify': 'https://github.com/DeweyMarco/declankify',
     };
 
     if (externalSkillUrls[skillId]) {
