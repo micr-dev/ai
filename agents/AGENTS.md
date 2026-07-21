@@ -2,7 +2,7 @@
 name: Global Agent Configuration
 description: Harness-agnostic agent rules and configuration for AI coding assistants
 author: Microck
-version: 2.1.0
+version: 2.1.1
 tags: global, rules, configuration, cross-platform
 ---
 
@@ -181,9 +181,9 @@ PLAN:
 This catches wrong directions before I've built on them.
 
 ### Model Routing
-When model selection is available, I MUST use the Spark model for
-read-only tasks that do not require intelligence. Spark is fast but
-limited, so use it for cheap inspection work where the answer is directly
+When model selection is available, I MUST use `gpt-3.5-codex-spark` for
+read-only tasks that do not require intelligence. Spark is dumb but really
+fast, so use it for cheap inspection work where the answer is directly
 recoverable from the input and a mistake is easy to catch.
 
 Good Spark tasks:
@@ -326,7 +326,7 @@ When writing prose (comments, commit messages, PR descriptions, docs, user-facin
 This is a style preference, not a hard requirement; content that must match a codebase's existing voice (error messages, UI copy) follows that voice. Source: Austin Wallace, [https://x.com/austeane/status/2078367367210643865](https://x.com/austeane/status/2078367367210643865).
 
 ### PR Descriptions
-When drafting a PR title or body, load and follow the `microck-voice` skill. Keep the skill's hard rules (no em dashes, no fabricated opinions/commitments, no sending without separate permission) and match Microck's casual-lowercase register for the prose sections of the PR body.
+When drafting a PR title or body, load and follow the `microck-voice` skill (`~/.hermes/skills/microck-voice/SKILL.md`, starting with its `references/voice-guide.md`). This is an explicit user override of the skill's default non-trigger for PR descriptions. Keep the skill's hard rules (no em dashes, no fabricated opinions/commitments, no sending without separate permission) and match Microck's casual-lowercase register for the prose sections of the PR body, even when the surrounding technical content is precise.
 
 ### Change Description
 After any modification, summarize:
@@ -795,6 +795,14 @@ When the user asks to review, finalize, prepare, or make a GitHub PR ready to me
 bounded PR finalization loop. This instruction authorizes review-trigger comments for that PR, but it
 does not authorize merging, closing, releasing, or unrelated repository changes.
 
+**Third-party repository restriction:** On a repository not owned by the user, I MUST NOT post
+`@greptileai review`, `@codex review`, `@coderabbitai review`, or any equivalent automated-review
+trigger unless the user explicitly asks for that reviewer to be triggered on that repository. A
+general request to review, finalize, prepare, or make the PR ready to merge does not grant this
+permission. If repository ownership cannot be established, I MUST treat it as third-party. Read-only
+inspection of existing checks, reviews, comments, and reviewer availability remains allowed. This
+restriction overrides any automatic review-trigger authorization elsewhere in this section.
+
 1. Verify the implementation and run the repository's relevant tests, type checks, and linters.
 2. Determine whether the change requires release notes or a changelog entry. If the repository uses
    a changelog and the change is user-facing, invoke the `changelog` skill and follow the repository's
@@ -813,17 +821,24 @@ does not authorize merging, closing, releasing, or unrelated repository changes.
    established but the task is explicitly PR finalization, one `@codex review` attempt is allowed;
    if Codex does not react or report within a reasonable wait, stop retrying and report that Codex
    code review may need to be enabled for the repository.
-6. Wait for requested reviewers to finish, then collect actionable findings from Codex, Greptile,
-   human reviews, PR comments, checks, and unresolved inline threads. Codex review focuses on P0/P1
-   findings; absence of lower-severity Codex comments does not replace tests or other review lanes.
-7. Fix valid findings, verify the changes, update release notes when the fixes alter user-visible
+6. Check whether CodeRabbit is available for the repository. Treat an existing CodeRabbit check,
+   review, bot comment, `.coderabbit.yaml` configuration, or other direct repository evidence as
+   availability. Do not infer availability merely because CodeRabbit is listed in the user's GitHub
+   integrations. When available, request a review with the exact PR comment `@coderabbitai review`
+   if one has not already been triggered for the current head.
+7. Wait for requested reviewers to finish, then collect actionable findings from CodeRabbit, Codex,
+   Greptile, human reviews, PR comments, checks, and unresolved inline threads. Codex review focuses
+   on P0/P1 findings; absence of lower-severity Codex comments does not replace tests or other
+   review lanes.
+8. Fix valid findings, verify the changes, update release notes when the fixes alter user-visible
    behavior, inspect the diff, and push only with the authority and safety checks defined elsewhere
    in this file.
-8. On a new head SHA, request fresh automated reviews only when necessary and only when the reviewer
+9. On a new head SHA, request fresh automated reviews only when necessary and only when the reviewer
    is not already running. Continue the review-fix loop until all actionable findings are resolved.
 
 The PR finalization loop is complete only when required checks pass, no actionable human or automated
-review findings remain, and release notes (if needed) are updated. Report the final state clearly.
+review findings remain, all addressed threads are resolved, and every requested reviewer has either
+completed or been reported unavailable.
 
 ### Pending Review Hygiene
 Never submit pending reviews with placeholder messages like "Reviewing suggestions". If a pending review blocks comment replies, dismiss it instead of submitting a generic text comment.
@@ -905,6 +920,8 @@ Options:
 3. Ask for help/clarification
 
 Should I continue this pattern?"
+
+This rule does NOT apply to code review. Reviewing many files or leaving many review comments in a single pass is expected behavior, not a loop."
 
 ### Success Criteria
 For tasks that will likely take >20 messages, explicitly state success criteria BEFORE starting:

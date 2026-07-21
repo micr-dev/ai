@@ -61,12 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
     'idea-generator': 'skills/idea-generator/SKILL.md',
     'teach': 'skills/teach/SKILL.md',
     'transitions-dev': 'skills/transitions-dev/SKILL.md',
+    'wayfinder': 'skills/wayfinder/SKILL.md',
     'writing-great-skills': 'skills/writing-great-skills/SKILL.md',
     'dft-writing': 'skills/dft-writing/SKILL.md',
     'effect-program-design': 'skills/effect-program-design/SKILL.md',
     'animation-vocabulary': 'skills/animation-vocabulary/SKILL.md',
     'timeboxed-iterating': 'skills/timeboxed-iterating/SKILL.md',
     'find-fonts': 'skills/find-fonts/SKILL.md',
+    'declankify': 'skills/declankify/SKILL.md',
     'tmux-codex-orchestrator': 'skills/tmux-codex-orchestrator/SKILL.md',
     'transitions-polish': 'skills/transitions-polish/SKILL.md',
   };
@@ -1118,10 +1120,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'better-ui': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-ui',
       'improve-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/improve-animations',
       'resolving-merge-conflicts': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/resolving-merge-conflicts',
-      'wayfinder': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder',
       'tmux-codex-orchestrator': 'https://github.com/ValXp/ai_tools/tree/main/skills/tmux-codex-orchestrator',
       'transitions-polish': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-polish',
-      'declankify': 'https://github.com/DeweyMarco/declankify',
     };
 
     if (externalSkillUrls[skillId]) {

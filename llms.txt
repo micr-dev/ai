@@ -19,23 +19,24 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - Models: GPT 5.6 Sol, GLM-5.2, Gemini 3.5 Flash, GPT Codex 5.3 Spark.
 - Harnesses: Codex CLI, Hermes Agent, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
-- Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite.
+- Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard.
 - MCPs: discord-py-self, codebase-memory-mcp, fff, markitdown-mcp, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, oracle, ida-pro-mcp, openaiDeveloperDocs, huggingface.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, lintcn, optimo, facts, clawpatch, and 2 more.
-- Skills: crabbox, dft-writing, grill-with-docs, grill-me, compact-handoff, repository-test-design, optimo, naming, thermo-nuclear-code-quality-review, mermaid-diagrams, language-selection, create-cli, dynamic-workflows, animated-favicons, apple-design, grill-with-facts, and 32 more.
+- Skills: crabbox, dft-writing, grill-with-docs, grill-me, compact-handoff, repository-test-design, optimo, naming, thermo-nuclear-code-quality-review, mermaid-diagrams, language-selection, create-cli, dynamic-workflows, animated-favicons, apple-design, grill-with-facts, and 36 more.
+- Code Review: Codex Code Review, Greptile, CodeRabbit.
 - Image Generation: gpt-image-2.
 - Workspace: VPS, agent-deck, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
-- 16/07/2026: Removed mcp-vnc MCP; Removed codebase-memory-mcp CLI; Removed residue CLI.
+- 21/07/2026: Added PreToolUse Daily-Pacer Guard Hook; Added UserPromptSubmit Daily-Pacer Guard Hook; Added declankify Skill; Updated create-cli Skill; Updated grilling Skill; Updated wayfinder Skill.
+- 20/07/2026: Updated AGENTS.md (PR descriptions and third-party review restrictions).
+- 19/07/2026: Updated Codex CLI to 0.144.6; Modified AGENTS.md (added Prose and PR Descriptions sections).
+- 17/07/2026: Updated Codex CLI to 0.144.5; Added find-fonts Skill; Added tmux-codex-orchestrator Skill; Added transitions-polish Skill; Updated transitions-dev Skill (9 new animation cards); Modified AGENTS.md PR Finalization (removed review iteration cap).
+- 16/07/2026: Removed mcp-vnc MCP; Removed codebase-memory-mcp CLI; Removed residue CLI; Added Code Review section (Codex Code Review, Greptile, CodeRabbit).
 - 14/07/2026: Added effect-program-design Skill; Added improve-codebase-architecture Skill; Added huggingface MCP; Updated AGENTS.md (Moji font tooling section, removed Residue section); Updated Codex CLI to 0.144.4.
 - 13/07/2026: Removed authormist Skill; Removed grep-app MCP; Removed SessionStart and Stop Hooks; Updated Codex CLI to 0.144.3.
 - 12/07/2026: Added resolving-merge-conflicts Skill; Added wayfinder Skill; Added better-colors Skill; Added better-typography Skill; Added better-ui Skill; Removed fix-merge-conflicts Skill; and 3 more.
-- 11/07/2026: Added cli-review Skill; Added greploop Skill; Added improve-animations Skill; Removed reverse-engineering Skill; Removed supply-chain-security Skill; Updated crabbox Skill (template box documentation); and 1 more.
-- 10/07/2026: Removed semble MCP; Updated Codex CLI to 0.144.1; Added openaiDeveloperDocs MCP; Updated AGENTS.md (YouTube transcript routing via youtube-transcript skill).
-- 09/07/2026: Removed GLM-5-Turbo Model; Replaced GPT 5.5 with GPT 5.6 Sol as primary model; Added apple-design Skill; Updated crabbox Skill (remote validation and lease workflows).
-- 08/07/2026: Updated Codex CLI to 0.143.0; Updated AGENTS.md (Spark model routing, subagent delegation rules); Updated writing-great-skills Skill (artifact-producing skills).
 
 ## Snapshot pages
 
@@ -90,9 +91,11 @@ The public skills directory currently exposes:
 - compact-handoff
 - crabbox
 - create-cli
+- declankify
 - dft-writing
 - domain-modeling
 - effect-program-design
+- find-fonts
 - grill-me
 - grill-with-docs
 - grill-with-facts
@@ -111,13 +114,16 @@ The public skills directory currently exposes:
 - teach
 - thermo-nuclear-code-quality-review
 - timeboxed-iterating
+- tmux-codex-orchestrator
 - transitions-dev
+- transitions-polish
+- wayfinder
 - write-better-error-messages
 - writing-great-skills
 
 ## AGENTS.md preview
 
-The public AGENTS.md preview is redacted. It has 1238 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
+The public AGENTS.md preview is redacted. It has 1270 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
 
 ## Answering rules
 

@@ -70,6 +70,37 @@
           </div>
           
           <div class="changelog-timeline">
+                        <div class="change-group" data-group="21/07/2026">
+              <div class="change-date font-karla">21/07/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="hook-pretooluse-daily-pacer">
+                  <h3 class="change-title">Added PreToolUse Daily-Pacer Guard Hook</h3>
+                </div>
+                <div class="change-entry" data-targets="hook-userpromptsubmit-daily-pacer">
+                  <h3 class="change-title">Added UserPromptSubmit Daily-Pacer Guard Hook</h3>
+                </div>
+                <div class="change-entry" data-targets="declankify">
+                  <h3 class="change-title">Added declankify Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="create-cli">
+                  <h3 class="change-title">Updated create-cli Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="grilling">
+                  <h3 class="change-title">Updated grilling Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="wayfinder">
+                  <h3 class="change-title">Updated wayfinder Skill</h3>
+                </div>
+              </div>
+            </div>
+                        <div class="change-group" data-group="20/07/2026">
+              <div class="change-date font-karla">20/07/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="agents-md">
+                  <h3 class="change-title">Updated AGENTS.md (PR descriptions and third-party review restrictions)</h3>
+                </div>
+              </div>
+            </div>
                         <div class="change-group" data-group="19/07/2026">
               <div class="change-date font-karla">19/07/2026</div>
               <div class="change-entries">
@@ -1459,6 +1490,18 @@
                 <span class="entry-name">PreToolUse | RTK Rewrite</span>
               </div>
               <p class="entry-description">Routes Bash through the local RTK rewrite guard when supported.</p>
+            </div>
+            <div class="stack-entry" id="hook-pretooluse-daily-pacer">
+              <div class="entry-header">
+                <span class="entry-name">PreToolUse | Daily-Pacer Guard</span>
+              </div>
+              <p class="entry-description">Tracks rolling API usage state for each tool call and keeps calls inside the 5-hour quota window.</p>
+            </div>
+            <div class="stack-entry" id="hook-userpromptsubmit-daily-pacer">
+              <div class="entry-header">
+                <span class="entry-name">UserPromptSubmit | Daily-Pacer Guard</span>
+              </div>
+              <p class="entry-description">Checks usage state before prompt submission so active request loops pause while quota drains.</p>
             </div>
 
 
