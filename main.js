@@ -1121,6 +1121,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'resolving-merge-conflicts': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/resolving-merge-conflicts',
       'transitions-polish': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-polish',
       'pick-ui-library': 'https://github.com/emilkowalski/skills/blob/main/skills/pick-ui-library',
+      'declankify': 'https://github.com/DeweyMarco/declankify',
+      'wayfinder': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder',
     };
 
     if (externalSkillUrls[skillId]) {
