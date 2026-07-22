@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'animated-favicons': 'skills/animated-favicons/SKILL.md',
     'grill-with-facts': 'skills/grill-with-facts/SKILL.md',
     'make-interfaces-feel-better': 'skills/make-interfaces-feel-better/SKILL.md',
-    'oracle': 'skills/oracle/SKILL.md',
     'quality-code': 'skills/quality-code/SKILL.md',
     'review-animations': 'skills/review-animations/SKILL.md',
     'write-better-error-messages': 'skills/write-better-error-messages/SKILL.md',
@@ -69,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'timeboxed-iterating': 'skills/timeboxed-iterating/SKILL.md',
     'find-fonts': 'skills/find-fonts/SKILL.md',
     'declankify': 'skills/declankify/SKILL.md',
-    'tmux-codex-orchestrator': 'skills/tmux-codex-orchestrator/SKILL.md',
+    'pick-ui-library': 'skills/pick-ui-library/SKILL.md',
     'transitions-polish': 'skills/transitions-polish/SKILL.md',
   };
   const skillContentCache = new Map();
@@ -1120,8 +1119,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'better-ui': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-ui',
       'improve-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/improve-animations',
       'resolving-merge-conflicts': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/resolving-merge-conflicts',
-      'tmux-codex-orchestrator': 'https://github.com/ValXp/ai_tools/tree/main/skills/tmux-codex-orchestrator',
       'transitions-polish': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-polish',
+      'pick-ui-library': 'https://github.com/emilkowalski/skills/blob/main/skills/pick-ui-library',
     };
 
     if (externalSkillUrls[skillId]) {

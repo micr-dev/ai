@@ -70,6 +70,17 @@
           </div>
           
           <div class="changelog-timeline">
+                        <div class="change-group" data-group="22/07/2026">
+              <div class="change-date font-karla">22/07/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="tmux-codex-orchestrator">
+                  <h3 class="change-title">Removed tmux-codex-orchestrator Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="semrush-mcp">
+                  <h3 class="change-title">Added semrush MCP</h3>
+                </div>
+              </div>
+            </div>
                         <div class="change-group" data-group="21/07/2026">
               <div class="change-date font-karla">21/07/2026</div>
               <div class="change-entries">
@@ -82,6 +93,12 @@
                 <div class="change-entry" data-targets="declankify">
                   <h3 class="change-title">Added declankify Skill</h3>
                 </div>
+                <div class="change-entry" data-targets="pick-ui-library">
+                  <h3 class="change-title">Added pick-ui-library Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="oracle">
+                  <h3 class="change-title">Removed oracle Skill</h3>
+                </div>
                 <div class="change-entry" data-targets="create-cli">
                   <h3 class="change-title">Updated create-cli Skill</h3>
                 </div>
@@ -90,6 +107,9 @@
                 </div>
                 <div class="change-entry" data-targets="wayfinder">
                   <h3 class="change-title">Updated wayfinder Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="agents-md">
+                  <h3 class="change-title">Updated AGENTS.md (removed Oracle consultation section)</h3>
                 </div>
               </div>
             </div>
@@ -1601,7 +1621,12 @@
               </div>
               <p class="entry-description">Ghidra reverse engineering server for headless binary analysis and decompilation.</p>
             </div>
-            <div class="stack-entry" id="oracle-mcp"><div class="entry-header"><a href="https://github.com/steipete/oracle" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">oracle</span></a></div><p class="entry-description">Outbound second-model consultation via API or browser automation.</p></div>
+            <div class="stack-entry" id="semrush-mcp">
+              <div class="entry-header">
+                <span class="entry-name">semrush</span>
+              </div>
+              <p class="entry-description">SEO and competitive research data via the Semrush API.</p>
+            </div>
 
             <div class="stack-entry" id="ida-pro-mcp">
               <div class="entry-header">
@@ -1722,7 +1747,6 @@
             <div class="skill-item" id="commit-helper"><span class="skill-name font-karla">commit-helper</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Generates clear commit messages from git diffs following Conventional Commits.</span></div>
             <div class="skill-item" id="ideate"><span class="skill-name font-karla">ideate</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Timeboxed brainstorming via propose-and-critique subagent pairs.</span></div>
             <div class="skill-item" id="release-helper"><span class="skill-name font-karla">release-helper</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Automates git tag creation and GitHub release workflows.</span></div>
-            <div class="skill-item" id="oracle"><span class="skill-name font-karla">oracle</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Bundle prompts and files for second-model review via API or browser.</span></div>
             <div class="skill-item" id="quality-code"><span class="skill-name font-karla">quality-code</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Type safety, real tests, and picking the right abstractions.</span></div>
             <div class="skill-item" id="review-animations"><span class="skill-name font-karla">review-animations</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Review animation code against a high craft bar.</span></div>
             <div class="skill-item" id="write-better-error-messages"><span class="skill-name font-karla">write-better-error-messages</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Review and rewrite error messages and error-handling UX.</span></div>
@@ -1740,16 +1764,16 @@
             <div class="skill-item" id="greploop"><span class="skill-name font-karla">greploop</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Iteratively improve a PR until Greptile scores 5/5.</span></div>
             <div class="skill-item" id="improve-animations"><span class="skill-name font-karla">improve-animations</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Survey animation code and produce prioritized audit plans.</span></div>
             <div class="skill-item" id="resolving-merge-conflicts"><span class="skill-name font-karla">resolving-merge-conflicts</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Resolve in-progress git merge and rebase conflicts.</span></div>
-            <div class="skill-item" id="wayfinder"><span class="skill-name font-karla">wayfinder</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Plan huge work as a shared map of investigation tickets.</span></div>
+            <div class="skill-item" id="wayfinder"><span class="skill-name font-karla">wayfinder</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Plan huge work as a shared map of decision tickets.</span></div>
             <div class="skill-item" id="better-colors"><span class="skill-name font-karla">better-colors</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- OKLCH color space conversion, palettes, and contrast for web.</span></div>
             <div class="skill-item" id="better-typography"><span class="skill-name font-karla">better-typography</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Web typography from font selection to spacing and accessibility.</span></div>
             <div class="skill-item" id="better-ui"><span class="skill-name font-karla">better-ui</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Design engineering principles for polished interfaces.</span></div>
             <div class="skill-item" id="effect-program-design"><span class="skill-name font-karla">effect-program-design</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Design and review Effect service modules using the deep module pattern.</span></div>
             <div class="skill-item" id="improve-codebase-architecture"><span class="skill-name font-karla">improve-codebase-architecture</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Scan a codebase for deepening opportunities and grill through them.</span></div>
             <div class="skill-item" id="find-fonts"><span class="skill-name font-karla">find-fonts</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Scout fonts from a design brief and return a license-checked shortlist.</span></div>
-            <div class="skill-item" id="tmux-codex-orchestrator"><span class="skill-name font-karla">tmux-codex-orchestrator</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Orchestrate Codex workers inside tmux panes with event-driven signaling.</span></div>
             <div class="skill-item" id="transitions-polish"><span class="skill-name font-karla">transitions-polish</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Polish and refine existing motion against the transitions.dev motion-token scale.</span></div>
-            <div class="skill-item" id="declankify"><span class="skill-name font-karla">declankify</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Rewrite or review text against a banned AI-speak list and prose structure rules.</span></div>
+            <div class="skill-item" id="declankify"><span class="skill-name font-karla">declankify</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Rewrite or review text against a banned AI-speak list and prose structure rules.</span></div>
+            <div class="skill-item" id="pick-ui-library"><span class="skill-name font-karla">pick-ui-library</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Pick the right library for a frontend task from a curated, opinionated list.</span></div>
 
             
           </div>

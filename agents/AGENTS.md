@@ -208,56 +208,6 @@ outbound API to ask ChatGPT or GPT-5.5 Pro a question. Do not treat DevSpace as
 a Codex-side hard-problem consultation tool unless a separate outbound model
 bridge is installed and verified.
 
-Oracle is the verified outbound consultation path for Codex on this machine.
-Codex MUST use Oracle's Pro browser path by default. The CLI `oracle` and MCP
-server `oracle-mcp` are installed globally, the Codex MCP server named `oracle`
-is registered, `~/.oracle/config.json` defaults to browser mode with
-`gpt-5.5-pro`, and the ChatGPT browser profile at
-`/home/ubuntu/snap/chromium/common/oracle-browser-profile` is signed in for
-browser-mode Pro consults.
-
-For a Codex-readable consult, use Oracle browser mode with the Pro model:
-
-```bash
-oracle --engine browser --model gpt-5.5-pro --timeout 60m \
-  --write-output /tmp/oracle-answer.md \
-  -p "<standalone question with context>" \
-  --file "<relevant files/globs>"
-```
-
-Or, through MCP, call the `oracle.consult` tool with
-`engine: "browser"`, `model: "gpt-5.5-pro"`, and
-`browserModelStrategy: "select"`; the Codex MCP entry provides
-`DISPLAY=:78` and `ORACLE_BROWSER_PROFILE_DIR` for the signed-in profile. Also
-set the highest thinking tier the selected ChatGPT surface supports.
-
-Oracle browser thinking tiers are, from lowest to highest:
-`light`, `standard`, `extended`, `heavy`.
-
-Use `browserThinkingTime: "extended"` for `gpt-5.5-pro` browser consults,
-because Oracle documents that as the Pro Extended code-review path. Use
-`browserThinkingTime: "heavy"` when the selected browser model supports
-Thinking Heavy, such as a non-Pro thinking model exposed as `gpt-5.5`. If
-Oracle or ChatGPT rejects the requested tier, retry with the highest accepted
-tier and state the downgrade.
-
-This Pro browser path was live-tested from MCP and returned
-`ORACLE_MCP_PRO_OK`. Browser Pro consults can take many minutes. Use
-`oracle status` / `oracle session <id>` before retrying if a run appears slow.
-
-Do not use the non-Pro `gpt-5.5` API path from Codex unless the user explicitly
-asks to bypass Pro for a specific run. Do not use `gpt-5.5-pro` through the
-local API proxy unless it is re-verified: Oracle's route check accepts the
-alias, but live execution currently fails with `unknown provider for model
-gpt-5.5-pro`. Use browser mode for Pro on this machine.
-
-Use this escalation for genuinely hard design, debugging, architecture, or
-cross-system reasoning problems, not routine implementation. Expect GPT-5.5 Pro
-highest-tier browser consultations to take a long while; slow or silent
-progress does not mean they have failed. If no verified outbound consultation
-path is available to Codex, say so explicitly and continue with the best local
-path.
-
 ---
 
 ## Motion
