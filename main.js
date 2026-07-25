@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const skillRenderedView = document.getElementById('skill-rendered-view');
   const skillGithubLink = document.getElementById('skill-github-link');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const skillContentPaths = {    'crabbox': 'skills/crabbox/SKILL.md',
+  const skillContentPaths = {    'benchmark-or-eval-graph': 'skills/benchmark-or-eval-graph/SKILL.md',
+    'crabbox': 'skills/crabbox/SKILL.md',
     'batch-grill-me': 'skills/batch-grill-me/SKILL.md',
     'grill-with-docs': 'skills/grill-with-docs/SKILL.md',
     'grill-me': 'skills/grill-me/SKILL.md',
