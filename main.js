@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'declankify': 'skills/declankify/SKILL.md',
     'pick-ui-library': 'skills/pick-ui-library/SKILL.md',
     'transitions-polish': 'skills/transitions-polish/SKILL.md',
+    'effect': 'skills/effect/SKILL.md',
   };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
@@ -1116,6 +1117,10 @@ document.addEventListener('DOMContentLoaded', () => {
       'cli-review': 'https://github.com/greptileai/skills/blob/main/skills/cli-review',
       'greploop': 'https://github.com/greptileai/skills/blob/main/skills/greploop',
       'better-colors': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-colors',
+      'better-accessibility': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-accessibility',
+      'better-interface': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-interface',
+      'better-layout': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-layout',
+      'better-writing': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-writing',
       'improve-codebase-architecture': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture',
       'better-typography': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-typography',
       'better-ui': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-ui',

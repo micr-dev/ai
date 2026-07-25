@@ -70,6 +70,41 @@
           </div>
           
           <div class="changelog-timeline">
+                        <div class="change-group" data-group="25/07/2026">
+              <div class="change-date font-karla">25/07/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="better-accessibility">
+                  <h3 class="change-title">Added better-accessibility Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="better-interface">
+                  <h3 class="change-title">Added better-interface Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="better-layout">
+                  <h3 class="change-title">Added better-layout Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="better-writing">
+                  <h3 class="change-title">Added better-writing Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="effect">
+                  <h3 class="change-title">Added effect Skill</h3>
+                </div>
+                <div class="change-entry" data-targets="better-colors">
+                  <h3 class="change-title">Updated better-colors Skill (new color-usage reference, OpenAI agent config)</h3>
+                </div>
+                <div class="change-entry" data-targets="better-typography">
+                  <h3 class="change-title">Updated better-typography Skill (OpenAI agent config, revised SKILL.md)</h3>
+                </div>
+                <div class="change-entry" data-targets="better-ui">
+                  <h3 class="change-title">Updated better-ui Skill (new icons reference, OpenAI agent config)</h3>
+                </div>
+                <div class="change-entry" data-targets="codex-model">
+                  <h3 class="change-title">Updated Codex model to gpt-5.3-codex-spark</h3>
+                </div>
+                <div class="change-entry" data-targets="hermes-model">
+                  <h3 class="change-title">Updated Hermes model to kimi-k2.7-code</h3>
+                </div>
+              </div>
+            </div>
                         <div class="change-group" data-group="24/07/2026">
               <div class="change-date font-karla">24/07/2026</div>
               <div class="change-entries">
@@ -1373,10 +1408,10 @@
             <div class="role-column">
               <span class="role-label font-karla">Primary</span>
               
-              <div class="stack-entry" id="gpt-5-6-sol">
+              <div class="stack-entry" id="gpt-codex-5-3-spark">
                 <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
-                  <span class="entry-name">GPT 5.6 Sol</span>
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/codex.svg" alt=""></span>
+                  <span class="entry-name">GPT Codex 5.3 Spark</span>
                 </div>
                 <p class="entry-description">Primary Codex model for implementation, debugging, review, and repository-level reasoning.</p>
                 <p class="entry-why">Best code output and amazing tool calling. It does exactly what I tell it to, no more and no less. The only real downside is frontend work, but with good prompting and actual human taste it can still produce good results.</p>
@@ -1386,6 +1421,14 @@
             <div class="role-column">
               <span class="role-label font-karla">Secondary</span>
               
+              <div class="stack-entry" id="gpt-5-6-sol">
+                <div class="entry-header">
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
+                  <span class="entry-name">GPT 5.6 Sol</span>
+                </div>
+                <p class="entry-description">Secondary Codex model kept for fallback and comparison runs.</p>
+              </div>
+
               <div class="stack-entry" id="glm-5-2">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/glm.svg" alt=""></span>
@@ -1402,12 +1445,12 @@
                 <p class="entry-description">Fast multimodal model reached through Antigravity CLI prompt runs.</p>
               </div>
 
-              <div class="stack-entry" id="gpt-codex-5-3-spark">
+              <div class="stack-entry" id="kimi-k2-7-code">
                 <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/codex.svg" alt=""></span>
-                  <span class="entry-name">GPT Codex 5.3 Spark</span>
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/kimi.svg" alt=""></span>
+                  <span class="entry-name">Kimi K2.7 Code</span>
                 </div>
-                <p class="entry-description">Lightweight Codex model for fast, low-cost coding tasks.</p>
+                <p class="entry-description">Hermes Agent model for persistent terminal sessions and alternate judgment.</p>
               </div>
             </div>
           </div>
@@ -1786,9 +1829,14 @@
             <div class="skill-item" id="improve-animations"><span class="skill-name font-karla">improve-animations</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Survey animation code and produce prioritized audit plans.</span></div>
             <div class="skill-item" id="resolving-merge-conflicts"><span class="skill-name font-karla">resolving-merge-conflicts</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Resolve in-progress git merge and rebase conflicts.</span></div>
             <div class="skill-item" id="wayfinder"><span class="skill-name font-karla">wayfinder</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Plan huge work as a shared map of decision tickets.</span></div>
+            <div class="skill-item" id="better-accessibility"><span class="skill-name font-karla">better-accessibility</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Accessibility engineering for focus, keyboard, ARIA, forms and screen readers.</span></div>
             <div class="skill-item" id="better-colors"><span class="skill-name font-karla">better-colors</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- OKLCH color space conversion, palettes, and contrast for web.</span></div>
+            <div class="skill-item" id="better-interface"><span class="skill-name font-karla">better-interface</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Cross-discipline interface review coordinating accessibility, layout, writing, typography, color and UI.</span></div>
+            <div class="skill-item" id="better-layout"><span class="skill-name font-karla">better-layout</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Layout structure from grouping and alignment to adaptive breakpoints.</span></div>
             <div class="skill-item" id="better-typography"><span class="skill-name font-karla">better-typography</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Web typography from font selection to spacing and accessibility.</span></div>
             <div class="skill-item" id="better-ui"><span class="skill-name font-karla">better-ui</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Design engineering principles for polished interfaces.</span></div>
+            <div class="skill-item" id="better-writing"><span class="skill-name font-karla">better-writing</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- UX writing and interface copy from button labels to error messages and empty states.</span></div>
+            <div class="skill-item" id="effect"><span class="skill-name font-karla">effect</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Opinionated guide for building production TypeScript applications with Effect v4.</span></div>
             <div class="skill-item" id="effect-program-design"><span class="skill-name font-karla">effect-program-design</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Design and review Effect service modules using the deep module pattern.</span></div>
             <div class="skill-item" id="improve-codebase-architecture"><span class="skill-name font-karla">improve-codebase-architecture</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Scan a codebase for deepening opportunities and grill through them.</span></div>
             <div class="skill-item" id="find-fonts"><span class="skill-name font-karla">find-fonts</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Scout fonts from a design brief and return a license-checked shortlist.</span></div>
