@@ -73,6 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
     'pick-ui-library': 'skills/pick-ui-library/SKILL.md',
     'transitions-polish': 'skills/transitions-polish/SKILL.md',
     'effect': 'skills/effect/SKILL.md',
+    'kagi-account-config': 'skills/kagi-account-config/SKILL.md',
+    'kagi-ai': 'skills/kagi-ai/SKILL.md',
+    'kagi-assistant': 'skills/kagi-assistant/SKILL.md',
+    'kagi-monitoring': 'skills/kagi-monitoring/SKILL.md',
+    'kagi-usage': 'skills/kagi-usage/SKILL.md',
+    'oracle': 'skills/oracle/SKILL.md',
   };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
@@ -1102,7 +1108,6 @@ document.addEventListener('DOMContentLoaded', () => {
       'ideate': 'https://github.com/av/skills/tree/master/ideate',
       'timeboxed-iterating': 'https://github.com/av/skills/tree/master/timeboxed-iterating',
       'release-helper': 'https://github.com/butttons/pi-kit/tree/main/skills/release-helper',
-      'oracle': 'https://github.com/openclaw/openclaw/blob/main/skills/oracle/SKILL.md',
       'quality-code': 'https://github.com/RhysSullivan/skills/blob/main/skills/quality-code',
       'review-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/review-animations',
       'animation-vocabulary': 'https://github.com/emilkowalski/skills/blob/main/skills/animation-vocabulary',
