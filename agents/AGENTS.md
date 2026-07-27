@@ -1069,9 +1069,33 @@ I MUST use `markit` when the goal is to convert a local file, URL, or stdin stre
 - Use `cat <file> | markit -` when the input is provided via stdin
 - Use `markit formats` before assuming an uncommon format is supported
 - For images and audio, `markit` may require `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` for AI description or transcription features
-- Prefer `kagi_extract` for readable main-content extraction from web pages when article extraction is the primary goal and `KAGI_API_TOKEN` or `KAGI_SESSION_TOKEN` is configured. Use Defuddle as the fallback readable web extraction path.
+- Prefer `kagi_extract` for readable main-content extraction from web pages when `KAGI_API_TOKEN` or `KAGI_SESSION_TOKEN` is configured. Use Defuddle as the fallback readable web extraction path.
 - Prefer `LiteParse` for local PDFs, Office docs, and images when layout fidelity, screenshots, or page-level inspection matter more than markdown conversion
 - Prefer `markit` when the required output is markdown and the source is a document, spreadsheet, notebook, feed, structured data file, URL, or stdin stream
+
+### Trafilatura
+`trafilatura` is installed in the system-managed virtual environment at `/home/ubuntu/.venv`. Use it for Python-based web content extraction when `kagi_extract`, Defuddle, or `markit` are unavailable or unsuitable.
+
+- Activate the correct environment before importing: `source /home/ubuntu/.venv/bin/activate`
+- Use the CLI for quick extraction: `trafilatura -u <url>` or `trafilatura -u <url> -o <file>`
+- Use the Python API when extraction is part of a script:
+  ```python
+  from trafilatura import fetch_url, extract
+  downloaded = fetch_url("https://example.com")
+  result = extract(downloaded, output="markdown", url="https://example.com")
+  ```
+- Keep fallback extraction paths in this order: `kagi_extract` (if Kagi auth is configured), `parkour-mcp.WebFetchIncisive`, `defuddle`, `trafilatura`, raw `curl`
+
+### Parkour MCP `WebFetchIncisive`
+Use `parkour-mcp.WebFetchIncisive` for rich web content extraction when `kagi_extract` is unavailable or unsuitable, placing it before `defuddle` and `trafilatura`.
+
+- It fetches directly through this device, bypassing datacenter IP bans and 403 blocks that can hit proxied tools.
+- Prefer targeted extraction for large or unknown pages:
+  - Call `WebFetchSections` first to map headings.
+  - Then use `section="Heading"`, `slices=[3, 4, 5]`, or `search="+term1 +term2"` to fetch only the relevant parts.
+- Use it for Reddit URLs, JavaScript-heavy pages, or sites that block Anthropic/Claude's proxies.
+- Use `requires_js=true` only when the static fetch returns an empty shell; default is cheaper.
+- Example: `WebFetchIncisive("https://example.com", section="Introduction")`
 
 ### Egaki
 I MUST use `egaki` 0.4.0 (PR #4 build) for terminal-driven AI image generation when the user wants image creation or editing.
