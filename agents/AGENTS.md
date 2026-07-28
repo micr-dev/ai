@@ -225,6 +225,27 @@ motion.
 
 ---
 
+## Simplified-Explanation Mode
+
+If I ask you to explain something to me:
+- "as if I were 5",
+- "as if I were retarded",
+- "ELI5" / "explain like I'm five",
+- or any similar phrasing that asks for a very simple, dumbed-down explanation,
+
+you MUST respond using ASD-STE100 Simplified Technical English rules:
+
+- Use only approved, simple words. Avoid technical jargon where possible; if a technical term is required, define it on first use.
+- Keep sentences short and grammatically simple (one clause per sentence when practical).
+- Use the active voice and imperative mood for instructions.
+- Use "you" to address me directly when giving guidance.
+- Be concrete and specific; avoid abstract or flowery language.
+- Do not use idioms, slang, metaphors, or humor to explain the concept.
+- Structure the answer with short paragraphs or numbered steps.
+- Do not add caveats, disclaimers, or qualifications beyond what is strictly needed to be accurate.
+
+---
+
 ## Output Standards
 
 ### Code Quality
@@ -353,6 +374,15 @@ I MUST prefer local CLIs, small helper scripts, and HTTP-native tools before MCP
 - Kagi-backed web research: I MUST use the local `kagi-mcp` MCP server before any direct Kagi CLI usage. Default tools: `kagi_search`, `kagi_assistant`, `kagi_summarize`, `kagi_extract`, `kagi_quick`, `kagi_news`, `kagi_auth_status`, and `kagi_auth_check`
 - Human-readable web-page extraction: I MUST prefer the `kagi_extract` MCP tool before Defuddle or raw `curl` when the goal is readable main-content extraction rather than exact raw bytes and either `KAGI_API_TOKEN` or `KAGI_SESSION_TOKEN` is configured. With session-only auth, kagi-cli mints a Kagi API token through the authenticated API portal and then calls the real Extract API. Use Defuddle when Kagi Extract is unavailable or cannot handle the web page. For YouTube transcripts, use the installed `youtube-transcript` skill instead of Defuddle.
 - Local document parsing for PDFs, Office docs, and images for agent consumption: `lit parse <path>` MUST be the default when the source is a local file rather than a web page
+
+### Video and Live-Site Tasks
+
+For tasks that require watching a video, understanding a screen recording, or interacting with a live website as a user would:
+
+- Prefer `agy` (Antigravity CLI) with a Gemini model: `agy --model gemini-3.6-flash-high --print "summarize this video: <URL>"`.
+- Gemini models can process video URLs directly and browse live sites, so they handle both video analysis and site interaction in one tool.
+- Use this when the task is "watch this and tell me what happens" rather than downloading or editing the video.
+- For exact frame extraction, downloading, or editing, use yt-dlp + ffmpeg directly.
 
 ---
 
@@ -1200,15 +1230,15 @@ React already encapsulates component state. Use a central store only when state 
 If a change affects observable behavior (public API, protocol, persistence format, CLI flags, error semantics), I MUST update the contract artifact first, then propagate code until enforcement is green.
 
 ### Spec Hierarchy (prefer highest available ground truth):
-1. External oracle (system outside ours: RFCs, Postgres, reference corpus)
-2. Reference model (executable spec mirroring the oracle)
+1. External reference source (system outside ours: RFCs, Postgres, reference corpus)
+2. Reference model (executable spec mirroring the reference source)
 3. Conformance suite (tests all implementations must pass)
 4. Prose rationale (why; trade-offs; what was tried/abandoned)
 
 ### Drift Prevention
-Drift is a failure mode. If an oracle exists:
+Drift is a failure mode. If a reference source exists:
 - Add/keep differential tests against it
-- Treat spec-oracle drift as CI failure, not folklore
+- Treat spec/reference drift as CI failure, not folklore
 
 If a "bug fix" requires changing the shared mental model, it's a behavior change. Document it and add enforcement.
 

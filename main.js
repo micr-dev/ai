@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'kagi-monitoring': 'skills/kagi-monitoring/SKILL.md',
     'kagi-usage': 'skills/kagi-usage/SKILL.md',
     'oracle': 'skills/oracle/SKILL.md',
+    'bikeshed': 'skills/bikeshed/SKILL.md',
   };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
