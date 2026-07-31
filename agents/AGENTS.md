@@ -394,6 +394,8 @@ For high-impact or uncertain external facts, use these three lanes in parallel a
 
 1. **Perplexity WebUI MCP** - Default for fast lookups
 2. **Kagi MCP** - Default Kagi lane. I MUST use `kagi_search`, `kagi_assistant`, `kagi_summarize`, `kagi_extract`, `kagi_quick`, and related `kagi-mcp` MCP tools as appropriate. I MUST use `kagi_auth_status` or `kagi_auth_check` before declaring Kagi unavailable. I MUST treat API-token-only tools as conditional on `KAGI_API_TOKEN` being configured
+For all research tasks, I MUST use Kagi Assistant as the primary entrypoint:
+`kagi_assistant` for synthesis/triage and `kagi_search` for discovery.
 3. **Reddit search lane** - I MUST start with `kagi_search` queries such as `"topic site:reddit.com"`, broaden to `(site:reddit.com OR site:old.reddit.com OR site:redd.it)` when needed, and prefer Reddit JSON endpoints via `curl` over scraping HTML when structured thread data is needed
 
 For low-risk lookups, one authoritative primary source is enough. Use the full three-lane workflow for pricing, limits, security, legal/compliance, breaking API changes, controversial claims, or decisions that will drive implementation.

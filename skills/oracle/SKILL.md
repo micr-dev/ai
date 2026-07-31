@@ -1,203 +1,119 @@
 ---
 name: oracle
-description: "Oracle second-model review: bundle prompts/files, debug, refactor, design."
+description: "Oracle CLI browser workflow for ChatGPT, with a direct recovery path for model picker but no prompt submit."
 ---
 
-# Oracle (CLI) — best use
+# Oracle (CLI) — browser recovery workflow
 
-Oracle bundles a prompt and selected files into a one-shot request so another
-model can answer with real repository context. A prompt is required; attach
-files only when they add necessary context. Treat responses as advisory and
-verify them against the codebase and tests.
+This skill keeps `--engine browser` and `--model gpt-5.6-sol` as default behavior.
 
-## Hard rules for Codex use
+## Non-negotiable defaults
 
-1. **Browser only.** Never use the API engine. Always pass `--engine browser`.
-2. **GPT-5.6 only.** The target model must be either `gpt-5.6-sol` or `gpt-5.6`.
-3. If GPT-5.6 is unavailable in the ChatGPT picker, stop and ask the operator
-   before falling back to another model. Do not silently switch to
-   `gpt-5.5-pro` or any other model.
-4. Do not attach secrets, `.env` files, or unredacted credentials.
+- Engine: `browser`
+- Model: `gpt-5.6-sol`
+- Thinking time: `--browser-thinking-time heavy`
+- Manual login: keep enabled unless you explicitly approve turning it off
+- Do not switch model/provider unless the operator approves a change
 
-## Main use case (browser, GPT-5.6)
+## Fast fix when picker loads but prompt never submits
 
-Use browser mode with GPT-5.6 only. GPT-5.6 Sol and GPT-5.6 Sol Pro are
-distinct targets: base Sol uses the Extra High effort setting, while Pro is a
-separate picker target for difficult or long-running work.
+If you see picker UI for `GPT-5.6 Sol` but Oracle marks a run as failed and `promptSubmitted:false`, run these exact steps.
 
-Required defaults:
+### 1) Turn a browser-exported ChatGPT cookie dump into Oracle inline cookies
 
-- Engine: browser (`--engine browser`)
-- Base Sol: `--model gpt-5.6-sol`
-- Base Sol maximum reasoning: `--browser-thinking-time heavy` (Extra High)
-- Pro: `--model gpt-5-pro`, without a thinking-time flag
-- Fallback: **operator consent required** before using any other model
-- Attachments: directories/globs plus excludes; never attach secrets by default
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
 
-GPT-5.6 availability is account-dependent. Confirm the base Sol picker and
-retain model-selection evidence. A bare `Pro` picker label proves picker
-selection but does not, by itself, prove the server-side Pro generation.
+src = Path('/path/to/chatgpt-cookie-export.json')
+out = Path('/tmp/chatgpt-inline-cookies.json')
 
-## GPT-5.6 model selection
+with src.open() as f:
+    data = json.load(f)
 
-This version supports the same aliases in browser and API mode:
+# most exports are object with "cookies" array
+cookies = data['cookies'] if isinstance(data, dict) and 'cookies' in data else data
+out.write_text(json.dumps(cookies, separators=(",", ":")))
+print(out)
+PY
+```
 
-- `gpt-5.6`: follow the GPT-5.6 family default
-- `gpt-5.6-sol`: pin ChatGPT's `GPT-5.6 Sol` entry
-- `gpt-5-pro`: select ChatGPT's `Pro` target
+### 2) Enable cookie sync in Oracle config (keeps manual login profile unchanged)
 
-For base Sol, use:
+```bash
+python - <<'PY'
+import json
+p = '/home/ubuntu/.oracle/config.json'
+cfg = json.loads(open(p).read())
+b = cfg.setdefault('browser', {})
+b['manualLogin'] = True
+b['manualLoginCookieSync'] = True
+# keep this pointing at your signed-in Chromium profile
+b['manualLoginProfileDir'] = '/home/ubuntu/snap/chromium/common/oracle-browser-profile'
+open(p, 'w').write(json.dumps(cfg, indent=2) + '\n')
+print('updated', p)
+PY
+```
+
+### 3) Verify one minimal call using the same profile + inline cookies
+
+```bash
+oracle --engine browser --model gpt-5.6-sol \
+  --browser-inline-cookies-file /tmp/chatgpt-inline-cookies.json \
+  --browser-model-strategy current \
+  --browser-manual-login \
+  --browser-manual-login-profile-dir /home/ubuntu/snap/chromium/common/oracle-browser-profile \
+  --force -p "current" \
+  --write-output /tmp/oracle-setup-check-current.md
+```
+
+If this succeeds, continue with your normal command style.
+
+### 4) Use this exact fallback until stable
+
+```bash
+oracle --engine browser --model gpt-5.6-sol \
+  --browser-inline-cookies-file /tmp/chatgpt-inline-cookies.json \
+  --browser-manual-login-profile-dir /home/ubuntu/snap/chromium/common/oracle-browser-profile \
+  --browser-model-strategy ignore \
+  --force -p "Reply with exactly: setup ok" \
+  --write-output /tmp/oracle-setup-check.md
+```
+
+`ignore` is a safe temporary fallback when picker state is flaky.
+
+## Standard run command
 
 ```bash
 oracle --engine browser --model gpt-5.6-sol \
   --browser-thinking-time heavy \
-  -p "<task>" --file "src/**"
+  -p "<task>" \
+  --file "src/**"
 ```
 
-Do not use `--model "GPT-5.6 Sol Pro"`. Pro is intentionally handled as a
-distinct picker target. Browser label validation rejects unknown future
-variants such as `gpt-5.6-luna` instead of silently falling back to Sol; API
-runs preserve such provider model IDs unchanged.
-
-Browser mode maps these aliases to ChatGPT's Sol picker. API and multi-model
-runs preserve the corresponding first-party OpenAI model IDs; provider-qualified
-and unrelated custom IDs remain pass-through values.
-
-The GPT-5.6 browser support depends on the unified Intelligence picker. It
-recognizes the current English and Chinese effort labels, avoids matching
-`高` inside `极高`, and re-queries the composer pill after React replaces it so
-selection verification cannot rely on a detached stale node.
-
-## Compatibility with npm 0.15.2
-
-Do not pass `gpt-5.6` or `gpt-5.6-sol` to an unpatched npm 0.15.2 install. That
-release can normalize those labels to `gpt-5.2`. Use the explicit fallback:
+## Session checks for hard failures
 
 ```bash
-npx -y @steipete/oracle@0.15.2 --engine browser --model gpt-5.5-pro \
-  -p "<task>" --file "src/**"
+# latest sessions + key runtime flags
+for s in $(ls -1t ~/.oracle/sessions 2>/dev/null | head -n 10); do
+  echo "--- $s"
+  jq -r '"status=" + (.status // "") + " | desiredModel=" + (.browser.config.desiredModel // "") + " | promptSubmitted=" + ((.browser.runtime.promptSubmitted // false) | tostring) + " | tabUrl=" + (.browser.runtime.tabUrl // "")' \
+    ~/.oracle/sessions/$s/meta.json
+ done
 ```
 
-After upgrading to a release containing the GPT-5.6 model-selection and
-unified-picker changes, verify all of the following before removing the
-fallback guidance: `--help --verbose` exposes the new options, browser dry-run
-resolves both aliases to GPT-5.6 Sol, API routing selects first-party OpenAI,
-and a live browser run records strict GPT-5.6 selection evidence.
+A blocked run often shows:
 
-## Golden path
+- `status=error`
+- `promptSubmitted=false`
+- `tabUrl=https://chatgpt.com/`
 
-1. Pick the smallest file set that still contains the truth.
-2. Preview the bundle with `--dry-run` and `--files-report`.
-3. Use browser mode for GPT-5.6; use API only when explicitly intended.
-4. If a run detaches or times out, reattach to the stored session instead of
-   starting a duplicate.
-
-## Commands
-
-- Show help:
-  - `npx -y @steipete/oracle --help --verbose`
-
-- Preview without calling a model:
-  - `npx -y @steipete/oracle --engine browser --model gpt-5.6-sol --dry-run summary -p "<task>" --file "src/**" --file "!**/*.test.*"`
-  - `npx -y @steipete/oracle --engine browser --model gpt-5.6-sol --dry-run full -p "<task>" --file "src/**"`
-
-- Inspect token usage:
-  - `npx -y @steipete/oracle --engine browser --model gpt-5.6-sol --dry-run summary --files-report -p "<task>" --file "src/**"`
-
-- Browser run (required form):
-  - `oracle --engine browser --model gpt-5.6-sol --browser-thinking-time heavy -p "<task>" --file "src/**"`
-
-- Manual paste fallback:
-  - `npx -y @steipete/oracle --engine browser --model gpt-5.6-sol --render-markdown --copy-markdown -p "<task>" --file "src/**"`
-  - `--render` is an alias for `--render-markdown`.
-
-- Performance trace:
-  - `npx -y @steipete/oracle --engine browser --model gpt-5.6-sol --perf-trace --perf-trace-path /tmp/oracle-perf.json --dry-run summary -p "<task>" --file "src/**"`
-
-## Attaching files
-
-`--file` accepts files, directories, and globs. Pass it multiple times or use
-comma-separated entries.
-
-- Include: `--file "src/**"`, `--file src/index.ts`, `--file docs --file README.md`
-- Exclude: prefix a pattern with `!`, for example `--file "!src/**/*.test.ts"`
-- Default ignored directories: `node_modules`, `dist`, `coverage`, `.git`,
-  `.turbo`, `.next`, `build`, and `tmp`
-- Globs honor `.gitignore` and do not follow symlinks.
-- Dotfiles require an explicit dot-segment in the pattern, such as
-  `--file ".github/**"`.
-- Files over 1 MB are rejected by default; configure
-  `ORACLE_MAX_FILE_SIZE_BYTES` or `maxFileSizeBytes` when necessary.
-
-Keep total input under roughly 196k tokens. Use `--files-report` or
-`--dry-run json` to identify oversized inputs. Never attach `.env` files,
-private keys, auth tokens, or other secrets unless they have been redacted and
-are essential to the question.
-
-## Engines and browser controls
-
-- **Always use `--engine browser`.** API mode is not allowed unless the
-  operator explicitly overrides this rule.
-- **Always use `--model gpt-5.6-sol` or `--model gpt-5.6`.** Do not use other
-  models without operator approval.
-- Browser supports GPT models through ChatGPT and Gemini models through Gemini
-  web. API-only models such as `gpt-5.1-codex` are out of scope for the default
-  Codex path.
-- Do not set `OPENAI_API_KEY` as a way to force API mode; keep browser mode
-  explicit.
-- Browser attachments use `--browser-attachments auto|never|always`.
-- For many files, add `--browser-bundle-files --browser-bundle-format auto|zip`.
-- Reuse an existing Chrome session with `--browser-tab <ref>`,
-  `--browser-attach-running`, or `--remote-chrome <host:port>`.
-- Use `--browser-model-strategy select|current|ignore` to control picker
-  behavior.
-- Use `--browser-follow-up "<prompt>"` for another turn in the same browser
-  conversation, or `--followup <sessionId|responseId>` for a stored run.
-- Use `--browser-research deep` only when Deep Research is explicitly wanted.
-
-## API preflight
-
-Before an API run, check provider readiness without printing secrets:
+## Config and profile sanity checks
 
 ```bash
-oracle doctor --providers --models gpt-5.4,claude-4.6-sonnet,gemini-3-pro
-oracle --preflight --models gpt-5.4,gemini-3-pro
-oracle --route --model gpt-5.4
+cat /home/ubuntu/.oracle/config.json
+ls -la /home/ubuntu/snap/chromium/common/oracle-browser-profile/Default | head
 ```
 
-Use `--provider openai` or `--no-azure` when first-party OpenAI routing is
-required. For multi-model panels where partial success is useful, use
-`--allow-partial --write-output <path>` so successful outputs and the manifest
-can be recovered.
-
-Set an explicit deadline for automation, for example `--timeout 10m`; Oracle
-derives the HTTP timeout unless `--http-timeout` is supplied.
-
-## Sessions and recovery
-
-- Sessions are stored under `~/.oracle/sessions`; override with
-  `ORACLE_HOME_DIR`.
-- Browser artifacts include `transcript.md` and, when available, research
-  reports and generated images.
-- List recent sessions with `oracle status --hours 72`.
-- Attach with `oracle session <id> --render`.
-- Use `--slug "<3-5 words>"` for readable session IDs.
-- If a run times out, reattach; do not re-run it. Use `--force` only when a
-  genuinely new identical run is intended.
-- Successful non-project browser one-shots are archived automatically by
-  default; override with `--browser-archive never|always`.
-
-## Prompt template
-
-Oracle starts with zero project knowledge. Include:
-
-- Project briefing: stack, services, build/test commands, and platform constraints
-- Where things live: entrypoints, configs, key modules, and dependency boundaries
-- Exact question, prior attempts, and verbatim error text
-- Constraints such as API compatibility, performance budgets, and files not to change
-- Desired output such as a patch plan, tests, risk list, or tradeoff comparison
-
-For a long investigation, make the prompt restorable: put a 6–30 sentence
-briefing at the top, concrete reproduction and errors in the middle, and attach
-all context files required by a fresh model at the bottom. Oracle runs are
-one-shot; the model does not remember prior runs.
+If you need a non-picker baseline run (no picker selection), use `--browser-model-strategy ignore`.
