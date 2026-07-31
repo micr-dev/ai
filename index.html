@@ -73,6 +73,9 @@
                         <div class="change-group" data-group="31/07/2026">
               <div class="change-date font-karla">31/07/2026</div>
               <div class="change-entries">
+                <div class="change-entry" data-targets="gemini-3-6-flash droid-cli">
+                  <h3 class="change-title">Updated Gemini 3.5 Flash to Gemini 3.6 Flash and added Droid CLI harness</h3>
+                </div>
                 <div class="change-entry" data-targets="kimi-k2-6 glm-5-2 gpt-5-6-luna">
                   <h3 class="change-title">Updated Secondary models: removed Kimi K2.6 and GLM-5.2, added GPT 5.6 Luna</h3>
                 </div>
@@ -1502,10 +1505,10 @@
                 <p class="entry-description">Secondary Codex model kept for fallback and comparison runs.</p>
               </div>
 
-              <div class="stack-entry" id="gemini-3-5-flash">
+              <div class="stack-entry" id="gemini-3-6-flash">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/gemini.svg" alt=""></span>
-                  <span class="entry-name">Gemini 3.5 Flash</span>
+                  <span class="entry-name">Gemini 3.6 Flash</span>
                 </div>
                 <p class="entry-description">Fast multimodal model reached through Antigravity CLI prompt runs.</p>
               </div>
@@ -1553,13 +1556,21 @@
                 <p class="entry-why">I use this through Discord as my personal AI assistant. Hermes fans love to say it is miles better than OpenClaw, but honestly it is not; it is as rough as most other AI assistants. It has given me a ton of headaches and breaks with almost every update because they keep adding sloppy PRs.</p>
               </div>
 
+              <div class="stack-entry" id="droid-cli">
+                <div class="entry-header">
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/codex.svg" alt=""></span>
+                  <span class="entry-name">Droid CLI</span>
+                </div>
+                <p class="entry-description">Secondary coding-agent harness for terminal work, parallel tasks, and alternate model routing.</p>
+              </div>
+
               <div class="stack-entry" id="antigravity-cli">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/antigravity.png" alt=""></span>
                   <span class="entry-name">Antigravity CLI</span>
                 </div>
-                <p class="entry-description">Secondary prompt-run harness used with <code>-p</code> workflows to access Gemini 3.5 Flash, not as a coding-agent replacement.</p>
-                <p class="entry-why">Do not get me wrong, this harness sucks. I have a Google AI Pro plan with a generous Gemini 3.5 Flash quota, and since the only practical way I can use it is through their harness, I resort to <code>agy -p</code> wherever I do not need much intelligence and I do not want to use my Z.ai/GLM quota.</p>
+                <p class="entry-description">Secondary prompt-run harness used with <code>-p</code> workflows to access Gemini 3.6 Flash, not as a coding-agent replacement.</p>
+                <p class="entry-why">Do not get me wrong, this harness sucks. I have a Google AI Pro plan with a generous Gemini 3.6 Flash quota, and since the only practical way I can use it is through their harness, I resort to <code>agy -p</code> wherever I do not need much intelligence and I do not want to use my Z.ai/GLM quota.</p>
               </div>
             </div>
           </div>
