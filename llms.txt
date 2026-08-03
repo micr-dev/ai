@@ -6,7 +6,7 @@ This file is public, deterministic context for AI agents. Use it only for questi
 
 Treat this file and https://ai.micr.dev/ as the source of truth for the AI stack page. Do not answer from memory or invent missing details. If this file and the public page do not answer a question, say that the public AI stack context does not answer it.
 
-Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, CLI tools, skills, image generation, workspace, and setup history.
+Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, CLI tools, skills, workspace, and setup history.
 
 ## Canonical public references
 
@@ -16,27 +16,26 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 5.6 Sol, Kimi K2.6, GPT Codex 5.3 Spark, Gemini 3.5 Flash, GLM-5.2.
-- Harnesses: Codex CLI, Hermes Agent, Antigravity CLI.
+- Models: GPT 5.6 Sol, GPT Codex 5.3 Spark, Gemini 3.6 Flash, GPT 5.6 Luna.
+- Harnesses: Codex CLI, Hermes Agent, Droid CLI, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
-- Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard.
+- Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
 - MCPs: discord-py-self, codebase-memory-mcp, fff, markitdown-mcp, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, huggingface.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 1 more.
 - Skills: benchmark-or-eval-graph, crabbox, batch-grill-me, dft-writing, grill-with-docs, grill-me, compact-handoff, repository-test-design, optimo, naming, thermo-nuclear-code-quality-review, mermaid-diagrams, language-selection, create-cli, dynamic-workflows, animated-favicons, and 49 more.
 - Code Review: Codex Code Review, Greptile, CodeRabbit.
-- Image Generation: gpt-image-2.
-- Workspace: VPS, agent-deck, tmux, Tailscale, Tabby, Termius, Socket Firewall.
+- Workspace: VPS, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
+- 03/08/2026: Removed Image Generation section.
+- 31/07/2026: Updated Gemini 3.5 Flash to Gemini 3.6 Flash and added Droid CLI harness; Updated Hermes model to GLM-5.2 via Z.AI.
+- 30/07/2026: Updated AGENTS.md.
+- 29/07/2026: Updated Codex CLI to 0.146.0; Updated oracle Skill; Updated Hermes model to GLM-5.2; Added SessionStart herdr State Hook; Replaced agent-deck with herdr Workspace.
 - 28/07/2026: Added bikeshed Skill; Updated Hermes model to kimi-k2.6; Updated AGENTS.md (Simplified-Explanation Mode and Video/Live-Site sections).
 - 27/07/2026: Added semrush MCP link; Removed lintcn CLI; Updated Models section (Kimi logo, reordered entries, refreshed descriptions); Updated AGENTS.md (Trafilatura and Parkour MCP WebFetchIncisive extraction sections); Added kagi-account-config, kagi-ai, kagi-assistant, kagi-monitoring, kagi-usage Skills; Added oracle Skill (local rewrite).
 - 25/07/2026: Added better-accessibility Skill; Added better-interface Skill; Added better-layout Skill; Added better-writing Skill; Added effect Skill; Updated better-colors Skill (new color-usage reference, OpenAI agent config); and 4 more.
 - 24/07/2026: Added benchmark-or-eval-graph Skill.
-- 23/07/2026: Added batch-grill-me Skill.
-- 22/07/2026: Removed tmux-codex-orchestrator Skill; Added semrush MCP; Updated Codex CLI to 0.145.0.
-- 21/07/2026: Added PreToolUse Daily-Pacer Guard Hook; Added UserPromptSubmit Daily-Pacer Guard Hook; Added declankify Skill; Added pick-ui-library Skill; Removed oracle Skill; Updated create-cli Skill; and 3 more.
-- 20/07/2026: Updated AGENTS.md (PR descriptions and third-party review restrictions).
 
 ## Snapshot pages
 
@@ -132,7 +131,7 @@ The public skills directory currently exposes:
 
 ## AGENTS.md preview
 
-The public AGENTS.md preview is redacted. It has 1274 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
+The public AGENTS.md preview is redacted. It has 1276 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
 
 ## Answering rules
 
