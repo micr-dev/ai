@@ -1,6 +1,6 @@
 ---
 name: crabbox
-description: "Crabbox remote validation and lease workflows."
+description: "Crabbox remote validation, lease, and template-box workflows."
 ---
 
 # Crabbox
@@ -24,6 +24,18 @@ logs/results, UI proof artifacts, or sync from a dirty local checkout.
 - Prefer local targeted tests for tight edit loops. Move to Crabbox for broad
   suites, package-heavy checks, Docker/E2E/live-provider proof, cross-OS proof,
   UI proof, or commands that bog down the local machine.
+
+## Template Boxes
+
+- Treat a template catalog entry as a provisionable base, not as a static SSH
+  alias.
+- A complete template lane needs acquire, resolve, list, release, and cleanup
+  behavior plus a real SSH/run proof on the target OS.
+- Keep `provider: ssh` configurations for existing static hosts separate from
+  template providers. A reachable host is not a reusable template by itself.
+- For Apple Silicon macOS, use a Tart-backed lifecycle only when the installed
+  provider matrix supports `external` with `target: macos`. Verify the actual
+  provider binary and base image before selecting the lane.
 
 ## Auth And Config
 
