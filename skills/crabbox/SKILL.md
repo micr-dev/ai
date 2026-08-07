@@ -1,6 +1,6 @@
 ---
 name: crabbox
-description: "Crabbox remote validation, lease, and template-box workflows."
+description: "Operate Crabbox leases, machine inventory, and the configured Linux, Windows 10, Windows 11, and macOS template boxes."
 ---
 
 # Crabbox
@@ -11,6 +11,9 @@ logs/results, UI proof artifacts, or sync from a dirty local checkout.
 
 ## Source Of Truth
 
+- Portable template configs and host scripts live in
+  `https://github.com/microck/crabbox-template-boxes`. Keep that repository
+  and the installed machine catalog aligned after verified template changes.
 - Run Crabbox from the repository root; sync mirrors the current checkout.
 - Treat repo-local `crabbox.yaml` or `.crabbox.yaml` as executable project
   automation. Review it before remote runs, especially `provider`, `actions`,
@@ -25,17 +28,64 @@ logs/results, UI proof artifacts, or sync from a dirty local checkout.
   suites, package-heavy checks, Docker/E2E/live-provider proof, cross-OS proof,
   UI proof, or commands that bog down the local machine.
 
-## Template Boxes
+## This Machine's Template Boxes
 
-- Treat a template catalog entry as a provisionable base, not as a static SSH
-  alias.
-- A complete template lane needs acquire, resolve, list, release, and cleanup
-  behavior plus a real SSH/run proof on the target OS.
-- Keep `provider: ssh` configurations for existing static hosts separate from
-  template providers. A reachable host is not a reusable template by itself.
-- For Apple Silicon macOS, use a Tart-backed lifecycle only when the installed
-  provider matrix supports `external` with `target: macos`. Verify the actual
-  provider binary and base image before selecting the lane.
+Keep catalog discovery separate from live inventory:
+
+- `crabbox list --help` documents flags. It never lists machines.
+- `crabbox list` shows active Crabbox lease claims for the selected provider.
+- `crabbox list --all --json` asks the selected provider for its wider
+  inventory, including stopped resources when that provider supports it.
+- `~/.crabbox/templates/templates.json` is the local catalog of available
+  template bases. Read this first when the request is "show the machines" or
+  "which boxes can I create?"
+
+The configured catalog has these supported lanes:
+
+| Lane | Catalog name | Base | Provider |
+| --- | --- | --- | --- |
+| Linux | `minimal` | `crabbox:minimal` | Oracle Cloud Docker |
+| Linux | `node` | `crabbox:node` | Oracle Cloud Docker |
+| Linux | `full` | `crabbox:full` | Oracle Cloud Docker |
+| Linux | `browser` | `crabbox:browser` | Oracle Cloud Docker |
+| Windows 10 ARM64 | `win10-full` | `win10-arm64-clean-qemu-pwsh` | QEMU |
+| Windows 11 ARM64 | `win11-full` | `win11-arm64-hyperv-base` | Hyper-V |
+| macOS Apple Silicon | `macos-full` | `macos-tahoe-base` | Remote Tart via external provider |
+
+Do not treat old experimental files as supported catalog entries. In
+particular, `win11-full-qemu.candidate.yaml` is stale if it exists in a local
+copy and must not be selected.
+
+The macOS lane is a real per-lease Tart VM cloned from the catalog base. It is
+not the separate static SSH entry for the physical Mac host. It requires a
+current Crabbox binary whose external provider advertises `target: macos`.
+
+Use this discovery sequence without starting or stopping anything:
+
+```sh
+jq . ~/.crabbox/templates/templates.json
+crabbox config path
+crabbox config show
+crabbox list --json
+crabbox list --all --json
+```
+
+Before interpreting an empty list, identify the selected provider with
+`crabbox config show`. An empty active-lease list does not mean the template
+bases are missing. A provider error means that provider's host or bridge is
+unreachable; it says nothing about the other lanes.
+
+Repository copies under `crabbox-template-boxes/configs/` are portable
+examples, not automatically trusted runtime config. Crabbox rejects a
+repository-provided `external.connection.ssh.trustProviderOutput` when it
+would inherit credentials. Keep that trust decision in the user config and do
+not bypass the rejection. Use the matching trusted local configuration and
+provider command for live inventory or box creation.
+
+For a machine-specific request, finish discovery only after reporting all of:
+the catalog lane and base, the selected provider, active lease count, wider
+provider inventory or its exact error, and whether the result is catalog
+availability, live reachability, or both.
 
 ## Auth And Config
 

@@ -37,6 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const skillGithubLink = document.getElementById('skill-github-link');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const skillContentPaths = {    'benchmark-or-eval-graph': 'skills/benchmark-or-eval-graph/SKILL.md',
+    'ce-simplify-code': 'skills/ce-simplify-code/SKILL.md',
+    'chart-visualization': 'skills/chart-visualization/SKILL.md',
+    'data-visualization': 'skills/data-visualization/SKILL.md',
+    'ui-unslop': 'skills/ui-unslop/SKILL.md',
     'crabbox': 'skills/crabbox/SKILL.md',
     'batch-grill-me': 'skills/batch-grill-me/SKILL.md',
     'grill-with-docs': 'skills/grill-with-docs/SKILL.md',
@@ -63,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'teach': 'skills/teach/SKILL.md',
     'transitions-dev': 'skills/transitions-dev/SKILL.md',
     'wayfinder': 'skills/wayfinder/SKILL.md',
-    'writing-great-skills': 'skills/writing-great-skills/SKILL.md',
     'dft-writing': 'skills/dft-writing/SKILL.md',
     'effect-program-design': 'skills/effect-program-design/SKILL.md',
     'animation-vocabulary': 'skills/animation-vocabulary/SKILL.md',
@@ -1117,7 +1120,6 @@ document.addEventListener('DOMContentLoaded', () => {
       'codebase-design': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/SKILL.md',
       'grilling': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling',
       'teach': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/teach',
-      'writing-great-skills': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-great-skills',
       'apple-design': 'https://github.com/emilkowalski/skills/blob/main/skills/apple-design',
       'transitions-dev': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-dev',
       'cli-review': 'https://github.com/greptileai/skills/blob/main/skills/cli-review',

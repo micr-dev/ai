@@ -402,6 +402,18 @@ For low-risk lookups, one authoritative primary source is enough. Use the full t
 
 After search discovers a relevant web page, I MUST use `kagi_extract` to read the page content when `KAGI_API_TOKEN` or `KAGI_SESSION_TOKEN` is configured unless the source is raw GitHub, JSON/API, a predictable text endpoint, exact bytes are required, or Kagi Extract is unavailable/unsuitable. Use Defuddle as the fallback readable-extraction path.
 
+### ChatGPT / OpenAI Deep Research
+
+When a request needs multi-source web research, use ChatGPT Deep Research through `gpt2agent` when it is installed and authenticated. Prefer the light mode for normal research and use heavy mode only for large reports, checking quota first. Run heavy jobs serially because they share the ChatGPT account backend.
+
+```bash
+~/.claude/skills/deep-research/bin/quota.sh
+~/.claude/skills/deep-research/bin/run.sh "<query>"
+~/.claude/skills/deep-research/bin/run.sh --heavy "<query>"
+```
+
+Use the official OpenAI Deep Research API through an MCP or CLI integration when an OpenAI API key is available and API billing or usage is intended. Do not assume ChatGPT Plus/Pro subscription access is equivalent to official API access. Treat `gpt2agent` as an unofficial ChatGPT backend integration, keep it on local stdio transport, and do not expose its unauthenticated HTTP transport.
+
 **Prohibited tools:**
 - Do NOT use built-in web tools (`webfetch`, `websearch`, `codesearch`)
 - Do NOT use `google_search`
@@ -761,6 +773,24 @@ After creating a PR:
 - Print the PR URL
 - Optionally watch checks: `gh pr checks --watch --fail-fast`
 
+### PR Images Without Repository Commits
+When a PR needs screenshots or other images that should not be committed to the repository, use [`atani/gh-attach`](https://github.com/atani/gh-attach) instead of inventing an upload endpoint or committing temporary assets:
+
+```bash
+gh extension install atani/gh-attach
+gh attach --issue <pr-number> --image ./path/to/image.png
+```
+
+The first use may open a browser for GitHub authentication. The extension uploads through GitHub's attachment flow and returns a `user-attachments/assets/...` URL. Use `--url-only` when the URL must be embedded into a PR body or another comment:
+
+```bash
+url=$(gh attach --issue <pr-number> --image ./path/to/image.png --url-only)
+printf '<img src="%s" width="900">
+' "$url"
+```
+
+Do not commit screenshots solely to make them available in a PR. `gh api` and the GitHub REST API do not provide a supported endpoint for uploading these native PR attachments. If `gh-attach` is unavailable, use an explicitly approved external image host such as Imgur and document the resulting public URL.
+
 Prefer editing existing PRs/issues/comments over recreating. Never close a PR or issue without explicit user confirmation.
 
 When checking whether a PR already exists for the current branch, check the upstream repository before assuming there is none.
@@ -924,6 +954,9 @@ Wait for user confirmation if they respond. If no response after stating plan, p
 When a goal automatically continues (e.g. across turns, compactions, or sessions), I MUST list the blocking conditions that prevent its completion.
 
 When creating or describing a long-running goal, I MUST include a completion criterion that treats the same blocking condition repeating twice as goal completion.
+
+### Autonomous Goal Execution
+While running a goal, I MUST NOT ask the user questions, request clarification, or pause for confirmation. I MUST choose the safest reasonable interpretation from the available context, continue working, and report assumptions or blockers in the final result. This rule applies only to goal execution and does not override explicit authorization requirements for destructive or externally consequential actions.
 
 ### Confusion Threshold
 If I express confusion 3+ times in a single session, STOP and reset:
@@ -1243,6 +1276,12 @@ Drift is a failure mode. If a reference source exists:
 - Treat spec/reference drift as CI failure, not folklore
 
 If a "bug fix" requires changing the shared mental model, it's a behavior change. Document it and add enforcement.
+
+## Code Simplification
+
+After substantive implementation work and before code review, invoke `$ce-simplify-code` to review the current branch changes for reuse, quality, and efficiency while preserving behavior.
+
+Use it only for settled code changes. Do not run it for documentation-only, generated, vendored, dependency, or mechanical-only changes. When there is no current diff, pass an explicit file or scope instead of guessing.
 
 ### Bidirectional Review
 - **Doc → Code:** If a spec claims an invariant, point to enforcement (tests/types/runtime assertions)
