@@ -1,174 +1,73 @@
-# UI Slop Pattern Catalog
+# UI Unslop Audit Catalog
 
-Use this catalog during the audit. The target is not decoration itself. The target is decoration chosen by formula instead of product intent.
+Use this catalog as a set of decision probes, not as a style recipe. A named pattern is not automatically wrong. It becomes slop when its treatment lacks a product, content, interaction, or brand reason, or when one treatment is repeated across content with different roles.
 
-## Contents
+Audit the full rendered surface and the source. Check every row that applies.
 
-1. Decorative pill badges and eyebrow tags
-2. Gradient headline text
-3. Formulaic heroes and scroll cues
-4. Cookie-cutter sections and uniform card grids
-5. Generic AI copy
-6. Excess animation
-7. Nested cards and double bezels
-8. Homogeneous color goo
-9. Generic decorative assets
-10. Trend effects without brand ownership
-11. Unjustified interface conventions
+## Structure and representation
 
-## 1. Decorative pill badges and eyebrow tags
+| Probe | Keep only when | Replace with |
+| --- | --- | --- |
+| Template hero | Its alignment, actions, and visual directly serve the page's one job | A composition led by the most useful content: product UI, result, evidence, image, or concise proposition |
+| Repeated section opening | The repeated form communicates a stable document hierarchy | Open directly with the content, or use a heading, rule, summary, or visual according to that section's role |
+| Uniform card grid | Each item is a self-contained unit, and enclosure improves browsing or clickability | A list for scanning, aligned rows or a table for comparison, prose for explanation, or an unboxed grid for homogeneous items |
+| Nested frames | Each boundary marks distinct ownership, interaction, or scroll behavior | Proximity, spacing, headings, or one meaningful container |
+| Decorative sequence | Numbers express order, rank, progress, or a stable reference | Unnumbered headings or the real grouping dimension |
+| Generic stat strip | Each figure is verified, decision-relevant evidence with a clear denominator | One lead fact, an aligned table, an annotated chart, or no statistic |
+| Borrowed interface convention | The control performs a real available action and belongs in that location | The product's actual navigation, support, comparison, or disclosure pattern |
 
-Typical tell:
+Look for the whole-page fingerprint, not only individual components. Common fingerprints include centered hero plus two calls to action plus equal feature cards, and label plus heading plus subtitle repeated above every section. Changing colors or borders does not change the fingerprint.
 
-```html
-<span class="rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] bg-pale-green/20 text-pale-green">
-  Live on Solana
-</span>
-```
+## Typography and copy
 
-This pattern combines a tiny rounded pill, uppercase text, wide tracking, and a pastel fill above a heading.
+| Probe | Keep only when | Replace with |
+| --- | --- | --- |
+| Eyebrow, kicker, or pill above a heading | It supplies needed status, category, provenance, or wayfinding that the heading cannot carry | Fold the words into the heading or body, or present them once as plain metadata |
+| Display treatment | The typeface, size, case, tracking, and emphasis match the content and established voice | A smaller set of type roles with a clear scale and readable measure |
+| Gradient or multicolor text | The treatment is an established brand asset and remains legible | Solid text with hierarchy from size, weight, placement, or one owned accent |
+| Generic marketing copy | The words name a concrete action, capability, constraint, or verified fact | Specific product language, or less copy |
+| Repeated microcopy | Each string adds new guidance at the moment it is needed | One clear label, description, or action |
 
-Keep it when the shape communicates status, a category, or dense dashboard metadata. Remove or revise it when it decorates a hero or every section, especially labels such as "Live on [chain]," "Built with [X]," or "Est. [year]."
+Generic copy includes unsupported superlatives and interchangeable claims such as "elevate," "seamless," "unleash," "revolutionary," "next-generation," "the future of X," and "X redefined." Treat the list as examples. The test is whether the sentence could move unchanged to another product.
 
-Better choices:
+## Color, surfaces, and effects
 
-- Drop it and let the heading stand alone.
-- Put useful metadata in navigation, a footer, or a plain meta line.
-- Use a simple inline prefix such as `Solana /` or `2024 -`.
-- Flatten a necessary label with an underline:
+| Probe | Keep only when | Replace with |
+| --- | --- | --- |
+| Gradient, glow, blur, glass, or texture | It expresses an owned brand material, a real depth relationship, data, state, or interaction | A solid surface, whitespace, contrast, or a restrained product-owned treatment |
+| Repeated tint | Color distinguishes a stable semantic role or hierarchy level | A neutral base, one owned accent, and semantic state colors |
+| Border plus shadow plus radius | Each signal contributes necessary grouping, elevation, or clickability | The single weakest sufficient grouping or interaction signal |
+| Uniform rounded containers | The enclosed items share the same role and need a boundary | Spacing and alignment, with shape reserved for controls or meaningful groups |
+| Decorative background object | It carries subject matter, brand identity, data, or useful atmosphere that survives the restraint test | Content, deliberate whitespace, or nothing |
 
-```html
-<span class="text-xs font-medium text-ink-secondary border-b border-ink/20 pb-0.5">
-  Solana
-</span>
-```
+Current second-order defaults need the same scrutiny as older AI tells: warm cream plus high-contrast serif plus terracotta, near-black plus an acid accent, and broadsheet hairlines plus dense editorial columns. Use them only when the subject or existing brand supports them.
 
-## 2. Gradient headline text
+## Assets and evidence
 
-Typical tell:
+| Probe | Keep only when | Replace with |
+| --- | --- | --- |
+| Icon in a colored rounded box | The icon and box encode a real category, state, or control | A consistent unboxed icon, a label, or nothing |
+| Emoji used as product art | Emoji belongs to user content or the product's established voice | A coherent asset, domain-specific visual, text, or nothing |
+| Fake browser, phone, terminal, or IDE chrome | The surrounding environment is necessary to understand the real captured content | An accurate screenshot or the useful content without redrawn chrome |
+| Empty gradient, particles, abstract SVG, or stock illustration | The asset communicates the subject or brand rather than filling space | Real product UI, a useful diagram, relevant media, or whitespace |
+| Chart decoration | Each mark helps read the data or its uncertainty | Direct labels, aligned scales, necessary guides, and less non-data ink |
+| Claim, metric, testimonial, or logo | It is truthful, sourced, and relevant | Verified evidence, an explicit placeholder, or removal |
 
-```html
-<h1 class="bg-gradient-to-r from-emerald via-violet to-amber bg-clip-text text-transparent">
-  Build what's next
-</h1>
-```
+## Motion and interaction
 
-Keep a gradient when it belongs to the brand or gives one accent word a restrained color shift. Revise it when a headline uses three or more unrelated colors, each section has a different gradient, or the colors do not belong to the brand palette.
+| Probe | Keep only when | Replace with |
+| --- | --- | --- |
+| Entrance or scroll animation | It explains order, change, or spatial relationship | Immediate stable content |
+| Hover movement, scale, glow, or shadow | It provides needed feedback without moving surrounding layout | A quiet color, underline, border, or cursor change |
+| Ambient loop, pulse, marquee, or particle motion | It represents live activity or an owned focal moment | A static treatment |
+| Floating or persistent control | The action works, stays important across the workflow, and does not cover content | An in-flow action at the point of need |
 
-Better choices:
+Keep interaction states complete even when decoration is removed. Controls still need clear default, hover where relevant, focus-visible, active, disabled, loading, error, and success behavior according to their actual contract. Honor reduced-motion preferences.
 
-- Use a solid color and change one word's weight or color.
-- Shift subtly between nearby hues.
-- Pair serif and sans-serif type for contrast.
-- Let size and weight create hierarchy.
+## Residual test
 
-## 3. Formulaic heroes and scroll cues
+For every treatment that remains, finish this sentence with concrete evidence:
 
-Typical sequence:
+> This is here because the product, content, interaction, or brand requires ___.
 
-1. Decorative pill
-2. Giant gradient headline
-3. Muted subtitle around 18px
-4. Solid primary CTA beside an outlined secondary CTA
-5. Scroll indicator
-
-Use a structure that fits the content instead:
-
-- Asymmetric: left-aligned headline with a useful visual beside it.
-- Minimal: product name, one line, and deliberate whitespace.
-- Editorial: strong type and body copy, with an inline text link instead of ornamental buttons.
-- Split: text on one side and one strong visual on the other.
-
-Remove "Scroll to explore," down arrows, and other scroll cues unless users need explicit help to discover unusual scrolling behavior.
-
-## 4. Cookie-cutter sections and uniform card grids
-
-Typical tell: every section repeats `label -> heading -> subtitle -> card grid` with the same width, spacing, and rhythm.
-
-Better choices:
-
-- Match spacing to the content instead of repeating one padding value.
-- Alternate constrained text with full-width material when the content calls for it.
-- Open with a quote, statistic, image, or direct content rather than a label.
-- Merge sections that do not need separate framing.
-- Use a rule or divider when it clarifies structure.
-
-Variation must clarify content. Random inconsistency is not personality.
-
-Do not force unrelated ideas into identical cards. Choose a list, comparison, prose block, diagram, table, or unboxed layout when that structure fits the content better.
-
-## 5. Generic AI copy
-
-Remove these filler words and formulas from markup unless they are quoted or have a precise domain meaning:
-
-- Elevate
-- Seamless
-- Unleash
-- Next-Gen
-- Game-changer
-- Delve
-- Revolutionary
-- Cutting-edge
-- Innovative
-- Empower
-- Transform
-- Supercharge
-- The future of [X]
-- [X] redefined
-- Welcome to [X] as hero text
-
-Replace aspiration with a concrete action or fact. For example, use "Swap on Jupiter" instead of "Experience the future of trading." When no useful detail exists, use less copy.
-
-## 6. Excess animation
-
-Typical tells:
-
-- every element fades upward on scroll
-- every hover scales or translates
-- every list staggers its reveal
-- several background blobs animate at once
-- CSS defines five or more unrelated animations for one page
-- cards lift and change shadow by default
-
-Keep motion when it explains a state change, gives useful interaction feedback, or supports one intentional entrance or ambient moment. Most content should appear immediately and remain stable. Honor reduced-motion preferences.
-
-One hero entrance, subtle feedback on interactive controls, and at most one ambient element are reasonable bounds. As a cleanup heuristic, cut roughly 80 percent of decorative animation before deciding whether any should return.
-
-If removing motion makes the page dull, improve the layout rather than restoring ambient effects.
-
-## 7. Nested cards and double bezels
-
-Typical tell: most cards use an outer shell plus a nested inner core, or several containers nest without clarifying ownership or interaction.
-
-Reserve a double bezel for one or two hero feature cards or product showcases. Flatten cards-inside-cards into spacing, headings, dividers, or one meaningful container. Use a simple border and background for ordinary grids, FAQs, statistics, and footer links.
-
-## 8. Homogeneous color goo
-
-Typical tell: many similar tinted chips, panels, and accents compete at the same visual weight without establishing hierarchy.
-
-Start from a neutral base, one intentional accent, and semantic state colors. Use color to communicate brand, state, or importance rather than to fill every available surface.
-
-## 9. Generic decorative assets
-
-- **Icons in colored rounded boxes:** Keep the box only when it encodes a real category or state. Prefer a domain-specific icon, a coherent illustration system, or no icon when the asset adds no information.
-- **Emoji as visual assets:** Reserve emoji for user content or a voice that intentionally uses them. Use consistent icons, illustrations, or plain text for product features.
-- **Fake browser chrome:** Remove ornamental red, yellow, and green dots. Show an accurate product frame when browser context matters, or crop to the product itself.
-- **Empty gradient visual placeholders:** Replace decorative gradient rectangles with a real product view, useful diagram, relevant image, or deliberate whitespace.
-- **Particle and connect-the-dots backgrounds:** Keep them only when they belong to the brand or explain real data. Otherwise, use composition and content to create interest.
-
-## 10. Trend effects without brand ownership
-
-- **Trendy serif heroes:** Use a display serif only when the subject and type system support it. Do not add one solely to make a generic page feel premium.
-- **Glassmorphism everywhere:** Use blur and transparency only when they communicate depth or material relationship. Prefer legible opaque surfaces for ordinary content.
-- **Gradient and glow buttons:** Establish action hierarchy with label, placement, contrast, and a solid treatment. Reserve glow for a brand-owned effect and never let it imitate focus state.
-- **Rounded left-border callouts:** Use a semantic alert or callout style when the message has real status. Avoid the rounded card plus colored stripe as default decoration.
-
-## 11. Unjustified interface conventions
-
-- **Decorative numbered sections:** Use `01`, `02`, and `03` only for a real sequence, ranking, or stable reference.
-- **Four-column stat strips:** Show verified, relevant evidence instead of default SaaS counters. Remove weak or invented numbers.
-- **Floating chat bubbles:** Add one only when a real support channel exists, the control works, and persistent placement serves the workflow.
-
-## Final test
-
-Ask whether each visible choice follows from the product, content, or brand. If its only rationale is that generated interfaces commonly use it, remove or replace it.
+If the blank can only be filled with "it looks polished," "it adds interest," "it feels premium," or a style name, remove or redesign the treatment. If the same answer could justify the same decorative or brand treatment on an unrelated product, it is still generic. Standard controls and signifiers remain valid when they consistently encode their conventional meaning.
