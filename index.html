@@ -70,6 +70,17 @@
           </div>
           
           <div class="changelog-timeline">
+            <div class="change-group" data-group="15/08/2026">
+              <div class="change-date font-karla">15/08/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="gpt-5-6-sol gpt-5-6-luna gpt-codex-5-3-spark glm-5-3 gemini-3-6-flash">
+                  <h3 class="change-title">Updated model roles: Sol and Luna primary, Spark and GLM 5.3 secondary</h3>
+                </div>
+                <div class="change-entry" data-targets="gemini-3-6-flash">
+                  <h3 class="change-title">Removed Gemini 3.6 Flash Model</h3>
+                </div>
+              </div>
+            </div>
             <div class="change-group" data-group="09/08/2026">
               <div class="change-date font-karla">09/08/2026</div>
               <div class="change-entries">
@@ -1538,32 +1549,13 @@
             <div class="role-column">
               <span class="role-label font-karla">Primary</span>
               
-              <div class="stack-entry" id="gpt-codex-5-3-spark">
-                <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/codex.svg" alt=""></span>
-                  <span class="entry-name">GPT Codex 5.3 Spark</span>
-                </div>
-                <p class="entry-description">Primary Codex model for fast day-to-day implementation and tool-driven terminal work.</p>
-              </div>
-            </div>
-            
-            <div class="role-column">
-              <span class="role-label font-karla">Secondary</span>
-              
               <div class="stack-entry" id="gpt-5-6-sol">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
                   <span class="entry-name">GPT 5.6 Sol</span>
                 </div>
-                <p class="entry-description">Secondary OpenAI reasoning model kept for deeper comparison runs.</p>
-              </div>
-
-              <div class="stack-entry" id="gemini-3-6-flash">
-                <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/gemini.svg" alt=""></span>
-                  <span class="entry-name">Gemini 3.6 Flash</span>
-                </div>
-                <p class="entry-description">Fast multimodal model reached through Antigravity CLI prompt runs.</p>
+                <p class="entry-description">Primary Codex model for implementation, debugging, review, and repository-level reasoning.</p>
+                <p class="entry-why">Best code output and amazing tool calling. It does exactly what I tell it to, no more and no less. The only real downside is frontend work, but with good prompting and actual human taste it can still produce good results.</p>
               </div>
 
               <div class="stack-entry" id="gpt-5-6-luna">
@@ -1571,9 +1563,28 @@
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
                   <span class="entry-name">GPT 5.6 Luna</span>
                 </div>
-                <p class="entry-description">Secondary OpenAI model for alternate reasoning and comparison runs.</p>
+                <p class="entry-description">Primary OpenAI model for alternate reasoning and comparison runs.</p>
+              </div>
+            </div>
+            
+            <div class="role-column">
+              <span class="role-label font-karla">Secondary</span>
+              
+              <div class="stack-entry" id="gpt-codex-5-3-spark">
+                <div class="entry-header">
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/codex.svg" alt=""></span>
+                  <span class="entry-name">GPT Codex 5.3 Spark</span>
+                </div>
+                <p class="entry-description">Secondary Codex model kept for fast fallback and comparison runs.</p>
               </div>
 
+              <div class="stack-entry" id="glm-5-3">
+                <div class="entry-header">
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/glm.svg" alt=""></span>
+                  <span class="entry-name">GLM 5.3</span>
+                </div>
+                <p class="entry-description">Secondary Z.AI model for alternate reasoning and comparison runs.</p>
+              </div>
             </div>
           </div>
         </section>
