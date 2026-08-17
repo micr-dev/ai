@@ -478,26 +478,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const faviconLink = document.getElementById('dynamic-favicon');
   if (faviconLink) {
     const faviconFrames = ['/favicon-a.png', '/favicon-i.png'];
-    let faviconFrameIndex = -1;
-    let faviconRevision = 0;
+    const frameImages = faviconFrames.map(source => {
+      const image = new Image();
+      image.src = source;
+      return image;
+    });
 
-    const setFaviconFrame = () => {
-      const previousIcon = document.getElementById('dynamic-favicon');
-      const nextIcon = document.createElement('link');
+    Promise.all(frameImages.map(image => new Promise(resolve => {
+      if (image.complete && image.naturalWidth > 0) {
+        resolve();
+        return;
+      }
+      image.addEventListener('load', resolve, { once: true });
+      image.addEventListener('error', resolve, { once: true });
+    }))).then(() => {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      if (!context || frameImages.some(image => image.naturalWidth === 0)) return;
 
-      faviconRevision += 1;
-      faviconFrameIndex = (faviconFrameIndex + 1) % faviconFrames.length;
-      nextIcon.id = 'dynamic-favicon';
-      nextIcon.rel = 'icon';
-      nextIcon.type = 'image/png';
-      nextIcon.href = `${faviconFrames[faviconFrameIndex]}?frame=${faviconFrameIndex}&rev=${faviconRevision}`;
+      canvas.width = frameImages[0].naturalWidth;
+      canvas.height = frameImages[0].naturalHeight;
+      const dataUrls = frameImages.map(image => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        return canvas.toDataURL('image/png');
+      });
+      let faviconFrameIndex = -1;
 
-      previousIcon?.remove();
-      document.head.append(nextIcon);
-    };
+      const setFaviconFrame = () => {
+        faviconFrameIndex = (faviconFrameIndex + 1) % dataUrls.length;
+        faviconLink.href = dataUrls[faviconFrameIndex];
+      };
 
-    setFaviconFrame();
-    window.setInterval(setFaviconFrame, 700);
+      setFaviconFrame();
+      window.setInterval(setFaviconFrame, 700);
+    });
   }
 
   // 1. FETCH & PROCESS AGENTS.MD FOR THE CODE BOX
