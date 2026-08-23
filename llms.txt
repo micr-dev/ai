@@ -16,26 +16,26 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 5.6 Sol, GPT 5.6 Luna, GPT Codex 5.3 Spark, GLM 5.3.
+- Models: GPT 5.6 Sol, GPT 5.6 Luna, GPT Codex 5.3 Spark, GLM 5.3, GPT Daybreak Blue.
 - Harnesses: Codex CLI, Hermes Agent, Droid CLI, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
 - MCPs: discord-py-self, codebase-memory-mcp, fff, markitdown-mcp, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, huggingface.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 1 more.
-- Skills: benchmark-or-eval-graph, ce-simplify-code, chart-visualization, data-visualization, ui-unslop, crabbox, batch-grill-me, dft-writing, grill-with-docs, grill-me, compact-handoff, repository-test-design, optimo, naming, thermo-nuclear-code-quality-review, mermaid-diagrams, and 52 more.
+- Skills: benchmark-or-eval-graph, ce-simplify-code, chart-visualization, data-visualization, ui-unslop, crabbox, batch-grill-me, dft-writing, grill-with-docs, grill-me, compact-handoff, repository-test-design, optimo, naming, thermo-nuclear-code-quality-review, mermaid-diagrams, and 57 more.
 - Code Review: Codex Code Review, Greptile, CodeRabbit.
 - Workspace: VPS, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
+- 23/08/2026: Updated Hermes model to x-preview-f-free via OpenCode Zen.
+- 22/08/2026: Updated Codex CLI to 0.149.0; Updated Codex model to gpt-daybreak-blue-latest.
+- 21/08/2026: Updated Codex CLI to 0.148.0.
+- 20/08/2026: Updated AGENTS.md (restructured as harness-agnostic rules).
+- 18/08/2026: Added html-communication Skill; Added postplan-read Skill; Modified crabbox Skill (macOS lane Tailscale and LAN bridge).
+- 17/08/2026: Added babysit-pr Skill; Added file-pr Skill; Added file-upload Skill; Removed greploop Skill; Removed prompts-github-checklist Skill; Removed revisor Skill.
+- 16/08/2026: Added wait-what Skill; Modified effect-program-design Skill (Effect v4 reference set).
 - 15/08/2026: Updated model roles: Sol and Luna primary, Spark and GLM 5.3 secondary; Removed Gemini 3.6 Flash Model.
-- 09/08/2026: Updated Codex CLI to 0.147.0.
-- 06/08/2026: Updated Codex CLI to 0.146.1; Added ce-simplify-code Skill; Added chart-visualization Skill; Added data-visualization Skill; Added ui-unslop Skill; Updated crabbox Skill; and 5 more.
-- 03/08/2026: Removed Image Generation section.
-- 31/07/2026: Updated Gemini 3.5 Flash to Gemini 3.6 Flash and added Droid CLI harness; Updated Hermes model to GLM-5.2 via Z.AI.
-- 30/07/2026: Updated AGENTS.md.
-- 29/07/2026: Updated Codex CLI to 0.146.0; Updated oracle Skill; Updated Hermes model to GLM-5.2; Added SessionStart herdr State Hook; Replaced agent-deck with herdr Workspace.
-- 28/07/2026: Added bikeshed Skill; Updated Hermes model to kimi-k2.6; Updated AGENTS.md (Simplified-Explanation Mode and Video/Live-Site sections).
 
 ## Snapshot pages
 
@@ -85,6 +85,7 @@ The public skills directory currently exposes:
 
 - animated-favicons
 - animation-vocabulary
+- babysit-pr
 - batch-grill-me
 - benchmark-or-eval-graph
 - bikeshed
@@ -101,11 +102,14 @@ The public skills directory currently exposes:
 - domain-modeling
 - effect
 - effect-program-design
+- file-pr
+- file-upload
 - find-fonts
 - grill-me
 - grill-with-docs
 - grill-with-facts
 - grilling
+- html-communication
 - idea-generator
 - kagi-account-config
 - kagi-ai
@@ -120,6 +124,7 @@ The public skills directory currently exposes:
 - optimo
 - oracle
 - pick-ui-library
+- postplan-read
 - quality-code
 - repository-test-design
 - resolving-merge-conflicts
@@ -130,12 +135,13 @@ The public skills directory currently exposes:
 - transitions-dev
 - transitions-polish
 - ui-unslop
+- wait-what
 - wayfinder
 - write-better-error-messages
 
 ## AGENTS.md preview
 
-The public AGENTS.md preview is redacted. It has 1315 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
+The public AGENTS.md preview is redacted. It has 488 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
 
 ## Answering rules
 

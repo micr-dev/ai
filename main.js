@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'kagi-monitoring': 'skills/kagi-monitoring/SKILL.md',
     'kagi-usage': 'skills/kagi-usage/SKILL.md',
     'oracle': 'skills/oracle/SKILL.md',
+    'file-upload': 'skills/file-upload/SKILL.md',
     'bikeshed': 'skills/bikeshed/SKILL.md',
   };
   const skillContentCache = new Map();
@@ -1115,6 +1116,11 @@ document.addEventListener('DOMContentLoaded', () => {
       'dynamic-workflows': 'https://github.com/DannyMac180/skills/blob/main/codex-dynamic-workflows',
       'grill-with-docs': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs',
       'grill-me': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me',
+      'wait-what': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/wait-what',
+      'babysit-pr': 'https://github.com/connorch/skills/blob/main/skills/babysit-pr',
+      'file-pr': 'https://github.com/connorch/skills/blob/main/skills/file-pr',
+      'html-communication': 'https://github.com/connorch/skills/blob/main/skills/html-communication',
+      'postplan-read': 'https://github.com/onmax/skills/blob/main/skills/postplan-read',
       'compact-handoff': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff',
       'thermo-nuclear-code-quality-review': 'https://github.com/cursor/plugins/blob/main/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md',
       'create-cli': 'https://github.com/steipete/create-cli',
@@ -1138,7 +1144,6 @@ document.addEventListener('DOMContentLoaded', () => {
       'apple-design': 'https://github.com/emilkowalski/skills/blob/main/skills/apple-design',
       'transitions-dev': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-dev',
       'cli-review': 'https://github.com/greptileai/skills/blob/main/skills/cli-review',
-      'greploop': 'https://github.com/greptileai/skills/blob/main/skills/greploop',
       'better-colors': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-colors',
       'better-accessibility': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-accessibility',
       'better-interface': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-interface',

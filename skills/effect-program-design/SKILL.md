@@ -34,8 +34,23 @@ CANONICAL references on Effect v4 (effect-smol):
 5. **Testable by layer substitution.** Every service is exercised through its public interface with deps
    swapped as layers (`@effect/vitest` + `Effect.provide`). No module mocks, no method spies.
 
-> See `REFERENCE.md` for the annotated file skeleton, copy-paste stubs, and the anti-pattern catalog with
-> in-repo line references.
+## Current Effect v4 references
+
+Use this blueprint together with the maintained Effect v4 reference skill. Read the references that match the
+work before editing:
+
+- [`SERVICES_LAYERS.md`](../effect/references/SERVICES_LAYERS.md) - service surfaces, layers, runtime wiring,
+  typed errors, and `Effect.fn` boundaries.
+- [`TESTING.md`](../effect/references/TESTING.md) - `@effect/vitest`, test layers, deterministic synchronization,
+  and stateful test stubs.
+- [`CONFIG.md`](../effect/references/CONFIG.md) - `Config`, `ConfigProvider`, redacted secrets, and config-backed
+  layers.
+- [`SCHEMA.md`](../effect/references/SCHEMA.md) - boundary decoding, domain models, tagged variants, and typed
+  errors.
+- [`HTTP_CLIENTS.md`](../effect/references/HTTP_CLIENTS.md) - Effect HTTP client adapters and transport boundaries.
+
+The references above are the source for current Effect v4 API shape. This skill adds the riptide-api module-depth,
+error-capture, observability, and real-seam testing requirements on top of them.
 
 ## 1. Anatomy — the file set
 

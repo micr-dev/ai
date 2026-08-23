@@ -60,6 +60,41 @@ The macOS lane is a real per-lease Tart VM cloned from the catalog base. It is
 not the separate static SSH entry for the physical Mac host. It requires a
 current Crabbox binary whose external provider advertises `target: macos`.
 
+Prefer the Mac's Tailscale address for the Tart control connection. If the Mac
+is unavailable through Tailscale, an optional LAN bridge may be used instead of
+declaring the Mac or its Tart VMs missing:
+
+- Tailscale primary: `marcos-macbook-pro` or its current Tailscale address.
+- LAN target: `192.168.1.34`.
+- Optional bridge peer: `100.104.128.8`.
+- Configure the bridge in local SSH config with the correct jump user and key,
+  then point `CRABBOX_TART_REMOTE_HOST` at that alias. On this machine the
+  configured optional aliases are `crabbox-tart-bridge-100104` and
+  `crabbox-tart-mac-lan-100104`. Do not put passwords or guessed credentials
+  in the skill.
+
+For example, the configured alias should express this shape:
+
+```sshconfig
+Host crabbox-tart-mac-lan-100104
+    HostName 192.168.1.34
+    User microck
+    ProxyJump crabbox-tart-bridge-100104
+```
+
+Probe the Tailscale target first, then the configured LAN alias:
+
+```sh
+ssh -o BatchMode=yes -o ConnectTimeout=10 marcos-macbook-pro 'uname -s'
+ssh -o BatchMode=yes -o ConnectTimeout=10 crabbox-tart-mac-lan-100104 'uname -s'
+```
+
+Use the LAN alias only when the Tailscale probe fails and the alias is
+configured and reachable. If both paths fail, report both exact errors. Do not
+interpret a Tailscale timeout as proof that a Tart VM is absent, and do not
+delete its lease or local claim until the provider has been checked through
+the fallback path.
+
 Use this discovery sequence without starting or stopping anything:
 
 ```sh
@@ -509,7 +544,7 @@ crabbox stop <lease>
 - Desktop unhealthy: run `desktop doctor`, then follow `problem:` / `rescue:`
   output from `webvnc status` or `webvnc reset`.
 - Cleanup uncertain: use `crabbox list`, `crabbox inspect --json`, and only
-  stop leases or provider resources you created.
+  release or delete leases or provider resources you created.
 - Broker/auth confusion: use `crabbox doctor`, `crabbox whoami`, and
   `crabbox config show` before asking for cloud credentials.
 
@@ -517,11 +552,23 @@ crabbox stop <lease>
 
 Brokered leases have coordinator-owned idle expiry and local lease claims.
 Default idle timeout is 30 minutes unless config or flags set a different
-value. Still stop boxes you created when done:
+value. Idle expiry is a safety net, not the completion step.
+
+When a provisioned VM will not be reused, delete its provider resource before
+finishing. For a lease or direct-provider machine you created, use Crabbox's
+release/delete command:
 
 ```sh
 crabbox stop <cbx_id-or-slug>
 ```
+
+`stop` releases a brokered lease or deletes a direct-provider machine. Use
+`pause`, `--keep`, or `keep=true` only when preserving the box for planned
+reuse. Before cleanup, use `crabbox inspect --id <lease> --json` to confirm
+ownership and provider. After cleanup, verify with `crabbox list --all --json`
+that no resource you created remains. If the resource is still present, do
+not finish: follow the selected provider's current `crabbox stop --help` and
+capability documentation for delete-on-release or cleanup, then recheck.
 
 When `crabbox list` prints `orphan=no-active-lease`, treat it as an operator
 review hint: verify the provider machine is not referenced by an active
