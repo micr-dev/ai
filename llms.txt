@@ -16,7 +16,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 5.6 Sol, GPT 5.6 Luna, GPT Codex 5.3 Spark, GLM 5.3, GPT Daybreak Blue.
+- Models: GPT 5.6 Sol, GPT 5.6 Luna, GPT Codex 5.3 Spark, GLM 5.3.
 - Harnesses: Codex CLI, Hermes Agent, Droid CLI, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
@@ -29,7 +29,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 ## Recent public setup changes
 
 - 23/08/2026: Updated Hermes model to x-preview-f-free via OpenCode Zen.
-- 22/08/2026: Updated Codex CLI to 0.149.0; Updated Codex model to gpt-daybreak-blue-latest.
+- 22/08/2026: Updated Codex CLI to 0.149.0.
 - 21/08/2026: Updated Codex CLI to 0.148.0.
 - 20/08/2026: Updated AGENTS.md (restructured as harness-agnostic rules).
 - 18/08/2026: Added html-communication Skill; Added postplan-read Skill; Modified crabbox Skill (macOS lane Tailscale and LAN bridge).
