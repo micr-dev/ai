@@ -70,6 +70,24 @@
           </div>
           
           <div class="changelog-timeline">
+            <div class="change-group" data-group="30/08/2026">
+              <div class="change-date font-karla">30/08/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="box-cli-tool">
+                  <h3 class="change-title">Added box CLI Tool</h3>
+                </div>
+                <div class="change-entry" data-targets="discord-py-self">
+                  <h3 class="change-title">Removed discord-py-self MCP</h3>
+                </div>
+                <div class="change-entry" data-targets="apify oracle-mcp gpt2agent parallel-search parallel-task octen">
+                  <h3 class="change-title">Added Apify, Oracle, gpt2agent, Parallel Search, Parallel Task, and Octen MCPs</h3>
+                </div>
+                <div class="change-entry" data-targets="greptile">
+                  <h3 class="change-title">Removed Greptile Code Review tool</h3>
+                </div>
+              </div>
+            </div>
+
             <div class="change-group" data-group="28/08/2026">
               <div class="change-date font-karla">28/08/2026</div>
               <div class="change-entries">
@@ -1860,13 +1878,6 @@
           
           <div class="simple-list two-column-list">
             
-            <div class="stack-entry" id="discord-py-self">
-              <div class="entry-header">
-                <a href="https://github.com/Microck/discord.py-self-mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">discord-py-self</span></a>
-              </div>
-              <p class="entry-description">Active Discord automation server.</p>
-            </div>
-            
             <div class="stack-entry" id="codebase-memory-mcp">
               <div class="entry-header">
                 <a href="https://github.com/Microck/codebase-memory-mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">codebase-memory-mcp</span></a>
@@ -1977,6 +1988,48 @@
               </div>
               <p class="entry-description">Hugging Face Hub model, dataset, and API server.</p>
             </div>
+
+            <div class="stack-entry" id="apify">
+              <div class="entry-header">
+                <a href="https://mcp.apify.com" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">apify</span></a>
+              </div>
+              <p class="entry-description">Hosted web automation, actor, and documentation MCP server.</p>
+            </div>
+
+            <div class="stack-entry" id="oracle-mcp">
+              <div class="entry-header">
+                <a href="https://github.com/paulelliotco/oracle-mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">oracle</span></a>
+              </div>
+              <p class="entry-description">Browser-based Oracle model and research workflow server.</p>
+            </div>
+
+            <div class="stack-entry" id="gpt2agent">
+              <div class="entry-header">
+                <a href="https://github.com/robotlearning123/gpt2agent" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">gpt2agent</span></a>
+              </div>
+              <p class="entry-description">MCP bridge for authenticated model access and agent workflows.</p>
+            </div>
+
+            <div class="stack-entry" id="parallel-search">
+              <div class="entry-header">
+                <a href="https://parallel.ai" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">parallel-search</span></a>
+              </div>
+              <p class="entry-description">Parallel AI web search MCP endpoint.</p>
+            </div>
+
+            <div class="stack-entry" id="parallel-task">
+              <div class="entry-header">
+                <a href="https://parallel.ai" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">parallel-task</span></a>
+              </div>
+              <p class="entry-description">Parallel AI task execution MCP endpoint.</p>
+            </div>
+
+            <div class="stack-entry" id="octen">
+              <div class="entry-header">
+                <a href="https://github.com/Octen-Team/octen-mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">octen</span></a>
+              </div>
+              <p class="entry-description">Authenticated Octen web search and extraction MCP server.</p>
+            </div>
             
           </div>
         </section>
@@ -2043,6 +2096,7 @@
             <div class="stack-entry" id="clawpatch-cli"><div class="entry-header"><a href="https://github.com/openclaw/clawpatch" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">clawpatch</span></a></div><p class="entry-description">Semantic code review with feature mapping, findings persistence, and automated patching.</p></div>
             <div class="stack-entry" id="browserstack-cli"><div class="entry-header"><a href="https://www.browserstack.com/app-automate/browserstack-cli" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">browserstack</span></a></div><p class="entry-description">Cloud-based real device and browser testing via CLI.</p></div>
             <div class="stack-entry" id="crabbox-cli"><div class="entry-header"><a href="https://github.com/openclaw/crabbox" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">crabbox</span></a></div><p class="entry-description">Remote testbox CLI for leasing cloud boxes, syncing diffs, and running test suites off-box.</p></div>
+            <div class="stack-entry" id="box-cli-tool"><div class="entry-header"><a href="https://docs.ascii.dev/box/cli-reference" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">box</span></a></div><p class="entry-description">Sandboxed Linux VM CLI for repositories, previews, snapshots, and GUI sessions.</p></div>
 
           </div>
         </section>
@@ -2140,7 +2194,7 @@
           
           <div class="simple-list">
             <div class="stack-entry" id="codex-code-review"><div class="entry-header"><a href="https://developers.openai.com/codex/cloud/code-review" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">Codex Code Review</span></a></div><p class="entry-description">OpenAI Codex as a GitHub Action for automated PR review and code suggestions.</p></div>
-            <div class="stack-entry" id="greptile"><div class="entry-header"><a href="https://www.greptile.com/" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">Greptile</span></a></div><p class="entry-description">AI code review with full codebase context, line-by-line analysis, and PR scoring.</p></div>
+
             <div class="stack-entry" id="coderabbit"><div class="entry-header"><a href="https://www.coderabbit.ai/" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">CodeRabbit</span></a></div><p class="entry-description">AI-first pull request reviewer with context-aware feedback and real-time chat.</p></div>
           </div>
         </section>
