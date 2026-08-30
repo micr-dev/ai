@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const skillRenderedView = document.getElementById('skill-rendered-view');
   const skillGithubLink = document.getElementById('skill-github-link');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const skillContentPaths = {    'benchmark-or-eval-graph': 'skills/benchmark-or-eval-graph/SKILL.md',
+  const skillContentPaths = {
+    'benchmark-or-eval-graph': 'skills/benchmark-or-eval-graph/SKILL.md',
     'ce-simplify-code': 'skills/ce-simplify-code/SKILL.md',
     'chart-visualization': 'skills/chart-visualization/SKILL.md',
     'data-visualization': 'skills/data-visualization/SKILL.md',
