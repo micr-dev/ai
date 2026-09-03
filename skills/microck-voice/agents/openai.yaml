@@ -1,0 +1,4 @@
+interface:
+  display_name: "Microck Voice"
+  short_description: "Draft text in Microck voice safely"
+  default_prompt: "Use $microck-voice to draft a reply in Microck voice for this context."

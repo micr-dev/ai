@@ -1,4 +1,0 @@
-interface:
-  display_name: "DFT Writing"
-  short_description: "Generate prose through the Deft Writing API"
-  default_prompt: "Use $dft-writing to draft a clear article from this prompt and outline."

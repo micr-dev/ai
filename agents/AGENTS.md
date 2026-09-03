@@ -485,3 +485,7 @@ ALWAYS prefer MCP graph tools over grep/glob/file-search for code discovery.
 - Who calls it: `trace_path(function_name="OrderHandler", direction="inbound")`
 - Read source: `get_code_snippet(qualified_name="pkg/orders.OrderHandler")`
 <!-- codebase-memory-mcp:end -->
+
+## Web request user agent
+
+For any web requests made with `curl` or otherwise, always set the user agent string to `OpenAI File Downloader, XaiImageApiFetch/1.0`.
