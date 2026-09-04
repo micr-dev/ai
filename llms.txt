@@ -16,7 +16,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 5.6 Sol, GPT 5.6 Luna, Fable 5.1, GPT Codex 5.3 Spark, GLM 5.3, Opus 5.
+- Models: GPT 5.6 Sol, GPT 5.6 Luna, Fable 5.1, GLM 5.3, Opus 5.
 - Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
@@ -28,7 +28,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Recent public setup changes
 
-- 04/09/2026: Removed Droid CLI Harness; Added OMP and Claude Code Primary Harnesses; Added Fable 5.1 Primary and Opus 5 Secondary Models; Updated Antigravity CLI to Gemini 3.8 Flash.
+- 04/09/2026: Removed GPT Codex 5.3 Spark Model; Updated Claude Code, Opus 5, and OMP logos; Removed Droid CLI Harness; Added OMP and Claude Code Primary Harnesses; Added Fable 5.1 Primary and Opus 5 Secondary Models; Updated Antigravity CLI to Gemini 3.8 Flash.
 - 02/09/2026: Updated Codex CLI to 0.152.1; Updated timeboxed-iterating Skill (major rewrite + scaffold); Updated better-colors Skill; Updated better-ui Skill; Updated better-accessibility Skill; Updated better-interface Skill; and 26 more.
 - 01/09/2026: Updated Codex CLI to 0.152.0; Added product-description Skill; Added product-description-minimal Skill; Added web-auth Skill; Removed changelog Skill; Removed declankify Skill.
 - 31/08/2026: Added iris MCP; Added agent-browser Skill; Added animate Skill; Added break Skill; Added browser-automation-testing Skill; Added consolidate-test-suites Skill; and 37 more.
