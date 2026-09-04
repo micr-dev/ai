@@ -94,6 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'ssh-multi-environment': 'skills/ssh-multi-environment/SKILL.md',
     'is-agentic': 'skills/is-agentic/SKILL.md',
     'orx-figures': 'skills/orx-figures/SKILL.md',
+    'deslop': 'skills/deslop/SKILL.md',
+    'youtube-transcript': 'skills/youtube-transcript/SKILL.md',
 };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
@@ -1200,6 +1202,11 @@ document.addEventListener('DOMContentLoaded', () => {
     'product-description': 'https://github.com/mattpocock/skills/tree/main/skills/product/product-description',
     'product-description-minimal': 'https://github.com/mattpocock/skills/tree/main/skills/product/product-description-minimal',
     'web-auth': 'https://github.com/mattpocock/skills/tree/main/skills/engineering/web-auth',
+    'documentation-writer': 'https://github.com/github/awesome-copilot/blob/main/skills/documentation-writer/SKILL.md',
+    'gitquarry': 'https://github.com/Microck/gitquarry/tree/main/skills/gitquarry',
+    'grill-for-unknowns': 'https://github.com/nicobailon/grill-for-unknowns',
+    'herdr': 'https://github.com/herdrdev/herdr/blob/master/skills/herdr/SKILL.md',
+    'tailor-coderabbit-config': 'https://github.com/Microck/tailor-coderabbit-config',
 };
 
     if (externalSkillUrls[skillId]) {
