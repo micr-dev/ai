@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#121212"/>
-  <text x="16" y="20" text-anchor="middle" font-family="Ioskeley Mono, monospace" font-size="7.5" font-weight="700" fill="#fff">OMP</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#0f0a14" />
+  <path fill="#ffffff" d="M14 16h36v8H40v32h-8V24h-6v22h-8V24h-4z" />
 </svg>
