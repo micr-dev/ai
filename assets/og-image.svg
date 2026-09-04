@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="accent" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff4fd8"/>
+      <stop offset="1" stop-color="#6c63ff"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" x2="1">
+      <stop offset="0" stop-color="#54e6ff"/>
+      <stop offset="1" stop-color="#8bffcf"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#fff" stroke-opacity=".055"/>
+    </pattern>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="#000"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="1050" cy="70" r="170" fill="#6c63ff" opacity=".15" filter="url(#soft)"/>
+  <circle cx="640" cy="560" r="160" fill="#ff4fd8" opacity=".1" filter="url(#soft)"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#fff">
+    <text x="72" y="72" font-size="18" letter-spacing="4" fill="#aaa">MICROCK / AI OPERATOR STACK</text>
+    <text x="72" y="164" font-size="76" font-weight="700">AI Stack</text>
+    <text x="76" y="207" font-size="23" fill="#aaa">the tools behind the work</text>
+
+    <line x1="76" y1="255" x2="388" y2="255" stroke="url(#accent)" stroke-width="4"/>
+    <text x="76" y="302" font-size="17" letter-spacing="2" fill="#777">CURRENT SETUP</text>
+    <text x="76" y="351" font-size="25" font-weight="700">models → harnesses → tools</text>
+    <text x="76" y="390" font-size="22" fill="#bbb">hooks, MCPs, CLI, skills, workspace</text>
+
+    <g transform="translate(76 478)">
+      <text x="0" y="0" font-size="42" font-weight="700">113</text>
+      <text x="0" y="27" font-size="15" letter-spacing="1.5" fill="#888">SKILLS</text>
+      <text x="135" y="0" font-size="42" font-weight="700">23</text>
+      <text x="135" y="27" font-size="15" letter-spacing="1.5" fill="#888">MCPS</text>
+      <text x="270" y="0" font-size="42" font-weight="700">18</text>
+      <text x="270" y="27" font-size="15" letter-spacing="1.5" fill="#888">CLI TOOLS</text>
+    </g>
+  </g>
+
+  <g transform="translate(520 74)" font-family="Arial, Helvetica, sans-serif">
+    <rect x="0" y="0" width="604" height="482" rx="3" fill="#080808" stroke="#333"/>
+    <rect x="0" y="0" width="604" height="42" fill="#111" stroke="#333"/>
+    <circle cx="22" cy="21" r="5" fill="#ff4fd8"/>
+    <circle cx="40" cy="21" r="5" fill="#54e6ff"/>
+    <circle cx="58" cy="21" r="5" fill="#8bffcf"/>
+    <text x="86" y="27" font-size="14" letter-spacing="1" fill="#777">stack-map / live</text>
+
+    <g stroke="#333" stroke-width="2" fill="none">
+      <path d="M302 132V172M302 248V288M302 364V404"/>
+      <path d="M302 172H110V204M302 172H494V204"/>
+      <path d="M110 288H62V320M110 288H194V320M494 288H410V320M494 288H542V320"/>
+    </g>
+    <g fill="#54e6ff">
+      <circle cx="302" cy="132" r="5"/><circle cx="302" cy="172" r="5"/><circle cx="302" cy="248" r="5"/>
+      <circle cx="302" cy="288" r="5"/><circle cx="302" cy="364" r="5"/><circle cx="302" cy="404" r="5"/>
+    </g>
+
+    <g>
+      <rect x="206" y="76" width="192" height="56" fill="#15121c" stroke="#ff4fd8"/>
+      <text x="302" y="99" text-anchor="middle" font-size="12" letter-spacing="2" fill="#ff4fd8">MODELS</text>
+      <text x="302" y="119" text-anchor="middle" font-size="14" fill="#fff">GPT 5.6 · GLM 5.3</text>
+
+      <rect x="206" y="192" width="192" height="56" fill="#101820" stroke="#54e6ff"/>
+      <text x="302" y="215" text-anchor="middle" font-size="12" letter-spacing="2" fill="#54e6ff">HARNESSES</text>
+      <text x="302" y="235" text-anchor="middle" font-size="14" fill="#fff">Codex · Hermes · Droid</text>
+
+      <rect x="30" y="320" width="160" height="56" fill="#101615" stroke="#8bffcf"/>
+      <text x="110" y="343" text-anchor="middle" font-size="12" letter-spacing="2" fill="#8bffcf">MCPs</text>
+      <text x="110" y="363" text-anchor="middle" font-size="14" fill="#fff">23 connected</text>
+
+      <rect x="222" y="320" width="160" height="56" fill="#15121c" stroke="#ff4fd8"/>
+      <text x="302" y="343" text-anchor="middle" font-size="12" letter-spacing="2" fill="#ff4fd8">CLI</text>
+      <text x="302" y="363" text-anchor="middle" font-size="14" fill="#fff">18 tools</text>
+
+      <rect x="414" y="320" width="160" height="56" fill="#101820" stroke="#54e6ff"/>
+      <text x="494" y="343" text-anchor="middle" font-size="12" letter-spacing="2" fill="#54e6ff">SKILLS</text>
+      <text x="494" y="363" text-anchor="middle" font-size="14" fill="#fff">113 loaded</text>
+    </g>
+
+    <rect x="176" y="404" width="252" height="48" fill="#111" stroke="#555"/>
+    <text x="302" y="434" text-anchor="middle" font-size="15" letter-spacing="1" fill="#bbb">hooks + workspace + review</text>
+  </g>
+
+  <text x="1124" y="594" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="16" letter-spacing="2" fill="#666">AI.MICR.DEV</text>
+</svg>
