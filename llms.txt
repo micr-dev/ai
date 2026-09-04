@@ -16,26 +16,26 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 5.6 Sol, GPT 5.6 Luna, GPT Codex 5.3 Spark, GLM 5.3.
-- Harnesses: Codex CLI, Hermes Agent, Droid CLI, Antigravity CLI.
+- Models: GPT 5.6 Sol, GPT 5.6 Luna, Fable 5.1, GPT Codex 5.3 Spark, GLM 5.3, Opus 5.
+- Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
 - MCPs: codebase-memory-mcp, fff, markitdown-mcp, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, huggingface, apify, and 7 more.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 2 more.
-- Skills: ce-simplify-code, chart-visualization, data-visualization, ui-unslop, box-cli, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, grill-me, compact-handoff, optimo, naming, thermo-nuclear-code-quality-review, mermaid-diagrams, and 97 more.
+- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, box-cli, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, grill-me, compact-handoff, optimo, naming, thermo-nuclear-code-quality-review, and 104 more.
 - Code Review: Codex Code Review, CodeRabbit.
 - Workspace: VPS, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
-- 02/09/2026: Updated Codex CLI to 0.152.1; Updated timeboxed-iterating Skill (major rewrite + scaffold); Updated better-colors Skill; Updated better-ui Skill; Updated better-accessibility Skill; Updated better-interface Skill; and 19 more.
+- 04/09/2026: Removed Droid CLI Harness; Added OMP and Claude Code Primary Harnesses; Added Fable 5.1 Primary and Opus 5 Secondary Models; Updated Antigravity CLI to Gemini 3.8 Flash.
+- 02/09/2026: Updated Codex CLI to 0.152.1; Updated timeboxed-iterating Skill (major rewrite + scaffold); Updated better-colors Skill; Updated better-ui Skill; Updated better-accessibility Skill; Updated better-interface Skill; and 26 more.
 - 01/09/2026: Updated Codex CLI to 0.152.0; Added product-description Skill; Added product-description-minimal Skill; Added web-auth Skill; Removed changelog Skill; Removed declankify Skill.
 - 31/08/2026: Added iris MCP; Added agent-browser Skill; Added animate Skill; Added break Skill; Added browser-automation-testing Skill; Added consolidate-test-suites Skill; and 37 more.
 - 30/08/2026: Updated Codex CLI to 0.151.0; Added x64dbg MCP; Updated AGENTS.md (web request user agent); Added octen-design Skill; Added octen-extract Skill; Added octen-image-search Skill; and 7 more.
 - 28/08/2026: Updated Codex CLI to 0.150.1; Updated AGENTS.md (TypeScript projects use Oxlint).
 - 26/08/2026: Updated Codex CLI to 0.149.1; Added box-cli Skill; Added opentui-design Skill; Added tui-design Skill.
 - 23/08/2026: Updated Hermes model to x-preview-f-free via OpenCode Zen.
-- 22/08/2026: Updated Codex CLI to 0.149.0.
 
 ## Snapshot pages
 
@@ -98,6 +98,7 @@ The public skills directory currently exposes:
 - crabbox
 - create-cli
 - data-visualization
+- deslop
 - discord-bot-development
 - domain-modeling
 - effect
@@ -146,6 +147,7 @@ The public skills directory currently exposes:
 - wait-what
 - wayfinder
 - write-better-error-messages
+- youtube-transcript
 
 ## AGENTS.md preview
 
