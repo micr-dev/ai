@@ -32,7 +32,7 @@
     <text x="76" y="390" font-size="22" fill="#bbb">hooks, MCPs, CLI, skills, workspace</text>
 
     <g transform="translate(76 478)">
-      <text x="0" y="0" font-size="42" font-weight="700">113</text>
+      <text x="0" y="0" font-size="42" font-weight="700">120</text>
       <text x="0" y="27" font-size="15" letter-spacing="1.5" fill="#888">SKILLS</text>
       <text x="135" y="0" font-size="42" font-weight="700">23</text>
       <text x="135" y="27" font-size="15" letter-spacing="1.5" fill="#888">MCPS</text>
@@ -62,11 +62,13 @@
     <g>
       <rect x="206" y="76" width="192" height="56" fill="#15121c" stroke="#ff4fd8"/>
       <text x="302" y="99" text-anchor="middle" font-size="12" letter-spacing="2" fill="#ff4fd8">MODELS</text>
-      <text x="302" y="119" text-anchor="middle" font-size="14" fill="#fff">GPT 5.6 · GLM 5.3</text>
+      <text x="302" y="112" text-anchor="middle" font-size="12" fill="#fff">GPT 5.6 Sol · GPT 5.6 Luna</text>
+      <text x="302" y="128" text-anchor="middle" font-size="12" fill="#fff">GPT Codex 5.3 Spark · GLM 5.3</text>
 
       <rect x="206" y="192" width="192" height="56" fill="#101820" stroke="#54e6ff"/>
       <text x="302" y="215" text-anchor="middle" font-size="12" letter-spacing="2" fill="#54e6ff">HARNESSES</text>
-      <text x="302" y="235" text-anchor="middle" font-size="14" fill="#fff">Codex · Hermes · Droid</text>
+      <text x="302" y="228" text-anchor="middle" font-size="12" fill="#fff">Codex CLI · Hermes Agent</text>
+      <text x="302" y="244" text-anchor="middle" font-size="12" fill="#fff">Droid CLI · Antigravity CLI</text>
 
       <rect x="30" y="320" width="160" height="56" fill="#101615" stroke="#8bffcf"/>
       <text x="110" y="343" text-anchor="middle" font-size="12" letter-spacing="2" fill="#8bffcf">MCPs</text>
@@ -78,7 +80,7 @@
 
       <rect x="414" y="320" width="160" height="56" fill="#101820" stroke="#54e6ff"/>
       <text x="494" y="343" text-anchor="middle" font-size="12" letter-spacing="2" fill="#54e6ff">SKILLS</text>
-      <text x="494" y="363" text-anchor="middle" font-size="14" fill="#fff">113 loaded</text>
+      <text x="494" y="363" text-anchor="middle" font-size="14" fill="#fff">120 loaded</text>
     </g>
 
     <rect x="176" y="404" width="252" height="48" fill="#111" stroke="#555"/>
