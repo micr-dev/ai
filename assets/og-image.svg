@@ -1,50 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#000"/>
+  <style>
+    .sans { font-family: 'Helvetica Neue', sans-serif; }
+    .mono { font-family: 'Ioskeley Mono', monospace; }
+  </style>
+  <rect width="1200" height="630" fill="#121212"/>
 
-  <g font-family="Arial, Helvetica, sans-serif" fill="#fff">
-    <text x="72" y="70" font-size="17" letter-spacing="5" fill="#8a8a8a">MICROCK / AI OPERATOR STACK</text>
-    <text x="72" y="168" font-size="76" font-weight="700">AI Stack</text>
-    <text x="76" y="211" font-size="23" fill="#aaa">the tools behind the work</text>
-    <line x1="76" y1="257" x2="397" y2="257" stroke="#fff" stroke-width="2"/>
-    <text x="76" y="309" font-size="16" letter-spacing="4" fill="#777">CURRENT SETUP</text>
-    <text x="76" y="356" font-size="25" font-weight="700">models → harnesses → tools</text>
-    <text x="76" y="395" font-size="21" fill="#aaa">hooks, MCPs, CLI, skills, workspace</text>
-
-    <text x="76" y="493" font-size="42" font-weight="700">120</text>
-    <text x="76" y="520" font-size="14" letter-spacing="3" fill="#777">SKILLS</text>
-    <text x="210" y="493" font-size="42" font-weight="700">23</text>
-    <text x="210" y="520" font-size="14" letter-spacing="3" fill="#777">MCPS</text>
-    <text x="344" y="493" font-size="42" font-weight="700">18</text>
-    <text x="344" y="520" font-size="14" letter-spacing="3" fill="#777">CLI TOOLS</text>
+  <g class="sans" fill="#fff">
+    <text x="78" y="176" font-size="82" font-weight="700">AI Stack</text>
+    <text x="82" y="218" font-size="24" fill="#8b8b8b">the tools behind the work</text>
+    <line x1="82" y1="270" x2="404" y2="270" stroke="#fff" stroke-width="2"/>
+    <text x="82" y="340" font-size="27" font-weight="500">models → harnesses → tools</text>
+    <text x="82" y="380" font-size="23" fill="#8b8b8b">hooks, MCPs, CLI, skills, workspace</text>
   </g>
 
-  <line x1="520" y1="70" x2="520" y2="555" stroke="#303030" stroke-width="1"/>
+  <line x1="536" y1="78" x2="536" y2="552" stroke="#242424" stroke-width="1"/>
 
-  <g font-family="Arial, Helvetica, sans-serif">
-    <text x="570" y="108" font-size="16" letter-spacing="4" fill="#777">STACK MAP</text>
+  <g class="sans">
+    <text x="588" y="128" font-size="24" font-weight="500" fill="#fff">Models</text>
+    <text x="588" y="158" font-size="20" fill="#8b8b8b">GPT 5.6 Sol · GPT 5.6 Luna</text>
+    <text x="588" y="185" font-size="20" fill="#8b8b8b">GPT Codex 5.3 Spark · GLM 5.3</text>
+    <line x1="588" y1="214" x2="1126" y2="214" stroke="#242424"/>
 
-    <g transform="translate(570 145)">
-      <text x="0" y="0" font-size="14" letter-spacing="3" fill="#777">MODELS</text>
-      <text x="0" y="31" font-size="22" fill="#fff">GPT 5.6 Sol · GPT 5.6 Luna</text>
-      <text x="0" y="59" font-size="22" fill="#fff">GPT Codex 5.3 Spark · GLM 5.3</text>
-      <line x1="0" y1="84" x2="558" y2="84" stroke="#303030"/>
-    </g>
+    <text x="588" y="264" font-size="24" font-weight="500" fill="#fff">Harnesses</text>
+    <text x="588" y="294" font-size="20" fill="#8b8b8b">Codex CLI · Hermes Agent</text>
+    <text x="588" y="321" font-size="20" fill="#8b8b8b">Droid CLI · Antigravity CLI</text>
+    <line x1="588" y1="350" x2="1126" y2="350" stroke="#242424"/>
 
-    <g transform="translate(570 255)">
-      <text x="0" y="0" font-size="14" letter-spacing="3" fill="#777">HARNESSES</text>
-      <text x="0" y="31" font-size="22" fill="#fff">Codex CLI · Hermes Agent</text>
-      <text x="0" y="59" font-size="22" fill="#fff">Droid CLI · Antigravity CLI</text>
-      <line x1="0" y1="84" x2="558" y2="84" stroke="#303030"/>
-    </g>
-
-    <g transform="translate(570 365)">
-      <text x="0" y="0" font-size="14" letter-spacing="3" fill="#777">TOOLS</text>
-      <text x="0" y="31" font-size="22" fill="#fff">23 MCPs · 18 CLI tools · 120 skills</text>
-      <text x="0" y="59" font-size="22" fill="#fff">hooks · workspace · code review</text>
-      <line x1="0" y1="84" x2="558" y2="84" stroke="#303030"/>
-    </g>
-
-    <text x="570" y="514" font-size="16" fill="#777">A public record of a working AI setup.</text>
-    <text x="1128" y="594" text-anchor="end" font-size="16" letter-spacing="4" fill="#777">AI.MICR.DEV</text>
+    <text x="588" y="400" font-size="24" font-weight="500" fill="#fff">Tools</text>
+    <text x="588" y="430" font-size="20" fill="#8b8b8b">23 MCPs · 18 CLI tools · 120 skills</text>
+    <text x="588" y="457" font-size="20" fill="#8b8b8b">hooks · workspace · code review</text>
   </g>
+
+  <text x="1126" y="572" text-anchor="end" class="mono" font-size="16" fill="#555">ai.micr.dev</text>
 </svg>
