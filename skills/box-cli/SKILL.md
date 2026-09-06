@@ -1,81 +1,120 @@
 ---
 name: box-cli
-description: Use for `box` CLI commands and ascii.dev cloud sandboxes: when a task needs a machine that is not this one (untrusted or destructive code, a heavy build, a real browser or GUI session, parallel agents on isolated copies), when something needs a public HTTPS preview URL to share, when creating, snapshotting, forking or resuming a sandbox, or when scripting `box --json`.
+description: Cloud Linux sandboxes via Box CLI (`box`). Run remote tests, builds, compiles, or untrusted code in disposable or persistent VMs, manage sandbox lifecycle, and inspect quota.
 ---
 
 # Box CLI
 
-A box is a full Linux VM rented by the second: sudo, 2-8 vCPUs, a dedicated IPv4, a
-streamed desktop, and a filesystem that survives being switched off. `box` drives it.
+A box is a persistent Ubuntu VM rented by the second while running. Stopped boxes are free.
 
-Read `box <command> --help` for the live flag surface, and fetch
-https://docs.ascii.dev/llms.txt for pages this file does not cover. What follows is the
-part `--help` never confesses: the semantics, the clocks, and the traps.
+The primary personal use is testing, compiling, and running isolated builds. Because Box has **no idle timer**, unstopped boxes burn quota continuously until their TTL expires. Every run must treat stopping the machine as a mandatory completion step.
 
-## Check the session first
+Read `box <command> --help` for flag syntax.
 
-```bash
-box status          # API health, signed-in account, plan, config path
-```
+## Pre-flight: Check Quota
 
-`box: command not found` -> `curl -fsSL https://box.ascii.dev/install | sh`
-(Windows: `irm https://box.ascii.dev/install.ps1 | iex`).
-
-Signed out -> **report it and stop**. `box login` with no key prints a URL, opens a
-browser and blocks for up to six minutes, which strands a non-interactive session. The
-user either signs in themselves or puts a key in `BOX_API_KEY`, after which
-`box login "$BOX_API_KEY"` works headlessly. Keys are minted only from a browser session
-(`box api-key create <name>`, secret shown once), so an API-key session cannot bootstrap
-another one, and cannot rotate or revoke keys either.
-
-## The loop
+Before starting work, check that machine time and starts remain:
 
 ```bash
-box new --ttl 3600                            # follows the box to `ready`, prints its id
-box exec current "npm test"                   # runs it; exits with the remote exit code
-box scp current:/home/user/out.zip ./out.zip  # pull results
-box stop current                              # snapshot, then billing stops
+box limits          # compute seconds remaining, starts budget, and active boxes
+box status          # API health and signed-in account
 ```
 
-`current` is the last box created in this shell and `self` is the box you are running
-inside. Both work anywhere an id does, including inside a box.
+If compute time is 0s or status is depleted, stop immediately and report to the user. Do not attempt `box new` or `box resume`.
 
-**1. Get a box.** `box new` for a fresh one, `box new --from <name>` to deploy a
-template you already built, `box resume <id>` to pick up a stopped one, `box fork <id>`
-to branch a running one. `--type small|default|large` is 2/4/8 vCPUs.
+If `box: command not found`, install via `curl -fsSL https://box.ascii.dev/install | sh`. If signed out, stop and ask the user to authenticate; non-interactive `box login` without a key hangs waiting for a browser. Headless sessions use `box login "$BOX_API_KEY"`.
 
-**2. Wait for `ready`.** `box new` already follows the box there. `resume` and `fork`
-answer asynchronously, so poll `box info <id>` until the state is `ready` or `idle`.
-Commands sent earlier are refused with a retryable `box_starting`, and would run before
-the box's environment variables were applied anyway.
+## The Test & Compile Loop
 
-**3. Run work.** `box exec <id> "cmd"` goes over the API with no SSH key setup and is
-the default; add `--cwd <dir>` (relative to `/home/user`) and `--timeout <secs>`.
-Reach for `box ssh` when you need an interactive shell or want to stream a local script
-in without copying it first: `box ssh <id> -- bash -s < ./setup.sh`.
+Follow this four-step sequence for every remote execution:
 
-**4. Get results out.** `box scp` in either direction, `--recursive` for trees. To hand
-a running service to a human instead, expose it (see below).
+```bash
+# 1. Allocate a small box with a tight deadman TTL (e.g. 5-10 minutes)
+box new --type small --ttl 300
 
-**5. Put it away.** `box stop <id>` snapshots the disk and pauses billing; a stopped box
-is free and `box resume` brings it back months later. Reserve `box delete <id>` for data
-you want destroyed: it force-stops without a final snapshot and permanently removes every
-snapshot chain only that box uses.
+# 2. Run the test or compile command over the API
+box exec current --timeout 240 "npm test"
 
-## Clocks and money
+# 3. Pull output artifacts if needed (skip if stdout is sufficient)
+box scp current:/home/user/dist ./dist
 
-* Auto-stop counts **from creation, not from last activity**. Default TTL is 1 hour, so a
-  box dies mid-work an hour in unless you say otherwise. `box extend <id> --hours 12`,
-  `--ttl 2592000` (30 days, the max), or `--no-auto-stop`.
-* A fork does not inherit `--no-auto-stop`; it defaults back to 1 hour. Resume keeps the
-  box's current setting when you omit `--ttl`.
-* $1 buys about 27 hours of a `default` box. `small` burns the balance at 0.5x, `large`
-  at 2x. Stopped boxes, snapshots, IPv4 and 2 TB/month egress cost nothing extra.
-* Create, fork and resume each count as one **machine start** against per-minute,
-  per-hour and per-day caps. `box limits` shows what is left of all three plus the
-  balance. Past a cap the API answers 429 `rate_limited` and names the window.
-* On the free trial `--no-auto-stop`, any TTL over 2 hours, and `--type large` are all
-  refused. Two concurrent boxes, 25 hours of machine time total.
+# 4. Mandatory completion: STOP immediately to halt billing
+box stop current
+```
 
-## Traps
+**Completion criterion**: Remote execution is not done until `box stop` (or `box delete`) succeeds. If the remote command fails or errors out, still stop the box immediately.
 
+## Quota & Sizing Rules
+
+1. **Default to `small` for tests and compiles**
+   - `--type small` (2 vCPU, 4 GB): **0.5x burn rate** ($0.018/h, ~1,110 hours per $20 plan). This handles standard test suites, linters, typechecks, and package builds.
+   - `--type default` (4 vCPU, 8 GB): **1x burn rate** ($0.036/h, ~555 hours per $20 plan). Use only when memory or thread limits exceed 4 GB (e.g. large Docker-in-Docker or heavier services).
+   - `--type large` (8 vCPU, 16 GB): **2x burn rate** ($0.072/h). Use only for heavily parallel C++/Rust workspace compilations.
+   - Omitting `--type` defaults to `default`, burning quota twice as fast as `small`.
+
+2. **TTL is a deadman switch, not an idle timer**
+   - The meter runs every second a box is in `ready`, `cloning`, `running`, or `idle`.
+   - Never run `box new` without `--ttl`. Default TTL is 3600 (1 hour); leaving it burns 50+ idle minutes if a stop is missed.
+   - Set `--ttl` to estimated runtime plus a small buffer (e.g. `--ttl 300` for 5m, `--ttl 600` for 10m).
+   - Never use `--no-auto-stop` for routine tests or builds.
+
+3. **Always pass `--ttl` when resuming**
+   - `box resume <id>` without `--ttl` preserves the box's previous TTL setting or disabled auto-stop. Always supply an explicit timer: `box resume <id> --ttl 300`.
+
+4. **Budget machine starts**
+   - `new`, `resume`, and `fork` each consume 1 start against rolling account caps (10/min, 50/hour, 150/day).
+   - Group multiple test commands into a single box session rather than creating a new box for every command.
+
+5. **Choose Stop vs Delete**
+   - `box stop <id>`: Pauses billing and saves the filesystem snapshot for free. Use this for reusable test runners where installed dependencies should be preserved.
+   - `box delete <id> --yes`: Permanently tears down the VM and its snapshot chain. Use this for one-off throwaway runs to avoid cluttered inventories.
+
+## Leverage: The Warmed Test Runner
+
+Cold builds spend billable box seconds cloning repos and installing dependencies. Build a reusable warm box once and resume it for subsequent runs:
+
+```bash
+# Setup phase (run once)
+box new --type small --ttl 600
+box exec current "git clone <repo> && cd <repo> && npm install"
+box stop current                         # disk snapshotted for free
+
+# Recurring test phase (sub-second launch, cached node_modules/cargo)
+box resume <id> --ttl 300
+box exec <id> "cd <repo> && git pull && npm test"
+box stop <id>                            # billing halts immediately
+```
+
+To deploy identical runners concurrently, snapshot the setup:
+```bash
+box snapshot <id> test-runner            # freeze template (up to 10 kept)
+box new --from test-runner --type small --ttl 300
+```
+
+## Running Long Builds (>600s)
+
+Synchronous `box exec` caps at 600 seconds. For longer compilations, detach and poll:
+
+```bash
+pid="$(box exec current --detach "cargo build --release" | jq -r .processId)"
+box exec current --status "$pid"         # poll until exitCode appears
+box stop current                         # stop once done
+```
+
+Detached logs stay at `~/.ascii/processes/<pid>.log` on the box.
+
+## Common Traps
+
+| Trap | Root Cause | Solution |
+| --- | --- | --- |
+| Quota drained with no work running | Box was left in `idle` or auto-stop was omitted. | Always pass tight `--ttl` (300-600s) and stop immediately after work. |
+| Resumed box stayed up indefinitely | `box resume` without `--ttl` inherits old lifetime. | Always pass `box resume <id> --ttl <secs>`. |
+| Tests burned quota at 1x or 2x rate | Default size is `default` (4 vCPU / 8 GB). | Explicitly pass `--type small` (0.5x burn rate). |
+| Start limit 429 `rate_limited` | Exceeded 10 starts/min or 50/hour. | Run multiple test steps in one session instead of spinning up a box per step. |
+| Test server unreachable on hosted URL | Service bound only to `127.0.0.1`. | App must bind `0.0.0.0` when exposing ports via `box host <id> <port>`. |
+| Interactive command hangs indefinitely | `box login` with no key waits for browser. | Check `box status` first; use `box login "$BOX_API_KEY"` headlessly. |
+| Stop refused and box left running | Disk snapshot in progress or failing. | The billing meter pauses on failed stop. Poll `box info` for `stopped`, or use `--force` if unsaved scratch data can be discarded. |
+
+## Automation & Scripting
+
+For shell automation, CI scripts, and error code reference, see [`references/automation.md`](references/automation.md).

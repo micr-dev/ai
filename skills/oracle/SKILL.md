@@ -5,19 +5,46 @@ description: "Oracle CLI browser workflow for ChatGPT, with a direct recovery pa
 
 # Oracle (CLI) — browser recovery workflow
 
-This skill keeps `--engine browser` and `--model gpt-5.6-sol` as default behavior.
+This skill keeps `--engine browser` and `--model gpt-6-astra` as default behavior.
 
 ## Non-negotiable defaults
 
 - Engine: `browser`
-- Model: `gpt-5.6-sol`
+- Model: `gpt-6-astra`
 - Thinking time: `--browser-thinking-time heavy`
-- Manual login: keep enabled unless you explicitly approve turning it off
+- Manual login: use only when refreshing the profile interactively; prefer the protected inline-cookie file for agent runs
 - Do not switch model/provider unless the operator approves a change
 
-## Fast fix when picker loads but prompt never submits
+## GPT-6 Pro is a thinking-effort level
 
-If you see picker UI for `GPT-5.6 Sol` but Oracle marks a run as failed and `promptSubmitted:false`, run these exact steps.
+GPT-6 Pro is real and is selected as the top `6 Pro` step in ChatGPT's thinking-effort slider. It is not necessarily exposed as a distinct model-picker label or model ID. Oracle label matching can therefore fail even when the browser consult is valid.
+
+When the browser directly accepts the prompt with `Pro thinking` active, treat the consult as submitted and real. The answer remains in the ChatGPT conversation even if Oracle later reports a local timeout or state error. Verify browser/session evidence before declaring failure, and do not retry with a different model merely because label matching failed.
+
+For CLI defaults, keep `gpt-6-astra` as the model identifier and `--browser-thinking-time heavy` as the setting that requests the top Pro effort level.
+
+## Persistent security-key login
+
+The Oracle browser profile cannot receive a physical USB security key through VNC. Authenticate to ChatGPT with the security key in a local browser, export the `chatgpt.com` cookies, and store the protected export at:
+
+```text
+/home/ubuntu/.oracle/chatgpt-inline-cookies.json
+```
+
+Use the cookie file for agent runs. Do not add `--browser-manual-login` when using it, because that flag intentionally skips cookie import and waits for an interactive profile login:
+
+```bash
+oracle --engine browser --model gpt-6-astra \
+  --browser-inline-cookies-file /home/ubuntu/.oracle/chatgpt-inline-cookies.json \
+  --browser-model-strategy current \
+  --force -p "<task>"
+```
+
+Refresh the file when ChatGPT invalidates the session cookies. Keep it mode `600` and never print its contents.
+
+## Fast fix when picker or label matching fails before prompt submission
+
+If Oracle cannot match a `6 Pro` label, do not infer that GPT-6 Pro is unavailable. Check whether the browser directly accepted the prompt and shows `Pro thinking` first. Only run the recovery steps below when the prompt was not accepted.
 
 ### 1) Turn a browser-exported ChatGPT cookie dump into Oracle inline cookies
 
@@ -59,7 +86,7 @@ PY
 ### 3) Verify one minimal call using the same profile + inline cookies
 
 ```bash
-oracle --engine browser --model gpt-5.6-sol \
+oracle --engine browser --model gpt-6-astra \
   --browser-inline-cookies-file /tmp/chatgpt-inline-cookies.json \
   --browser-model-strategy current \
   --browser-manual-login \
@@ -73,7 +100,7 @@ If this succeeds, continue with your normal command style.
 ### 4) Use this exact fallback until stable
 
 ```bash
-oracle --engine browser --model gpt-5.6-sol \
+oracle --engine browser --model gpt-6-astra \
   --browser-inline-cookies-file /tmp/chatgpt-inline-cookies.json \
   --browser-manual-login-profile-dir /home/ubuntu/snap/chromium/common/oracle-browser-profile \
   --browser-model-strategy ignore \
@@ -86,7 +113,8 @@ oracle --engine browser --model gpt-5.6-sol \
 ## Standard run command
 
 ```bash
-oracle --engine browser --model gpt-5.6-sol \
+oracle --engine browser --model gpt-6-astra \
+  --browser-inline-cookies-file /home/ubuntu/.oracle/chatgpt-inline-cookies.json \
   --browser-thinking-time heavy \
   -p "<task>" \
   --file "src/**"
