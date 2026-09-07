@@ -27,11 +27,20 @@
       ]
     },
     {
-      "source": "/(favicon.gif|favicon.png|favicon-a.png|favicon-i.png|og-image.png)",
+      "source": "/(favicon.gif|favicon.png|favicon-a.png|favicon-i.png)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/og-image.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
         }
       ]
     },
