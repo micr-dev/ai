@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     'browser-automation-testing': 'skills/browser-automation-testing/SKILL.md',
     'discord-bot-development': 'skills/discord-bot-development/SKILL.md',
+    'image-understanding': 'skills/image-understanding/SKILL.md',
     'mcp-server-development': 'skills/mcp-server-development/SKILL.md',
     'microck-voice': 'skills/microck-voice/SKILL.md',
     'price-monitoring-scraping': 'skills/price-monitoring-scraping/SKILL.md',

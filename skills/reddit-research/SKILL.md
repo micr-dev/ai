@@ -1,3 +1,8 @@
+---
+name: reddit-research
+description: Two-phase Reddit research workflow using Kagi discovery and reddit-mcp-buddy analysis
+---
+
 # Reddit Research Skill
 
 ## Triggers

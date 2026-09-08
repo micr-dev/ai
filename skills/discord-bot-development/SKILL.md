@@ -1,3 +1,8 @@
+---
+name: discord-bot-development
+description: Discord bot development patterns for selfbot automation and standard bot integrations
+---
+
 # Discord Bot Development
 
 Comprehensive guide for building Discord bots using discord-py-self MCP and best practices.

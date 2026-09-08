@@ -202,13 +202,16 @@ you MUST respond using ASD-STE100 Simplified Technical English rules:
 - Structure the answer with short paragraphs or numbered steps.
 - Do not add caveats, disclaimers, or qualifications beyond what is strictly needed to be accurate.
 
-## File reading rules (mandatory)
+## Temporary file uploads
 
-- Always prefer the built-in `read_file` tool over any shell command (sed, head, tail, cat, less, etc.) when inspecting source or project files.
-- When using `read_file`, request the FULL file: set a high limit (e.g. limit=10000 or higher) or issue sequential offset/limit calls that cover every line until the end.
-- Never stop after the first 200–300 lines. If the file is longer, continue reading the rest.
-- First check total lines with `wc -l` if needed, then plan full coverage.
-- Partial reads are only acceptable for huge logs or when the user explicitly asks for a section.
+Use `ravenbin-upload <file>` for temporary uploads instead of litterbox. Treat the returned URL as sensitive.
+
+## File reading
+
+- Prefer the built-in `read_file` tool when available; otherwise use the narrowest reliable local reader.
+- Read the relevant function, section, or other unit with enough surrounding context to understand its contract before editing. Expand the read when dependencies or cross-cutting invariants require it.
+- Read the entire file when the task reviews the whole file or correctness depends on its full contents. Do not load unrelated sections merely to satisfy a fixed line count.
+- For skills and other routed documentation, load only the references needed for the current task. Do not treat truncated output as complete evidence.
 
 ---
 
@@ -318,6 +321,7 @@ POTENTIAL CONCERNS:
 - Deep research must use Oracle's browser workflow with ChatGPT Deep Research when it is available. If it is unavailable, report the blocker. Do not report ordinary search as deep research.
 - When a provider finds a page, use that provider's extractor when suitable. Skip hosted extraction for raw GitHub, JSON, APIs, and exact-byte work.
 - For YouTube transcripts, use the installed YouTube transcript workflow and stop after bot detection or HTTP 429 rather than retrying in a loop.
+- When X/Twitter research is needed, use x.md at `https://x.pcstyle.dev` when direct X access is unavailable or inconvenient. It reads public X content only and is read-only. Prefer its Markdown or JSON output, respect its hosted limit of 5 uncached search requests per minute per IP, and do not assume degraded web-indexed results are complete or paginated.
 
 ## Repository verification
 
@@ -415,9 +419,9 @@ Proceeding unless you redirect.
 Wait for user confirmation if they respond. If no response after stating plan, proceed.
 
 ### Goal Continuation Rules
-When a goal automatically continues (e.g. across turns, compactions, or sessions), I MUST list the blocking conditions that prevent its completion.
+Define completion by the requested outcome and relevant verification. A goal is complete only when those criteria are met.
 
-When creating or describing a long-running goal, I MUST include a completion criterion that treats the same blocking condition repeating twice as goal completion.
+When work is blocked, report the unresolved condition, evidence, and what is needed to resume. Repeated identical failure without new evidence is a reason to stop futile retries, not to declare success. Distinguish completed work, blocked work, and work stopped at an agreed limit, and follow the active goal tool's rules for status transitions.
 
 ### Autonomous Goal Execution
 While running a goal, I MUST NOT ask the user questions, request clarification, or pause for confirmation. I MUST choose the safest reasonable interpretation from the available context, continue working, and report assumptions or blockers in the final result. This rule applies only to goal execution and does not override explicit authorization requirements for destructive or externally consequential actions.
