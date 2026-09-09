@@ -1,6 +1,6 @@
 ---
 name: oracle
-description: "Oracle CLI browser workflow for ChatGPT, with a direct recovery path for model picker but no prompt submit."
+description: "Oracle CLI browser workflow for ChatGPT, with a direct recovery path for model picker but no prompt submit." 
 ---
 
 # Oracle (CLI) — browser recovery workflow
