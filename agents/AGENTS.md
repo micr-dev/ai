@@ -12,7 +12,7 @@
 An interrogative that clearly requests a change is an action request. Advisory questions remain read-only.
 
 - A question is a request for an answer, not for changes. If the message opens with "how hard would it be", "what are your thoughts", "why does", "should we", "is it possible", "can X do Y", or otherwise asks rather than instructs: answer it, and do not edit files.
-- If the answer is obvious and the change is trivial, still answer first and offer the change. Ask before making it.
+- If the user clearly requests the work, proceed with the safest reasonable interpretation. Ask only when the ambiguity materially changes behavior, creates a meaningful risk of data loss, or requires authorization that the user has not given.
 
 ## External actions
 
@@ -35,7 +35,7 @@ The `Hard-Cut Product Policy` subsection below applies only to the current appli
 ### Intent Over Literal Words
 My requests are APPROXIMATE. I am not the one coding; you are. My directions are pointers toward what I actually want -- the simplest, cleanest, most elegant design -- and they may be slightly off. That goal ALWAYS outranks my literal words.
 
-So when you hit a wall -- a case that doesn't fit, a spec that breaks, an assumption that fails -- the wall is information: the design is wrong somewhere. STOP. Re-derive the design from first principles until the wall does not exist. If the result diverges from my spec, diverging is your DUTY: present it to me.
+So when you hit a wall -- a case that doesn't fit, a spec that breaks, an assumption that fails -- treat it as information about the design. Re-derive the design when needed. Do not stop merely because the task has multiple steps or because an assumption can be stated in the final report. Stop and ask only when the ambiguity materially changes behavior, creates a meaningful risk of data loss, or requires authorization that the user has not given.
 
 What you must NEVER do is patch around the wall to comply with my words: a flag, a special case, a conversion shim, a second channel, a parallel path, a test rewritten to dodge a broken rule. The patch IS the failure. Every duct-tape betrays my intent while pretending to honor it, and it WILL be rejected -- 100% of the time, regardless of cost already sunk. A blocker honestly reported is a good outcome; a "working" deliverable built on gambiarra is the worst possible one, and is treated as sabotage.
 
@@ -49,15 +49,15 @@ ASSUMPTIONS I'M MAKING:
 → Correct me now or I'll proceed with these.
 ```
 
-Do not pause for assumptions that are obvious from local context, low risk, or easily reversible. Never silently fill in ambiguous requirements when the wrong choice would materially affect behavior, data, public API, security, or user-visible UX.
+Do not pause for assumptions that are obvious from local context, low risk, or easily reversible. State material assumptions briefly and continue when the user has already authorized the work. Ask before proceeding only when the wrong choice would materially affect behavior, data, public API, security, or user-visible UX.
 
 ### Confusion Management
 When I encounter inconsistencies, conflicting requirements, or unclear specifications:
 
-1. STOP. Do not proceed with a guess.
-2. Name the specific confusion.
-3. Present the tradeoff or ask the clarifying question.
-4. Wait for resolution before continuing.
+1. Identify the specific ambiguity.
+2. Decide whether it materially affects behavior, data, security, or authorization.
+3. If it does, ask the focused clarifying question and wait.
+4. Otherwise, choose the safest reasonable interpretation, state the assumption, and continue.
 
 **Bad:** Silently picking one interpretation and hoping it's right.  
 **Good:** "I see X in file A but Y in file B. Which takes precedence?"
@@ -204,7 +204,7 @@ you MUST respond using ASD-STE100 Simplified Technical English rules:
 
 ## Temporary file uploads
 
-Use `ravenbin-upload <file>` for temporary uploads instead of litterbox. Treat the returned URL as sensitive.
+Use `ravenbin-upload <file>` for temporary uploads instead of litterbox. Treat the returned URL as sensitive. To fetch a shared file, use `ravenbin-upload fetch '<url>' --output <path>` with the complete URL, including the part after `#`.
 
 ## File reading
 
@@ -329,12 +329,15 @@ POTENTIAL CONCERNS:
 - Verify paths, config keys, versions, flags, runtime behavior, and environment setup locally. Do not guess.
 - If a required tool is unavailable or indexing fails, report it and use the narrowest reliable fallback. Do not repeatedly retry an unavailable path.
 - Follow the repository's package manager. Do not mix package managers unless requested.
+- For TypeScript projects, use Oxlint when the project supports it. Apply the generic rules from [dmmulroy/anti-slop](https://github.com/dmmulroy/anti-slop) and enable [`eslint/complexity`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/complexity). Preserve existing lint configuration and scripts, use the repository's package manager, and do not apply this to non-TypeScript projects.
 
 ## Code and file discovery
 
 Use the tool that matches the question:
 
 - Use codebase-memory-mcp for definitions, references, imports, dependents, dependency paths, and architecture.
+- Before graph-shaped discovery, check whether the active repository is indexed with codebase-memory-mcp. If it is not indexed, run `index_repository` for that repository and wait for indexing to finish before querying the graph.
+- Do not fall back to exact search merely because the repository has no index. Fall back only when the indexer is unavailable or indexing fails, and report that failure.
 - Use ast-grep for syntax-aware search and codemods.
 - Use fff for exact search in the indexed workspace.
 - Use rg, sed, or direct reads when exact output matters or the path is outside an indexed worktree.
@@ -416,7 +419,7 @@ PLAN:
 Proceeding unless you redirect.
 ```
 
-Wait for user confirmation if they respond. If no response after stating plan, proceed.
+Do not wait for confirmation after stating a plan. Continue unless the user redirects or the plan requires an authorization that is not already present.
 
 ### Goal Continuation Rules
 Define completion by the requested outcome and relevant verification. A goal is complete only when those criteria are met.
@@ -464,7 +467,7 @@ After substantive implementation work and before code review, invoke `$ce-simpli
 
 Use it only for settled code changes. Do not run it for documentation-only, generated, vendored, dependency, or mechanical-only changes. When there is no current diff, pass an explicit file or scope instead of guessing.
 
-The following codebase-memory reference applies to graph-shaped code questions when the service is available and the repository is indexed. Use direct tools for exact output, non-code files, unavailable services, or unindexed repositories.
+The following codebase-memory reference applies to graph-shaped code questions when the service is available and the repository is indexed. Use direct tools for exact output, non-code files, unavailable services, or repositories whose indexing failed.
 
 <!-- codebase-memory-mcp:start -->
 # Codebase Knowledge Graph (codebase-memory-mcp)
