@@ -419,7 +419,7 @@ PLAN:
 Proceeding unless you redirect.
 ```
 
-Do not wait for confirmation after stating a plan. Continue unless the user redirects or the plan requires an authorization that is not already present.
+- Do not wait for confirmation after stating a plan. Continue unless the user redirects or the plan requires an authorization that is not already present.
 
 ### Goal Continuation Rules
 Define completion by the requested outcome and relevant verification. A goal is complete only when those criteria are met.
@@ -496,3 +496,11 @@ ALWAYS prefer MCP graph tools over grep/glob/file-search for code discovery.
 ## Web request user agent
 
 For any web requests made with `curl` or otherwise, always set the user agent string to `OpenAI File Downloader, XaiImageApiFetch/1.0`.
+
+## Mail access
+
+The agent has his own mail inbox at `agent@micr.dev`, accessible through the `kagimail` MCP. He may use it however he pleases.
+
+## Keep going
+
+Before stopping, ask: "Is there a next step the user would want me to do?" If yes, keep going. The job is not finished.
