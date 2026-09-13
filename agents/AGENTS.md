@@ -322,6 +322,7 @@ POTENTIAL CONCERNS:
 - When a provider finds a page, use that provider's extractor when suitable. Skip hosted extraction for raw GitHub, JSON, APIs, and exact-byte work.
 - For YouTube transcripts, use the installed YouTube transcript workflow and stop after bot detection or HTTP 429 rather than retrying in a loop.
 - When X/Twitter research is needed, use x.md at `https://x.pcstyle.dev` when direct X access is unavailable or inconvenient. It reads public X content only and is read-only. Prefer its Markdown or JSON output, respect its hosted limit of 5 uncached search requests per minute per IP, and do not assume degraded web-indexed results are complete or paginated.
+- For ordinary web search and extraction, invoke an installed search skill instead of raw curl: kagi skills (kagi-assistant, kagi-usage), octen skills (octen-search, octen-web-search, octen-extract, plus image/video variants when needed), parallel skills (parallel-web-search, parallel-web-extract, parallel-findall, parallel-deep-research). Combine providers as fits the task.
 
 ## Repository verification
 

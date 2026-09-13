@@ -20,6 +20,7 @@ Do not use it for HTML that ships as part of a product.
 
 Create one self-contained HTML file, capped at 512 KB.
 
+- Apply the `scandinavian-design` skill to the generated page's visual system. Use its recon, hierarchy, neutral palette, restrained typography, spacing, accessibility, responsive, and verification guidance while preserving this skill's self-contained-file and sandbox constraints.
 - Write it like a spec, not a landing page: dense, scannable, no hero, decorative chrome, marketing voice, or em dashes.
 - Default to true black (`#000`), white primary text, and dark gray only for secondary surfaces or accents.
 - Make it mobile-readable with a responsive viewport and no fixed-width layout.

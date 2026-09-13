@@ -16,26 +16,26 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 6 Astra, GPT 5.6 Luna, Fable 5.1, GLM 5.3, Opus 5.
+- Models: GPT Daybreak Blue, GPT 5.6 Luna, Fable 5.1, GLM 5.3, Opus 5.
 - Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
-- MCPs: codebase-memory-mcp, fff, markitdown-mcp, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, huggingface, apify, and 7 more.
+- MCPs: codebase-memory-mcp, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, huggingface, and 8 more.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 2 more.
-- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, box-cli, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, grill-me, compact-handoff, optimo, naming, thermo-nuclear-code-quality-review, and 104 more.
+- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, unslop, box-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, code-review, prototype, to-spec, and 115 more.
 - Code Review: Codex Code Review, CodeRabbit.
 - Workspace: VPS, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
+- 12/09/2026: Updated GPT 6 Astra to GPT 5.6 Sol Model; Updated GPT 5.6 Sol to GPT Daybreak Blue Model; Added gpt-reserve Hermes fallback Model; Added code-review Skill; Added prototype Skill; Added to-spec Skill; and 8 more.
+- 11/09/2026: Updated Codex CLI to 0.154.0.
+- 10/09/2026: Updated AGENTS.md.
+- 09/09/2026: Added kagimail MCP; Updated AGENTS.md.
+- 08/09/2026: Updated AGENTS.md; Updated babysit-pr Skill; Updated html-communication Skill; Updated kagi-usage Skill.
+- 07/09/2026: Updated oracle Skill; Added image-understanding Skill.
+- 05/09/2026: Updated Codex CLI to 0.153.4; Updated Codex model to gpt-6-astra; Updated box-cli Skill; Updated oracle Skill; Added fumadocs Skill.
 - 04/09/2026: Updated GPT 5.6 Sol to GPT 6 Astra Model; Removed GPT Codex 5.3 Spark Model; Updated Claude Code, Opus 5, and OMP logos; Removed Droid CLI Harness; Added OMP and Claude Code Primary Harnesses; Added Fable 5.1 Primary and Opus 5 Secondary Models; and 1 more.
-- 02/09/2026: Updated Codex CLI to 0.152.1; Updated timeboxed-iterating Skill (major rewrite + scaffold); Updated better-colors Skill; Updated better-ui Skill; Updated better-accessibility Skill; Updated better-interface Skill; and 26 more.
-- 01/09/2026: Updated Codex CLI to 0.152.0; Added product-description Skill; Added product-description-minimal Skill; Added web-auth Skill; Removed changelog Skill; Removed declankify Skill.
-- 31/08/2026: Added iris MCP; Added agent-browser Skill; Added animate Skill; Added break Skill; Added browser-automation-testing Skill; Added consolidate-test-suites Skill; and 37 more.
-- 30/08/2026: Updated Codex CLI to 0.151.0; Added x64dbg MCP; Updated AGENTS.md (web request user agent); Added octen-design Skill; Added octen-extract Skill; Added octen-image-search Skill; and 7 more.
-- 28/08/2026: Updated Codex CLI to 0.150.1; Updated AGENTS.md (TypeScript projects use Oxlint).
-- 26/08/2026: Updated Codex CLI to 0.149.1; Added box-cli Skill; Added opentui-design Skill; Added tui-design Skill.
-- 23/08/2026: Updated Hermes model to x-preview-f-free via OpenCode Zen.
 
 ## Snapshot pages
 
@@ -106,11 +106,14 @@ The public skills directory currently exposes:
 - file-pr
 - file-upload
 - find-fonts
+- fumadocs
 - grill-me
 - grill-with-docs
 - grilling
+- how
 - html-communication
 - idea-generator
+- image-understanding
 - is-agentic
 - kagi-ai
 - kagi-assistant
@@ -130,6 +133,8 @@ The public skills directory currently exposes:
 - pick-ui-library
 - postplan-read
 - price-monitoring-scraping
+- principle-exhaust-the-design-space
+- principle-fix-root-causes
 - quality-code
 - reddit-research
 - resolving-merge-conflicts
@@ -144,14 +149,16 @@ The public skills directory currently exposes:
 - transitions-polish
 - tui-design
 - ui-unslop
+- unslop
 - wait-what
 - wayfinder
+- why
 - write-better-error-messages
 - youtube-transcript
 
 ## AGENTS.md preview
 
-The public AGENTS.md preview is redacted. It has 492 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
+The public AGENTS.md preview is redacted. It has 508 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
 
 ## Answering rules
 

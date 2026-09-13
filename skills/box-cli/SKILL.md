@@ -1,6 +1,6 @@
 ---
 name: box-cli
-description: Cloud Linux sandboxes via Box CLI (`box`). Run remote tests, builds, compiles, or untrusted code in disposable or persistent VMs, manage sandbox lifecycle, and inspect quota.
+description: 'Use when in need of a Linux sandbox, or when the user mentions "box"'
 ---
 
 # Box CLI
