@@ -1152,6 +1152,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'bugbash': 'https://github.com/av/skills/tree/master/bugbash',
       'bughunt': 'https://github.com/av/skills/tree/master/bughunt',
       'ideate': 'https://github.com/av/skills/tree/master/ideate',
+      'implement': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/implement',
       'timeboxed-iterating': 'https://github.com/av/skills/tree/master/timeboxed-iterating',
       'release-helper': 'https://github.com/butttons/pi-kit/tree/main/skills/release-helper',
       'quality-code': 'https://github.com/RhysSullivan/skills/blob/main/skills/quality-code',
