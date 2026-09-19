@@ -16,26 +16,26 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT Daybreak Blue, GPT 5.6 Luna, Fable 5.1, GLM 5.3, Opus 5.
+- Models: GPT 5.6 Sol, GPT 5.6 Luna, Fable 5.1, GLM 5.3, Opus 5.
 - Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
 - MCPs: codebase-memory-mcp, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, huggingface, and 8 more.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 2 more.
-- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, unslop, box-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, code-review, prototype, to-spec, and 115 more.
+- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, code-review, prototype, to-spec, and 116 more.
 - Code Review: Codex Code Review, CodeRabbit.
 - Workspace: VPS, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
-- 12/09/2026: Updated GPT 6 Astra to GPT 5.6 Sol Model; Updated GPT 5.6 Sol to GPT Daybreak Blue Model; Added gpt-reserve Hermes fallback Model; Added code-review Skill; Added prototype Skill; Added to-spec Skill; and 8 more.
+- 18/09/2026: Updated Codex CLI to 0.155.0.
+- 17/09/2026: Added boat-cli Skill; Removed box-cli Skill (replaced by boat-cli); Renamed box to boat CLI Tool.
+- 14/09/2026: Added implement Skill; Updated transitions-dev Skill.
+- 13/09/2026: Updated GPT Daybreak Blue to GPT 5.6 Sol Model.
+- 12/09/2026: Updated GPT 6 Astra to GPT 5.6 Sol Model; Updated GPT 5.6 Sol to GPT Daybreak Blue Model; Added gpt-reserve Hermes fallback Model; Added code-review Skill; Added prototype Skill; Added to-spec Skill; and 9 more.
 - 11/09/2026: Updated Codex CLI to 0.154.0.
 - 10/09/2026: Updated AGENTS.md.
 - 09/09/2026: Added kagimail MCP; Updated AGENTS.md.
-- 08/09/2026: Updated AGENTS.md; Updated babysit-pr Skill; Updated html-communication Skill; Updated kagi-usage Skill.
-- 07/09/2026: Updated oracle Skill; Added image-understanding Skill.
-- 05/09/2026: Updated Codex CLI to 0.153.4; Updated Codex model to gpt-6-astra; Updated box-cli Skill; Updated oracle Skill; Added fumadocs Skill.
-- 04/09/2026: Updated GPT 5.6 Sol to GPT 6 Astra Model; Removed GPT Codex 5.3 Spark Model; Updated Claude Code, Opus 5, and OMP logos; Removed Droid CLI Harness; Added OMP and Claude Code Primary Harnesses; Added Fable 5.1 Primary and Opus 5 Secondary Models; and 1 more.
 
 ## Snapshot pages
 
@@ -88,7 +88,7 @@ The public skills directory currently exposes:
 - babysit-pr
 - batch-grill-me
 - bikeshed
-- box-cli
+- boat-cli
 - browser-automation-testing
 - ce-simplify-code
 - chart-visualization

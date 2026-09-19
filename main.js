@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'chart-visualization': 'skills/chart-visualization/SKILL.md',
     'data-visualization': 'skills/data-visualization/SKILL.md',
     'ui-unslop': 'skills/ui-unslop/SKILL.md',
-    'box-cli': 'skills/box-cli/SKILL.md',
+    'boat-cli': 'skills/boat-cli/SKILL.md',
     'fumadocs': 'skills/fumadocs/SKILL.md',
     'opentui-design': 'skills/opentui-design/SKILL.md',
     'tui-design': 'skills/tui-design/SKILL.md',
