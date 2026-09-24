@@ -16,7 +16,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT Daybreak Blue, GPT 5.6 Luna, Fable 5.1, GLM 5.3, Opus 5.
+- Models: gpt-6-sol, GPT 5.6 Luna, Fable 5.1, GLM 5.3, Opus 5.
 - Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
@@ -28,15 +28,14 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Recent public setup changes
 
+- 24/09/2026: Updated Codex model to GPT 6 Sol.
+- 21/09/2026: Updated file-pr Skill.
+- 20/09/2026: Updated Codex model to gpt-6-astra.
 - 19/09/2026: Updated GPT 5.6 Sol to GPT Daybreak Blue Model; Updated Codex CLI to 0.155.1.
 - 18/09/2026: Updated Codex CLI to 0.155.0.
 - 17/09/2026: Added boat-cli Skill; Removed box-cli Skill (replaced by boat-cli); Renamed box to boat CLI Tool.
 - 14/09/2026: Added implement Skill; Updated transitions-dev Skill.
 - 13/09/2026: Updated GPT Daybreak Blue to GPT 5.6 Sol Model.
-- 12/09/2026: Updated GPT 6 Astra to GPT 5.6 Sol Model; Updated GPT 5.6 Sol to GPT Daybreak Blue Model; Added gpt-reserve Hermes fallback Model; Added code-review Skill; Added prototype Skill; Added to-spec Skill; and 9 more.
-- 11/09/2026: Updated Codex CLI to 0.154.0.
-- 10/09/2026: Updated AGENTS.md.
-- 09/09/2026: Added kagimail MCP; Updated AGENTS.md.
 
 ## Snapshot pages
 
