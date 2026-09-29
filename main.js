@@ -101,6 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
     'ssh-multi-environment': 'skills/ssh-multi-environment/SKILL.md',
     'is-agentic': 'skills/is-agentic/SKILL.md',
     'orx-figures': 'skills/orx-figures/SKILL.md',
+    'satelle': 'skills/satelle/SKILL.md',
+    'satelle-recover': 'skills/satelle-recover/SKILL.md',
+    'satelle-setup': 'skills/satelle-setup/SKILL.md',
+    'satelle-use': 'skills/satelle-use/SKILL.md',
     'deslop': 'skills/deslop/SKILL.md',
     'youtube-transcript': 'skills/youtube-transcript/SKILL.md',
 };
