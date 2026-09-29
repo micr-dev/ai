@@ -16,26 +16,26 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: gpt-6-sol, GPT 5.6 Luna, Fable 5.1, GLM 5.3, Opus 5.
+- Models: GPT 6.1 Sol, gpt-6-luna, Fable 5.1, GLM 5.3, Opus 5.5.
 - Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent, Antigravity CLI.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
-- MCPs: codebase-memory-mcp, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, huggingface, and 8 more.
+- MCPs: codebase-memory-mcp, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, and 9 more.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 2 more.
-- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, code-review, prototype, to-spec, and 116 more.
+- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, code-review, prototype, to-spec, and 120 more.
 - Code Review: Codex Code Review, CodeRabbit.
 - Workspace: VPS, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
-- 24/09/2026: Updated Codex model to GPT 6 Sol.
+- 29/09/2026: Updated Primary model to GPT 6.1 Sol; Updated Secondary model to Opus 5.5.
+- 24/09/2026: Updated Hermes model to GPT 6 Luna; Added satelle MCP; Added satelle Skill; Added satelle-recover Skill; Added satelle-setup Skill; Added satelle-use Skill; and 1 more.
 - 21/09/2026: Updated file-pr Skill.
 - 20/09/2026: Updated Codex model to gpt-6-astra.
 - 19/09/2026: Updated GPT 5.6 Sol to GPT Daybreak Blue Model; Updated Codex CLI to 0.155.1.
 - 18/09/2026: Updated Codex CLI to 0.155.0.
 - 17/09/2026: Added boat-cli Skill; Removed box-cli Skill (replaced by boat-cli); Renamed box to boat CLI Tool.
 - 14/09/2026: Added implement Skill; Updated transitions-dev Skill.
-- 13/09/2026: Updated GPT Daybreak Blue to GPT 5.6 Sol Model.
 
 ## Snapshot pages
 
@@ -139,6 +139,10 @@ The public skills directory currently exposes:
 - reddit-research
 - resolving-merge-conflicts
 - review-animations
+- satelle
+- satelle-recover
+- satelle-setup
+- satelle-use
 - scandinavian-design
 - skill-grooming
 - ssh-multi-environment
