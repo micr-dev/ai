@@ -16,19 +16,19 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 6.1 Sol, Opus 5.5, gpt-6-luna, Fable 5.1, GLM 5.3.
-- Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent, Antigravity CLI.
+- Models: GPT 6.1 Sol, Opus 5.5, gpt-6-luna, Fable 5.1.
+- Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
-- MCPs: codebase-memory-mcp, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, and 9 more.
+- MCPs: codebase-memory-mcp, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, and 6 more.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 2 more.
 - Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, code-review, prototype, to-spec, and 120 more.
 - Code Review: Codex Code Review, CodeRabbit.
-- Workspace: VPS, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
+- Workspace: Local, VPS Ashburn, VPS Paris, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
-- 30/09/2026: Promoted Opus 5.5 to Primary model.
+- 30/09/2026: Promoted Opus 5.5 to Primary model; Removed GLM 5.3 Model; Moved GPT 6 Luna to Secondary models; Moved Fable 5.1 to Secondary models; Removed Antigravity CLI Harness; Removed huggingface MCP; and 5 more.
 - 29/09/2026: Updated Primary model to GPT 6.1 Sol; Updated Secondary model to Opus 5.5.
 - 24/09/2026: Updated Hermes model to GPT 6 Luna; Added satelle MCP; Added satelle Skill; Added satelle-recover Skill; Added satelle-setup Skill; Added satelle-use Skill; and 1 more.
 - 21/09/2026: Updated file-pr Skill.

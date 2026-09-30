@@ -81,6 +81,17 @@
                 <div class="change-entry" data-targets="opus-5">
                   <h3 class="change-title">Promoted Opus 5.5 to Primary model</h3>
                 </div>
+
+                <div class="change-entry" data-targets="glm-5-3"><h3 class="change-title">Removed GLM 5.3 Model</h3></div>
+                <div class="change-entry" data-targets="gpt-5-6-luna"><h3 class="change-title">Moved GPT 6 Luna to Secondary models</h3></div>
+                <div class="change-entry" data-targets="fable-5-1"><h3 class="change-title">Moved Fable 5.1 to Secondary models</h3></div>
+                <div class="change-entry" data-targets="antigravity-cli"><h3 class="change-title">Removed Antigravity CLI Harness</h3></div>
+                <div class="change-entry" data-targets="huggingface-mcp"><h3 class="change-title">Removed huggingface MCP</h3></div>
+                <div class="change-entry" data-targets="apify"><h3 class="change-title">Removed apify MCP</h3></div>
+                <div class="change-entry" data-targets="gpt2agent"><h3 class="change-title">Removed gpt2agent MCP</h3></div>
+                <div class="change-entry" data-targets="vps"><h3 class="change-title">Updated Local machine specifications</h3></div>
+                <div class="change-entry" data-targets="vps-ashburn"><h3 class="change-title">Added VPS Ashburn</h3></div>
+                <div class="change-entry" data-targets="vps-paris"><h3 class="change-title">Added VPS Paris</h3></div>
               </div>
             </div>
             <div class="change-group" data-group="29/09/2026">
@@ -2275,6 +2286,11 @@
                 <p class="entry-description">Primary model for reasoning and comparison runs.</p>
               </div>
 
+            </div>
+
+            <div class="role-column">
+              <span class="role-label font-karla">Secondary</span>
+
               <div class="stack-entry" id="gpt-5-6-luna">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
@@ -2282,7 +2298,6 @@
                 </div>
                 <p class="entry-description">Hermes default model for general-purpose agent work.</p>
               </div>
-
               <div class="stack-entry" id="fable-5-1">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/anthropic.png" alt=""></span>
@@ -2290,20 +2305,7 @@
                 </div>
                 <p class="entry-description">Primary model for implementation and reasoning.</p>
               </div>
-            </div>
-            
-            <div class="role-column">
-              <span class="role-label font-karla">Secondary</span>
-              
-              <div class="stack-entry" id="glm-5-3">
-                <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/glm.svg" alt=""></span>
-                  <span class="entry-name">GLM 5.3</span>
-                </div>
-                <p class="entry-description">Secondary Z.AI model for alternate reasoning and comparison runs.</p>
-              </div>
-
-            </div>
+</div>
           </div>
         </section>
         
@@ -2355,14 +2357,7 @@
                 <p class="entry-why">I use this through Discord as my personal AI assistant. Hermes fans love to say it is miles better than OpenClaw, but honestly it is not; it is as rough as most other AI assistants. It has given me a ton of headaches and breaks with almost every update because they keep adding sloppy PRs.</p>
               </div>
 
-              <div class="stack-entry" id="antigravity-cli">
-                <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/antigravity.png" alt=""></span>
-                  <span class="entry-name">Antigravity CLI</span>
-                </div>
-                <p class="entry-description">Secondary prompt-run harness used with <code>-p</code> workflows to access Gemini 3.8 Flash, not as a coding-agent replacement.</p>
-                <p class="entry-why">Do not get me wrong, this harness sucks. I have a Google AI Pro plan with a generous Gemini 3.8 Flash quota, and since the only practical way I can use it is through their harness, I resort to <code>agy -p</code> wherever I do not need much intelligence and I do not want to use my Z.ai/GLM quota.</p>
-              </div>
+
             </div>
           </div>
         </section>
@@ -2587,19 +2582,9 @@
               </div>
               <p class="entry-description">OpenAI developer documentation server for API references and integration guides.</p>
             </div>
-            <div class="stack-entry" id="huggingface-mcp">
-              <div class="entry-header">
-                <a href="https://huggingface.co/mcp" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">huggingface</span></a>
-              </div>
-              <p class="entry-description">Hugging Face Hub model, dataset, and API server.</p>
-            </div>
 
-            <div class="stack-entry" id="apify">
-              <div class="entry-header">
-                <a href="https://mcp.apify.com" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">apify</span></a>
-              </div>
-              <p class="entry-description">Hosted web automation, actor, and documentation MCP server.</p>
-            </div>
+
+
 
             <div class="stack-entry" id="oracle-mcp">
               <div class="entry-header">
@@ -2608,12 +2593,7 @@
               <p class="entry-description">Browser-based Oracle model and research workflow server.</p>
             </div>
 
-            <div class="stack-entry" id="gpt2agent">
-              <div class="entry-header">
-                <a href="https://github.com/robotlearning123/gpt2agent" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">gpt2agent</span></a>
-              </div>
-              <p class="entry-description">MCP bridge for authenticated model access and agent workflows.</p>
-            </div>
+
 
             <div class="stack-entry" id="parallel-search">
               <div class="entry-header">
@@ -2887,15 +2867,39 @@
             
             <div class="stack-entry tooltip-target" id="vps">
               <div class="entry-header">
-                <span class="entry-name">VPS</span>
+                <span class="entry-name">Local</span>
               </div>
-              <p class="entry-description">Active remote compute anchor for this operator environment.</p>
+              <p class="entry-description">Local machine hosting this operator environment.</p>
               <div class="custom-tooltip font-mono" role="tooltip">
-                <span class="tooltip-title">Public Compute Specs</span>
+                <span class="tooltip-title">Local Machine Specs</span>
+                <span class="tooltip-row"><span>CPU:</span> <span>2 vCPU ARM64 Qualcomm</span></span>
+                <span class="tooltip-row"><span>Memory:</span> <span>4GB RAM</span></span>
+                <span class="tooltip-row"><span>Storage:</span> <span>299GB root disk</span></span>
+                <span class="tooltip-row"><span>OS:</span> <span>Ubuntu 22.04.5 LTS</span></span>
+              </div>
+            </div>
+
+            <div class="stack-entry tooltip-target" id="vps-ashburn">
+              <div class="entry-header"><span class="entry-name">VPS Ashburn</span></div>
+              <p class="entry-description">Oracle Cloud ARM server on Tailscale.</p>
+              <div class="custom-tooltip font-mono" role="tooltip">
+                <span class="tooltip-title">VPS Ashburn Specs</span>
                 <span class="tooltip-row"><span>CPU:</span> <span>2 vCPU ARM Neoverse-N1</span></span>
-                <span class="tooltip-row"><span>Memory:</span> <span>12GB RAM</span></span>
-                <span class="tooltip-row"><span>Storage:</span> <span>180GB root disk</span></span>
-                <span class="tooltip-row"><span>OS:</span> <span>Ubuntu 22.04 LTS</span></span>
+                <span class="tooltip-row"><span>Memory:</span> <span>11GB RAM</span></span>
+                <span class="tooltip-row"><span>Storage:</span> <span>193GB root disk</span></span>
+                <span class="tooltip-row"><span>OS:</span> <span>Ubuntu 22.04.5 LTS</span></span>
+              </div>
+            </div>
+
+            <div class="stack-entry tooltip-target" id="vps-paris">
+              <div class="entry-header"><span class="entry-name">VPS Paris</span></div>
+              <p class="entry-description">ARM server on Tailscale.</p>
+              <div class="custom-tooltip font-mono" role="tooltip">
+                <span class="tooltip-title">VPS Paris Specs</span>
+                <span class="tooltip-row"><span>CPU:</span> <span>2 vCPU ARM Neoverse-N1</span></span>
+                <span class="tooltip-row"><span>Memory:</span> <span>11GB RAM</span></span>
+                <span class="tooltip-row"><span>Storage:</span> <span>146GB root disk</span></span>
+                <span class="tooltip-row"><span>OS:</span> <span>Ubuntu 22.04.5 LTS</span></span>
               </div>
             </div>
 
