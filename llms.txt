@@ -16,7 +16,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 6.1 Sol, Opus 5.5, gpt-6-luna, Fable 5.1.
+- Models: GPT 6.1 Sol, Opus 5.5, GPT 6 Luna, Fable 5.1.
 - Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
@@ -28,7 +28,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Recent public setup changes
 
-- 30/09/2026: Promoted Opus 5.5 to Primary model; Removed GLM 5.3 Model; Moved GPT 6 Luna to Secondary models; Moved Fable 5.1 to Secondary models; Removed Antigravity CLI Harness; Removed huggingface MCP; and 5 more.
+- 30/09/2026: Promoted Opus 5.5 to Primary model; Removed GLM 5.3 Model; Moved GPT 6 Luna to Secondary models; Moved Fable 5.1 to Secondary models; Removed Antigravity CLI Harness; Removed huggingface MCP; and 6 more.
 - 29/09/2026: Updated Primary model to GPT 6.1 Sol; Updated Secondary model to Opus 5.5.
 - 24/09/2026: Updated Hermes model to GPT 6 Luna; Added satelle MCP; Added satelle Skill; Added satelle-recover Skill; Added satelle-setup Skill; Added satelle-use Skill; and 1 more.
 - 21/09/2026: Updated file-pr Skill.
