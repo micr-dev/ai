@@ -107,6 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'satelle-use': 'skills/satelle-use/SKILL.md',
     'deslop': 'skills/deslop/SKILL.md',
     'youtube-transcript': 'skills/youtube-transcript/SKILL.md',
+    'ae-edit-style': 'skills/ae-edit-style/SKILL.md',
+    'shea-motion': 'skills/shea-motion/SKILL.md',
+    'raft-cli': 'skills/raft-cli/SKILL.md',
 };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
@@ -1136,7 +1139,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function getSkillGithubUrl(skillId) {
     const externalSkillUrls = {
-      'dynamic-workflows': 'https://github.com/DannyMac180/skills/blob/main/codex-dynamic-workflows',
+      'dynamic-workflows': 'https://github.com/DannyMac180/skills/blob/main/codex-dynamic-workflows/SKILL.md',
       'grill-with-docs': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs',
       'code-review-skill': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review',
       'prototype': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/prototype',
@@ -1163,7 +1166,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'review-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/review-animations',
       'animation-vocabulary': 'https://github.com/emilkowalski/skills/blob/main/skills/animation-vocabulary',
       'write-better-error-messages': 'https://github.com/gillkyle/skills/blob/main/skills/write-better-error-messages',
-      'domain-modeling': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/domain-modeling',
+      'domain-modeling': 'https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling',
       'codebase-design': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/SKILL.md',
       'grilling': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling',
       'teach': 'https://github.com/mattpocock/skills/blob/main/skills/productivity/teach',
@@ -1174,7 +1177,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'better-interface': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-interface',
       'better-layout': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-layout',
       'better-writing': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-writing',
-      'improve-codebase-architecture': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture',
+      'improve-codebase-architecture': 'https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture',
       'better-typography': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-typography',
       'better-ui': 'https://github.com/jakubkrehel/skills/blob/main/skills/better-ui',
       'improve-animations': 'https://github.com/emilkowalski/skills/blob/main/skills/improve-animations',
@@ -1183,12 +1186,12 @@ document.addEventListener('DOMContentLoaded', () => {
       'pick-ui-library': 'https://github.com/emilkowalski/skills/blob/main/skills/pick-ui-library',
       'wayfinder': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder',
     
-    'octen-design': 'https://github.com/Octen-Team/octen-skills/tree/main/octen-design',
-    'octen-extract': 'https://github.com/Octen-Team/octen-skills/tree/main/octen-extract',
-    'octen-image-search': 'https://github.com/Octen-Team/octen-skills/tree/main/octen-image-search',
-    'octen-search': 'https://github.com/Octen-Team/octen-skills/tree/main/octen-search',
-    'octen-video-search': 'https://github.com/Octen-Team/octen-skills/tree/main/octen-video-search',
-    'octen-web-search': 'https://github.com/Octen-Team/octen-skills/tree/main/octen-web-search',
+    'octen-design': 'https://github.com/Octen-Team/octen-skills/tree/main/skills/octen-design',
+    'octen-extract': 'https://github.com/Octen-Team/octen-skills/tree/main/skills/octen-extract',
+    'octen-image-search': 'https://github.com/Octen-Team/octen-skills/tree/main/skills/octen-image-search',
+    'octen-search': 'https://github.com/Octen-Team/octen-skills/tree/main/skills/octen-search',
+    'octen-video-search': 'https://github.com/Octen-Team/octen-skills/tree/main/skills/octen-video-search',
+    'octen-web-search': 'https://github.com/Octen-Team/octen-skills/tree/main/skills/octen-web-search',
     'agent-browser': 'https://github.com/vercel-labs/agent-browser',
     'animate': 'https://github.com/emilkowalski/skills/tree/main/skills/animate',
     'break': 'https://github.com/emilkowalski/skills/tree/main/skills/break',
@@ -1223,6 +1226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'grill-for-unknowns': 'https://github.com/nicobailon/grill-for-unknowns',
     'herdr': 'https://github.com/herdrdev/herdr/blob/master/skills/herdr/SKILL.md',
     'tailor-coderabbit-config': 'https://github.com/Microck/tailor-coderabbit-config',
+    'ensure-your-work-is-meaningful': 'https://gist.github.com/bdsqqq/1e7e6f454271d5f856a1176d0e800d89',
 };
 
     if (externalSkillUrls[skillId]) {

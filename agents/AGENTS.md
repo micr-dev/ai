@@ -204,7 +204,7 @@ you MUST respond using ASD-STE100 Simplified Technical English rules:
 
 ## Temporary file uploads
 
-Use `ravenbin-upload <file>` for temporary uploads instead of litterbox. Treat the returned URL as sensitive. To fetch a shared file, use `ravenbin-upload fetch '<url>' --output <path>` with the complete URL, including the part after `#`.
+Use `ravenbin upload <file>` for temporary uploads instead of litterbox. Treat the returned URL as sensitive. To download a shared file, use `ravenbin download '<url>' --output <path>` with the complete URL, including the part after `#`.
 
 ## File reading
 

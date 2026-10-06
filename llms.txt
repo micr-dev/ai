@@ -20,22 +20,22 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
-- MCPs: codebase-memory-mcp, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, openaiDeveloperDocs, and 6 more.
+- MCPs: codebase-memory-mcp, beeper, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, and 7 more.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 2 more.
-- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, code-review, prototype, to-spec, and 120 more.
+- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, code-review, prototype, to-spec, and 124 more.
 - Code Review: Codex Code Review, CodeRabbit.
 - Workspace: Local, VPS Ashburn, VPS Paris, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
-- 30/09/2026: Promoted Opus 5.5 to Primary model; Removed GLM 5.3 Model; Moved GPT 6 Luna to Secondary models; Moved Fable 5.1 to Secondary models; Removed Antigravity CLI Harness; Removed huggingface MCP; and 6 more.
-- 29/09/2026: Updated Primary model to GPT 6.1 Sol; Updated Secondary model to Opus 5.5.
+- 06/10/2026: Updated Codex CLI to 0.160.1; Added ensure-your-work-is-meaningful Skill; Added raft-cli Skill; Updated dynamic-workflows Skill; Updated domain-modeling Skill; Updated effect Skill; and 4 more.
+- 04/10/2026: Updated Codex CLI to 0.160.0; Changed Hermes default search backend to Parallel.
+- 01/10/2026: Updated Codex CLI to 0.159.2; Added beeper MCP.
+- 30/09/2026: Promoted Opus 5.5 to Primary model; Removed GLM 5.3 Model; Moved GPT 6 Luna to Secondary models; Moved Fable 5.1 to Secondary models; Removed Antigravity CLI Harness; Removed huggingface MCP; and 8 more.
+- 29/09/2026: Updated Primary model to GPT 6.1 Sol; Updated Secondary model to Opus 5.5; Updated Codex CLI to 0.159.0; Updated Codex CLI to 0.158.0.
+- 28/09/2026: Updated AGENTS.md upload and download commands.
+- 27/09/2026: Updated Codex CLI to 0.157.1.
 - 24/09/2026: Updated Hermes model to GPT 6 Luna; Added satelle MCP; Added satelle Skill; Added satelle-recover Skill; Added satelle-setup Skill; Added satelle-use Skill; and 1 more.
-- 21/09/2026: Updated file-pr Skill.
-- 20/09/2026: Updated Codex model to gpt-6-astra.
-- 19/09/2026: Updated GPT 5.6 Sol to GPT Daybreak Blue Model; Updated Codex CLI to 0.155.1.
-- 18/09/2026: Updated Codex CLI to 0.155.0.
-- 17/09/2026: Added boat-cli Skill; Removed box-cli Skill (replaced by boat-cli); Renamed box to boat CLI Tool.
 
 ## Snapshot pages
 
@@ -83,6 +83,7 @@ The site exposes 37 dated snapshot pages. Use them only when the user asks about
 
 The public skills directory currently exposes:
 
+- ae-edit-style
 - animated-favicons
 - animation-vocabulary
 - babysit-pr
@@ -136,6 +137,7 @@ The public skills directory currently exposes:
 - principle-exhaust-the-design-space
 - principle-fix-root-causes
 - quality-code
+- raft-cli
 - reddit-research
 - resolving-merge-conflicts
 - review-animations
@@ -144,6 +146,7 @@ The public skills directory currently exposes:
 - satelle-setup
 - satelle-use
 - scandinavian-design
+- shea-motion
 - skill-grooming
 - ssh-multi-environment
 - teach
