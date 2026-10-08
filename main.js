@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'ae-edit-style': 'skills/ae-edit-style/SKILL.md',
     'shea-motion': 'skills/shea-motion/SKILL.md',
     'raft-cli': 'skills/raft-cli/SKILL.md',
+    'babysit-pr': 'skills/babysit-pr/SKILL.md',
 };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
