@@ -35,7 +35,6 @@ The watcher `scripts/pr_watch.py` (next to this file) owns all PR polling: CI on
    | `unresolved_thread` | Verify the finding against the source. Fix it and push, then `reply <thread_id> --body "<what changed>" --resolve`. If you reject it, reply with the reason and `--resolve`. Outdated threads count too. |
    | `body_findings` | Findings in the review body that GitHub could not attach inline. Fix them, then answer all of them in one `comment`. |
    | `human_comment` | Instructions from the user or a reviewer. Follow them; answer with `comment`. A hold or stop instruction ends the loop: report and wait for the user. |
-   | `bot_blocked` | The bot cannot review (too many files, not installed, erroring, or stalled after 3 requests). Report it to the user; do not work around it. |
    | `merge_conflict`, `behind_base` | Rebase on the base branch and push. |
 
    Helpers, all posting with the disclosure header:
@@ -47,7 +46,9 @@ The watcher `scripts/pr_watch.py` (next to this file) owns all PR polling: CI on
    python3 <skill-dir>/scripts/pr_watch.py status <PR>   # one read-only evaluation
    ```
 
-3. **Done** when the watcher exits `0`: CI finished and passing, every enabled bot reviewed the current head, no unresolved threads, nothing unanswered, no conflicts. Report the PR as ready with the head SHA from the report. Merge only when the user explicitly asked for it, and only on the head the watcher approved. Exit `20` means someone else merged or closed it; report that.
+3. **Done** when the watcher exits `0`: CI finished and passing, every working bot reviewed the current head, no unresolved threads, nothing unanswered, no conflicts. Report the PR as ready with the head SHA from the report. Merge only when the user explicitly asked for it, and only on the head the watcher approved. Exit `20` means someone else merged or closed it; report that.
+
+   A bot that cannot review (Codex has no environment for the repo, CodeRabbit hits its file limit, a bot never answers or errors after 3 requests) appears in `blocked_bots`. The watcher stops requiring it and keeps watching CI and the other bots, so keep the loop going. Name each blocked bot and its `detail` in the final report, so the user can fix the setup; a PR reviewed by fewer bots than usual is still ready.
 
 Only the watcher's exit `0` makes a PR ready. CI passing alone, a bot review of an earlier commit, or a quiet PR is still `waiting`.
 
