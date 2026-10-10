@@ -494,13 +494,17 @@ ALWAYS prefer MCP graph tools over grep/glob/file-search for code discovery.
 - Read source: `get_code_snippet(qualified_name="pkg/orders.OrderHandler")`
 <!-- codebase-memory-mcp:end -->
 
-## Web request user agent
+## Local page hosting
 
-For any web requests made with `curl` or otherwise, always set the user agent string to `OpenAI File Downloader, XaiImageApiFetch/1.0`.
+When starting a local web page or development server, bind it to `0.0.0.0` so it can be reached from other devices. Give me the page's Tailscale URL, using the machine's Tailscale DNS name and the server port. If Tailscale access or a usable DNS name is unavailable, say so rather than inventing a URL.
 
-## Mail access
+## GitHub Codespaces usage
 
-The agent has his own mail inbox at `agent@micr.dev`, accessible through the `kagimail` MCP. He may use it however he pleases.
+- Agents MUST NOT create, start, or resume GitHub Codespaces unless the user explicitly requests GitHub Codespaces for the current task. Authorization for a previous task does not carry forward.
+- Requests for tests, remote proof, virtual machines, or Crabbox do not authorize Codespaces. Use local resources or an already configured non-Codespaces provider. If that cannot meet the task, report the blocker instead of choosing Codespaces.
+- This rule applies to GitHub CLI, APIs, browser actions, Crabbox providers, jobs, and scripts. Inspect Crabbox's effective provider before provisioning; never fall back to Codespaces automatically.
+- When Codespaces use is explicitly authorized, set a bounded runtime and a stop step for success, failure, and cancellation. Stop and verify the codespace is Shutdown before finishing. Do not rely on idle timeout, closing a browser, or leaving a keepalive running.
+- Preserve existing uncommitted or unpushed work. Stop compute rather than deleting a codespace merely to reduce compute usage.
 
 ## Keep going
 
