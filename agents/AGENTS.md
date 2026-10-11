@@ -18,6 +18,8 @@ An interrogative that clearly requests a change is an action request. Advisory q
 
 Read-only inspection, review, or planning does not authorize external side effects. Creating, updating, deleting, posting, committing, pushing, merging, closing, releasing, deploying, or triggering automation requires an explicit request for that scope. Inspect current state before acting. On third-party repositories, automated reviewer triggers require an explicit user request.
 
+When using the `babysit-pr` skill, its user-authorized workflow may commit, push, and post PR review replies/comments as needed to address findings and reach the skill's ready state. This exception does not authorize merging, deployment, or live Sentry configuration; those remain out of scope unless explicitly requested. All other safety, scope, and third-party repository restrictions still apply.
+
 Never create a draft pull request. Create a ready-for-review pull request unless the user explicitly requests a draft.
 
 ## Meta
@@ -125,7 +127,7 @@ Don't leave corpses. Don't delete without asking.
 
 ## Match ceremony to the task
 
-Delegation requires an explicit user request. When authorized, split work into isolated ownership and state file ownership before starting.
+When delegating, split work into isolated ownership and state file ownership up front.
 
 - Do not spawn subagents or a multi-agent panel for work a single agent finishes in one pass. Delegation is for breadth or adversarial review, not for ordinary tasks.
 - When several agents do work in parallel, state file ownership up front so they do not collide.
@@ -340,7 +342,7 @@ Use the tool that matches the question:
 - Before graph-shaped discovery, check whether the active repository is indexed with codebase-memory-mcp. If it is not indexed, run `index_repository` for that repository and wait for indexing to finish before querying the graph.
 - Do not fall back to exact search merely because the repository has no index. Fall back only when the indexer is unavailable or indexing fails, and report that failure.
 - Use ast-grep for syntax-aware search and codemods.
-- Use fff for exact search in the indexed workspace.
+- For exact file and text searches within the indexed workspace, use the `fff` MCP tools (`find_files`, `grep`, or `multi_grep`). Use other tools only when the target is outside that workspace, `fff` is unavailable, or `fff` cannot answer the query. If `fff` fails, report the failure and use the narrowest reliable fallback.
 - Use rg, sed, or direct reads when exact output matters or the path is outside an indexed worktree.
 
 For graph-shaped questions, prefer the codebase-memory pointer at the end of this file. Do not repeatedly grep imports as a substitute.

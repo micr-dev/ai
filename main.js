@@ -1186,6 +1186,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'transitions-polish': 'https://github.com/Jakubantalik/transitions.dev/tree/main/skills/transitions-polish',
       'pick-ui-library': 'https://github.com/emilkowalski/skills/blob/main/skills/pick-ui-library',
       'wayfinder': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder',
+      'setup-matt-pocock-skills': 'https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills',
     
     'octen-design': 'https://github.com/Octen-Team/octen-skills/tree/main/skills/octen-design',
     'octen-extract': 'https://github.com/Octen-Team/octen-skills/tree/main/skills/octen-extract',
