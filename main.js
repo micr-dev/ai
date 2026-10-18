@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'shea-motion': 'skills/shea-motion/SKILL.md',
     'raft-cli': 'skills/raft-cli/SKILL.md',
     'babysit-pr': 'skills/babysit-pr/SKILL.md',
+    'full-send': 'skills/full-send/SKILL.md',
 };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
@@ -1229,6 +1230,20 @@ document.addEventListener('DOMContentLoaded', () => {
     'herdr': 'https://github.com/herdrdev/herdr/blob/master/skills/herdr/SKILL.md',
     'tailor-coderabbit-config': 'https://github.com/Microck/tailor-coderabbit-config',
     'ensure-your-work-is-meaningful': 'https://gist.github.com/bdsqqq/1e7e6f454271d5f856a1176d0e800d89',
+      'mkt-ai-seo': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/ai-seo',
+      'mkt-aso': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/aso',
+      'mkt-competitors': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/competitors',
+      'mkt-content-strategy': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/content-strategy',
+      'mkt-copywriting': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/copywriting',
+      'mkt-directory-submissions': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/directory-submissions',
+      'mkt-free-tools': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/free-tools',
+      'mkt-launch': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/launch',
+      'mkt-paywalls': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/paywalls',
+      'mkt-product-marketing': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/product-marketing',
+      'mkt-programmatic-seo': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/programmatic-seo',
+      'mkt-schema': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/schema',
+      'mkt-seo-audit': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/seo-audit',
+      'mkt-site-architecture': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/site-architecture',
 };
 
     if (externalSkillUrls[skillId]) {
