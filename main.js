@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'raft-cli': 'skills/raft-cli/SKILL.md',
     'babysit-pr': 'skills/babysit-pr/SKILL.md',
     'full-send': 'skills/full-send/SKILL.md',
+    'logo-archive': 'skills/logo-archive/SKILL.md',
 };
   const skillContentCache = new Map();
   const floatingTooltip = document.createElement('div');
