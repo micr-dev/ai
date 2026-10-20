@@ -105,6 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'satelle-recover': 'skills/satelle-recover/SKILL.md',
     'satelle-setup': 'skills/satelle-setup/SKILL.md',
     'satelle-use': 'skills/satelle-use/SKILL.md',
+    'ios-reflect': 'skills/ios-reflect/SKILL.md',
+    'reflect': 'skills/reflect/SKILL.md',
     'deslop': 'skills/deslop/SKILL.md',
     'youtube-transcript': 'skills/youtube-transcript/SKILL.md',
     'ae-edit-style': 'skills/ae-edit-style/SKILL.md',
