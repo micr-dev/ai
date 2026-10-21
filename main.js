@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'ce-simplify-code': 'skills/ce-simplify-code/SKILL.md',
     'chart-visualization': 'skills/chart-visualization/SKILL.md',
     'data-visualization': 'skills/data-visualization/SKILL.md',
+    'deeper': 'skills/deeper/SKILL.md',
     'ui-unslop': 'skills/ui-unslop/SKILL.md',
     'boat-cli': 'skills/boat-cli/SKILL.md',
     'fumadocs': 'skills/fumadocs/SKILL.md',
