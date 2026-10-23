@@ -1,3 +1,8 @@
+---
+name: skill-grooming
+description: Audit and maintain OpenCode skills, validate skill structure, and review skill quality.
+---
+
 # Skill Grooming & Audit
 
 Comprehensive skill quality assessment and maintenance workflow for OpenCode agent skills.

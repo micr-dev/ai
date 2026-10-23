@@ -1,3 +1,8 @@
+---
+name: mcp-server-development
+description: Build MCP servers and tools using stdio or HTTP for OpenCode integration.
+---
+
 # MCP Server Development
 
 Comprehensive guide for developing Model Context Protocol (MCP) servers for OpenCode integration.

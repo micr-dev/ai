@@ -280,7 +280,7 @@ When writing prose (comments, commit messages, PR descriptions, docs, user-facin
 This is a style preference, not a hard requirement; content that must match a codebase's existing voice (error messages, UI copy) follows that voice. Source: Austin Wallace, [https://x.com/austeane/status/2078367367210643865](https://x.com/austeane/status/2078367367210643865).
 
 ### PR Descriptions
-When drafting a PR title or body, load and follow the `microck-voice` skill (`~/.hermes/skills/microck-voice/SKILL.md`, starting with its `references/voice-guide.md`). This is an explicit user override of the skill's default non-trigger for PR descriptions. Keep the skill's hard rules (no em dashes, no fabricated opinions/commitments, no sending without separate permission) and match Microck's casual-lowercase register for the prose sections of the PR body, even when the surrounding technical content is precise.
+When drafting a PR title or body, use the installed `microck-voice` skill and its voice guide. This is an explicit override of the skill's default non-trigger for PR descriptions. Keep its hard rules: no em dashes, no fabricated opinions or commitments, and no sending without separate permission. Match the skill's casual-lowercase register for the prose sections of the PR body, even when the surrounding technical content is precise.
 
 ### Change Description
 After any modification, summarize:
@@ -357,7 +357,7 @@ For graph-shaped questions, prefer the codebase-memory pointer at the end of thi
 - If jj is unavailable or initialization fails, report the failure and use the repository's native VCS.
 - Once initialized, use jj as the canonical VCS. Use git only for workflows that require it, such as gh, submodules, or raw remote inspection.
 - Never create commits unless explicitly asked. Inspect jj diff before committing.
-- Use the identity Microck / contact@micr.dev for commits.
+- Use the explicitly configured commit identity; do not infer account details.
 - Use jj undo only for operations created in this session. Do not restore or revert user changes.
 - Prefer jj new over stashes. Use jj workspace add for separate working copies.
 - Name bookmarks semantically, for example feat/name or fix/name. Never use agent-tool prefixes.

@@ -1,3 +1,8 @@
+---
+name: browser-automation-testing
+description: Test browser workflows, automate forms and navigation, capture screenshots, or extract page data using Camofox browser automation.
+---
+
 # Browser Automation Testing Skill
 
 ## Triggers

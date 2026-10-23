@@ -1,3 +1,8 @@
+---
+name: ssh-multi-environment
+description: Manage SSH environments, remote commands, file transfers, keys, port forwarding, and persistent remote sessions.
+---
+
 # SSH Multi-Environment Management Skill
 
 ## Triggers

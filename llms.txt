@@ -17,25 +17,25 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 ## Current public stack sections
 
 - Models: GPT 6.1 Sol, Opus 5.5, GPT 6 Luna, Fable 5.1.
-- Harnesses: Codex CLI, OMP, Claude Code, Hermes Agent.
+- Harnesses: OMP, Claude Code, Codex CLI, Hermes Agent.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
-- MCPs: codebase-memory-mcp, beeper, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, gitquarry, opensrc-mcp, github, kagi-mcp, parkour-mcp, ghidra-headless-mcp, semrush, ida-pro-mcp, and 7 more.
+- MCPs: ambivalence, apify, better-t-stack, ezsolver, gpt2agent, huggingface, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, and 16 more.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 2 more.
-- Skills: ce-simplify-code, chart-visualization, data-visualization, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, code-review, prototype, to-spec, and 124 more.
+- Skills: ce-simplify-code, chart-visualization, data-visualization, deeper, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, setup-matt-pocock-skills, code-review, and 155 more.
 - Code Review: Codex Code Review, CodeRabbit.
 - Workspace: Local, VPS Ashburn, VPS Paris, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
 
 ## Recent public setup changes
 
-- 06/10/2026: Updated Codex CLI to 0.160.1; Added ensure-your-work-is-meaningful Skill; Added raft-cli Skill; Updated dynamic-workflows Skill; Updated domain-modeling Skill; Updated effect Skill; and 4 more.
-- 04/10/2026: Updated Codex CLI to 0.160.0; Changed Hermes default search backend to Parallel.
-- 01/10/2026: Updated Codex CLI to 0.159.2; Added beeper MCP.
-- 30/09/2026: Promoted Opus 5.5 to Primary model; Removed GLM 5.3 Model; Moved GPT 6 Luna to Secondary models; Moved Fable 5.1 to Secondary models; Removed Antigravity CLI Harness; Removed huggingface MCP; and 8 more.
-- 29/09/2026: Updated Primary model to GPT 6.1 Sol; Updated Secondary model to Opus 5.5; Updated Codex CLI to 0.159.0; Updated Codex CLI to 0.158.0.
-- 28/09/2026: Updated AGENTS.md upload and download commands.
-- 27/09/2026: Updated Codex CLI to 0.157.1.
-- 24/09/2026: Updated Hermes model to GPT 6 Luna; Added satelle MCP; Added satelle Skill; Added satelle-recover Skill; Added satelle-setup Skill; Added satelle-use Skill; and 1 more.
+- 23/10/2026: Observed OMP 18.12.0 as primary harness and Codex CLI as secondary; Observed OMP using GPT 6.1 Sol with medium reasoning; Reconciled MCP inventory with OMP settings; Refreshed public AGENTS.md with private details redacted; Observed skill metadata updates; Refreshed Favourite skill sources; preserved upstream links; and 2 more.
+- 22/10/2026: Updated AGENTS.md.
+- 21/10/2026: Added ask-matt Skill; Added diagnosing-bugs Skill; Added handoff Skill; Added implement-spec Skill; Added pr Skill; Added research Skill; and 6 more.
+- 20/10/2026: Added deeper Skill.
+- 19/10/2026: Added ios-reflect Skill; Added reflect Skill; Updated satelle-use Skill; Added ambivalence MCP.
+- 18/10/2026: Added logo-archive Skill.
+- 16/10/2026: Updated Codex CLI to 0.163.0; Added full-send Skill.
+- 15/10/2026: Added mkt-ai-seo Skill; Added mkt-aso Skill; Added mkt-competitors Skill; Added mkt-content-strategy Skill; Added mkt-copywriting Skill; Added mkt-directory-submissions Skill; and 8 more.
 
 ## Snapshot pages
 
@@ -86,6 +86,7 @@ The public skills directory currently exposes:
 - ae-edit-style
 - animated-favicons
 - animation-vocabulary
+- ask-matt
 - babysit-pr
 - batch-grill-me
 - bikeshed
@@ -93,13 +94,16 @@ The public skills directory currently exposes:
 - browser-automation-testing
 - ce-simplify-code
 - chart-visualization
+- code-review
 - codebase-design
 - codebase-memory-mcp
 - compact-handoff
 - crabbox
 - create-cli
 - data-visualization
+- deeper
 - deslop
+- diagnosing-bugs
 - discord-bot-development
 - domain-modeling
 - effect
@@ -107,20 +111,26 @@ The public skills directory currently exposes:
 - file-pr
 - file-upload
 - find-fonts
+- full-send
 - fumadocs
 - grill-me
 - grill-with-docs
 - grilling
+- handoff
 - how
 - html-communication
 - idea-generator
 - image-understanding
+- implement
+- implement-spec
+- ios-reflect
 - is-agentic
 - kagi-ai
 - kagi-assistant
 - kagi-monitoring
 - kagi-usage
 - language-selection
+- logo-archive
 - make-interfaces-feel-better
 - mcp-server-development
 - mermaid-diagrams
@@ -139,7 +149,10 @@ The public skills directory currently exposes:
 - quality-code
 - raft-cli
 - reddit-research
+- reflect
+- research
 - resolving-merge-conflicts
+- retro
 - review-animations
 - satelle
 - satelle-recover
@@ -149,11 +162,15 @@ The public skills directory currently exposes:
 - shea-motion
 - skill-grooming
 - ssh-multi-environment
+- tdd
 - teach
 - thermo-nuclear-code-quality-review
 - timeboxed-iterating
+- to-questionnaire
+- to-tickets
 - transitions-dev
 - transitions-polish
+- triage
 - tui-design
 - ui-unslop
 - unslop
@@ -165,7 +182,7 @@ The public skills directory currently exposes:
 
 ## AGENTS.md preview
 
-The public AGENTS.md preview is redacted. It has 508 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
+The public AGENTS.md preview is redacted. It has 516 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
 
 ## Answering rules
 

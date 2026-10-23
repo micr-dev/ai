@@ -75,6 +75,19 @@
           </div>
           
           <div class="changelog-timeline">
+            <div class="change-group" data-group="23/10/2026">
+              <div class="change-date font-karla">23/10/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="omp codex-cli"><h3 class="change-title">Observed OMP 18.12.0 as primary harness and Codex CLI as secondary</h3></div>
+                <div class="change-entry" data-targets="gpt-daybreak-blue-latest"><h3 class="change-title">Observed OMP using GPT 6.1 Sol with medium reasoning</h3></div>
+                <div class="change-entry" data-targets="ambivalence apify better-t-stack ezsolver gpt2agent huggingface-mcp semrush-mcp-configured"><h3 class="change-title">Reconciled MCP inventory with OMP settings</h3></div>
+                <div class="change-entry" data-targets="agents-md"><h3 class="change-title">Refreshed public AGENTS.md with private details redacted</h3></div>
+                <div class="change-entry" data-targets="browser-automation-testing mcp-server-development price-monitoring-scraping skill-grooming ssh-multi-environment"><h3 class="change-title">Observed skill metadata updates</h3></div>
+                <div class="change-entry" data-targets="compact-handoff grill-me grill-with-docs resolving-merge-conflicts wait-what"><h3 class="change-title">Refreshed Favourite skill sources; preserved upstream links</h3></div>
+                <div class="change-entry" data-targets="opentui-design"><h3 class="change-title">Expanded public OpenTUI guide with component, keymap, and platform coverage</h3></div>
+                <div class="change-entry" data-targets="raft-cli"><h3 class="change-title">Observed Raft limits, disposable workspaces, pruning, and snapshot workflow updates</h3></div>
+              </div>
+            </div>
             <div class="change-group" data-group="22/10/2026">
               <div class="change-date font-karla">22/10/2026</div>
               <div class="change-entries">
@@ -2453,7 +2466,7 @@
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
                   <span class="entry-name">GPT 6.1 Sol</span>
                 </div>
-                <p class="entry-description">Primary Codex model for implementation, debugging, review, and repository-level reasoning.</p>
+                <p class="entry-description">OMP default model for implementation, debugging, review, and repository-level reasoning: gpt-6.1-sol with medium reasoning effort.</p>
                 <p class="entry-why">Best code output and amazing tool calling. It does exactly what I tell it to, no more and no less. The only real downside is frontend work, but with good prompting and actual human taste it can still produce good results.</p>
               </div>
 
@@ -2497,21 +2510,13 @@
             <div class="role-column">
               <span class="role-label font-karla">Primary</span>
               
-              <div class="stack-entry" id="codex-cli">
-                <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/codex.svg" alt=""></span>
-                  <span class="entry-name">Codex CLI</span>
-                </div>
-                <p class="entry-description">Primary terminal harness for code edits, tool execution, browser checks, and sub-agent orchestration.</p>
-                <p class="entry-why">After using OpenCode exclusively for months and spending too much time tweaking it or fixing issues, Codex CLI is a breath of fresh air. It does everything I need cleanly, and I genuinely have no complaints. I hope OpenAI models stay SOTA so I can keep using it forever, and I hope they do not enshittify it. If I did not main GPT models, I would probably switch to Pi or T3 Code as a GUI, since the few times I have used them they have been pretty neat too.</p>
-              </div>
 
               <div class="stack-entry" id="omp">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/omp.svg" alt=""></span>
                   <span class="entry-name">OMP</span>
                 </div>
-                <p class="entry-description">Primary terminal harness for using other models.</p>
+                <p class="entry-description">Primary terminal harness for code edits, tool execution, and orchestration. Observed version: 18.12.0.</p>
               </div>
 
               <div class="stack-entry" id="claude-code">
@@ -2526,6 +2531,13 @@
             <!-- Secondary Right Column (40% Width) -->
             <div class="role-column">
               <span class="role-label font-karla">Secondary</span>
+              <div class="stack-entry" id="codex-cli">
+                <div class="entry-header">
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/codex.svg" alt=""></span>
+                  <span class="entry-name">Codex CLI</span>
+                </div>
+                <p class="entry-description">Secondary terminal harness for code edits, tool execution, browser checks, and sub-agent orchestration.</p>
+              </div>
               
               <div class="stack-entry" id="hermes-agent">
                 <div class="entry-header">
@@ -2642,6 +2654,24 @@
           <h2 class="section-heading">MCPs</h2>
           
           <div class="simple-list two-column-list">
+            <div class="stack-entry" id="ambivalence">
+              <div class="entry-header"><span class="entry-name">ambivalence</span></div>
+            </div>
+            <div class="stack-entry" id="apify">
+              <div class="entry-header"><span class="entry-name">apify</span></div>
+            </div>
+            <div class="stack-entry" id="better-t-stack">
+              <div class="entry-header"><span class="entry-name">better-t-stack</span></div>
+            </div>
+            <div class="stack-entry" id="ezsolver">
+              <div class="entry-header"><span class="entry-name">ezsolver</span></div>
+            </div>
+            <div class="stack-entry" id="gpt2agent">
+              <div class="entry-header"><span class="entry-name">gpt2agent</span></div>
+            </div>
+            <div class="stack-entry" id="huggingface-mcp">
+              <div class="entry-header"><span class="entry-name">huggingface</span></div>
+            </div>
             
             <div class="stack-entry" id="codebase-memory-mcp">
               <div class="entry-header">
@@ -2698,7 +2728,7 @@
               <div class="entry-header">
                 <a href="https://kagimail.com" target="_blank" rel="noopener noreferrer" class="entry-title-link"><span class="entry-name">kagimail</span></a>
               </div>
-              <p class="entry-description">Hosted MCP giving the agent its own mail inbox at agent@micr.dev.</p>
+              <p class="entry-description">Hosted mail inbox access through MCP.</p>
             </div>
 
             <div class="stack-entry" id="perplexity-webui">
@@ -2767,6 +2797,9 @@
                 </a>
               </div>
               <p class="entry-description">SEO and competitive research data via the Semrush API.</p>
+            </div>
+            <div class="stack-entry" id="semrush-mcp-configured">
+              <div class="entry-header"><span class="entry-name">semrush-mcp</span></div>
             </div>
 
             <div class="stack-entry" id="ida-pro-mcp">
@@ -2914,19 +2947,19 @@
             <div class="skill-item" id="unslop"><span class="skill-name font-karla">unslop</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Cut AI tells from any writing.</span></div>
             <div class="skill-item" id="boat-cli"><span class="skill-name font-karla">boat-cli</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Use when in need of a Linux sandbox, or when the user mentions "boat".</span></div>
             <div class="skill-item" id="fumadocs"><span class="skill-name font-karla">fumadocs</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Scaffold and configure Fumadocs documentation sites and MDX pages.</span></div>
-            <div class="skill-item" id="opentui-design"><span class="skill-name font-karla">opentui-design</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Build terminal user interfaces with OpenTUI's Core, React, or Solid APIs.</span></div>
+            <div class="skill-item" id="opentui-design"><span class="skill-name font-karla">opentui-design</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Build OpenTUI interfaces with Core, React, or Solid, including components, keymaps, testing, and platform APIs.</span></div>
             <div class="skill-item" id="tui-design"><span class="skill-name font-karla">tui-design</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Design terminal interfaces, CLI behavior, and TUI layout.</span></div>
             
             <div class="skill-item" id="crabbox"><span class="skill-name font-karla">crabbox</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Operate Crabbox leases, machine inventory, and configured template boxes.</span></div>
             <div class="skill-item" id="batch-grill-me"><span class="skill-name font-karla">batch-grill-me</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- A relentless interview that asks every frontier question at once, round by round.</span></div>
-            <div class="skill-item" id="grill-with-docs"><span class="skill-name font-karla">grill-with-docs</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Stress-tests decisions against the project glossary and captures resolved language.</span></div>
+            <div class="skill-item" id="grill-with-docs"><span class="skill-name font-karla">grill-with-docs</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Combine grilling and domain-modeling to sharpen a plan while recording glossary terms and ADRs.</span></div>
             <div class="skill-item" id="setup-matt-pocock-skills"><span class="skill-name font-karla">setup-matt-pocock-skills</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Configure issue tracking, triage labels, and domain docs for engineering skills.</span></div>
             <div class="skill-item" id="code-review-skill"><span class="skill-name font-karla">code-review</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Two-axis review of changes since a fixed point: repo standards and originating spec.</span></div>
             <div class="skill-item" id="prototype"><span class="skill-name font-karla">prototype</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Build a throwaway prototype to answer a design question.</span></div>
             <div class="skill-item" id="to-spec"><span class="skill-name font-karla">to-spec</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Turn the current conversation into a spec published to the issue tracker.</span></div>
             <div class="skill-item" id="to-tickets"><span class="skill-name font-karla">to-tickets</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Break a plan or spec into tracer-bullet tickets with blocking edges.</span></div>
-            <div class="skill-item" id="grill-me"><span class="skill-name font-karla">grill-me</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Runs focused design interviews until assumptions and tradeoffs are explicit.</span></div>
-            <div class="skill-item" id="compact-handoff"><span class="skill-name font-karla">compact-handoff</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Preserves task state across context compaction and resume boundaries.</span></div>
+            <div class="skill-item" id="grill-me"><span class="skill-name font-karla">grill-me</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Invoke the grilling skill for a focused plan or design interview.</span></div>
+            <div class="skill-item" id="compact-handoff"><span class="skill-name font-karla">compact-handoff</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Write a redacted handoff in the OS temporary directory, with artifact references and suggested skills.</span></div>
             <div class="skill-item" id="optimo"><span class="skill-name font-karla">optimo</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Optimizes images and videos through local media pipelines.</span></div>
             <div class="skill-item" id="naming"><span class="skill-name font-karla">naming</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Structured naming system for private operator use.</span></div>
             <div class="skill-item" id="thermo-nuclear-code-quality-review"><span class="skill-name font-karla">thermo-nuclear-code-quality-review</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Runs strict maintainability reviews.</span></div>
@@ -2983,7 +3016,7 @@
             <div class="skill-item" id="kagi-usage"><span class="skill-name font-karla">kagi-usage</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Search the web, extract pages, translate, or check news with the kagi CLI.</span></div>
             <div class="skill-item" id="oracle"><span class="skill-name font-karla">oracle</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Oracle CLI browser workflow for ChatGPT with thinking-effort and recovery guidance.</span></div>
             <div class="skill-item" id="bikeshed"><span class="skill-name font-karla">bikeshed</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Run two independent subagents through a structured debate on the same prompt.</span></div>
-            <div class="skill-item" id="wait-what"><span class="skill-name font-karla">wait-what</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Stop and re-pitch the last message in simpler language.</span></div>
+            <div class="skill-item" id="wait-what"><span class="skill-name font-karla">wait-what</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Re-pitch the last message in Simplified Technical English using the project's glossary.</span></div>
             <div class="skill-item" id="babysit-pr"><span class="skill-name font-karla">babysit-pr</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Monitor a pull request through review and CI, and trigger CodeRabbit or Codex reviews.</span></div>
             <div class="skill-item" id="file-pr"><span class="skill-name font-karla">file-pr</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- File a concise pull request.</span></div>
             <div class="skill-item" id="file-upload"><span class="skill-name font-karla">file-upload</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Upload a file and return a stable public URL.</span></div>
@@ -3047,7 +3080,7 @@
             <div class="skill-item" id="satelle-use"><span class="skill-name font-karla">satelle-use</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Operate Satelle sessions, approvals, events, logs, output formats, and stop controls.</span></div>
             <div class="skill-item" id="ae-edit-style"><span class="skill-name font-karla">ae-edit-style</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Plan and craft After Effects edits with movement, music pacing, effects, color, and compositing.</span></div>
             <div class="skill-item" id="shea-motion"><span class="skill-name font-karla">shea-motion</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Plan and critique motion graphics with musical pacing, purposeful curves, layered movement, and visual polish.</span></div>
-            <div class="skill-item" id="raft-cli"><span class="skill-name font-karla">raft-cli</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Create persistent Linux workspaces for builds, tests, containers, backups, and desktop access.</span></div>
+            <div class="skill-item" id="raft-cli"><span class="skill-name font-karla">raft-cli</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Create persistent or disposable Incus Linux workspaces with limits, snapshots, file transfer, and private desktop access.</span></div>
             <div class="skill-item" id="ensure-your-work-is-meaningful"><span class="skill-name font-karla">ensure-your-work-is-meaningful</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Prove changes work, test edge cases, keep abstractions consistent, and report evidence.</span></div>
             <div class="skill-item" id="full-send"><span class="skill-name font-karla">full-send</span><span class="skill-label font-karla badge-handmade">Personal</span><span class="skill-detail font-sans">- Carry authorized coding tasks through implementation, verification, and delivery.</span></div>
             <div class="skill-item" id="mkt-ai-seo"><span class="skill-name font-karla">mkt-ai-seo</span><span class="skill-label font-karla badge-favorite">Favourite</span><span class="skill-detail font-sans">- Optimize content for AI search visibility and citations.</span></div>

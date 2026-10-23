@@ -78,3 +78,151 @@ Which framework?
    └─ core/ (imperative API)
 ```
 
+### "I need to display content"
+
+```
+Display content?
+├─ Plain or styled text -> components/text-display.md
+├─ Container with borders/background -> components/containers.md
+├─ Scrollable content area -> components/containers.md (scrollbox)
+├─ Standalone scrollbar -> components/containers.md (scrollbar)
+├─ ASCII art banner/title -> components/text-display.md (ascii-font)
+├─ QR code -> components/text-display.md (qr-code, @opentui/qrcode)
+├─ Data table with borders/wrapping -> components/code-diff.md (TextTable)
+├─ Code with syntax highlighting -> components/code-diff.md
+├─ Diff viewer (unified/split, hunk nav) -> components/code-diff.md
+├─ Line numbers with diagnostics -> components/code-diff.md
+└─ Markdown content (streaming) -> components/code-diff.md (markdown)
+```
+
+### "I need user input"
+
+```
+User input?
+├─ Single-line text field -> components/inputs.md (input)
+├─ Multi-line text editor -> components/inputs.md (textarea)
+├─ Select from a list (vertical) -> components/inputs.md (select)
+├─ Tab-based selection (horizontal) -> components/inputs.md (tab-select)
+├─ Value slider -> components/inputs.md (slider)
+├─ Declarative/layered keybindings -> keymap/REFERENCE.md (@opentui/keymap)
+└─ Custom keyboard shortcuts -> keyboard/REFERENCE.md
+```
+
+### "I need layout/positioning"
+
+```
+Layout?
+├─ Flexbox-style layouts (row, column, wrap) -> layout/REFERENCE.md
+├─ Absolute positioning -> layout/patterns.md
+├─ Responsive to terminal size -> layout/patterns.md
+├─ Centering content -> layout/patterns.md
+└─ Complex nested layouts -> layout/patterns.md
+```
+
+### "I need animations"
+
+```
+Animations?
+├─ Timeline-based animations -> animation/REFERENCE.md
+├─ Easing functions -> animation/REFERENCE.md
+├─ Property transitions -> animation/REFERENCE.md
+└─ Looping animations -> animation/REFERENCE.md
+```
+
+### "I need to handle input"
+
+```
+Input handling?
+├─ Keyboard events (keypress, release) -> keyboard/REFERENCE.md
+├─ Layered bindings, commands, leader keys -> keymap/REFERENCE.md
+├─ Focus management -> keyboard/REFERENCE.md
+├─ Paste events -> keyboard/REFERENCE.md
+├─ Mouse events -> components/containers.md
+├─ Text selection & copy-on-select -> keyboard/REFERENCE.md (selection)
+└─ Clipboard (OSC 52) -> keyboard/REFERENCE.md (clipboard)
+```
+
+### "I need to test my TUI"
+
+```
+Testing?
+├─ Snapshot testing -> testing/REFERENCE.md
+├─ Interaction testing -> testing/REFERENCE.md
+├─ Test renderer setup -> testing/REFERENCE.md
+└─ Debugging tests -> testing/REFERENCE.md
+```
+
+### "I need platform capabilities (audio, notifications, SSH)"
+
+```
+Platform capability?
+├─ Play sound / native audio -> core/api.md (Audio)
+├─ Desktop notifications (OSC 9/777/99) -> core/api.md (triggerNotification)
+├─ Custom stdin/stdout (PTY, xterm.js) -> core/api.md (createCliRenderer)
+└─ Serve a TUI over SSH -> core/REFERENCE.md (@opentui/ssh)
+```
+
+### "I need to debug/troubleshoot"
+
+```
+Troubleshooting?
+├─ Runtime errors, crashes -> <framework>/gotchas.md
+├─ Layout issues -> layout/REFERENCE.md + layout/patterns.md
+├─ Input/focus issues -> keyboard/REFERENCE.md
+└─ Repro + regression tests -> testing/REFERENCE.md
+```
+
+### Troubleshooting Index
+
+- Terminal cleanup, crashes -> `core/gotchas.md`
+- Text styling not applying -> `components/text-display.md`
+- Input focus/shortcuts -> `keyboard/REFERENCE.md`
+- Layout misalignment -> `layout/REFERENCE.md`
+- Flaky snapshots -> `testing/REFERENCE.md`
+
+For component naming differences and text modifiers, see `components/REFERENCE.md`.
+
+## Product Index
+
+### Frameworks
+| Framework | Entry File | Description |
+|-----------|------------|-------------|
+| Core | `./references/core/REFERENCE.md` | Imperative API, all primitives |
+| React | `./references/react/REFERENCE.md` | React reconciler for declarative TUI |
+| Solid | `./references/solid/REFERENCE.md` | SolidJS reconciler for declarative TUI |
+
+### Cross-Cutting Concepts
+| Concept | Entry File | Description |
+|---------|------------|-------------|
+| Layout | `./references/layout/REFERENCE.md` | Yoga/Flexbox layout system |
+| Components | `./references/components/REFERENCE.md` | Component reference by category |
+| Keyboard | `./references/keyboard/REFERENCE.md` | Low-level keyboard input handling |
+| Keymap | `./references/keymap/REFERENCE.md` | Declarative layered keybindings (`@opentui/keymap`) |
+| Animation | `./references/animation/REFERENCE.md` | Timeline-based animations |
+| Testing | `./references/testing/REFERENCE.md` | Test renderer and snapshots |
+
+### Component Categories
+| Category | Entry File | Components |
+|----------|------------|------------|
+| Text & Display | `./references/components/text-display.md` | text, ascii-font, styled text, qr-code |
+| Containers | `./references/components/containers.md` | box, scrollbox, scrollbar, borders |
+| Inputs | `./references/components/inputs.md` | input, textarea, select, tab-select, slider |
+| Code & Diff | `./references/components/code-diff.md` | code, line-number, diff, markdown, text-table |
+
+### Additional Packages
+| Package | Description | Docs |
+|---------|-------------|------|
+| `@opentui/keymap` | Layered keybinding/command engine (Bun or Node, no FFI) | `./references/keymap/REFERENCE.md` |
+| `@opentui/qrcode` | QR code component | `./references/components/text-display.md` |
+| `@opentui/ssh` | Serve a TUI over SSH | `./references/core/REFERENCE.md` |
+| `@opentui/three` | Three.js WebGPU renderer (formerly `core/src/3d`) | upstream `packages/three` |
+| `@opentui/examples` | Runnable examples (formerly `core/src/examples`) | upstream `packages/examples` |
+
+Core also ships a native **Audio** engine and OSC desktop **notifications** — see `./references/core/api.md`.
+
+## Resources
+
+**Repository**: https://github.com/anomalyco/opentui
+**Core Docs**: https://github.com/anomalyco/opentui/tree/main/packages/core/docs
+**Examples**: https://github.com/anomalyco/opentui/tree/main/packages/examples/src
+**Awesome List**: https://github.com/msmps/awesome-opentui

@@ -1,3 +1,8 @@
+---
+name: price-monitoring-scraping
+description: Build price monitors and web scrapers with proxy rotation, browser automation, CAPTCHA handling, and anti-bot evasion.
+---
+
 # Price Monitoring & Web Scraping
 
 Comprehensive guide for building robust web scrapers with anti-bot evasion, proxy management, and price monitoring systems.
