@@ -168,6 +168,8 @@ This catches wrong directions before I've built on them.
 ## Standing constraints
 
 - Standing constraints: dark mode, true black (#000) background, white primary text. Information-dense, no decorative card/pill chrome, no light-gray subtitle lines above sections. Minimal copy. No em dashes.
+- Landing-page copy: never use staccato sentences. Write in natural, complete sentences.
+- For interfaces, avoid gratuitous text, visual additions, and eyebrow elements. Follow Jakub's "less is more" guidance, as recommended in [Michael Chomsky's post](https://x.com/michael_chomsky/status/2112687270780457067).
 - Avoid continuously repainting CSS animations (pulse, shimmer, blur, spinners); they peg the GPU on high-refresh displays.
 
 ## Motion

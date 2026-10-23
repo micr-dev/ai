@@ -1258,6 +1258,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'mkt-schema': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/schema',
       'mkt-seo-audit': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/seo-audit',
       'mkt-site-architecture': 'https://github.com/coreyhaines31/marketingskills/tree/main/skills/site-architecture',
+      'wizard': 'https://github.com/Kingdaddy007/StratOS/blob/main/global/skills/wizard/SKILL.md',
 };
 
     if (externalSkillUrls[skillId]) {
