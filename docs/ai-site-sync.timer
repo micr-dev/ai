@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily verified AI stack update
+
+[Timer]
+OnCalendar=*-*-* 09:30:00 Europe/Madrid
+Persistent=true
+Unit=ai-site-sync.service
+
+[Install]
+WantedBy=timers.target

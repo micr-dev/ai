@@ -1,0 +1,9 @@
+[Unit]
+Description=Alert when the AI stack update fails or stops running
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/ai-site-sync/runtime.env
+ExecStart=%h/.local/lib/ai-site-sync/venv/bin/python %h/.local/lib/ai-site-sync/daily-update.py watchdog
+TimeoutStartSec=90
+UMask=0077

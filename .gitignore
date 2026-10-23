@@ -1,2 +1,4 @@
 .vercel
 .residue/
+
+__pycache__/

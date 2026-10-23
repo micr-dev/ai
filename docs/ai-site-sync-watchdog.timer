@@ -1,0 +1,10 @@
+[Unit]
+Description=Check AI stack update freshness hourly
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+Unit=ai-site-sync-watchdog.service
+
+[Install]
+WantedBy=timers.target
