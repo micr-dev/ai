@@ -20,7 +20,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - Harnesses: OMP, Claude Code, Codex CLI, Hermes Agent.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
-- MCPs: ambivalence, apify, better-t-stack, ezsolver, gpt2agent, huggingface, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, reddit-mcp-buddy, and 16 more.
+- MCPs: ambivalence, apify, scrapling, better-t-stack, ezsolver, gpt2agent, huggingface, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, and 17 more.
 - CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 2 more.
 - Skills: ce-simplify-code, chart-visualization, data-visualization, deeper, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, setup-matt-pocock-skills, code-review, and 155 more.
 - Code Review: Codex Code Review, CodeRabbit.
@@ -28,6 +28,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Recent public setup changes
 
+- 24/10/2026: Observed scrapling MCP in OMP settings; Observed reflect plugin-cache edit protection; published referenced review templates.
 - 23/10/2026: Observed OMP 18.12.0 as primary harness and Codex CLI as secondary; Observed OMP using GPT 6.1 Sol with medium reasoning; Reconciled MCP inventory with OMP settings; Refreshed public AGENTS.md with private details redacted; Observed skill metadata updates; Refreshed Favourite skill sources; preserved upstream links; and 2 more.
 - 22/10/2026: Updated AGENTS.md.
 - 21/10/2026: Added ask-matt Skill; Added diagnosing-bugs Skill; Added handoff Skill; Added implement-spec Skill; Added pr Skill; Added research Skill; and 6 more.
@@ -35,7 +36,6 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - 19/10/2026: Added ios-reflect Skill; Added reflect Skill; Updated satelle-use Skill; Added ambivalence MCP.
 - 18/10/2026: Added logo-archive Skill.
 - 16/10/2026: Updated Codex CLI to 0.163.0; Added full-send Skill.
-- 15/10/2026: Added mkt-ai-seo Skill; Added mkt-aso Skill; Added mkt-competitors Skill; Added mkt-content-strategy Skill; Added mkt-copywriting Skill; Added mkt-directory-submissions Skill; and 8 more.
 
 ## Snapshot pages
 
