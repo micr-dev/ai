@@ -339,7 +339,7 @@ def verify_deployment(config, commit, expected):
             if (deployment.get('projectId') == config['project_id'] and deployment.get('target') == 'production'
                     and deployment.get('readyState') == 'READY' and DOMAIN in deployment.get('alias', [])
                     and deployment.get('meta', {}).get('githubCommitSha') == commit):
-                if all(digest(request('https://' + DOMAIN + '/' + urllib.parse.quote(path) + '?sync=' + commit)) == sha
+                if all(digest(request('https://' + DOMAIN + '/' + urllib.parse.quote('' if path == 'index.html' else path) + '?sync=' + commit)) == sha
                        for path, sha in expected.items()):
                     return deployment['id']
         except urllib.error.HTTPError as error:

@@ -18,7 +18,7 @@ The editorial process runs in a filesystem sandbox with the operator home hidden
 4. Validate the report, changed paths, historical entries, skill links and public content. Run a secret scan. Reject incomplete reports, unplanned edits, symlinks, missing skill files and unexpected source-catalog loss.
 5. Generate llms.txt and the OG image from the final site. Publish only after validation. Refuse a changed remote base rather than overwriting concurrent work.
 6. Save the pending commit and expected public file hashes before pushing. A failed or interrupted deployment is retried by verifying that same commit, without repeating the editorial step.
-7. Require a Ready Production deployment for the pushed commit in the configured Vercel project, the correct domain alias, and matching live bytes for every changed public artifact. Only then advance the source checkpoint.
+7. Require a Ready Production deployment for the pushed commit in the configured Vercel project, the correct domain alias, and matching live bytes for every changed public artifact. Verify `index.html` at its canonical public URL `/`, because clean URLs redirect the file path. Only then advance the source checkpoint.
 
 A successful unchanged-source check still verifies the deployed site and regenerates dated OG assets without calling the model. Failures exit nonzero and preserve the run directory. A separate hourly watchdog reports an unsuccessful latest run or more than 30 hours without a verified check. Notifications are deduplicated; notification failure must remain visible in the service log.
 
