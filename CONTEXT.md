@@ -65,7 +65,7 @@ A date-grouped set of **Change Entries** shown under one `DD/MM/YYYY` date heade
 _Avoid_: Timeline card, terminal log
 
 **Stack Snapshot**:
-The reconstructed public stack immediately after a selected **Change Group**. A snapshot replays additions, removals, replacements, and version transitions so its visible entries reflect that date rather than merely hiding recently added items from the current stack. When a removal has no recorded introduction, the item appears only in the immediately preceding observable snapshot instead of being projected backward without evidence.
+The reconstructed public stack immediately after a selected **Change Group**. A snapshot replays additions, removals, replacements, and version transitions so its visible entries reflect that date rather than merely hiding recently added items from the current stack. Direct navigation and reloads of snapshot URLs must serve the current entrypoint and select that same historical state. With clean URLs enabled, rewrites target `/index`, not `/index.html`. When a removal has no recorded introduction, the item appears only in the immediately preceding observable snapshot instead of being projected backward without evidence.
 _Avoid_: Filtered current stack, URL-only snapshot
 
 **AGENTS.md**:
@@ -129,3 +129,7 @@ Domain expert: "Yes, when the fade is quick, restrained, and makes state changes
 Dev: "Should the AGENTS.md section be rewritten as marketing copy?"
 
 Domain expert: "No. It should read like the raw operating manual, with redactions where public exposure would be unnecessary or risky."
+
+## Current personal assistant
+
+MicroClaw is the operator's public NanoClaw fork. Link its own repository, not upstream NanoClaw. It replaces Hermes Agent in the current stack; keep Hermes entries in the historical changelog and snapshots.

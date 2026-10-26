@@ -17,7 +17,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 ## Current public stack sections
 
 - Models: GPT 6.1 Sol, Opus 5.5, GPT 6 Luna, Fable 5.1.
-- Harnesses: OMP, Claude Code, Codex CLI, Hermes Agent.
+- Harnesses: OMP, Claude Code, Codex CLI, MicroClaw.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
 - MCPs: ambivalence, apify, scrapling, better-t-stack, ezsolver, gpt2agent, huggingface, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, kagimail, perplexity-webui, and 17 more.
@@ -28,6 +28,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Recent public setup changes
 
+- 26/10/2026: Replaced Hermes Agent with MicroClaw Harness.
 - 24/10/2026: Observed scrapling MCP in OMP settings; Observed reflect plugin-cache edit protection; published referenced review templates.
 - 23/10/2026: Observed OMP 18.12.0 as primary harness and Codex CLI as secondary; Observed OMP using GPT 6.1 Sol with medium reasoning; Reconciled MCP inventory with OMP settings; Refreshed public AGENTS.md with private details redacted; Observed skill metadata updates; Refreshed Favourite skill sources; preserved upstream links; and 2 more.
 - 22/10/2026: Updated AGENTS.md.
@@ -35,7 +36,6 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - 20/10/2026: Added deeper Skill.
 - 19/10/2026: Added ios-reflect Skill; Added reflect Skill; Updated satelle-use Skill; Added ambivalence MCP.
 - 18/10/2026: Added logo-archive Skill.
-- 16/10/2026: Updated Codex CLI to 0.163.0; Added full-send Skill.
 
 ## Snapshot pages
 

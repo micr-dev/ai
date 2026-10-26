@@ -17,10 +17,10 @@
     <text x="588" y="158" font-size="20" fill="#8b8b8b">GPT 6.1 Sol · Opus 5.5 · GPT 6 Luna · Fable 5.1</text>
     <line x1="588" y1="214" x2="1126" y2="214" stroke="#242424"/>
     <text x="588" y="264" font-size="24" font-weight="500" fill="#fff">Harnesses</text>
-    <text x="588" y="294" font-size="20" fill="#8b8b8b">OMP · Claude Code · Codex CLI · Hermes Agent</text>
+    <text x="588" y="294" font-size="20" fill="#8b8b8b">OMP · Claude Code · Codex CLI · MicroClaw</text>
     <line x1="588" y1="350" x2="1126" y2="350" stroke="#242424"/>
     <text x="588" y="400" font-size="24" font-weight="500" fill="#fff">Tools</text>
     <text x="588" y="430" font-size="20" fill="#8b8b8b">238 entries · 6 categories</text>
   </g>
-  <text x="1126" y="572" text-anchor="end" class="mono" font-size="16" fill="#555">updated 2026-10-24 · ai.micr.dev</text>
+  <text x="1126" y="572" text-anchor="end" class="mono" font-size="16" fill="#555">updated 2026-10-26 · ai.micr.dev</text>
 </svg>
