@@ -78,6 +78,7 @@
             <div class="change-group" data-group="27/10/2026">
               <div class="change-date font-karla">27/10/2026</div>
               <div class="change-entries">
+                <div class="change-entry" data-targets="gpt-6-astra fable-5-1"><h3 class="change-title">Added GPT 6 Astra to the usage ranking</h3></div>
                 <div class="change-entry" data-targets="mcps"><h3 class="change-title">Updated MCP capability descriptions</h3></div>
                 <div class="change-entry" data-targets="hooks"><h3 class="change-title">Updated hooks and extensions</h3></div>
                 <div class="change-entry" data-targets="context-mcp firecrawl"><h3 class="change-title">Updated context and Firecrawl MCPs</h3></div>
@@ -2482,6 +2483,7 @@
         <!-- SECTION: MODELS -->
         <section class="stack-section" id="models">
           <h2 class="section-heading">Models</h2>
+          <p class="entry-description">Based on the last 7 days of token usage.</p>
           
           <div class="role-grid">
             <div class="role-column">
@@ -2500,7 +2502,7 @@
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
                   <span class="entry-name">GPT 6.1 Sol</span>
                 </div>
-                <p class="entry-description">OMP default model for implementation, debugging, review, and repository-level reasoning: gpt-6.1-sol with medium reasoning effort.</p>
+                <p class="entry-description">Used for implementation, debugging, review, and repository-level reasoning.</p>
               </div>
 
             </div>
@@ -2508,6 +2510,13 @@
             <div class="role-column">
               <span class="role-label font-karla">Secondary</span>
 
+              <div class="stack-entry" id="gpt-6-astra">
+                <div class="entry-header">
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
+                  <span class="entry-name">GPT 6 Astra</span>
+                </div>
+                <p class="entry-description">OpenAI model.</p>
+              </div>
               <div class="stack-entry" id="gpt-5-6-luna">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
@@ -2515,14 +2524,7 @@
                 </div>
                 <p class="entry-description">Secondary model for general-purpose agent work.</p>
               </div>
-              <div class="stack-entry" id="fable-5-1">
-                <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/anthropic.png" alt=""></span>
-                  <span class="entry-name">Fable 5.1</span>
-                </div>
-                <p class="entry-description">Primary model for implementation and reasoning.</p>
-              </div>
-</div>
+            </div>
           </div>
         </section>
         
@@ -2541,7 +2543,7 @@
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/omp.svg" alt=""></span>
                   <span class="entry-name">OMP</span>
                 </div>
-                <p class="entry-description">Primary terminal harness for code edits, tool execution, and orchestration. Observed version: 18.12.0.</p>
+                <p class="entry-description">Primary terminal harness for code edits, tool execution, and orchestration. Version 18.12.0. Default: GPT 6.1 Sol, medium reasoning.</p>
               </div>
 
             </div>

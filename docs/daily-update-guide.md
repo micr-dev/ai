@@ -23,6 +23,8 @@ An inactive oneshot service is normal after completion. Check `status.json` for 
 
 The private `source/cli.json`, `source/mcps.json` and `source/hooks.json` files record the next candidate's inventory and redacted evidence. CLI names and descriptions must exactly match the catalogue. MCP README or package evidence may be missing or describe an installation rather than a running server. An offline stdio probe can supply tool descriptions, but it does not use credentials or establish live availability. Hook and extension excerpts omit string literals and other potentially sensitive lines, so they can miss important conditions. Secret scanning and redaction are not guarantees. If evidence is insufficient, inspect its source privately and review the candidate and report. Never publish private paths, credentials or source excerpts. The collector does not inspect project-local hooks.
 
+`source/models.json` records the selected order when the usage API is usable. `checkpoint.json` stores the two daily observations only after publication is verified. A log message saying model usage is unavailable means the model list stayed unchanged; inspect the API response and its freshness before the next run.
+
 The private snapshot also includes supported scripts for skills already linked on the public site. Review each script for private content before publication. The candidate secret scan covers scripts, but it cannot guarantee that they contain no sensitive information.
 
 ## Fix a failed run

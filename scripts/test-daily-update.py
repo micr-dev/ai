@@ -82,6 +82,70 @@ class CheckpointInventoryTests(unittest.TestCase):
             self.assertEqual(received, [sync.UA])
 
 
+class ModelRankingTests(unittest.TestCase):
+    def test_usage_aggregates_seven_days_and_aliases(self):
+        current = sync.dt.datetime(2026, 10, 27, 16, tzinfo=sync.dt.timezone.utc)
+        def day(date, rows):
+            return {'date': date, 'total': sum(value for _, value in rows),
+                    'breakdown': [{'name': name, 'tokens': {'total': value}} for name, value in rows]}
+        payload = {'schemaVersion': 1, 'start': '2026-10-20', 'end': '2026-10-27',
+                   'updatedAt': '2026-10-27T15:00:00Z',
+                   'providers': [
+                       {'daily': [day('2026-10-20', [('gpt-old', 999)]),
+                                  day('2026-10-21', [('anthropic/claude-opus-5-5', 10),
+                                                     ('gpt-6.1-sol', 20)])]},
+                       {'daily': [day('2026-10-27', [('claude-5.5-opus', 5), ('gpt-6-astra', 7),
+                                                     ('gpt-6-luna', 4)])]},
+                   ]}
+        snapshot = sync.usage_snapshot(payload, current)
+        self.assertEqual(snapshot['totals'], {'claude-5.5-opus': 15, 'gpt-6.1-sol': 20,
+                                              'gpt-6-astra': 7, 'gpt-6-luna': 4})
+        payload['providers'][1]['daily'][0]['total'] += 1
+        with self.assertRaisesRegex(ValueError, 'incomplete model attribution'):
+            sync.usage_snapshot(payload, current)
+        payload['providers'][1]['daily'][0]['total'] -= 1
+        with self.assertRaisesRegex(ValueError, 'stale'):
+            sync.usage_snapshot(payload, current + sync.dt.timedelta(days=3))
+
+    def test_malformed_api_shapes_are_rejected(self):
+        current = sync.dt.datetime(2026, 10, 27, 16, tzinfo=sync.dt.timezone.utc)
+        valid = {'schemaVersion': 1, 'start': '2026-10-20', 'end': '2026-10-27',
+                 'updatedAt': '2026-10-27T15:00:00Z', 'providers': []}
+        for payload in (None, [], {**valid, 'updatedAt': None}, {**valid, 'providers': [None]}):
+            with self.subTest(payload=payload), self.assertRaises(ValueError):
+                sync.usage_snapshot(payload, current)
+
+    def test_consecutive_snapshots_and_same_day_reruns(self):
+        order = ['alpha', 'beta', 'gamma', 'delta']
+        first = {'date': '2026-10-26', 'totals': {'alpha': 100, 'beta': 120, 'gamma': 80,
+                                                   'delta': 10, 'epsilon': 20}}
+        second = {'date': '2026-10-27', 'totals': {'alpha': 100, 'beta': 120, 'gamma': 80,
+                                                    'delta': 10, 'epsilon': 20}}
+        state = sync.advance_model_state(first, None)
+        self.assertEqual(sync.ranked_models(first, state['previous'], order), order)
+        state = sync.advance_model_state(first, state)
+        self.assertIsNone(state['previous'])
+        state = sync.advance_model_state(second, state)
+        self.assertEqual(sync.ranked_models(second, state['previous'], order),
+                         ['beta', 'alpha', 'gamma', 'epsilon'])
+        second['totals']['beta'] = 110
+        self.assertEqual(sync.ranked_models(second, state['previous'], order),
+                         ['alpha', 'beta', 'gamma', 'epsilon'])
+        gap = {'date': '2026-10-29', 'totals': second['totals']}
+        self.assertIsNone(sync.advance_model_state(gap, state)['previous'])
+        with self.assertRaisesRegex(ValueError, 'predates'):
+            sync.advance_model_state(first, state)
+
+    def test_displayed_columns_enforce_rank_and_membership(self):
+        html = ('<section id="models"><span class="role-label font-karla">Primary</span>'
+                '<span class="entry-name">Alpha</span><span class="entry-name">Beta</span>'
+                '<span class="role-label font-karla">Secondary</span>'
+                '<span class="entry-name">Gamma</span><span class="entry-name">Delta</span></section>')
+        self.assertEqual(sync.displayed_models(html), ['alpha', 'beta', 'gamma', 'delta'])
+        with self.assertRaisesRegex(RuntimeError, 'four distinct'):
+            sync.displayed_models(html.replace('Delta</span>', 'Gamma</span>'))
+
+
 class VercelAuthTests(unittest.TestCase):
     def test_unexpired_login_does_not_change_file(self):
         with tempfile.TemporaryDirectory() as temporary:
