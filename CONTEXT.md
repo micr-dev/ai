@@ -24,9 +24,8 @@ _Avoid_: Installed MCP, available MCP
 A direct operator tool used from the local environment.
 _Avoid_: MCP
 
-**Skill Label**:
-A subtle low-emphasis label used inside the Skills section, such as `Handmade` or `Favorite`.
-_Avoid_: Skill section, category
+**Skill Category**:
+A collapsible group in the Skills section. Search filters skills across groups, and opening a group reveals its entries. Existing `Personal` and `Favourite` labels remain on individual skills.
 
 **Skill Interaction**:
 A skill with a committed public source file opens that source in the read-only skill dialog. A skill without a committed public source file opens its canonical upstream GitHub location as a link instead of presenting fallback or partial dialog content.

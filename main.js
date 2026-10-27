@@ -434,6 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .filter(item => !item.classList.contains('snapshot-hidden'));
       section.classList.toggle('snapshot-hidden', visibleItems.length === 0);
     });
+    updateSkillCategories();
   }
 
   function applySnapshot(displayDate, { pushState = false, transition = false } = {}) {
@@ -1038,6 +1039,81 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function setupSkillCategories() {
+    const list = document.querySelector('#skills .skills-inline-list');
+    if (!list) return;
+
+    const categories = [
+      ['Design and motion', /^(better-|emil-|animate$|animated-favicons$|animation-|apple-design$|ae-edit-style$|shea-motion$|transitions-|review-animations$|improve-animations$|make-interfaces|ui-unslop$|octen-design$|scandinavian-design$|find-fonts$|logo-archive$|variant$|pick-ui-library$|image-understanding$)/],
+      ['Research and web', /^(parallel-|kagi-|octen-|research$|reddit-research$|youtube-transcript$|result$|status$|gitquarry$|postplan-read$|price-monitoring)/],
+      ['Marketing', /^mkt-/],
+      ['Engineering and testing', /^(ce-simplify|code-|codebase-|quality-code$|effect|good-api|hard-cut$|install-anti-slop$|principle-|bug|diagnosing-bugs$|root-cause|tdd$|consolidate-test|browser-automation|dogfood$|break$|implement|create-cli$|mcp-server|web-auth$|discord-bot|language-selection$|resolving-merge|thermo-nuclear|ensure-your-work)/],
+      ['Tools and operations', /^(agent-browser$|boat-cli$|crabbox$|raft-cli$|satelle|herdr$|ssh-|vercel-sandbox$|electron$|slack$|oracle$|optimo$|file-upload$|release-helper$|babysit-pr$|file-pr$|pr$|tailor-coderabbit)/],
+      ['Planning and writing', /^(grill|batch-grill|bikeshed$|deeper$|dynamic-workflows$|domain-modeling$|ideate$|idea-generator$|prototype$|to-|wayfinder$|writing-|documentation-|product-description|microck-voice$|unslop$|deslop$|wait-what$|how$|why$|naming$|teach$|handoff$|compact-handoff$|retro$|triage$|skill-|ask-matt$|full-send$|timeboxed|is-agentic$|html-communication$|mermaid|chart-|data-visualization$|orx-figures$|wizard$|fumadocs$|opentui|tui-design$)/],
+      ['Other', /./],
+    ];
+
+    const search = document.createElement('div');
+    search.className = 'skills-search';
+    search.innerHTML = '<label for="skills-search">Search skills</label><input id="skills-search" type="search" autocomplete="off"><span class="skills-search-status" role="status"></span>';
+    list.before(search);
+
+    const groups = categories.map(([name, pattern]) => {
+      const details = document.createElement('details');
+      details.className = 'skill-category';
+      const summary = document.createElement('summary');
+      summary.textContent = name;
+      const items = document.createElement('div');
+      items.className = 'skill-category-items';
+      details.append(summary, items);
+      list.append(details);
+      return { details, items, pattern };
+    });
+
+    Array.from(list.querySelectorAll(':scope > .skill-item')).forEach(item => {
+      groups.find(group => group.pattern.test(item.id)).items.append(item);
+    });
+
+    const input = search.querySelector('input');
+    input.addEventListener('input', () => updateSkillCategories());
+    const revealHash = () => {
+      const target = document.getElementById(location.hash.slice(1));
+      if (target?.matches('.skill-item')) {
+        target.closest('details')?.setAttribute('open', '');
+        target.scrollIntoView();
+      }
+    };
+    window.addEventListener('hashchange', revealHash);
+    revealHash();
+    updateSkillCategories();
+  }
+
+  function updateSkillCategories() {
+    const input = document.getElementById('skills-search');
+    if (!input) return;
+    const query = input.value.trim().toLowerCase();
+    let total = 0;
+    document.querySelectorAll('#skills .skill-category').forEach(category => {
+      let count = 0;
+      category.querySelectorAll('.skill-item').forEach(item => {
+        const matches = !item.classList.contains('snapshot-hidden')
+          && (!query || item.textContent.toLowerCase().includes(query));
+        item.hidden = !matches;
+        if (matches) count++;
+      });
+      category.hidden = count === 0;
+      if (query) {
+        if (!category.hasAttribute('data-search-open')) category.dataset.searchOpen = String(category.open);
+        category.open = count > 0;
+      } else if (category.hasAttribute('data-search-open')) {
+        category.open = category.dataset.searchOpen === 'true';
+        delete category.dataset.searchOpen;
+      }
+      total += count;
+    });
+    document.querySelector('.skills-search-status').textContent = query ? `${total} skills found` : '';
+  }
+
   function setupSkillDialog() {
     document.querySelectorAll('.skill-item').forEach(item => {
       const title = item.querySelector('.skill-name')?.textContent?.trim() || 'Skill';
@@ -1299,6 +1375,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSkillDialog();
 
   setupSnapshotLinks();
+  setupSkillCategories();
 
   // 4. CROSS-HIGHLIGHTING: CHANGELOG HOVER DYNAMIC LINKING
   const changeEntries = document.querySelectorAll('.change-entry');

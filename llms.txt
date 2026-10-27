@@ -16,22 +16,22 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: GPT 6.1 Sol, Opus 5.5, GPT 6 Luna, Fable 5.1.
-- Harnesses: OMP, Claude Code, Codex CLI, MicroClaw.
+- Models: Opus 5.5, GPT 6.1 Sol, GPT 6 Luna, Fable 5.1.
+- Harnesses: OMP, Codex CLI, MicroClaw.
 - AGENTS.md: public redacted operator manual preview.
-- Hooks: PreToolUse | Bash Safety, PreToolUse | RTK Rewrite, PreToolUse | Daily-Pacer Guard, UserPromptSubmit | Daily-Pacer Guard, SessionStart | herdr State.
-- MCPs: ambivalence, apify, scrapling, better-t-stack, ezsolver, gpt2agent, huggingface, context, firecrawl, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, and 19 more.
-- CLI: rtk, kagi-cli, fff, agent-browser, lit, gitquarry, opensrc, markit, egaki, mullgate, rg, jj, optimo, facts, clawpatch, browserstack, and 2 more.
+- Hooks: PreToolUse | RTK Rewrite, Session Stop | Stop Gate, SessionStart | herdr State, herdr OMP extension, lsops extension, Compaction extension.
+- MCPs: ambivalence, apify, scrapling, context, firecrawl, better-t-stack, ezsolver, gpt2agent, huggingface, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, and 19 more.
+- CLI: agent-browser, agent-tui, agg, asc, asciinema, ast-grep, bazel, browserstack, cloudflare, cloudflared, context-dev, crabbox, cwebp, defuddle, fff, ffmpeg, and 34 more.
 - Skills: ce-simplify-code, chart-visualization, data-visualization, deeper, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, setup-matt-pocock-skills, code-review, and 155 more.
 - Code Review: Codex Code Review, CodeRabbit.
-- Workspace: Local, VPS Ashburn, VPS Paris, herdr, tmux, Tailscale, Tabby, Termius, Socket Firewall.
+- Workspace: Local, VPS Ashburn, VPS Paris, T3Code, Tailscale, Socket Firewall.
 
 ## Recent public setup changes
 
-- 27/10/2026: Observed context and firecrawl MCPs in OMP settings; Observed private-only visual preferences and Reddit routing updates in AGENTS.md; Observed explicit-only ios-reflect invocation; published referenced prompts; Observed subscriber-only Kagi image search guidance; Observed Satelle protocol 24 requirement.
+- 27/10/2026: Updated MCP capability descriptions; Updated hooks and extensions; Updated context and Firecrawl MCPs; Updated AGENTS.md guidance; Updated ios-reflect invocation and prompts; Updated Kagi image search guidance; and 1 more.
 - 26/10/2026: Replaced Hermes Agent with MicroClaw Harness.
-- 24/10/2026: Observed scrapling MCP in OMP settings; Observed reflect plugin-cache edit protection; published referenced review templates.
-- 23/10/2026: Observed OMP 18.12.0 as primary harness and Codex CLI as secondary; Observed OMP using GPT 6.1 Sol with medium reasoning; Reconciled MCP inventory with OMP settings; Refreshed public AGENTS.md with private details redacted; Observed skill metadata updates; Refreshed Favourite skill sources; preserved upstream links; and 2 more.
+- 24/10/2026: Updated scrapling MCP; Updated reflect Skill (edit protection and review templates).
+- 23/10/2026: Updated OMP and Codex CLI harness roles (OMP 18.12.0); Updated OMP model to GPT 6.1 Sol; Updated MCP inventory; Updated AGENTS.md; Updated skill metadata; Updated Favourite skill sources; and 2 more.
 - 22/10/2026: Updated AGENTS.md.
 - 21/10/2026: Added ask-matt Skill; Added diagnosing-bugs Skill; Added handoff Skill; Added implement-spec Skill; Added pr Skill; Added research Skill; and 6 more.
 - 20/10/2026: Added deeper Skill.

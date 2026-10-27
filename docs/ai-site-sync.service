@@ -1,8 +1,7 @@
 [Unit]
 Description=Update and verify the public AI stack from OMP
 Wants=network-online.target
-Requires=ai-site-sync-auth.service
-After=network-online.target ai-site-sync-auth.service
+After=network-online.target
 StartLimitIntervalSec=1d
 StartLimitBurst=3
 OnFailure=ai-site-sync-watchdog.service
@@ -11,7 +10,7 @@ OnFailure=ai-site-sync-watchdog.service
 Type=oneshot
 EnvironmentFile=%h/.config/ai-site-sync/runtime.env
 ExecStart=%h/.local/lib/ai-site-sync/venv/bin/python %h/.local/lib/ai-site-sync/daily-update.py run
-TimeoutStartSec=40min
+TimeoutStartSec=70min
 Restart=on-failure
 RestartSec=30min
 UMask=0077

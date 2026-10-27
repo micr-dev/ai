@@ -5,7 +5,7 @@ description: "Use for 'why does X work this way', 'why we picked Y', design rati
 
 # Why
 
-Delegation and optional capabilities follow `../poteto-mode/references/codex-agent-runtime.md`.
+The cross-skill runtime reference `../poteto-mode/references/codex-agent-runtime.md` is unavailable in this distribution. Follow the active environment's delegation and capability instructions instead.
 
 Investigate the motivation and intent behind code. Why was it built this way? What edge cases were considered? What product, business, or operational constraints shaped the design? What alternatives were rejected, and why?
 

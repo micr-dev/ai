@@ -5,7 +5,7 @@ description: "Use for \"how does X work\", code walkthroughs before changing som
 
 # How
 
-Delegation and optional capabilities follow `../poteto-mode/references/codex-agent-runtime.md`.
+The cross-skill runtime reference `../poteto-mode/references/codex-agent-runtime.md` is unavailable in this distribution. Follow the active environment's delegation and capability instructions instead.
 
 Explore the codebase to answer "how does X work?" questions. Produce clear architectural explanations at the level of a senior engineer onboarding onto a subsystem. Enough to build a working mental model, not annotated source code.
 
