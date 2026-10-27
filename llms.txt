@@ -19,7 +19,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - Models: Opus 5.5, GPT 6.1 Sol, GPT 6 Astra, GPT 6 Luna.
 - Harnesses: OMP, Codex CLI, MicroClaw.
 - AGENTS.md: public redacted operator manual preview.
-- Hooks: PreToolUse | RTK Rewrite, Session Stop | Stop Gate, SessionStart | herdr State, herdr OMP extension, lsops extension, Compaction extension.
+- Hooks: PreToolUse | RTK Rewrite, Session Stop | Stop Gate, SessionStart | herdr State, herdr OMP extension, lsops extension.
 - MCPs: ambivalence, apify, scrapling, context, firecrawl, better-t-stack, ezsolver, gpt2agent, huggingface, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, and 19 more.
 - CLI: agent-browser, agent-tui, agg, asc, asciinema, ast-grep, bazel, browserstack, cloudflare, cloudflared, context-dev, crabbox, cwebp, defuddle, fff, ffmpeg, and 34 more.
 - Skills: ce-simplify-code, chart-visualization, data-visualization, deeper, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, setup-matt-pocock-skills, code-review, and 155 more.
