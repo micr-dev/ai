@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: ios-reflect
 description: Mine an iOS app project's agent sessions and route durable lessons into the iOS app framework (AGENTS.md, development-docs/, checklists/). Use after a milestone, a release, an App Review outcome, or when the user says ios-reflect.
 ---

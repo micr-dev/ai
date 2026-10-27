@@ -167,10 +167,10 @@ This catches wrong directions before I've built on them.
 
 ## Standing constraints
 
-- Standing constraints: dark mode, true black (#000) background, white primary text. Information-dense, no decorative card/pill chrome, no light-gray subtitle lines above sections. Minimal copy. No em dashes.
+- Personal visual preferences apply only to my own private, personal files and interfaces: dark mode, true black (#000) background, white primary text, information-dense layouts, no decorative card/pill chrome, no light-gray subtitle lines above sections, and minimal copy. For public-facing files, sites, products, documentation, and shared projects, follow the project's design system, audience, and explicit task requirements instead. Personal ownership of a public-facing project does not make these preferences applicable.
+- No em dashes.
 - Landing-page copy: never use staccato sentences. Write in natural, complete sentences.
-- For interfaces, avoid gratuitous text, visual additions, and eyebrow elements. Follow Jakub's "less is more" guidance, as recommended in [Michael Chomsky's post](https://x.com/michael_chomsky/status/2112687270780457067).
-- Avoid continuously repainting CSS animations (pulse, shimmer, blur, spinners); they peg the GPU on high-refresh displays.
+- For my own private, personal interfaces, avoid gratuitous text, visual additions, and eyebrow elements. Follow Jakub's "less is more" guidance, as recommended in [Michael Chomsky's post](https://x.com/michael_chomsky/status/2112687270780457067).
 
 ## Motion
 
@@ -322,10 +322,10 @@ POTENTIAL CONCERNS:
 - Prefer primary sources. Never invent citations or links.
 - Use one authoritative source for low-risk facts. For high-impact, current, disputed, or implementation-driving claims, use independent research lanes and reconcile disagreements.
 - Treat explicit deep-research requests and named multi-source work such as literature reviews, market scans, strategic reports, technical decision matrices, and broad comparisons as deep research.
-- Deep research must use Oracle's browser workflow with ChatGPT Deep Research when it is available. If it is unavailable, report the blocker. Do not report ordinary search as deep research.
 - When a provider finds a page, use that provider's extractor when suitable. Skip hosted extraction for raw GitHub, JSON, APIs, and exact-byte work.
 - For YouTube transcripts, use the installed YouTube transcript workflow and stop after bot detection or HTTP 429 rather than retrying in a loop.
 - When X/Twitter research is needed, use x.md at `https://x.pcstyle.dev` when direct X access is unavailable or inconvenient. It reads public X content only and is read-only. Prefer its Markdown or JSON output, respect its hosted limit of 5 uncached search requests per minute per IP, and do not assume degraded web-indexed results are complete or paginated.
+- Reddit inspection MUST go through `reddit-mcp-buddy` for posts, comments, subreddit browsing, search, and user activity. Use the configured MCP tools; if they are not mounted, invoke the same server over stdio with `node <reddit-mcp-buddy-install>/dist/cli.js`. Use its existing authentication without printing or copying credentials. If it fails, report the error rather than silently switching to direct Reddit requests or another scraper.
 - For ordinary web search and extraction, invoke an installed search skill instead of raw curl: kagi skills (kagi-assistant, kagi-usage), octen skills (octen-search, octen-web-search, octen-extract, plus image/video variants when needed), parallel skills (parallel-web-search, parallel-web-extract, parallel-findall, parallel-deep-research). Combine providers as fits the task.
 
 ## Repository verification
