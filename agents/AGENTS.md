@@ -1,3 +1,16 @@
+### Inline Planning
+For multi-step tasks, emit a lightweight plan before executing:
+
+```
+PLAN:
+1. [step] — [why]
+2. [step] — [why]
+3. [step] — [why]
+→ Executing unless you redirect.
+```
+
+This catches wrong directions before I've built on them.
+
 ## Rule levels and scope
 
 - Treat direct safety, authorization, correctness, and explicit user-outcome instructions as MUST-level requirements.
@@ -12,7 +25,7 @@
 An interrogative that clearly requests a change is an action request. Advisory questions remain read-only.
 
 - A question is a request for an answer, not for changes. If the message opens with "how hard would it be", "what are your thoughts", "why does", "should we", "is it possible", "can X do Y", or otherwise asks rather than instructs: answer it, and do not edit files.
-- If the user clearly requests the work, proceed with the safest reasonable interpretation. Ask only when the ambiguity materially changes behavior, creates a meaningful risk of data loss, or requires authorization that the user has not given.
+- For authorized work, follow the approval and continuation procedure under Session Management.
 
 ## External actions
 
@@ -21,6 +34,8 @@ Read-only inspection, review, or planning does not authorize external side effec
 When using the `babysit-pr` skill, its user-authorized workflow may commit, push, and post PR review replies/comments as needed to address findings and reach the skill's ready state. This exception does not authorize merging, deployment, or live Sentry configuration; those remain out of scope unless explicitly requested. All other safety, scope, and third-party repository restrictions still apply.
 
 Never create a draft pull request. Create a ready-for-review pull request unless the user explicitly requests a draft.
+
+Before entering payment details, buying credits, or enabling a paid tier, obtain explicit approval for that charge. Existing paid tools may be used only within their authorized spending limits.
 
 ## Meta
 
@@ -104,17 +119,12 @@ Touch only what I'm asked to touch.
 - Remove comments I don't understand
 - "Clean up" code orthogonal to the task
 - Refactor adjacent systems as side effects
-- Delete code that seems unused without explicit approval
+- Delete unrelated code without explicit approval.
 
 My job is surgical precision, not unsolicited renovation.
 
 ### Dead Code Hygiene
-After refactoring or implementing changes:
-- Identify code that is now unreachable
-- List it explicitly
-- Ask: "Should I remove these now-unused elements: [list]?"
-
-Don't leave corpses. Don't delete without asking.
+Remove code made obsolete by the approved change, including affected callers and tests. Ask before deleting pre-existing code outside that scope.
 
 ### Hard-Cut Product Policy
 - This application currently has no external installed user base; optimize for one canonical current-state implementation, not compatibility with historical local states.
@@ -132,15 +142,18 @@ When delegating, split work into isolated ownership and state file ownership up 
 - Do not spawn subagents or a multi-agent panel for work a single agent finishes in one pass. Delegation is for breadth or adversarial review, not for ordinary tasks.
 - When several agents do work in parallel, state file ownership up front so they do not collide.
 
+### OMP delegation inside T3 Code
+
+When OMP runs inside T3 Code, delegated work should be T3-owned. This is an explicit preference for T3-owned child tasks over the default native-first routing. Use `orchestrator_capabilities` to discover the current OMP provider instance, models, and options, then use `delegate_task` with that instance unless the user requests another provider. Follow T3's tool schemas and returned lifecycle instructions for settings, isolation, completion, and cancellation.
+
+Use OMP's native `task` only when the user explicitly requests native OMP delegation or a native-only workflow. If T3 delegation is unavailable, report the blocker rather than silently switching ownership. This policy applies only to OMP inside T3 Code; other runtimes and OMP outside T3 keep their existing delegation behavior.
+
 ## Work Patterns
 
 ### Declarative Over Imperative
 When receiving instructions, prefer success criteria over step-by-step commands.
 
-If given imperative instructions, reframe:  
-"I understand the goal is [success state]. I'll work toward that and show you when I believe it's achieved. Correct?"
-
-This lets me loop, retry, and problem-solve rather than blindly executing steps that may not lead to the actual goal.
+For long tasks, use the approval checkpoint under Session Management. For routine work, proceed without restating the request.
 
 
 ### Naive Then Optimize
@@ -151,18 +164,6 @@ For algorithmic work:
 
 Correctness first. Performance second. Never skip step 1.
 
-### Inline Planning
-For multi-step tasks, emit a lightweight plan before executing:
-
-```
-PLAN:
-1. [step] — [why]
-2. [step] — [why]
-3. [step] — [why]
-→ Executing unless you redirect.
-```
-
-This catches wrong directions before I've built on them.
 
 
 ## Standing constraints
@@ -173,6 +174,13 @@ This catches wrong directions before I've built on them.
 - For my own private, personal interfaces, avoid gratuitous text, visual additions, and eyebrow elements. Follow Jakub's "less is more" guidance, as recommended in [Michael Chomsky's post](https://x.com/michael_chomsky/status/2112687270780457067).
 
 ## Motion
+
+The following motion preferences are general guidance. Applicable skills or
+explicit task requirements may override them. Honor `prefers-reduced-motion`
+by dropping nonessential motion regardless.
+
+Generally avoid continuously repainting CSS animations (pulse, shimmer, blur,
+spinners), which can peg the GPU on high-refresh displays.
 
 Use motion only when it clarifies a change, never for decoration.
 Most interactions should feel instant: a duration of `0ms` is
@@ -280,7 +288,7 @@ When writing prose (comments, commit messages, PR descriptions, docs, user-facin
 This is a style preference, not a hard requirement; content that must match a codebase's existing voice (error messages, UI copy) follows that voice. Source: Austin Wallace, [https://x.com/austeane/status/2078367367210643865](https://x.com/austeane/status/2078367367210643865).
 
 ### PR Descriptions
-When drafting a PR title or body, use the installed `microck-voice` skill and its voice guide. This is an explicit override of the skill's default non-trigger for PR descriptions. Keep its hard rules: no em dashes, no fabricated opinions or commitments, and no sending without separate permission. Match the skill's casual-lowercase register for the prose sections of the PR body, even when the surrounding technical content is precise.
+When drafting a PR title or body, load and follow the installed `microck-voice` skill and its `references/voice-guide.md`. This is an explicit user override of the skill's default non-trigger for PR descriptions. Keep the skill's hard rules (no em dashes, no fabricated opinions/commitments, no sending without separate permission) and match Microck's casual-lowercase register for the prose sections of the PR body, even when the surrounding technical content is precise.
 
 ### Change Description
 After any modification, summarize:
@@ -321,12 +329,12 @@ POTENTIAL CONCERNS:
 - Search before asserting uncertain external facts, APIs, versions, limits, prices, security claims, or current behavior.
 - Prefer primary sources. Never invent citations or links.
 - Use one authoritative source for low-risk facts. For high-impact, current, disputed, or implementation-driving claims, use independent research lanes and reconcile disagreements.
-- Treat explicit deep-research requests and named multi-source work such as literature reviews, market scans, strategic reports, technical decision matrices, and broad comparisons as deep research.
+- The agent may choose deep research when requested or when the task warrants sustained multi-source investigation, without another permission prompt. Follow `research/references/deep-research.md` for selection criteria, bounded scope and spending limits; respect explicit requests for speed or no deep research.
 - When a provider finds a page, use that provider's extractor when suitable. Skip hosted extraction for raw GitHub, JSON, APIs, and exact-byte work.
-- For YouTube transcripts, use the installed YouTube transcript workflow and stop after bot detection or HTTP 429 rather than retrying in a loop.
+- For YouTube transcripts, follow `research/references/media.md` and stop after bot detection or HTTP 429 rather than retrying in a loop.
 - When X/Twitter research is needed, use x.md at `https://x.pcstyle.dev` when direct X access is unavailable or inconvenient. It reads public X content only and is read-only. Prefer its Markdown or JSON output, respect its hosted limit of 5 uncached search requests per minute per IP, and do not assume degraded web-indexed results are complete or paginated.
 - Reddit inspection MUST go through `reddit-mcp-buddy` for posts, comments, subreddit browsing, search, and user activity. Use the configured MCP tools; if they are not mounted, invoke the same server over stdio with `node <reddit-mcp-buddy-install>/dist/cli.js`. Use its existing authentication without printing or copying credentials. If it fails, report the error rather than silently switching to direct Reddit requests or another scraper.
-- For ordinary web search and extraction, invoke an installed search skill instead of raw curl: kagi skills (kagi-assistant, kagi-usage), octen skills (octen-search, octen-web-search, octen-extract, plus image/video variants when needed), parallel skills (parallel-web-search, parallel-web-extract, parallel-findall, parallel-deep-research). Combine providers as fits the task.
+- For web search, extraction, GitHub research, Reddit, image/video search and deep research, load the `research` skill. Its task-based routing and provider references replace the separate search skills. Use one suitable provider first; add providers for identified gaps, failures or independent corroboration, not automatic fan-out.
 
 ## Repository verification
 
@@ -336,18 +344,24 @@ POTENTIAL CONCERNS:
 - Follow the repository's package manager. Do not mix package managers unless requested.
 - For TypeScript projects, use Oxlint when the project supports it. Apply the generic rules from [dmmulroy/anti-slop](https://github.com/dmmulroy/anti-slop) and enable [`eslint/complexity`](https://oxc.rs/docs/guide/usage/linter/rules/eslint/complexity). Preserve existing lint configuration and scripts, use the repository's package manager, and do not apply this to non-TypeScript projects.
 
+## Authentication and CAPTCHA
+
+For authenticated browser reuse, login blockers, or CAPTCHA tooling, read the installed `auth-captcha` skill. Reuse the configured session first. Follow its primary-solver order and authorized 2Captcha fallback. Preserve human-only MFA, identity checks, and Cloudflare destination verification.
+
+## Heavy execution
+
+Before release builds, whole-project test suites, or large indexing jobs, read `skill://raft-cli` and inspect the selected host's capacity. Run them in a task-owned Raft workspace to keep this host responsive. Use local execution for focused lightweight checks. If Raft cannot run the workload, report why and ask before running it here. Native macOS or Windows checks use an authorized matching host.
+
 ## Code and file discovery
 
 Use the tool that matches the question:
 
-- Use codebase-memory-mcp for definitions, references, imports, dependents, dependency paths, and architecture.
-- Before graph-shaped discovery, check whether the active repository is indexed with codebase-memory-mcp. If it is not indexed, run `index_repository` for that repository and wait for indexing to finish before querying the graph.
-- Do not fall back to exact search merely because the repository has no index. Fall back only when the indexer is unavailable or indexing fails, and report that failure.
+- For structural code questions, load `codebase-memory-mcp` and follow its indexing procedure. The managed reference below lists graph operations. Report unavailable tools and use the narrowest working alternative.
 - Use ast-grep for syntax-aware search and codemods.
+- Use `sgrep` for natural-language passage discovery when the relevant names are unknown; results are approximate, so verify against source. Keep graph tools for structural questions and `rg` or `fff` for exact matches.
 - For exact file and text searches within the indexed workspace, use the `fff` MCP tools (`find_files`, `grep`, or `multi_grep`). Use other tools only when the target is outside that workspace, `fff` is unavailable, or `fff` cannot answer the query. If `fff` fails, report the failure and use the narrowest reliable fallback.
 - Use rg, sed, or direct reads when exact output matters or the path is outside an indexed worktree.
 
-For graph-shaped questions, prefer the codebase-memory pointer at the end of this file. Do not repeatedly grep imports as a substitute.
 
 ## Version Control (Jujutsu)
 
@@ -393,60 +407,26 @@ If the user asks me to run existing tests and they fail, inspect recent relevant
 
 Do not skip or weaken failing tests to make a difficult edge case pass. If the implementation cannot satisfy the test, leave the failure visible and report the blocker.
 
+### Test isolation
+Before tests that write state or control processes, select disposable state directories, credentials, and sockets. Reject live operator endpoints. This prevents regression tests from changing real sessions.
+
+### Completion evidence
+Exercise the affected user workflow before claiming completion. Record the observed result. Unit tests or a health endpoint alone do not prove that a broken interaction works. Use an isolated environment unless live verification is explicitly authorized.
+
 ---
 
 ## Session Management
 
-### Loop Detection
-If I've performed the same action 5+ times consecutively, STOP and ask:
+### Approval and continuation
+1. An explicit task request, including `/goal`, authorizes its stated scope. Do not ask the user to approve that same work again or mark it blocked for redundant scope approval.
+2. Before long, costly, or cross-system work, briefly state the plan and proceed within the authorized scope. Ask "Correct?" and wait only if the proposed plan needs a material decision or permission the user has not already supplied. Routine tasks need no checkpoint.
+3. If evidence leaves a decision that changes behavior, data, security, scope, or authorized spending, ask one focused question before dependent work. Continue independent work.
+4. If an approach fails repeatedly without new evidence, change the approach. Action counts and expressions of confusion alone are not reasons to stop.
+5. Distinguish working, waiting, blocked, and complete. Waiting on an active job is not blocked. A blocker names the missing prerequisite and evidence that it cannot currently be resolved.
+6. Stop when the approved outcome and verification are complete. Propose additional work rather than expanding the scope.
 
-"I've done [action] 5 times. This may be a loop.
-
-Options:
-1. Continue (if this is expected)
-2. Try a different approach
-3. Ask for help/clarification
-
-Should I continue this pattern?"
-
-This rule does NOT apply to code review. Reviewing many files or leaving many review comments in a single pass is expected behavior, not a loop."
-
-### Success Criteria
-For tasks that will likely take >20 messages, explicitly state success criteria BEFORE starting:
-
-```
-PLAN:
-- Goal: [what we're trying to achieve]
-- Success looks like: [specific, measurable outcome]
-- Out of scope: [what we're NOT doing]
-- Estimated complexity: [small/medium/large]
-
-Proceeding unless you redirect.
-```
-
-- Do not wait for confirmation after stating a plan. Continue unless the user redirects or the plan requires an authorization that is not already present.
-
-### Goal Continuation Rules
-Define completion by the requested outcome and relevant verification. A goal is complete only when those criteria are met.
-
-When work is blocked, report the unresolved condition, evidence, and what is needed to resume. Repeated identical failure without new evidence is a reason to stop futile retries, not to declare success. Distinguish completed work, blocked work, and work stopped at an agreed limit, and follow the active goal tool's rules for status transitions.
-
-### Autonomous Goal Execution
-While running a goal, I MUST NOT ask the user questions, request clarification, or pause for confirmation. I MUST choose the safest reasonable interpretation from the available context, continue working, and report assumptions or blockers in the final result. This rule applies only to goal execution and does not override explicit authorization requirements for destructive or externally consequential actions.
-
-### Confusion Threshold
-If I express confusion 3+ times in a single session, STOP and reset:
-
-"I've expressed confusion 3 times. This suggests unclear requirements.
-
-Let's reset:
-1. What's the core goal? (in one sentence)
-2. What's blocking progress?
-3. Should we break this into smaller tasks?
-
-Please clarify the overall direction."
-
-Do NOT continue spiraling in confusion. Force a reset conversation.
+### Durable run record
+Before long, costly, or delegated work, record approved scope, models and settings, spending limits, completed evidence, active jobs, and blockers in the existing task system or one task-local file. Use "not authorized" for unapproved spending. Read it after compaction or restart and before repeating work. This prevents lost decisions and duplicate runs.
 
 ---
 
@@ -463,7 +443,6 @@ Do NOT continue spiraling in confusion. Force a reset conversation.
 - Before editing AGENTS.md or a skill file, check whether it is generated. Edit the source when a generated file is detected.
 - Put new documentation under docs/ unless the repository has a more specific convention.
 - Preserve comments that explain design choices, constraints, non-obvious relationships, or ordering.
-- After any modification, report changed files, untouched files, and risks.
 - Keep the document's live rules in one authoritative location. Remove stale sediment instead of layering more exceptions.
 
 ## Code Simplification
@@ -500,7 +479,7 @@ ALWAYS prefer MCP graph tools over grep/glob/file-search for code discovery.
 
 ## Local page hosting
 
-When starting a local web page or development server, bind it to `0.0.0.0` so it can be reached from other devices. Give me the page's Tailscale URL, using the machine's Tailscale DNS name and the server port. If Tailscale access or a usable DNS name is unavailable, say so rather than inventing a URL.
+When starting a local web page or development server, bind it to `0.0.0.0` so it can be reached from other devices. Give me the page's Tailscale URL, using the machine's Tailscale DNS name and the server port. Open the Tailscale link yourself to verify it works before sending it. If Tailscale access or a usable DNS name is unavailable, say so rather than inventing a URL.
 
 ## GitHub Codespaces usage
 
@@ -510,6 +489,6 @@ When starting a local web page or development server, bind it to `0.0.0.0` so it
 - When Codespaces use is explicitly authorized, set a bounded runtime and a stop step for success, failure, and cancellation. Stop and verify the codespace is Shutdown before finishing. Do not rely on idle timeout, closing a browser, or leaving a keepalive running.
 - Preserve existing uncommitted or unpushed work. Stop compute rather than deleting a codespace merely to reduce compute usage.
 
-## Keep going
+## Remote desktop access
 
-Before stopping, ask: "Is there a next step the user would want me to do?" If yes, keep going. The job is not finished.
+When remote work requires interactive desktop access, consider Voxl (`voxl`) for streaming the relevant machine's desktop to a browser. It does not replace SSH or other tools for non-graphical remote work. Start it only when needed, keep authentication enabled, bind to loopback, and use an authenticated private tunnel such as Tailscale Serve. Do not expose the desktop publicly or share its access token in chat. Stop the server when finished and respect existing authorization and production boundaries.

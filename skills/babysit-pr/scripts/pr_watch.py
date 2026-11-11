@@ -6,8 +6,8 @@ poll loops. It reads everything in one GraphQL query per poll and judges the
 PR against the *current head commit*:
 
   - CI: every check on the head finished; failures listed (required or not).
-  - Review bots: each bot reviewed the exact head SHA. Triggers them when they
-    did not auto-run, waits out CodeRabbit rate limits until the stated reset,
+  - Review bots: one clean review of the head is enough to stop waiting for
+    the other bot. Triggers missing reviews, waits out CodeRabbit rate limits,
     detects unresponsive or erroring bots instead of waiting forever. A bot
     that cannot review lands in `blocked_bots` and stops being required; the
     watch carries on with CI and the remaining bots.
@@ -217,9 +217,9 @@ def evaluate_checks(pr: dict, pushed: datetime, now: datetime, ignore: list[str]
             outcome = ctx["state"]
             done = outcome not in ("PENDING", "EXPECTED")
             url = ctx.get("targetUrl")
-        if any(b in name.lower() for b in BOT_CHECK_NAMES):
+        if not ctx.get("isRequired") and any(b in name.lower() for b in BOT_CHECK_NAMES):
             continue
-        if any(fnmatch.fnmatch(label, pat) or fnmatch.fnmatch(name, pat) for pat in ignore):
+        if not ctx.get("isRequired") and any(fnmatch.fnmatch(label, pat) or fnmatch.fnmatch(name, pat) for pat in ignore):
             summary["ignored"].append(label)
             continue
         entry = {"name": label, "required": bool(ctx.get("isRequired")), "outcome": outcome, "url": url}
@@ -282,7 +282,11 @@ def coderabbit_state(pr: dict, comments: list[dict], pushed: datetime, now: date
         outside = 0
         if latest and (m := re.search(r"Outside diff range comments \((\d+)\)", latest["body"] or "")):
             outside = int(m.group(1))
-        return {"status": "reviewed", "review_state": latest["state"] if latest else "SUMMARY_ONLY", "outside_diff_findings": outside, "review": latest}
+        state = latest["state"] if latest else "SUMMARY_ONLY"
+        # CodeRabbit often posts a COMMENTED review even when it found nothing.
+        if latest and state == "COMMENTED" and re.search(r"Actionable comments posted:\s*0\b", latest["body"] or "", re.I):
+            state = "CLEAN"
+        return {"status": "reviewed", "review_state": state, "outside_diff_findings": outside, "review": latest}
 
     triggers = [c for c in comments if BOTS[bot]["trigger"] in c["body"] and ts(c["createdAt"]) >= pushed]
     replies = [c for c in mine if "auto-generated reply by CodeRabbit" in c["body"] and ts(c["createdAt"]) >= pushed]
@@ -340,7 +344,9 @@ def codex_state(pr: dict, comments: list[dict], pushed: datetime, now: datetime)
     # Findings arrive as a PR review on the reviewed commit.
     reviews = [r for r in pr["reviews"]["nodes"] if login(r) == bot_login and ((r.get("commit") or {}).get("oid") == head or (reviewed_sha(r["body"]) and head.startswith(reviewed_sha(r["body"]))))]
     if reviews:
-        return {"status": "reviewed", "review_state": "FINDINGS", "review": reviews[-1]}
+        latest = reviews[-1]
+        state = "CLEAN" if latest["state"] == "APPROVED" else "FINDINGS"
+        return {"status": "reviewed", "review_state": state, "review": latest}
 
     mine = [c for c in comments if login(c) == bot_login]
     # Older format: a "Didn't find any major issues" comment naming the commit.
@@ -431,6 +437,17 @@ def evaluate(pr: dict, viewer: str, now: datetime, bots: list[str], ignore: list
             report["blocked_bots"].append({"bot": bot, "detail": st["action"], **({"url": st["url"]} if st.get("url") else {})})
         elif st["status"] != "reviewed":
             report["waiting"].append({"kind": "bot_review", "bot": bot, "status": st["status"], **{k: st[k] for k in ("retry_at", "until", "since") if k in st}})
+
+    # A clean current-head review satisfies the shared bot gate. Still inspect
+    # both bots above so findings already reported remain actionable. Do not
+    # post an unnecessary trigger for the other bot after the gate is met.
+    clean_states = {"codex": {"CLEAN"}, "coderabbit": {"APPROVED", "CLEAN", "FINISHED_NO_REVIEW"}}
+    if any(st.get("status") == "reviewed" and st.get("review_state") in clean_states[bot]
+           and not st.get("outside_diff_findings")
+           for bot, st in report["bots"].items()):
+        report["waiting"] = [item for item in report["waiting"] if item["kind"] != "bot_review"]
+        for st in report["bots"].values():
+            st.pop("trigger", None)
 
     for thread in pr["reviewThreads"]["nodes"]:
         if thread["isResolved"]:
@@ -530,7 +547,7 @@ def main() -> int:
         p.add_argument("-R", "--repo", help="owner/name when PR is a number outside the repo checkout")
 
     def evaluation(p):
-        p.add_argument("--bots", default="coderabbit,codex", help="comma list of review bots to require (coderabbit,codex)")
+        p.add_argument("--bots", default="coderabbit,codex", help="comma list of review bots to consider (coderabbit,codex)")
         p.add_argument("--ignore-check", action="append", default=[], metavar="GLOB", help="check name to ignore after you justified it (repeatable)")
         p.add_argument("--third-party-triggers", action="store_true", help="allow bot review requests on repos you do not own (only when the user asked)")
 

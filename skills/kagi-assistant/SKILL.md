@@ -1,14 +1,16 @@
 ---
 name: kagi-assistant
-description: Use Kagi Assistant for conversational answers, thread continuity, attachments, streaming, model selection, or custom assistants. Use when the task benefits from an account-backed conversation rather than direct search or page extraction.
+description: Use Kagi Assistant for conversational answers, thread continuity, attachments, streaming, model selection, or custom assistants. For Kagi Mail mailbox search, message reading and mail OAuth setup, load its separate mail reference instead of the Assistant workflow.
 allowed-tools: Bash(kagi:*)
 ---
 
 # Kagi Assistant
 
 Use Assistant for conversation mechanics and continuity. Use `kagi-ai` to
-choose when to spend AI allowance, and `kagi-usage` for direct search or page
-work.
+choose when to spend AI allowance, and `research` with `references/kagi.md`
+for direct search or page work.
+
+For Kagi Mail, read [Mail search and reading](references/mail.md) and use that workflow instead of the Assistant steps below. Mail OAuth and Assistant session authentication are separate.
 
 Assistant commands require `KAGI_SESSION_TOKEN`.
 

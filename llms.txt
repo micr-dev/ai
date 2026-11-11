@@ -19,15 +19,16 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - Models: GPT 6.1 Sol, Opus 5.5, GPT 6 Astra, GPT 6 Luna.
 - Harnesses: OMP, Codex CLI, MicroClaw.
 - AGENTS.md: public redacted operator manual preview.
-- Hooks: PreToolUse | RTK Rewrite, Session Stop | Stop Gate, SessionStart | herdr State, herdr OMP extension, lsops extension.
-- MCPs: ambivalence, apify, scrapling, context, firecrawl, better-t-stack, ezsolver, gpt2agent, huggingface, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, and 19 more.
-- CLI: agent-browser, agent-tui, agg, asc, asciinema, ast-grep, bazel, browserstack, cloudflare, cloudflared, context-dev, crabbox, cwebp, defuddle, fff, ffmpeg, and 34 more.
+- Hooks: PreToolUse | RTK Rewrite, Session Stop | Stop Gate, SessionStart | herdr State, SessionStart | lsops, instruction-safeguards extension, skill-router extension, herdr OMP extension, lsops extension.
+- MCPs: ambivalence, apify, scrapling, context, firecrawl, better-t-stack, ezsolver, gpt2agent, huggingface, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, and 21 more.
+- CLI: agent-browser, agent-tui, agg, asc, asciinema, ast-grep, bazel, browserstack, cloudflare, cloudflared, context-dev, crabbox, cwebp, defuddle, fff, ffmpeg, and 46 more.
 - Skills: ce-simplify-code, chart-visualization, data-visualization, deeper, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, setup-matt-pocock-skills, code-review, and 155 more.
 - Code Review: Codex Code Review, CodeRabbit.
 - Workspace: Local, VPS Ashburn, VPS Paris, T3Code, Tailscale, Socket Firewall.
 
 ## Recent public setup changes
 
+- 11/11/2026: Updated CLI catalogue; Updated MCP inventory and descriptions; Updated hooks and extensions; Updated AGENTS.md guidance; Updated selected skill guidance.
 - 28/10/2026: Updated Primary model order; Updated TUI design guidance.
 - 27/10/2026: Added GPT 6 Astra to the usage ranking; Updated MCP capability descriptions; Updated hooks and extensions; Updated context and Firecrawl MCPs; Updated AGENTS.md guidance; Updated ios-reflect invocation and prompts; and 2 more.
 - 26/10/2026: Replaced Hermes Agent with MicroClaw Harness.
@@ -35,7 +36,6 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - 23/10/2026: Updated OMP and Codex CLI harness roles (OMP 18.12.0); Updated OMP model to GPT 6.1 Sol; Updated MCP inventory; Updated AGENTS.md; Updated skill metadata; Updated Favourite skill sources; and 2 more.
 - 22/10/2026: Updated AGENTS.md.
 - 21/10/2026: Added ask-matt Skill; Added diagnosing-bugs Skill; Added handoff Skill; Added implement-spec Skill; Added pr Skill; Added research Skill; and 6 more.
-- 20/10/2026: Added deeper Skill.
 
 ## Snapshot pages
 
@@ -182,7 +182,7 @@ The public skills directory currently exposes:
 
 ## AGENTS.md preview
 
-The public AGENTS.md preview is redacted. It has 516 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
+The public AGENTS.md preview is redacted. It has 495 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
 
 ## Answering rules
 

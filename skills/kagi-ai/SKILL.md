@@ -14,12 +14,12 @@ transformations and reserve the allowance for harder work.
 
 | Need | Lane |
 | --- | --- |
-| Find or verify sources | Load `kagi-usage` and search |
+| Find or verify sources | Load `research` and its `references/kagi.md` guide |
 | Summarize one URL or text | `kagi summarize --subscriber` |
 | Translate supplied text | `kagi translate` |
 | Get a fast cited answer | `kagi quick` |
 | Reason, code, synthesize, or analyze files | `kagi assistant` |
-| Run multi-step research or tool use | An account-visible Research assistant |
+| Requested or task-warranted deep research | An account-visible Research assistant; follow `research/references/deep-research.md` |
 | Manage threads or custom assistants | Load `kagi-assistant` |
 
 The Assistant allowance is separate from API credit. A plan's monthly value
@@ -110,8 +110,8 @@ shape. Contract mode validates the response and makes one repair attempt.
 3. Disable web access for closed-context work.
 4. Keep prompts specific and attach only relevant files.
 5. Start a new thread for an unrelated task.
-6. Reserve Research assistants and premium models for work that needs their
-   extra tools or reasoning depth.
+6. Choose Research assistants using `research/references/deep-research.md`: explicit requests or task-warranted investigation, within scope and spending limits.
+   Choose premium reasoning models separately according to the task and available allowance.
 
 ## Completion criteria
 

@@ -46,9 +46,11 @@ The watcher `scripts/pr_watch.py` (next to this file) owns all PR polling: CI on
    python3 <skill-dir>/scripts/pr_watch.py status <PR>   # one read-only evaluation
    ```
 
-3. **Done** when the watcher exits `0`: CI finished and passing, every working bot reviewed the current head, no unresolved threads, nothing unanswered, no conflicts. Report the PR as ready with the head SHA from the report. Merge only when the user explicitly asked for it, and only on the head the watcher approved. Exit `20` means someone else merged or closed it; report that.
+3. **Done** when the watcher exits `0`: CI finished and passing, at least one working bot has completed a clean review of the current head, without waiting for the other bot, no unresolved threads, nothing unanswered, no conflicts. Report the PR as ready with the head SHA from the report. Merge only when the user explicitly asked for it, and only on the head the watcher approved. Exit `20` means someone else merged or closed it; report that.
 
    A bot that cannot review (Codex has no environment for the repo, CodeRabbit hits its file limit, a bot never answers or errors after 3 requests) appears in `blocked_bots`. The watcher stops requiring it and keeps watching CI and the other bots, so keep the loop going. Name each blocked bot and its `detail` in the final report, so the user can fix the setup; a PR reviewed by fewer bots than usual is still ready.
+
+Inspect any findings already posted by either bot. A clean review does not override required GitHub checks, branch protection, human reviews, or unresolved threads. Verify effective GitHub merge gates separately before declaring the PR mergeable.
 
 Only the watcher's exit `0` makes a PR ready. CI passing alone, a bot review of an earlier commit, or a quiet PR is still `waiting`.
 
