@@ -19,7 +19,7 @@
   <meta property="og:title" content="AI Stack">
   <meta property="og:description" content="Microck's current AI operator stack: models, harnesses, hooks, MCPs, CLI tools, skills, workspace, and review tooling.">
   <meta property="og:url" content="https://ai.micr.dev/">
-  <meta property="og:image" content="https://ai.micr.dev/og-image.png?v=20261112">
+  <meta property="og:image" content="https://ai.micr.dev/og-image.png?v=20261113">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AI Stack">
   <meta name="twitter:description" content="Microck's current AI operator stack: models, harnesses, hooks, MCPs, CLI tools, skills, workspace, and review tooling.">
-  <meta name="twitter:image" content="https://ai.micr.dev/og-image.png?v=20261112">
+  <meta name="twitter:image" content="https://ai.micr.dev/og-image.png?v=20261113">
   <base href="/">
   
   <!-- Critical local fonts are preloaded; font-display handles progressive rendering. -->
@@ -75,6 +75,13 @@
           </div>
           
           <div class="changelog-timeline">
+            <div class="change-group" data-group="13/11/2026">
+              <div class="change-date font-karla">13/11/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="opus-5 gpt-daybreak-blue-latest gpt-6-astra gpt-6-1-terra"><h3 class="change-title">Updated model selection and order</h3></div>
+                <div class="change-entry" data-targets="cli-tools"><h3 class="change-title">Updated CLI catalogue descriptions</h3></div>
+              </div>
+            </div>
             <div class="change-group" data-group="11/11/2026">
               <div class="change-date font-karla">11/11/2026</div>
               <div class="change-entries">
@@ -2506,20 +2513,20 @@
             <div class="role-column">
               <span class="role-label font-karla">Primary</span>
               
-              <div class="stack-entry" id="gpt-daybreak-blue-latest">
-                <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
-                  <span class="entry-name">GPT 6.1 Sol</span>
-                </div>
-                <p class="entry-description">Used for implementation, debugging, review, and repository-level reasoning.</p>
-              </div>
-
               <div class="stack-entry" id="opus-5">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/anthropic.png" alt=""></span>
                   <span class="entry-name">Opus 5.5</span>
                 </div>
                 <p class="entry-description">Primary model for reasoning and comparison runs.</p>
+              </div>
+
+              <div class="stack-entry" id="gpt-daybreak-blue-latest">
+                <div class="entry-header">
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
+                  <span class="entry-name">GPT 6.1 Sol</span>
+                </div>
+                <p class="entry-description">Used for implementation, debugging, review, and repository-level reasoning.</p>
               </div>
             </div>
 
@@ -2533,12 +2540,12 @@
                 </div>
                 <p class="entry-description">OpenAI model.</p>
               </div>
-              <div class="stack-entry" id="gpt-5-6-luna">
+              <div class="stack-entry" id="gpt-6-1-terra">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
-                  <span class="entry-name">GPT 6 Luna</span>
+                  <span class="entry-name">GPT 6.1 Terra</span>
                 </div>
-                <p class="entry-description">Secondary model for general-purpose agent work.</p>
+                <p class="entry-description">OpenAI model.</p>
               </div>
             </div>
           </div>
@@ -2879,6 +2886,7 @@
 <h2 class="section-heading">CLI</h2>
 <div class="simple-list two-column-list">
 <div class="stack-entry" id="agent-browser-cli"><div class="entry-header"><a class="entry-title-link" href="https://github.com/vercel-labs/agent-browser" rel="noopener noreferrer" target="_blank"><span class="entry-name">agent-browser</span></a></div><p class="entry-description">browser automation cli that opens pages, exposes element snapshots, and sends clicks, typing, and keyboard input</p></div>
+<div class="stack-entry" id="agent-desktop-cli"><div class="entry-header"><span class="entry-name">agent-desktop</span></div><p class="entry-description">Control Windows desktop accessibility through SSH</p></div>
 <div class="stack-entry" id="agent-tui-cli"><div class="entry-header"><span class="entry-name">agent-tui</span></div><p class="entry-description">launches terminal applications in virtual terminal sessions and exposes screenshots, resizing, and input controls</p></div>
 <div class="stack-entry" id="agg-cli"><div class="entry-header"><span class="entry-name">agg</span></div><p class="entry-description">renders asciinema session recordings into animated gif files</p></div>
 <div class="stack-entry" id="asc-cli"><div class="entry-header"><span class="entry-name">asc</span></div><p class="entry-description">Rork App Store Connect CLI: builds, TestFlight, metadata, submissions and signing</p></div>
@@ -2888,10 +2896,14 @@
 <div class="stack-entry" id="browserstack-cli"><div class="entry-header"><a class="entry-title-link" href="https://www.browserstack.com/app-automate/browserstack-cli" rel="noopener noreferrer" target="_blank"><span class="entry-name">browserstack</span></a></div><p class="entry-description">Cloud-based real device and browser testing via CLI</p></div>
 <div class="stack-entry" id="cloudflare-cli"><div class="entry-header"><span class="entry-name">cloudflare</span></div><p class="entry-description">cloudflare api client with discoverable commands for inspecting and managing cloudflare resources</p></div>
 <div class="stack-entry" id="cloudflared-cli"><div class="entry-header"><span class="entry-name">cloudflared</span></div><p class="entry-description">Cloudflare Tunnel connector</p></div>
+<div class="stack-entry" id="colab-cli"><div class="entry-header"><span class="entry-name">colab</span></div><p class="entry-description">Run code and manage Google Colab runtimes</p></div>
 <div class="stack-entry" id="context-dev-cli"><div class="entry-header"><span class="entry-name">context-dev</span></div><p class="entry-description">Context.dev web search, scraping, crawling and brand data</p></div>
 <div class="stack-entry" id="crabbox-cli"><div class="entry-header"><a class="entry-title-link" href="https://github.com/openclaw/crabbox" rel="noopener noreferrer" target="_blank"><span class="entry-name">crabbox</span></a></div><p class="entry-description">Remote testbox CLI for leasing cloud boxes, syncing diffs, and running test suites off-box</p></div>
+<div class="stack-entry" id="cua-windows-cli"><div class="entry-header"><span class="entry-name">cua-windows</span></div><p class="entry-description">Control the signed-in Windows desktop through Cua Driver over SSH</p></div>
 <div class="stack-entry" id="cwebp-cli"><div class="entry-header"><span class="entry-name">cwebp</span></div><p class="entry-description">webp image encoder that converts still images with controls for quality, compression effort, transparency, resizing, and metadata</p></div>
 <div class="stack-entry" id="defuddle-cli"><div class="entry-header"><span class="entry-name">defuddle</span></div><p class="entry-description">extracts a web page's main article text and metadata from its html</p></div>
+<div class="stack-entry" id="earshot-cli"><div class="entry-header"><span class="entry-name">earshot</span></div><p class="entry-description">Analyze, compare, and synthesize audio locally for coding agents</p></div>
+<div class="stack-entry" id="elevenlabs-cli"><div class="entry-header"><span class="entry-name">elevenlabs</span></div><p class="entry-description">ElevenLabs CLI for voices, speech, dialogue, sound effects and audio history</p></div>
 <div class="stack-entry" id="fff-cli"><div class="entry-header"><a class="entry-title-link" href="https://github.com/dmtrKovalenko/fff" rel="noopener noreferrer" target="_blank"><span class="entry-name">fff</span></a></div><p class="entry-description">Fast fuzzy file discovery and content grep via the fff-mcp stdio server</p></div>
 <div class="stack-entry" id="ffmpeg-cli"><div class="entry-header"><span class="entry-name">ffmpeg</span></div><p class="entry-description">audio and video processor for decoding, encoding, trimming, filtering, and combining media streams</p></div>
 <div class="stack-entry" id="ffprobe-cli"><div class="entry-header"><span class="entry-name">ffprobe</span></div><p class="entry-description">reads media containers and reports streams, codecs, dimensions, duration, frame rates, and other metadata</p></div>
@@ -2909,7 +2921,11 @@
 <div class="stack-entry" id="magick-cli"><div class="entry-header"><span class="entry-name">magick</span></div><p class="entry-description">imagemagick's image processor for converting formats, resizing, cropping, compositing, and other pixel operations</p></div>
 <div class="stack-entry" id="markit-cli"><div class="entry-header"><a class="entry-title-link" href="https://github.com/Michaelliv/markit" rel="noopener noreferrer" target="_blank"><span class="entry-name">markit</span></a></div><p class="entry-description">converts supported documents, files, and urls into markdown using format-specific converters</p></div>
 <div class="stack-entry" id="moji-cli"><div class="entry-header"><span class="entry-name">moji</span></div><p class="entry-description">font finder that searches ranked font results, downloads matches, and converts between ttf, otf, and woff2</p></div>
+<div class="stack-entry" id="ocular-cli"><div class="entry-header"><span class="entry-name">ocular</span></div><p class="entry-description">Search, inspect, play and copy local Ocular Vector sound effects offline</p></div>
+<div class="stack-entry" id="opencode-cli"><div class="entry-header"><span class="entry-name">opencode</span></div><p class="entry-description">OpenCode AI coding agent</p></div>
 <div class="stack-entry" id="opensrc-cli"><div class="entry-header"><a class="entry-title-link" href="https://github.com/vercel-labs/opensrc" rel="noopener noreferrer" target="_blank"><span class="entry-name">opensrc</span></a></div><p class="entry-description">downloads dependency source code so it can be inspected alongside the project</p></div>
+<div class="stack-entry" id="openvector-cli"><div class="entry-header"><span class="entry-name">openvector</span></div><p class="entry-description">Convert raster images to editable SVG, PDF, EPS, AI, DXF and EMF vectors</p></div>
+<div class="stack-entry" id="openverse-cli"><div class="entry-header"><span class="entry-name">openverse</span></div><p class="entry-description">Search openly licensed Openverse images and audio</p></div>
 <div class="stack-entry" id="optimo-cli"><div class="entry-header"><a class="entry-title-link" href="https://github.com/microlinkhq/optimo" rel="noopener noreferrer" target="_blank"><span class="entry-name">optimo</span></a></div><p class="entry-description">Image and video optimization through format-specific compression pipelines</p></div>
 <div class="stack-entry" id="optipng-cli"><div class="entry-header"><span class="entry-name">optipng</span></div><p class="entry-description">lossless png optimizer that searches compression settings and removes avoidable storage overhead</p></div>
 <div class="stack-entry" id="parallel-cli-cli"><div class="entry-header"><span class="entry-name">parallel-cli</span></div><p class="entry-description">web intelligence client for search, page extraction, research tasks, and data enrichment</p></div>
@@ -2920,15 +2936,18 @@
 <div class="stack-entry" id="rtk"><div class="entry-header"><a class="entry-title-link" href="https://github.com/rtk-ai/rtk" rel="noopener noreferrer" target="_blank"><span class="entry-name">rtk</span></a></div><p class="entry-description">command proxy that filters and summarizes supported terminal commands' output before it reaches the agent</p></div>
 <div class="stack-entry" id="scrapling-cli"><div class="entry-header"><span class="entry-name">scrapling</span></div><p class="entry-description">python scraping toolkit with a cli for fetching web pages and extracting content, including browser-based fetchers</p></div>
 <div class="stack-entry" id="semrush-cli"><div class="entry-header"><span class="entry-name">semrush</span></div><p class="entry-description">research client for keyword, domain, competitor, and backlink reports through a signed-in semrush account</p></div>
+<div class="stack-entry" id="sgrep-cli"><div class="entry-header"><span class="entry-name">sgrep</span></div><p class="entry-description">Search local code and documents by meaning</p></div>
 <div class="stack-entry" id="suno-cli"><div class="entry-header"><span class="entry-name">suno</span></div><p class="entry-description">client for generating music with suno and downloading the resulting tracks</p></div>
 <div class="stack-entry" id="svgo-cli"><div class="entry-header"><span class="entry-name">svgo</span></div><p class="entry-description">svg optimizer that simplifies vector markup through configurable optimization passes</p></div>
 <div class="stack-entry" id="tailsocks-cli"><div class="entry-header"><span class="entry-name">tailsocks</span></div><p class="entry-description">socks5 and http proxy server that routes client traffic through tailscale, including a selected tailnet exit node</p></div>
 <div class="stack-entry" id="tesseract-cli"><div class="entry-header"><span class="entry-name">tesseract</span></div><p class="entry-description">local optical character recognition engine that converts printed text in images into machine-readable text</p></div>
 <div class="stack-entry" id="tuistory-cli"><div class="entry-header"><span class="entry-name">tuistory</span></div><p class="entry-description">terminal automation cli that runs applications in persistent pseudo-terminal sessions and captures screen snapshots</p></div>
+<div class="stack-entry" id="voxl-cli"><div class="entry-header"><span class="entry-name">voxl</span></div><p class="entry-description">Stream an X11 desktop to a browser with remote input</p></div>
 <div class="stack-entry" id="webreel-cli"><div class="entry-header"><span class="entry-name">webreel</span></div><p class="entry-description">records scripted browser interactions as video or gif, with cursor and input overlays</p></div>
+<div class="stack-entry" id="yoinks-cli"><div class="entry-header"><span class="entry-name">yoinks</span></div><p class="entry-description">Download videos and audio from supported sites using yt-dlp</p></div>
 <div class="stack-entry" id="youtube_transcript_api-cli"><div class="entry-header"><span class="entry-name">youtube_transcript_api</span></div><p class="entry-description">fetches available youtube caption tracks, including transcript text and segment timestamps</p></div>
 <div class="stack-entry" id="yt-dlp-cli"><div class="entry-header"><span class="entry-name">yt-dlp</span></div><p class="entry-description">downloads video, audio, and available subtitles from supported websites</p></div>
-<div class="stack-entry" id="agent-desktop-cli"><div class="entry-header"><span class="entry-name">agent-desktop</span></div><p class="entry-description">Control Windows desktop accessibility through SSH</p></div><div class="stack-entry" id="colab-cli"><div class="entry-header"><span class="entry-name">colab</span></div><p class="entry-description">Run code and manage Google Colab runtimes</p></div><div class="stack-entry" id="cua-windows-cli"><div class="entry-header"><span class="entry-name">cua-windows</span></div><p class="entry-description">Control the signed-in Windows desktop through Cua Driver over SSH</p></div><div class="stack-entry" id="earshot-cli"><div class="entry-header"><span class="entry-name">earshot</span></div><p class="entry-description">Analyze, compare, and synthesize audio locally for coding agents</p></div><div class="stack-entry" id="elevenlabs-cli"><div class="entry-header"><span class="entry-name">elevenlabs</span></div><p class="entry-description">ElevenLabs CLI for voices, speech, dialogue, sound effects and audio history</p></div><div class="stack-entry" id="ocular-cli"><div class="entry-header"><span class="entry-name">ocular</span></div><p class="entry-description">Search and copy Ocular sound effects through a read-only Windows library mount over Tailscale</p></div><div class="stack-entry" id="opencode-cli"><div class="entry-header"><span class="entry-name">opencode</span></div><p class="entry-description">OpenCode AI coding agent</p></div><div class="stack-entry" id="openvector-cli"><div class="entry-header"><span class="entry-name">openvector</span></div><p class="entry-description">Convert raster images to editable SVG, PDF, EPS, AI, DXF and EMF vectors</p></div><div class="stack-entry" id="openverse-cli"><div class="entry-header"><span class="entry-name">openverse</span></div><p class="entry-description">Search openly licensed Openverse images and audio</p></div><div class="stack-entry" id="sgrep-cli"><div class="entry-header"><span class="entry-name">sgrep</span></div><p class="entry-description">Search local code and documents by meaning</p></div><div class="stack-entry" id="voxl-cli"><div class="entry-header"><span class="entry-name">voxl</span></div><p class="entry-description">Stream an X11 desktop to a browser with remote input</p></div><div class="stack-entry" id="yoinks-cli"><div class="entry-header"><span class="entry-name">yoinks</span></div><p class="entry-description">Download videos and audio from supported sites using yt-dlp</p></div></div>
+</div>
 </section>
         
         <!-- SECTION: SKILLS -->
