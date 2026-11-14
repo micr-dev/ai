@@ -16,18 +16,19 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: Opus 5.5, GPT 6.1 Sol, GPT 6 Astra, GPT 6.1 Terra.
+- Models: Opus 5.5, GPT 6.1 Sol, GPT 6.1 Terra, GPT 6 Astra.
 - Harnesses: OMP, Codex CLI, MicroClaw.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | RTK Rewrite, Session Stop | Stop Gate, SessionStart | herdr State, SessionStart | lsops, instruction-safeguards extension, skill-router extension, herdr OMP extension, lsops extension.
 - MCPs: ambivalence, apify, scrapling, context, firecrawl, better-t-stack, ezsolver, gpt2agent, huggingface, codebase-memory-mcp, beeper, discord-user, composio, satelle, fff, markitdown-mcp, and 21 more.
-- CLI: agent-browser, agent-desktop, agent-tui, agg, asc, asciinema, ast-grep, bazel, browserstack, cloudflare, cloudflared, colab, context-dev, crabbox, cua-windows, cwebp, and 46 more.
+- CLI: agent-browser, agent-desktop, agent-tui, agg, asc, asciinema, ast-grep, bazel, browserstack, cloudflare, cloudflared, colab, context-dev, crabbox, cua-windows, cwebp, and 47 more.
 - Skills: ce-simplify-code, chart-visualization, data-visualization, deeper, deslop, ui-unslop, unslop, boat-cli, fumadocs, opentui-design, tui-design, crabbox, batch-grill-me, grill-with-docs, setup-matt-pocock-skills, code-review, and 155 more.
 - Code Review: Codex Code Review, CodeRabbit.
 - Workspace: Local, VPS Ashburn, VPS Paris, T3Code, Tailscale, Socket Firewall.
 
 ## Recent public setup changes
 
+- 14/11/2026: Updated Secondary model order; Added Keenable CLI; Updated research skill with Keenable.
 - 13/11/2026: Updated model selection and order; Updated CLI catalogue descriptions.
 - 11/11/2026: Updated CLI catalogue; Updated MCP inventory and descriptions; Updated hooks and extensions; Updated AGENTS.md guidance; Updated selected skill guidance.
 - 28/10/2026: Updated Primary model order; Updated TUI design guidance.
@@ -35,7 +36,6 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - 26/10/2026: Replaced Hermes Agent with MicroClaw Harness.
 - 24/10/2026: Updated scrapling MCP; Updated reflect Skill (edit protection and review templates).
 - 23/10/2026: Updated OMP and Codex CLI harness roles (OMP 18.12.0); Updated OMP model to GPT 6.1 Sol; Updated MCP inventory; Updated AGENTS.md; Updated skill metadata; Updated Favourite skill sources; and 2 more.
-- 22/10/2026: Updated AGENTS.md.
 
 ## Snapshot pages
 

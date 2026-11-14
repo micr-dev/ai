@@ -4,6 +4,8 @@ Known URL: use the provider that found it if its extractor fits. For local files
 
 If the requested output is a page summary, a single-page answer or a translation rather than source extraction, follow [Kagi page questions and transformations](kagi.md#page-questions-and-transformations). Keep generated summaries distinct from source text.
 
+For Keenable search results or public pages without a preferred extractor, use [Keenable fetch](keenable.md). Use `--live` when current page content matters; omit `--prompt` when collecting source text rather than model-generated extraction.
+
 ## Context.dev
 
 The installed `context-dev` wrapper loads existing private authentication. Do not print its credential source. Its native CLI exposes `web search`, not a top-level `search` command.

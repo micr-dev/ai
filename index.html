@@ -19,7 +19,7 @@
   <meta property="og:title" content="AI Stack">
   <meta property="og:description" content="Microck's current AI operator stack: models, harnesses, hooks, MCPs, CLI tools, skills, workspace, and review tooling.">
   <meta property="og:url" content="https://ai.micr.dev/">
-  <meta property="og:image" content="https://ai.micr.dev/og-image.png?v=20261113">
+  <meta property="og:image" content="https://ai.micr.dev/og-image.png?v=20261114">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AI Stack">
   <meta name="twitter:description" content="Microck's current AI operator stack: models, harnesses, hooks, MCPs, CLI tools, skills, workspace, and review tooling.">
-  <meta name="twitter:image" content="https://ai.micr.dev/og-image.png?v=20261113">
+  <meta name="twitter:image" content="https://ai.micr.dev/og-image.png?v=20261114">
   <base href="/">
   
   <!-- Critical local fonts are preloaded; font-display handles progressive rendering. -->
@@ -75,6 +75,14 @@
           </div>
           
           <div class="changelog-timeline">
+            <div class="change-group" data-group="14/11/2026">
+              <div class="change-date font-karla">14/11/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="gpt-6-1-terra gpt-6-astra"><h3 class="change-title">Updated Secondary model order</h3></div>
+                <div class="change-entry" data-targets="keenable-cli"><h3 class="change-title">Added Keenable CLI</h3></div>
+                <div class="change-entry" data-targets="research"><h3 class="change-title">Updated research skill with Keenable</h3></div>
+              </div>
+            </div>
             <div class="change-group" data-group="13/11/2026">
               <div class="change-date font-karla">13/11/2026</div>
               <div class="change-entries">
@@ -2533,17 +2541,17 @@
             <div class="role-column">
               <span class="role-label font-karla">Secondary</span>
 
-              <div class="stack-entry" id="gpt-6-astra">
-                <div class="entry-header">
-                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
-                  <span class="entry-name">GPT 6 Astra</span>
-                </div>
-                <p class="entry-description">OpenAI model.</p>
-              </div>
               <div class="stack-entry" id="gpt-6-1-terra">
                 <div class="entry-header">
                   <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
                   <span class="entry-name">GPT 6.1 Terra</span>
+                </div>
+                <p class="entry-description">OpenAI model.</p>
+              </div>
+              <div class="stack-entry" id="gpt-6-astra">
+                <div class="entry-header">
+                  <span class="entry-logo" aria-hidden="true"><img src="assets/logos/openai.svg" alt=""></span>
+                  <span class="entry-name">GPT 6 Astra</span>
                 </div>
                 <p class="entry-description">OpenAI model.</p>
               </div>
@@ -2916,6 +2924,7 @@
 <div class="stack-entry" id="iris-cli"><div class="entry-header"><span class="entry-name">iris</span></div><p class="entry-description">website screenshot cli with configurable waiting, lazy-load handling, resolution, and concurrent capture</p></div>
 <div class="stack-entry" id="jj"><div class="entry-header"><a class="entry-title-link" href="https://github.com/jj-vcs/jj" rel="noopener noreferrer" target="_blank"><span class="entry-name">jj</span></a></div><p class="entry-description">git-compatible version control that tracks working-copy changes, revisions, bookmarks, and separate workspaces</p></div>
 <div class="stack-entry" id="kagi-cli"><div class="entry-header"><a class="entry-title-link" href="https://github.com/Microck/kagi-cli" rel="noopener noreferrer" target="_blank"><span class="entry-name">kagi</span></a></div><p class="entry-description">command-line access to kagi web search, page extraction, and account-backed ai assistant features</p></div>
+<div class="stack-entry" id="keenable-cli"><div class="entry-header"><span class="entry-name">keenable</span></div><p class="entry-description">Keenable web search and page Markdown retrieval</p></div>
 <div class="stack-entry" id="kou-cli"><div class="entry-header"><span class="entry-name">kou</span></div><p class="entry-description">koubou screenshot generator for composing app store promotional images from configured content or html</p></div>
 <div class="stack-entry" id="lit-cli"><div class="entry-header"><a class="entry-title-link" href="https://github.com/run-llama/liteparse" rel="noopener noreferrer" target="_blank"><span class="entry-name">liteparse</span></a></div><p class="entry-description">document parser that extracts text with page-position information and supports ocr and pdf page screenshots</p></div>
 <div class="stack-entry" id="magick-cli"><div class="entry-header"><span class="entry-name">magick</span></div><p class="entry-description">imagemagick's image processor for converting formats, resizing, cropping, compositing, and other pixel operations</p></div>

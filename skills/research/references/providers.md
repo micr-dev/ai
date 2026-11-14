@@ -4,7 +4,8 @@ Choose the operation first, then access and output shape. These are capabilities
 
 | Need | First route | Why / boundary |
 | --- | --- | --- |
-| Focused web lookup, site/date filters, news | [Kagi](kagi.md) | Subscriber search, explicit filters, news and image verticals; Quick Answer is synthesis, not primary evidence. |
+| Ordinary web lookup, site/date filters, point-in-time search | [Keenable](keenable.md) | First choice while the configured free allowance remains; search plus page Markdown. This is a cost preference, not a quality ranking. |
+| News/image verticals or a web coverage gap | [Kagi](kagi.md) | Subscriber search and explicit filters; Quick Answer is synthesis, not primary evidence. |
 | Objective plus several related keyword queries | [Parallel](parallel.md) | One objective, repeatable queries, bounded excerpts, domain and freshness controls. Requires working credits. |
 | Search with relevant passages or inline Markdown | [Context.dev](extraction.md#contextdev) | Search result content can be requested; `query-fanout` currently has no effect. |
 | Search plus scrape, news/images, developer or paper indexes | [Firecrawl](extraction.md#firecrawl) | Combines discovery with extraction. The paper index is distinct from research-category web filtering. |
@@ -23,7 +24,11 @@ Before the first unfamiliar call, inspect installed `--help` or the mounted MCP 
 
 For ordinary work, start with a currently usable provider fitting the row above. If results miss a named source, geography, date range or medium, select another provider for that gap. For high-impact claims, independent original sources matter more than how many engines return the same page.
 
-## Verified environment snapshot: 2026-10-28
+## Verified environment snapshots
+
+- 2026-11-13: Keenable CLI 0.4.0 authenticated search returned three Python documentation results; live fetch returned the page's Markdown and flagged the requested truncation. Each operation cost one free credit with `paid: false`. Remaining allowance is a dated observation, not a standing budget.
+
+### 2026-10-28
 
 - Kagi search: live query succeeded. Installed `search --help` exposes `--images`, despite an older local source checkout lacking it.
 - Context.dev search: live query succeeded; CLI version 1.19.1.
