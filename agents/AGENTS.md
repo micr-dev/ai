@@ -479,7 +479,7 @@ ALWAYS prefer MCP graph tools over grep/glob/file-search for code discovery.
 
 ## Local page hosting
 
-When starting a local web page or development server, bind it to `0.0.0.0` so it can be reached from other devices. Give me the page's Tailscale URL, using the machine's Tailscale DNS name and the server port. Open the Tailscale link yourself to verify it works before sending it. If Tailscale access or a usable DNS name is unavailable, say so rather than inventing a URL.
+When starting a local web page or development server, bind it to `0.0.0.0` so it can be reached from other devices. Give me the page's Tailscale URL, using the machine's Tailscale DNS name and the server port. If Tailscale access or a usable DNS name is unavailable, say so rather than inventing a URL.
 
 ## GitHub Codespaces usage
 
