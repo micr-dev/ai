@@ -28,6 +28,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Recent public setup changes
 
+- 17/11/2026: Updated full-send workflow and merge gate.
 - 16/11/2026: Updated local page hosting guidance; Updated code-review and to-tickets skills.
 - 14/11/2026: Updated Secondary model order; Added Keenable CLI; Updated research skill with Keenable.
 - 13/11/2026: Updated model selection and order; Updated CLI catalogue descriptions.
@@ -35,7 +36,6 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - 28/10/2026: Updated Primary model order; Updated TUI design guidance.
 - 27/10/2026: Added GPT 6 Astra to the usage ranking; Updated MCP capability descriptions; Updated hooks and extensions; Updated context and Firecrawl MCPs; Updated AGENTS.md guidance; Updated ios-reflect invocation and prompts; and 2 more.
 - 26/10/2026: Replaced Hermes Agent with MicroClaw Harness.
-- 24/10/2026: Updated scrapling MCP; Updated reflect Skill (edit protection and review templates).
 
 ## Snapshot pages
 
