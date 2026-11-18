@@ -19,7 +19,7 @@
   <meta property="og:title" content="AI Stack">
   <meta property="og:description" content="Microck's current AI operator stack: models, harnesses, hooks, MCPs, CLI tools, skills, workspace, and review tooling.">
   <meta property="og:url" content="https://ai.micr.dev/">
-  <meta property="og:image" content="https://ai.micr.dev/og-image.png?v=20261117">
+  <meta property="og:image" content="https://ai.micr.dev/og-image.png?v=20261118">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AI Stack">
   <meta name="twitter:description" content="Microck's current AI operator stack: models, harnesses, hooks, MCPs, CLI tools, skills, workspace, and review tooling.">
-  <meta name="twitter:image" content="https://ai.micr.dev/og-image.png?v=20261117">
+  <meta name="twitter:image" content="https://ai.micr.dev/og-image.png?v=20261118">
   <base href="/">
   
   <!-- Critical local fonts are preloaded; font-display handles progressive rendering. -->
@@ -75,6 +75,13 @@
           </div>
           
           <div class="changelog-timeline">
+            <div class="change-group" data-group="18/11/2026">
+              <div class="change-date font-karla">18/11/2026</div>
+              <div class="change-entries">
+                <div class="change-entry" data-targets="mcps"><h3 class="change-title">Updated MCP inventory and capability descriptions</h3></div>
+                <div class="change-entry" data-targets="hooks"><h3 class="change-title">Updated stop gate and herdr hook descriptions</h3></div>
+              </div>
+            </div>
             <div class="change-group" data-group="17/11/2026">
               <div class="change-date font-karla">17/11/2026</div>
               <div class="change-entries">
@@ -2685,13 +2692,13 @@
 <div class="entry-header">
 <span class="entry-name">Session Stop | Stop Gate</span>
 </div>
-<p class="entry-description">Checks OMP and Codex stop events. The OMP hook can continue incomplete work.</p>
+<p class="entry-description">Checks OMP and Codex stop events. The OMP hook can continue work judged incomplete.</p>
 </div>
 <div class="stack-entry" id="hook-sessionstart-herdr">
 <div class="entry-header">
 <span class="entry-name">SessionStart | herdr State</span>
 </div>
-<p class="entry-description">Reports Codex session state to herdr when its integration is available.</p>
+<p class="entry-description">Conditionally reports Codex session information to herdr.</p>
 </div>
 <div class="stack-entry" id="hook-codex-lsops"><div class="entry-header"><span class="entry-name">SessionStart | lsops</span></div></div>
 <div class="stack-entry" id="hook-instruction-safeguards"><div class="entry-header"><span class="entry-name">instruction-safeguards extension</span></div><p class="entry-description">Tracks successful mutations and can continue a session.</p></div>
@@ -2711,45 +2718,26 @@
 <div class="entry-header"><a class="entry-title-link" href="https://docs.apify.com/mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">apify</span></a></div>
 <p class="entry-description">Supports web scraping, data extraction and browser automation through Actors.</p>
 </div>
-<div class="stack-entry" id="scrapling">
-<div class="entry-header"><span class="entry-name">scrapling</span></div>
-<p class="entry-description">Fetches and extracts pages and operates browser sessions.</p>
-</div>
-<div class="stack-entry" id="context-mcp">
-<div class="entry-header"><span class="entry-name">context</span></div>
-<p class="entry-description">Searches and crawls the web and finds brand information.</p>
-</div>
-<div class="stack-entry" id="firecrawl-mcp">
-<div class="entry-header"><span class="entry-name">firecrawl</span></div>
-<p class="entry-description">Scrapes and crawls websites and parses documents.</p>
-</div>
 <div class="stack-entry" id="better-t-stack">
 <div class="entry-header"><a class="entry-title-link" href="https://github.com/AmanVarshney01/create-better-t-stack" rel="noopener noreferrer" target="_blank"><span class="entry-name">better-t-stack</span></a></div>
-<p class="entry-description">Inspects stack schemas and plans or creates projects.</p>
+<p class="entry-description">Plans and generates Better T Stack projects.</p>
 </div>
-<div class="stack-entry" id="ezsolver">
-<div class="entry-header"><span class="entry-name">ezsolver</span></div>
-<p class="entry-description">Solves Turnstile challenges on sites the operator is authorized to test.</p>
-</div>
-<div class="stack-entry" id="gpt2agent">
-<div class="entry-header"><span class="entry-name">gpt2agent</span></div>
-<p class="entry-description">Supports ChatGPT conversations and web research.</p>
-</div>
-<div class="stack-entry" id="huggingface-mcp">
-<div class="entry-header"><a class="entry-title-link" href="https://huggingface.co/docs/hub/agents-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">huggingface</span></a></div>
-<p class="entry-description">Searches models, datasets and Spaces.</p>
-</div>
+<div class="stack-entry" id="browse"><div class="entry-header"><span class="entry-name">browse</span></div><p class="entry-description">Opens tabs, reads and interacts with pages, and captures screenshots.</p></div>
 <div class="stack-entry" id="codebase-memory-mcp">
 <div class="entry-header">
 <a class="entry-title-link" href="https://github.com/Microck/codebase-memory-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">codebase-memory-mcp</span></a>
 </div>
 <p class="entry-description">Traces code relationships and provides architecture summaries.</p>
 </div>
-<div class="stack-entry" id="beeper">
+<div class="stack-entry" id="composio">
 <div class="entry-header">
-<a class="entry-title-link" href="https://developers.beeper.com/desktop-api/mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">beeper</span></a>
+<a class="entry-title-link" href="https://composio.dev" rel="noopener noreferrer" target="_blank"><span class="entry-name">composio</span></a>
 </div>
-<p class="entry-description">Connects Beeper Desktop with AI assistants.</p>
+<p class="entry-description">Provides MCP meta-tools for supported apps.</p>
+</div>
+<div class="stack-entry" id="context-mcp">
+<div class="entry-header"><span class="entry-name">context</span></div>
+<p class="entry-description">Supports scraping, crawling, search and brand data.</p>
 </div>
 <div class="stack-entry" id="discord-user">
 <div class="entry-header">
@@ -2757,17 +2745,9 @@
 </div>
 <p class="entry-description">Lists Discord servers and searches messages.</p>
 </div>
-<div class="stack-entry" id="composio">
-<div class="entry-header">
-<a class="entry-title-link" href="https://composio.dev" rel="noopener noreferrer" target="_blank"><span class="entry-name">composio</span></a>
-</div>
-<p class="entry-description">Provides MCP access to supported apps.</p>
-</div>
-<div class="stack-entry" id="satelle-mcp">
-<div class="entry-header">
-<span class="entry-name">satelle</span>
-</div>
-<p class="entry-description">Checks configuration and reads host and session status.</p>
+<div class="stack-entry" id="ezsolver">
+<div class="entry-header"><span class="entry-name">ezsolver</span></div>
+<p class="entry-description">Solves Turnstile challenges on sites the operator is authorized to test.</p>
 </div>
 <div class="stack-entry" id="fff-mcp">
 <div class="entry-header">
@@ -2775,29 +2755,15 @@
 </div>
 <p class="entry-description">Finds files and searches file contents.</p>
 </div>
-<div class="stack-entry" id="markitdown-mcp">
+<div class="stack-entry" id="firecrawl-mcp">
+<div class="entry-header"><span class="entry-name">firecrawl</span></div>
+<p class="entry-description">Scrapes and crawls websites and parses documents.</p>
+</div>
+<div class="stack-entry" id="ghidra-headless-mcp">
 <div class="entry-header">
-<a class="entry-title-link" href="https://github.com/KorigamiK/markitdown_mcp_server" rel="noopener noreferrer" target="_blank"><span class="entry-name">markitdown-mcp</span></a>
+<span class="entry-name"><a class="entry-title-link" href="https://github.com/mrphrazer/ghidra-headless-mcp" rel="noopener noreferrer" target="_blank">ghidra_headless_mcp</a></span>
 </div>
-<p class="entry-description">Converts resources to Markdown.</p>
-</div>
-<div class="stack-entry" id="kagimail">
-<div class="entry-header">
-<a class="entry-title-link" href="https://kagimail.com" rel="noopener noreferrer" target="_blank"><span class="entry-name">kagimail</span></a>
-</div>
-<p class="entry-description">Lists mailboxes, reads messages and searches mail.</p>
-</div>
-<div class="stack-entry" id="perplexity-webui">
-<div class="entry-header">
-<a class="entry-title-link" href="https://github.com/Microck/perplexity-webui-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">perplexity-webui</span></a>
-</div>
-<p class="entry-description">Provides Perplexity query modes including deep research.</p>
-</div>
-<div class="stack-entry" id="reddit-mcp-buddy">
-<div class="entry-header">
-<a class="entry-title-link" href="https://github.com/karanb192/reddit-mcp-buddy" rel="noopener noreferrer" target="_blank"><span class="entry-name">reddit-mcp-buddy</span></a>
-</div>
-<p class="entry-description">Searches Reddit and browses community posts.</p>
+<p class="entry-description">Looks up functions and decompiles them.</p>
 </div>
 <div class="stack-entry" id="gitquarry">
 <div class="entry-header">
@@ -2805,17 +2771,17 @@
 </div>
 <p class="entry-description">Searches, inspects and compares GitHub repositories.</p>
 </div>
-<div class="stack-entry" id="opensrc-mcp">
+<div class="stack-entry" id="ida-pro-mcp">
 <div class="entry-header">
-<a class="entry-title-link" href="https://github.com/dmmulroy/opensrc-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">opensrc-mcp</span></a>
+<a class="entry-title-link" href="https://github.com/mrexodia/ida-pro-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">ida-pro-mcp</span></a>
 </div>
-<p class="entry-description">Queries and changes fetched source code.</p>
+<p class="entry-description">Supports function decompilation.</p>
 </div>
-<div class="stack-entry" id="github-mcp">
+<div class="stack-entry" id="iris">
 <div class="entry-header">
-<a class="entry-title-link" href="https://github.com/github/github-mcp-server" rel="noopener noreferrer" target="_blank"><span class="entry-name">github</span></a>
+<span class="entry-name">iris</span>
 </div>
-<p class="entry-description">Supports repository access and issue and pull request management.</p>
+<p class="entry-description">Captures an image of a live page or matching element.</p>
 </div>
 <div class="stack-entry" id="kagi-mcp">
 <div class="entry-header">
@@ -2823,51 +2789,17 @@
 </div>
 <p class="entry-description">Searches the web and queries Kagi Assistant.</p>
 </div>
-<div class="stack-entry" id="parkour-mcp">
+<div class="stack-entry" id="octen">
 <div class="entry-header">
-<a class="entry-title-link" href="https://github.com/blightbow/parkour-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">parkour-mcp</span></a>
+<a class="entry-title-link" href="https://github.com/Octen-Team/octen-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">octen</span></a>
 </div>
-<p class="entry-description">Searches the web and fetches or summarizes content.</p>
+<p class="entry-description">Searches the web and news and extracts pages.</p>
 </div>
-<div class="stack-entry" id="ghidra-headless-mcp">
+<div class="stack-entry" id="opensrc-mcp">
 <div class="entry-header">
-<span class="entry-name"><a class="entry-title-link" href="https://github.com/mrphrazer/ghidra-headless-mcp" rel="noopener noreferrer" target="_blank">ghidra_headless_mcp</a></span>
+<a class="entry-title-link" href="https://github.com/dmmulroy/opensrc-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">opensrc-mcp</span></a>
 </div>
-<p class="entry-description">Supports headless Ghidra analysis and decompilation.</p>
-</div>
-<div class="stack-entry" id="semrush-mcp">
-<div class="entry-header">
-<a class="entry-title-link" href="https://github.com/superseoworld/semrush-mcp" rel="noopener noreferrer" target="_blank">
-<span class="entry-name">semrush</span>
-<svg aria-hidden="true" class="link-icon" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-<path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-<path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-</svg>
-</a>
-</div>
-<p class="entry-description">Researches keywords and domains.</p>
-</div>
-<div class="stack-entry" id="semrush-mcp-configured">
-<div class="entry-header"><span class="entry-name">semrush-mcp</span></div>
-<p class="entry-description">Researches keywords and domains.</p>
-</div>
-<div class="stack-entry" id="ida-pro-mcp">
-<div class="entry-header">
-<a class="entry-title-link" href="https://github.com/mrexodia/ida-pro-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">ida-pro-mcp</span></a>
-</div>
-<p class="entry-description">Inspects IDA functions and decompiles them.</p>
-</div>
-<div class="stack-entry" id="openai-developer-docs">
-<div class="entry-header">
-<a class="entry-title-link" href="https://developers.openai.com/mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">openaiDeveloperDocs</span></a>
-</div>
-<p class="entry-description">Lists OpenAI API endpoints and retrieves specifications.</p>
-</div>
-<div class="stack-entry" id="oracle-mcp">
-<div class="entry-header">
-<a class="entry-title-link" href="https://github.com/paulelliotco/oracle-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">oracle</span></a>
-</div>
-<p class="entry-description">Runs Oracle sessions and can wait for their completion.</p>
+<p class="entry-description">Queries and changes fetched source code.</p>
 </div>
 <div class="stack-entry" id="parallel-search">
 <div class="entry-header">
@@ -2875,30 +2807,26 @@
 </div>
 <p class="entry-description">Searches the web and fetches page content.</p>
 </div>
-<div class="stack-entry" id="parallel-task">
+<div class="stack-entry" id="parkour-mcp">
 <div class="entry-header">
-<a class="entry-title-link" href="https://parallel.ai" rel="noopener noreferrer" target="_blank"><span class="entry-name">parallel-task</span></a>
+<a class="entry-title-link" href="https://github.com/blightbow/parkour-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">parkour-mcp</span></a>
 </div>
-<p class="entry-description">Creates research and batch enrichment tasks and retrieves results.</p>
+<p class="entry-description">Searches the web and fetches page content.</p>
 </div>
-<div class="stack-entry" id="octen">
+<div class="stack-entry" id="reddit-mcp-buddy">
 <div class="entry-header">
-<a class="entry-title-link" href="https://github.com/Octen-Team/octen-mcp" rel="noopener noreferrer" target="_blank"><span class="entry-name">octen</span></a>
+<a class="entry-title-link" href="https://github.com/karanb192/reddit-mcp-buddy" rel="noopener noreferrer" target="_blank"><span class="entry-name">reddit-mcp-buddy</span></a>
 </div>
-<p class="entry-description">Searches the web and news and extracts pages.</p>
+<p class="entry-description">Searches Reddit and browses community posts.</p>
 </div>
-<div class="stack-entry" id="x64dbg">
-<div class="entry-header">
-<span class="entry-name">x64dbg</span>
+<div class="stack-entry" id="scrapling">
+<div class="entry-header"><span class="entry-name">scrapling</span></div>
+<p class="entry-description">Supports web scraping and browser interaction.</p>
 </div>
-<p class="entry-description">The x64dbg MCP plugin supports debugger control.</p>
+<div class="stack-entry" id="semrush-mcp-configured">
+<div class="entry-header"><span class="entry-name">semrush-mcp</span></div>
+<p class="entry-description">Researches keywords and domains.</p>
 </div>
-<div class="stack-entry" id="browse"><div class="entry-header"><span class="entry-name">browse</span></div><p class="entry-description">Controls browser sessions through Playwright.</p></div><div class="stack-entry" id="browse-windows"><div class="entry-header"><span class="entry-name">browse-windows</span></div><p class="entry-description">The browse server drives browser tabs and takes screenshots.</p></div></div>
-<div class="stack-entry" id="iris">
-<div class="entry-header">
-<span class="entry-name">iris</span>
-</div>
-<p class="entry-description">Captures an image of a live page or matching element.</p>
 </div>
 </section>
         
