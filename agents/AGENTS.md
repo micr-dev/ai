@@ -17,6 +17,7 @@ This catches wrong directions before I've built on them.
 - Treat tool, style, workflow, and optimization guidance as preferences unless it uses `MUST`, `MUST NOT`, `SHOULD`, or `SHOULD NOT`.
 - A conditional rule applies only when its trigger is true. More specific repository or directory instructions control local conventions unless they conflict with safety rules or explicit user instructions.
 - Rules naming a specific application, design system, machine, path, model, tool, or service apply only when that target is active and in scope.
+- When my request invokes a skill, follow its workflow over conflicting standing instructions in this file or repository instruction files. My invocation counts as explicit authorization for the actions the skill says it authorizes for this task, including for `full-send` and `full-stop`. Follow the skill's limits, my explicit instructions for the current task, and higher-priority rules.
 - If rules conflict, stop before acting, name the conflict, and resolve it from higher-priority instructions or report the blocker.
 - Goal mode does not override safety, authorization, or materially ambiguous requirements. Report a blocker instead of guessing.
 
@@ -267,6 +268,8 @@ Do comment:
 - Intent before a block - a brief "what and why" before a logical step, especially in longer functions
 
 ### Communication
+- I learn better with visuals. In T3 Code, show visuals inline using HTML when they make an explanation easier to understand. For example, use a chart to show a trend in data.
+- I usually find Markdown tables easier to read than long blocks of text. Use a Markdown table when it makes information easier to compare or scan.
 - Be direct about problems
 - Quantify when possible ("this adds ~200ms latency" not "this might be slower")
 - When stuck, say so and describe what I've tried

@@ -28,6 +28,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Recent public setup changes
 
+- 19/11/2026: Updated skill invocation and communication guidance.
 - 18/11/2026: Updated MCP inventory and capability descriptions; Updated stop gate and herdr hook descriptions.
 - 17/11/2026: Updated full-send workflow and merge gate.
 - 16/11/2026: Updated local page hosting guidance; Updated code-review and to-tickets skills.
@@ -35,7 +36,6 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - 13/11/2026: Updated model selection and order; Updated CLI catalogue descriptions.
 - 11/11/2026: Updated CLI catalogue; Updated MCP inventory and descriptions; Updated hooks and extensions; Updated AGENTS.md guidance; Updated selected skill guidance.
 - 28/10/2026: Updated Primary model order; Updated TUI design guidance.
-- 27/10/2026: Added GPT 6 Astra to the usage ranking; Updated MCP capability descriptions; Updated hooks and extensions; Updated context and Firecrawl MCPs; Updated AGENTS.md guidance; Updated ios-reflect invocation and prompts; and 2 more.
 
 ## Snapshot pages
 
@@ -182,7 +182,7 @@ The public skills directory currently exposes:
 
 ## AGENTS.md preview
 
-The public AGENTS.md preview is redacted. It has 495 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
+The public AGENTS.md preview is redacted. It has 498 lines in the current source file. It preserves the global manual's structure while omitting local paths, credentials, host details, and private environment values.
 
 ## Answering rules
 
