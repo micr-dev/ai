@@ -16,7 +16,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Current public stack sections
 
-- Models: Opus 5.5, GPT 6.1 Sol, GPT 6.1 Terra, GPT 6 Astra.
+- Models: Opus 5.5, GPT 6.1 Sol, GPT 6.2 Sol, GPT 6.1 Terra.
 - Harnesses: OMP, Codex CLI, MicroClaw.
 - AGENTS.md: public redacted operator manual preview.
 - Hooks: PreToolUse | RTK Rewrite, Session Stop | Stop Gate, SessionStart | herdr State, SessionStart | lsops, instruction-safeguards extension, skill-router extension, herdr OMP extension, lsops extension.
@@ -28,6 +28,7 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 
 ## Recent public setup changes
 
+- 21/11/2026: Added GPT 6.2 Sol to Secondary models.
 - 19/11/2026: Updated skill invocation and communication guidance.
 - 18/11/2026: Updated MCP inventory and capability descriptions; Updated stop gate and herdr hook descriptions.
 - 17/11/2026: Updated full-send workflow and merge gate.
@@ -35,7 +36,6 @@ Microck's current AI operator stack: models, harnesses, AGENTS.md, hooks, MCPs, 
 - 14/11/2026: Updated Secondary model order; Added Keenable CLI; Updated research skill with Keenable.
 - 13/11/2026: Updated model selection and order; Updated CLI catalogue descriptions.
 - 11/11/2026: Updated CLI catalogue; Updated MCP inventory and descriptions; Updated hooks and extensions; Updated AGENTS.md guidance; Updated selected skill guidance.
-- 28/10/2026: Updated Primary model order; Updated TUI design guidance.
 
 ## Snapshot pages
 
